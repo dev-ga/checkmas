@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\View\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,12 +18,35 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+
 Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
+    'auth.basic'
 ])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    /**
+     * Ruta de prueba
+     */
+    Route::view('/d','livewire.view.dashboard')->name('dash');
+    Route::view('/dash',Dashboard::class)->name('foo');
+    
+
+    /**
+     * Ruta para Logout del usuario
+     */
+    Route::get('/logout', [\App\Http\Controllers\UserController::class, 'destroy'])
+        ->name('logout');
 });
+
+/**
+ * Rutas que no requieren autenticacion
+ */
+ Route::get('admin-registro', function () {
+    return view('auth.admin-registro');
+})->name('admin-registro');
+
+Route::post('/store-resgistro', [\App\Http\Controllers\UserController::class, 'store-registro'])
+        ->name('store-resgistro');

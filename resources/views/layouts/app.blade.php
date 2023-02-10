@@ -10,6 +10,12 @@
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
 
+        <!-- CDN jQuery -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+        <!-- wireUI -->
+        <wireui:scripts />
+
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -17,25 +23,33 @@
         @livewireStyles
     </head>
     <body class="font-sans antialiased">
-        <x-jet-banner />
+        <x-notifications /> 
+        {{-- <x-jet-banner /> --}}
 
-        <div class="min-h-screen bg-gray-100">
-            @livewire('navigation-menu')
+        {{-- <div class="min-h-screen bg-gray-100"> --}}
+            <div class="flex flex-row min-h-screen bg-gray-100">
+                
+                {{-- Sidebar principal --}}
+                <x-sidebar-principal></x-sidebar-principal>
 
-            <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
+                <main class="main flex flex-col flex-grow -ml-64 md:ml-0 transition-all duration-150 ease-in">
+                    
+                    {{-- Headers principal --}}
+                    <x-header-ppal></x-header-ppal>
+                    
+                    <div class="main-content flex flex-col flex-grow p-4">
+                        <h1 class="font-bold text-2xl text-gray-700">Dashboard</h1>
+                        <div class="flex flex-col flex-grow bg-white rounded mt-4">
+                            {{ $slot }}
+                        </div>
                     </div>
-                </header>
-            @endif
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
-        </div>
+                    {{-- Footer principal --}}
+                    <x-footer-ppal></x-footer-ppal>
+
+                </main>
+            </div>
+        {{-- </div> --}}
 
         @stack('modals')
 
