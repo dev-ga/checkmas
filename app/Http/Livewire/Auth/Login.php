@@ -45,15 +45,19 @@ class Login extends Component
         $this->validateOnly($propertyName);
     }
 
+    public function completarRegistro()
+    {
+        redirect()->to('/completar-registro');
+    }
+
     public function retornaDash()
     {
-        redirect()->route('foo');
+        redirect()->to('/dashboard-admin');
     }
 
 
     public function login()
     {
-        // dd(Hash::make($this->password));
 
         try {
 
@@ -63,11 +67,43 @@ class Login extends Component
             $user = User::where('email', $this->email)->get();
 
             if (count($user) > 0) {
-                if(Auth::attempt($this->validate(), false)){
-                    dd('correcto');
-                }else{
-                    dd('incorrecto');
+                foreach ($user as $item) {
+                    $password = $item->password;
                 }
+
+                if (Hash::check($this->password, $password)) {
+                    $credenciales = [
+                        'email' => $this->email,
+                        'password' => $this->password
+                    ];
+
+                    Auth::attempt($credenciales);
+                    $user = Auth::user();
+                    if ($user->rol != '1') 
+                    {
+                        
+                        $this->completarRegistro();
+
+                    } else {
+
+                        $this->retornaDash();
+                    }
+
+                } else {
+
+                    $this->password = '';
+                    $this->notification()->success(
+                        $title = 'ERROR!',
+                        $description = 'Password incorrecto'
+                    );
+                }
+            } else {
+
+                $this->email = '';
+                $this->notification()->success(
+                    $title = 'ERROR!',
+                    $description = 'El email no registrado'
+                );
             }
         } catch (\Throwable $th) {
             dd($th);

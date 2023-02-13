@@ -57,8 +57,8 @@ class Registro extends Component
         $resgistro = new User();
 
         $resgistro->email = $this->email;
-        // $resgistro->password = Hash::make($this->password);
-        $resgistro->password = $this->password;
+        $resgistro->password = Hash::make($this->password);
+        // $resgistro->password = $this->password;
         $resgistro->save();
 
         $this->resetInputFields();

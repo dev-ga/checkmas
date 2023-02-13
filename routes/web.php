@@ -20,9 +20,7 @@ Route::get('/', function () {
 
 
 
-Route::middleware([
-    'auth.basic'
-])->group(function () {
+Route::middleware(['auth:sanctum','verified'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
@@ -30,10 +28,12 @@ Route::middleware([
     /**
      * Ruta de prueba
      */
-    Route::view('/d','livewire.view.dashboard')->name('dash');
-    Route::view('/dash',Dashboard::class)->name('foo');
-    
+    Route::view('/dashboard-admin','livewire.view.dashboard')->name('dashboard-admin');
 
+    Route::view('/dash',Dashboard::class)->name('foo');
+
+    Route::view('/completar-registro','livewire.view.completar-registro')->name('completar-registro');
+    
     /**
      * Ruta para Logout del usuario
      */

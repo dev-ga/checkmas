@@ -18,5 +18,4 @@
               <span> Guardar</span>
         </button>
     </div>
-</form>
 </div>
