@@ -1,6 +1,6 @@
 <div x-data="wireui_inputs_maskable({
     isLazy: @boolean($attributes->wire('model')->hasModifier('lazy')),
-    model: @entangle($attributes->wire('model')),
+    {{-- model: @entangle($attributes->wire('model')), --}}
     emitFormatted: @boolean($emitFormatted),
     mask: {{ $mask }},
 })" {{ $attributes->only('wire:key') }}>

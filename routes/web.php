@@ -32,7 +32,11 @@ Route::middleware(['auth:sanctum','verified'])->group(function () {
 
     Route::view('/dash',Dashboard::class)->name('foo');
 
-    Route::view('/completar-registro','livewire.view.completar-registro')->name('completar-registro');
+    Route::get('/completar-registro', function () {
+        return view('auth.completar-registro');
+    })->name('completar-registro');
+
+    // Route::view('/completar-registro','livewire.view.completar-registro')->name('completar-registro');
     
     /**
      * Ruta para Logout del usuario
@@ -50,3 +54,5 @@ Route::middleware(['auth:sanctum','verified'])->group(function () {
 
 Route::post('/store-resgistro', [\App\Http\Controllers\UserController::class, 'store-registro'])
         ->name('store-resgistro');
+
+Route::view('/completar-registro','livewire.view.completar-registro')->name('completar-registro');
