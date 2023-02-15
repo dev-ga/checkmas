@@ -56,5 +56,6 @@
             </div>
         </form>
     </x-jet-authentication-card> --}}
-    @livewire('view.completar-registro')
+    @livewire('auth.registro-banco')
+    @livewire('auth.registro-trx')
 </x-guest-layout>

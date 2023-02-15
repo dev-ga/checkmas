@@ -33,7 +33,7 @@
                     <x-dynamic-component
                         :component="WireUi::component('icon')"
                         :name="$icon"
-                        class="w-5 h-5"
+                        class="w-4 h-4"
                     />
                 @elseif($prefix)
                     <span class="flex items-center self-center pl-1">

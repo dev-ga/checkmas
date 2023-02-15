@@ -79,7 +79,7 @@ class Login extends Component
 
                     Auth::attempt($credenciales);
                     $user = Auth::user();
-                    if ($user->rol != '1') 
+                    if ($user->rol != '1')
                     {
                         
                         $this->completarRegistro();

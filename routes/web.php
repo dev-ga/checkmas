@@ -52,6 +52,14 @@ Route::middleware(['auth:sanctum','verified'])->group(function () {
     return view('auth.admin-registro');
 })->name('admin-registro');
 
+Route::get('registro-trx', function () {
+    return view('auth.registro-trx');
+})->name('registro-trx');
+
+Route::get('registro-banco', function () {
+    return view('auth.registro-banco');
+})->name('registro-banco');
+
 Route::post('/store-resgistro', [\App\Http\Controllers\UserController::class, 'store-registro'])
         ->name('store-resgistro');
 
