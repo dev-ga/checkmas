@@ -1,6 +1,6 @@
 <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-700 dark:border-gray-600">
     <div class="items-center justify-start mb-8 mt-4 sm:flex">
-        <time class="mb-1 text-2xl font-extrabold text-blue-900 drop-shadow-lg sm:order-last sm:mb-0">ORDEN DE TRABAJO</time>
+        <time class="mb-1 text-2xl font-extrabold text-blue-900 drop-shadow-lg sm:order-last sm:mb-0">FICHA TECNICA EQUIPO REFRIGERACION Y AIRE ACONDICIONADO</time>
     </div>
 
     <div class="p-2">
@@ -105,6 +105,3 @@
     </div>
 
 </div>
-
-
-

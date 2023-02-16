@@ -47,7 +47,7 @@ class Login extends Component
 
     public function completarRegistro()
     {
-        redirect()->to('/completar-registro');
+        redirect()->to('/dash-tecnicos');
     }
 
     public function retornaDash()

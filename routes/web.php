@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\View\Dashboard;
+use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +37,15 @@ Route::middleware(['auth:sanctum','verified'])->group(function () {
         return view('auth.completar-registro');
     })->name('completar-registro');
 
+    Route::get('prueba', function () {
+        return view('prueba');
+    })->name('prueba');
+
     // Route::view('/completar-registro','livewire.view.completar-registro')->name('completar-registro');
+
+    Route::get('/dash-tecnicos', function () {
+        return view('layouts.tecnicos');
+    })->name('dash-tecnicos');
     
     /**
      * Ruta para Logout del usuario
@@ -60,7 +69,18 @@ Route::get('registro-banco', function () {
     return view('auth.registro-banco');
 })->name('registro-banco');
 
+
+
 Route::post('/store-resgistro', [\App\Http\Controllers\UserController::class, 'store-registro'])
         ->name('store-resgistro');
 
 Route::view('/completar-registro','livewire.view.completar-registro')->name('completar-registro');
+
+Route::get('uuid', function () {
+    $uuid = Str::uuid()->toString();
+        dd($uuid);
+   
+});
+
+
+

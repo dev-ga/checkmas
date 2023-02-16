@@ -1,11 +1,11 @@
 <div>
     <div class="mt-4">
         <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.email')</label>
-        <x-input class="pr-28" wire:model="email" />
+        <x-input class="pr-28" wire:model="email"/>
     </div>
     <div class="mt-4">
         <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.pass')</label>
-        <x-inputs.password wire:model="password" />
+        <x-inputs.password wire:model="password"/>
     </div>
     <div class="flex items-center justify-end mt-4">
         <button type="submit" wire:click.prevent="login()" class="ml-3 inline-flex justify-center rounded-md border border-transparent bg-red-200 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-200">

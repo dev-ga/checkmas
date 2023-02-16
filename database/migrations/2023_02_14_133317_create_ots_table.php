@@ -17,13 +17,18 @@ return new class extends Migration
             $table->id();
             $table->string('ot_id');
             $table->string('fechaRegistro');
+            $table->string('prioridad');
+            $table->string('tipoMantenimiento');
             $table->string('descripcion');
             $table->string('agencia');
             $table->string('estado');
             $table->string('owner');
-            $table->string('estatusPr');
-            $table->string('estatusAd');
-            $table->string('estatusGs');
+            $table->string('esAsignada')->default(0); //estatus 1 = asignada
+            $table->string('tecRespondable');
+            $table->string('fechaEjecucion');
+            $table->string('esPrte');
+            $table->string('esAd');
+            $table->string('esGs');
             $table->timestamps();
         });
     }

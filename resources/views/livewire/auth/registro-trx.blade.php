@@ -31,7 +31,7 @@
                 <div class="p-2">
                     <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.email')</label>
                     <x-input wire:model="email" icon="user" />
-                </div>
+                </div> 
                 {{-- password --}}
                 <div class="p-2">
                     <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.pass')</label>
