@@ -39,7 +39,23 @@ return [
         'corriente' => 'Corriente',
         'otras' => 'Otras características técnicas del Equipo',
         'observaciones' => 'Observaciones del estado del equipo',
+        'compacto' => 'Compacto',
+        'fancoil' => 'Fancoil',
+        'split' => 'Split',
+        'gabinete' => 'Gabinete',
+        'otro' => 'Otro',
+        'tipo' => 'Tipo',
+        'numQR' => 'No.QR',
+        'condensadora' => 'CONDENSADORA (Unidad Exterior)',
+        'phases' => 'Phases',
         'funcionamiento' => 'Funcionamiento',
+        'funcionamiento' => 'Funcionamiento',
+        'funcionamiento' => 'Funcionamiento',
+        'funcionamiento' => 'Funcionamiento',
+        'funcionamiento' => 'Funcionamiento',
+        'funcionamiento' => 'Funcionamiento',
+        'funcionamiento' => 'Funcionamiento',
+
     ],
 
 ];
