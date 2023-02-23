@@ -15,25 +15,26 @@ return new class extends Migration
     {
         Schema::create('ficha_tecnicas', function (Blueprint $table) {
             $table->id();
+            $table->string('uid');
+            $table->string('qrConden');
+            $table->string('tipoConden');
             $table->string('voltaje');
-            $table->string('amp');
-            $table->string('watts');
-            $table->string('nFases');
+            $table->string('phases');
+            $table->string('tipoRefri');
             $table->string('btu');
-            $table->string('refri');
-            $table->string('cargaRefri');
-            $table->string('mvMarca');
-            $table->string('mvVoltaje');
-            $table->string('mvCorriente');
-            $table->string('compreMarca');
-            $table->string('compreVoltaje');
+            $table->string('tipoCompresor');
+            $table->string('marcaCompresor');
+            $table->string('ampCompresor');
+            $table->string('placaCompresor');
+            $table->string('tipoVentilador');
+            $table->string('etiqVentilador');
             $table->string('compreCorriente');
-            $table->string('munMarca');
-            $table->string('munVoltaje');
-            $table->string('munCorriente');
-            $table->string('otrasCaTec');
-            $table->string('observaciones');
-            $table->string('funcionamiento');
+            $table->string('qrEvaporador');
+            $table->string('fotoEvaporador');
+            $table->string('oficina');
+            $table->string('piso');
+            $table->string('agencia');
+            $table->string('estado');
             $table->timestamps();
         });
     }

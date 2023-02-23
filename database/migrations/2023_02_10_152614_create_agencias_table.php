@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('agencias', function (Blueprint $table) {
             $table->id();
+            $table->string('codigo');
             $table->string('descripcion');
             $table->timestamps();
         });
