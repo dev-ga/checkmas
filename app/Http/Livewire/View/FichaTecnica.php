@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\View;
 
+use App\Models\FichaTecnica as ModelFichaTecnica;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
@@ -114,8 +116,34 @@ class FichaTecnica extends Component
     ];
 
     public function store(){
+
+        $user = Auth::user();
         
         $this->validateData();
+
+        $fichaTecnica = new ModelFichaTecnica();
+        $fichaTecnica->uid = $this->agencia.'-'.$this->estado.'-'.$fichaTecnica->id;
+        $fichaTecnica->qrConden = $this->qrConden;
+        $fichaTecnica->tipoConden = $this->tipoConden;
+        $fichaTecnica->voltaje = $this->voltaje;
+        $fichaTecnica->phases = $this->phases;
+        $fichaTecnica->tipoRefri = $this->tipoRefri;
+        $fichaTecnica->btu = $this->btu;
+        $fichaTecnica->tipoCompresor = $this->tipoCompresor;
+        $fichaTecnica->marcaCompresor = $this->marcaCompresor;
+        $fichaTecnica->ampCompresor = $this->ampCompresor;
+        $fichaTecnica->placaCompresor = $this->placaCompresor;
+        $fichaTecnica->tipoVentilador = $this->tipoVentilador;
+        $fichaTecnica->etiqVentilador = $this->etiqVentilador;
+        $fichaTecnica->compreCorriente = $this->compreCorriente;
+        $fichaTecnica->qrEvaporador = $this->qrEvaporador;
+        $fichaTecnica->fotoEvaporador = $this->fotoEvaporador;
+        $fichaTecnica->oficina = $this->oficina;
+        $fichaTecnica->piso = $this->piso;
+        $fichaTecnica->agencia = $this->agencia;
+        $fichaTecnica->estado = $this->estado;
+        $fichaTecnica->save();
+
     }
 
 

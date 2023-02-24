@@ -38,6 +38,14 @@ Route::middleware(['auth:sanctum','verified'])->group(function () {
         return view('auth.completar-registro');
     })->name('completar-registro');
 
+    Route::get('ficha-tecnica', function () {
+        return view('tecnicos.ficha-tecnica');
+    })->name('ficha-tecnica');
+
+    Route::get('ots', function () {
+        return view('tecnicos.ots');
+    })->name('ots');
+
     Route::get('prueba', function () {
         return view('prueba');
     })->name('prueba');

@@ -26,8 +26,15 @@ return new class extends Migration
             $table->string('lecPreBaja');
             $table->string('observacionesMp');
             $table->string('listaMateriales');
-            $table->string('fotoAntes');
-            $table->string('fotoDespues');
+            $table->string('fotoMpAntes1');
+            $table->string('fotoMpAntes2');
+            $table->string('fotoMpDesp1');
+            $table->string('fotoMpDesp2');
+            $table->string('fotoMcAntes1');
+            $table->string('fotoMcAntes2');
+            $table->string('fotoMcDesp1');
+            $table->string('fotoMcDesp2');
+           
             $table->string('observacionesMc');
             $table->timestamps();
         });

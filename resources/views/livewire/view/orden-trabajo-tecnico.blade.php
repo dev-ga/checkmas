@@ -15,7 +15,7 @@
     </div>
 
     {{-- Tareas realizadas MP --}}
-    <div class="border border-gray-200 rounded-lg shadow-md px-4">
+    <div class="border border-gray-200 rounded-lg shadow-md px-4" hidden>
         <div class="p-2 mb-4">
             <label class="text-xs font-extrabold text-black drop-shadow-lg">@lang('messages.label.tareasMp')</label>
         </div>
@@ -29,20 +29,52 @@
                 <input wire:model="limEva" id="checked-checkbox" type="checkbox" class="w-6 h-6 ml-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
             </div>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
             <div class="p-2">
                 <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.lecAmpComp')</label>
-                <x-input icon="pencil" wire:model="lecAmpComp" class="w-48" />
+                <x-input icon="pencil" wire:model="lecAmpComp" />
             </div>
             <div class="p-2">
                 <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.lecPreAlta')</label>
-                <x-input icon="pencil" wire:model="lecPreAlta" class="w-48" />
+                <x-input icon="pencil" wire:model="lecPreAlta" />
             </div>
             <div class="p-2">
                 <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.lecPreBaja')</label>
-                <x-input icon="pencil" wire:model="lecPreBaja" class="w-48" />
+                <x-input icon="pencil" wire:model="lecPreBaja" />
             </div>
         </div>
+
+        {{-- Fotos Mp Antes --}}
+        <div class="p-2 mb-4">
+            <label class="text-xs font-extrabold text-black drop-shadow-lg">@lang('messages.label.fotosMpAntes')</label>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div class="p-2">
+                <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.fotoAntes1')</label>
+                <input id="" wire:model="fotoMpAntes1" type="file" class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-gray-200 outline-none focus:border-indigo-500 disabledDocCC">
+            </div>
+            <div class="p-2">
+                <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.fotoAntes2')</label>
+                <input id="" wire:model="fotoMpAntes2" type="file" class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-gray-200 outline-none focus:border-indigo-500 disabledDocCC">
+            </div>
+        </div>
+
+        {{-- Fotos Mp Despues --}}
+        <div class="p-2 mb-4">
+            <label class="text-xs font-extrabold text-black drop-shadow-lg">@lang('messages.label.fotosMpDesp')</label>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div class="p-2">
+                <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.fotoAntes1')</label>
+                <input id="" wire:model="fotoMpDesp1" type="file" class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-gray-200 outline-none focus:border-indigo-500 disabledDocCC">
+            </div>
+            <div class="p-2">
+                <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.fotoAntes2')</label>
+                <input id="" wire:model="fotoMpDesp2" type="file" class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-gray-200 outline-none focus:border-indigo-500 disabledDocCC">
+            </div>
+        </div>
+
+        {{-- Observaciones --}}
         <div class="grid grid-cols-1 md:grid-cols-1 gap-4 mb-4">
             <div class="p-2">
                 <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.observacionesMp')</label>
@@ -51,8 +83,9 @@
         </div>
     </div>
 
+
     {{-- Tareas realizadas MC --}}
-    <div class="border border-gray-200 rounded-lg shadow-md px-4">
+    <div class="border border-gray-200 rounded-lg shadow-md px-4" hidden>
         <div class="p-2 mb-4">
             <label class="text-xs font-extrabold text-black drop-shadow-lg">@lang('messages.label.tareasMc')</label>
         </div>
@@ -64,18 +97,37 @@
                 <x-textarea wire:model="listaMateriales" placeholder="Lista de materiales usados en la actividad" />
             </div>
         </div>
-        {{-- Fotos antes y despues --}}
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
+
+        {{-- Fotos Mc Antes --}}
+        <div class="p-2 mb-4">
+            <label class="text-xs font-extrabold text-black drop-shadow-lg">@lang('messages.label.fotosMcAntes')</label>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div class="p-2">
-                <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.fotoAntes')</label>
-                <input id="" wire:model="fotoAntes" type="file" class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-gray-200 outline-none focus:border-indigo-500 disabledDocCC">
+                <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.fotoAntes1')</label>
+                <input id="" wire:model="fotoMcAntes1" type="file" class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-gray-200 outline-none focus:border-indigo-500 disabledDocCC">
             </div>
-            
             <div class="p-2">
-                <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.fotoDespues')</label>
-                <input id="" wire:model="fotoDespues" type="file" class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-gray-200 outline-none focus:border-indigo-500 disabledDocCC">
+                <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.fotoAntes2')</label>
+                <input id="" wire:model="fotoMcAntes2" type="file" class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-gray-200 outline-none focus:border-indigo-500 disabledDocCC">
             </div>
         </div>
+
+        {{-- Fotos Mc Despues --}}
+        <div class="p-2 mb-4">
+            <label class="text-xs font-extrabold text-black drop-shadow-lg">@lang('messages.label.fotosMcDesp')</label>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div class="p-2">
+                <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.fotoAntes1')</label>
+                <input id="" wire:model="fotoMcDesp1" type="file" class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-gray-200 outline-none focus:border-indigo-500 disabledDocCC">
+            </div>
+            <div class="p-2">
+                <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.fotoAntes2')</label>
+                <input id="" wire:model="fotoMcDesp2" type="file" class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-gray-200 outline-none focus:border-indigo-500 disabledDocCC">
+            </div>
+        </div>
+
         {{-- observaciones --}}
         <div class="grid grid-cols-1 md:grid-cols-1 gap-4 mb-4">
             <div class="p-2">

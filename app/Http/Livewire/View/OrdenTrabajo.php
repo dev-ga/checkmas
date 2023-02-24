@@ -2,9 +2,12 @@
 
 namespace App\Http\Livewire\View;
 
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
+use App\Models\Ot;
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 
 class OrdenTrabajo extends Component
@@ -58,10 +61,34 @@ class OrdenTrabajo extends Component
         $this->validateOnly($propertyName);
     }
 
+    public function store(){
+
+        $fecha = Carbon::create($this->fechaInicio);
+        // dd($fecha->format('dmYhis'));
+        $user = Auth::user();
+        // $otUid = $fecha->format('dmYhis').'-'.$this->equipoUid.'-'.$this->tipoMantenimiento;
+        // dd($otUid);
+
+        $this->validate();
+
+        $ot = new Ot();
+        $ot->otUid = $fecha->format('dmYhis').'-'.$this->equipoUid.'-'.$this->tipoMantenimiento;
+        $ot->fechaInicio = $this->fechaInicio;
+        $ot->tecRespondable = $this->tecRespondable;
+        $ot->equipoUid = $this->equipoUid;
+        $ot->tipoMantenimiento = $this->tipoMantenimiento;
+        $ot->owner = $user->email;
+        $ot->statusOts = '1';
+        $ot->save();
+
+
+    }
+
     
 
     public function render()
     {
+        
         return view('livewire.view.orden-trabajo');
     }
 }

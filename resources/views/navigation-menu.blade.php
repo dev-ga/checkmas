@@ -12,12 +12,12 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="#" :active="request()->routeIs('dashboard')">
+                    <x-jet-nav-link href="{{ route('ficha-tecnica') }}" :active="request()->routeIs('ficha-tecnica')">
                         {{ __('Ficha Tecnica') }}
                     </x-jet-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="#" :active="request()->routeIs('dashboard')">
+                    <x-jet-nav-link href="{{ route('ots') }}" :active="request()->routeIs('ots')">
                         {{ __('OTs') }}
                     </x-jet-nav-link>
                 </div>

@@ -18,8 +18,14 @@ class OrdenTrabajoTecnico extends Component
     public $lecPreBaja;
     public $observacionesMp;
     public $listaMateriales;
-    public $fotoAntes;
-    public $fotoDespues;
+    public $fotoMpAntes1;
+    public $fotoMpAntes2;
+    public $fotoMpDesp1;
+    public $fotoMpDesp2;
+    public $fotoMcAntes1;
+    public $fotoMcAntes2;
+    public $fotoMcDesp1;
+    public $fotoMcDesp2;
     public $observacionesMc;
 
     

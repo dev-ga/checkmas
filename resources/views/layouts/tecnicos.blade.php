@@ -29,14 +29,14 @@
     <div class="min-h-screen bg-gray-100">
     {{-- <div class="flex flex-row min-h-screen bg-gray-100"> --}}
 
-        {{-- @livewire('navigation-menu') --}}
+        @livewire('navigation-menu')
 
         <!-- Page Content -->
         <main>
             <div class="py-12">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                        @yield('content')
+                        @livewire('view.ficha-tecnica')
                     </div>
                 </div>
             </div>

@@ -23,8 +23,14 @@ class OtTecnico extends Model
         'lecPreBaja',
         'observacionesMp',
         'listaMateriales',
-        'fotoAntes',
-        'fotoDespues',
+        'fotoMpAntes1',
+        'fotoMpAntes2',
+        'fotoMpDesp1',
+        'fotoMpDesp2',
+        'fotoMcAntes1',
+        'fotoMcAntes2',
+        'fotoMcDesp1',
+        'fotoMcDesp2',
         'observacionesMc',
 
     ];

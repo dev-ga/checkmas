@@ -12,7 +12,7 @@
         <div class="flex flex-wrap justify-star">
             <div class="p-2">
                 <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.numQR')</label>
-                <x-inputs.maskable icon="code" mask="0####-###-##" wire:model="qrConden" class="w-36" />
+                <x-conden />
             </div>
             <div class="p-2">
                 <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.tipo')</label>
@@ -139,9 +139,9 @@
         <div class="flex flex-wrap justify-star">
             <div class="p-2">
                 <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.numQR')</label>
-                <x-inputs.maskable icon="code" mask="####-###-##" wire:model="qrEvaporador" class="w-36" />
+                <x-evaporador />
             </div>
-            <div class="p-2">
+            <div class="p-2 ml-8">
                 <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.representativa')</label>
                 <input id="" wire:model="fotoEvaporador" type="file" class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-gray-200 outline-none focus:border-indigo-500 disabledDocCC">
             </div>
@@ -158,23 +158,19 @@
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
             <div class="p-2">
                 <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.oficina')</label>
-                <x-native-select wire:model="tipoCompresor">
-                    <option></option>
-                    <option value="scroll">@lang('messages.label.scroll')</option>
-                    <option value="piston">@lang('messages.label.piston')</option>
-                </x-native-select>
+                <x-input icon="pencil" wire:model="oficina" />
             </div>
             <div class="p-2">
                 <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.piso')</label>
-                <x-input icon="pencil" wire:model="marcaCompresor" />
+                <x-input icon="pencil" wire:model="piso" />
             </div>
             <div class="p-2">
                 <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.agencia')</label>
-                <x-input icon="pencil" wire:model="ampCompresor" />
+                <x-agencias />
             </div>
             <div class="p-2">
                 <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.estado')</label>
-                <x-input icon="pencil" wire:model="ampCompresor" />
+                <x-estados />
             </div>
         </div>
     </div>
