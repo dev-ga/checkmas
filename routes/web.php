@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\View\Dashboard;
+use App\Models\User;
 use Illuminate\Support\Str;
 
 /*
@@ -40,6 +41,11 @@ Route::middleware(['auth:sanctum','verified'])->group(function () {
     Route::get('prueba', function () {
         return view('prueba');
     })->name('prueba');
+
+    Route::get('arr', function () {
+        $arr = User::all();
+        return $arr;
+    })->name('arr');
 
     // Route::view('/completar-registro','livewire.view.completar-registro')->name('completar-registro');
 
@@ -81,6 +87,10 @@ Route::get('uuid', function () {
         dd($uuid);
    
 });
+
+Route::get('/pp', function () {
+    return view('prueba');
+})->name('pp');
 
 
 

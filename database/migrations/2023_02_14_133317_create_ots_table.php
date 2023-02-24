@@ -15,20 +15,26 @@ return new class extends Migration
     {
         Schema::create('ots', function (Blueprint $table) {
             $table->id();
-            $table->string('ot_id');
-            $table->string('fechaRegistro');
-            $table->string('prioridad');
-            $table->string('tipoMantenimiento');
-            $table->string('descripcion');
-            $table->string('agencia');
-            $table->string('estado');
-            $table->string('owner');
-            $table->string('esAsignada')->default(0); //estatus 1 = asignada
+            /**
+             * @param $otUid
+             * Formula: $fechaInicio(mdY) + $equipoUid + $tipoMantenimiento('mc' o 'mp')
+             */
+            $table->string('otUid');
+            $table->string('fechaInicio');
             $table->string('tecRespondable');
-            $table->string('fechaEjecucion');
-            $table->string('esPrte');
-            $table->string('esAd');
-            $table->string('esGs');
+            $table->string('equipoUid');
+            $table->string('tipoMantenimiento');
+            $table->string('owner');
+            /**
+             * @param $statusOts
+             * Status de las Ots.
+             * 1 - creada
+             * 2 - aprobada
+             * 3 - en ejecución
+             * 4 - revision
+             * 5 - cerrada
+             */
+            $table->string('statusOts')->default(1);
             $table->timestamps();
         });
     }

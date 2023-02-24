@@ -32,6 +32,7 @@ class FichaTecnica extends Component
     public $piso;
     public $agencia;
     public $estado;
+    public $model;
 
 
     public $atr = '';

@@ -12,6 +12,17 @@ class Ot extends Model
     protected $table = 'ots';
 
     protected $fillable = [
-        'descripcion',
+        'otUid',
+        'fechaInicio',
+        'tecRespondable',
+        'equipoUid',
+        'tipoMantenimiento',
+        'owner',
+        'statusOts',
     ];
+
+    public function otTecnico()
+    {
+        return $this->hasOne(OtTecnico::class);
+    }
 }
