@@ -16,20 +16,14 @@
             </div>
             <div class="p-2">
                 <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.idEquipo')</label>
-                <x-native-select wire:model="equipoUid">
-                    <option></option>
-                    <option value="110V">110V</option>
-                    <option value="220V">220V</option>
-                    <option value="380V">380V</option>
-                    <option value="440V">440V</option>
-                </x-native-select>
+                <x-equipos />
             </div>
             <div class="p-2">
                 <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.tipoMan')</label>
                 <x-native-select wire:model="tipoMantenimiento">
                     <option></option>
-                    <option value="mp">Preventivo</option>
-                    <option value="mc">Correctivo</option>
+                    <option value="MP">Preventivo</option>
+                    <option value="MC">Correctivo</option>
                 </x-native-select>
             </div>
         </div>

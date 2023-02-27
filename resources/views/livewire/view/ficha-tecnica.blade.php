@@ -1,4 +1,4 @@
-<div class="p-4 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-700 dark:border-gray-600">
+<div class="p-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-700 dark:border-gray-600">
     <div class="items-center justify-start mb-8 mt-4 sm:flex">
         <time class="mb-1 text-2xl font-extrabold text-blue-900 drop-shadow-lg sm:order-last sm:mb-0">FICHA TECNICA</time>
     </div>
@@ -101,7 +101,7 @@
                 </div>
                 <div class="p-2">
                     <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.placa')</label>
-                    <input id="" wire:model="placaCompresor" type="file" class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-gray-200 outline-none focus:border-indigo-500 disabledDocCC">
+                    <input id="" wire:model="imgPlacaCompresor" type="file" class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-gray-200 outline-none focus:border-indigo-500 disabledDocCC">
                 </div>
             </div>
         </div>
@@ -126,7 +126,7 @@
             </div>
             <div class="p-2">
                 <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.etiqueta')</label>
-                <input id="" wire:model="etiqVentilador" type="file" class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-gray-200 outline-none focus:border-indigo-500 disabledDocCC">
+                <input id="" wire:model="imgEtiqVentilador" type="file" class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-gray-200 outline-none focus:border-indigo-500 disabledDocCC">
             </div>
         </div>
     </div>
@@ -143,7 +143,7 @@
             </div>
             <div class="p-2 ml-8">
                 <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.representativa')</label>
-                <input id="" wire:model="fotoEvaporador" type="file" class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-gray-200 outline-none focus:border-indigo-500 disabledDocCC">
+                <input id="" wire:model="imgEvaporador" type="file" class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-gray-200 outline-none focus:border-indigo-500 disabledDocCC">
             </div>
         </div>
     </div>

@@ -9,8 +9,8 @@
                         <x-jet-application-mark class="block h-9 w-auto" />
                     </a>
                 </div>
-
-                <!-- Navigation Links -->
+                
+                @if (Auth::user()->rol == 5 || Auth::user()->rol == 6 )
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('ficha-tecnica') }}" :active="request()->routeIs('ficha-tecnica')">
                         {{ __('Ficha Tecnica') }}
@@ -21,8 +21,10 @@
                         {{ __('OTs') }}
                     </x-jet-nav-link>
                 </div>
+                @endif
+                <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="#" :active="request()->routeIs('dashboard')">
+                    <x-jet-nav-link href="{{ route('mantenimientos') }}" :active="request()->routeIs('mantenimientos')">
                         {{ __('Mantenimientos') }}
                     </x-jet-nav-link>
                 </div>

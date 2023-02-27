@@ -46,6 +46,10 @@ Route::middleware(['auth:sanctum','verified'])->group(function () {
         return view('tecnicos.ots');
     })->name('ots');
 
+    Route::get('mantenimientos', function () {
+        return view('tecnicos.mantenimientos');
+    })->name('mantenimientos');
+
     Route::get('prueba', function () {
         return view('prueba');
     })->name('prueba');
@@ -58,7 +62,7 @@ Route::middleware(['auth:sanctum','verified'])->group(function () {
     // Route::view('/completar-registro','livewire.view.completar-registro')->name('completar-registro');
 
     Route::get('/dash-tecnicos', function () {
-        return view('layouts.tecnicos');
+        return view('tecnicos.ficha-tecnica');
     })->name('dash-tecnicos');
     
     /**

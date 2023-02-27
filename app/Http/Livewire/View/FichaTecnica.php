@@ -4,13 +4,17 @@ namespace App\Http\Livewire\View;
 
 use App\Models\FichaTecnica as ModelFichaTecnica;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
+use WireUi\Traits\Actions;
 use Illuminate\Support\Str;
 
 class FichaTecnica extends Component
 {
+
+    use Actions;
 
     use WithPagination;
 
@@ -25,16 +29,15 @@ class FichaTecnica extends Component
     public $tipoCompresor;
     public $marcaCompresor;
     public $ampCompresor;
-    public $placaCompresor;
+    public $imgPlacaCompresor;
     public $tipoVentilador;
-    public $etiqVentilador;
+    public $imgEtiqVentilador;
     public $qrEvaporador;
-    public $fotoEvaporador;
+    public $imgEvaporador;
     public $oficina;
     public $piso;
     public $agencia;
     public $estado;
-    public $model;
 
 
     public $atr = '';
@@ -68,9 +71,13 @@ class FichaTecnica extends Component
                 'tipoCompresor'  => 'required',
                 'marcaCompresor'  => 'required',
                 'ampCompresor'  => 'required',
-                'placaCompresor'  => 'required',
+                'imgPlacaCompresor'  => 'required|file|mimes:jpg,jpeg,png|max:2048',
                 'tipoVentilador'  => 'required',
-                'etiqVentilador'  => 'required',
+                'imgEtiqVentilador'  => 'required|file|mimes:jpg,jpeg,png|max:2048',
+                'oficina'  => 'required',
+                'piso'  => 'required',
+                'agencia'  => 'required',
+                'estado'  => 'required',
             ]);
         }
 
@@ -85,16 +92,41 @@ class FichaTecnica extends Component
                 'tipoCompresor'  => 'required',
                 'marcaCompresor'  => 'required',
                 'ampCompresor'  => 'required',
-                'placaCompresor'  => 'required',
+                'imgPlacaCompresor'  => 'required|file|mimes:jpg,jpeg,png|max:2048',
                 'tipoVentilador'  => 'required',
-                'etiqVentilador'  => 'required',
+                'imgEtiqVentilador'  => 'required|file|mimes:jpg,jpeg,png|max:2048',
                 'qrEvaporador'  => 'required',
-                'fotoEvaporador'  => 'required',
+                'imgEvaporador'  => 'required|file|mimes:jpg,jpeg,png|max:2048',
+                'oficina'  => 'required',
+                'piso'  => 'required',
+                'agencia'  => 'required',
+                'estado'  => 'required',
 
             ]);
         }
 
 
+    }
+
+    private function resetInputFields()
+    {
+        $this->tipoConden = '';
+        $this->voltaje = '';
+        $this->phases = '';
+        $this->tipoRefri = '';
+        $this->btu = '';
+        $this->tipoCompresor = '';
+        $this->marcaCompresor = '';
+        $this->ampCompresor = '';
+        $this->imgPlacaCompresor = '';
+        $this->tipoVentilador = '';
+        $this->imgEtiqVentilador = '';
+        $this->qrEvaporador = '';
+        $this->imgEvaporador = '';
+        $this->oficina = '';
+        $this->piso = '';
+        $this->agencia = '';
+        $this->estado = '';
     }
 
     protected $messages = [
@@ -108,41 +140,112 @@ class FichaTecnica extends Component
         'tipoCompresor.required'     => 'Campo Requerido',
         'marcaCompresor.required'    => 'Campo Requerido',
         'ampCompresor.required'      => 'Campo Requerido',
-        'placaCompresor.required'    => 'Campo Requerido',
+        'imgPlacaCompresor.required'    => 'Campo Requerido',
         'tipoVentilador.required'    => 'Campo Requerido',
-        'etiqVentilador.required'    => 'Campo Requerido',
+        'imgEtiqVentilador.required'    => 'Campo Requerido',
         'qrEvaporador.required'      => 'Campo Requerido',
-        'fotoEvaporador.required'    => 'Campo Requerido',
+        'imgEvaporador.required'    => 'Campo Requerido',
+        'oficina.required'    => 'Campo Requerido',
+        'piso.required'    => 'Campo Requerido',
+        'agencia.required'    => 'Campo Requerido',
+        'estado.required'    => 'Campo Requerido',
     ];
 
     public function store(){
 
-        $user = Auth::user();
-        
-        $this->validateData();
+        try {
+            
+            $user = Auth::user();
+        // $this->validateData();
 
         $fichaTecnica = new ModelFichaTecnica();
-        $fichaTecnica->uid = $this->agencia.'-'.$this->estado.'-'.$fichaTecnica->id;
-        $fichaTecnica->qrConden = $this->qrConden;
-        $fichaTecnica->tipoConden = $this->tipoConden;
-        $fichaTecnica->voltaje = $this->voltaje;
-        $fichaTecnica->phases = $this->phases;
-        $fichaTecnica->tipoRefri = $this->tipoRefri;
-        $fichaTecnica->btu = $this->btu;
-        $fichaTecnica->tipoCompresor = $this->tipoCompresor;
-        $fichaTecnica->marcaCompresor = $this->marcaCompresor;
-        $fichaTecnica->ampCompresor = $this->ampCompresor;
-        $fichaTecnica->placaCompresor = $this->placaCompresor;
-        $fichaTecnica->tipoVentilador = $this->tipoVentilador;
-        $fichaTecnica->etiqVentilador = $this->etiqVentilador;
-        $fichaTecnica->compreCorriente = $this->compreCorriente;
-        $fichaTecnica->qrEvaporador = $this->qrEvaporador;
-        $fichaTecnica->fotoEvaporador = $this->fotoEvaporador;
-        $fichaTecnica->oficina = $this->oficina;
-        $fichaTecnica->piso = $this->piso;
-        $fichaTecnica->agencia = $this->agencia;
-        $fichaTecnica->estado = $this->estado;
-        $fichaTecnica->save();
+
+        if($this->tipoConden == 'compacto'){
+
+            $this->validateData();
+
+            $uidFt = DB::table('ficha_tecnicas')->latest("id")->first();
+
+            if($uidFt == NULL){
+                $fichaTecnica->uid = $this->agencia.'-'.$this->estado.'-1';
+
+            }else{
+                $tercerTer = $uidFt->id * 10;
+                $fichaTecnica->uid = $this->agencia.'-'.$this->estado.'-'.$tercerTer;
+            }
+
+            $fichaTecnica->qrConden = $this->qrConden;
+            $fichaTecnica->tipoConden = $this->tipoConden;
+            $fichaTecnica->voltaje = $this->voltaje;
+            $fichaTecnica->phases = $this->phases;
+            $fichaTecnica->tipoRefri = $this->tipoRefri;
+            $fichaTecnica->btu = $this->btu;
+            $fichaTecnica->tipoCompresor = $this->tipoCompresor;
+            $fichaTecnica->marcaCompresor = $this->marcaCompresor;
+            $fichaTecnica->ampCompresor = $this->ampCompresor;
+            $fichaTecnica->imgPlacaCompresor = $this->imgPlacaCompresor;
+            $fichaTecnica->tipoVentilador = $this->tipoVentilador;
+            $fichaTecnica->imgEtiqVentilador = $this->imgEtiqVentilador;
+            $fichaTecnica->oficina = $this->oficina;
+            $fichaTecnica->piso = $this->piso;
+            $fichaTecnica->agencia = $this->agencia;
+            $fichaTecnica->estado = $this->estado;
+            $fichaTecnica->save();
+
+        }
+
+        if($this->tipoConden != 'compacto'){
+
+            $this->validateData();
+
+            $uidFt = DB::table('ficha_tecnicas')->latest("id")->first();
+
+            if($uidFt == NULL){
+                $fichaTecnica->uid = $this->agencia.'-'.$this->estado.'-1';
+
+            }else{
+                $tercerTer = $uidFt->id * 10;
+                $fichaTecnica->uid = $this->agencia.'-'.$this->estado.'-'.$tercerTer;
+            }
+
+            $fichaTecnica->qrConden = $this->qrConden;
+            $fichaTecnica->tipoConden = $this->tipoConden;
+            $fichaTecnica->voltaje = $this->voltaje;
+            $fichaTecnica->phases = $this->phases;
+            $fichaTecnica->tipoRefri = $this->tipoRefri;
+            $fichaTecnica->btu = $this->btu;
+            $fichaTecnica->tipoCompresor = $this->tipoCompresor;
+            $fichaTecnica->marcaCompresor = $this->marcaCompresor;
+            $fichaTecnica->ampCompresor = $this->ampCompresor;
+            $fichaTecnica->imgPlacaCompresor = $this->imgPlacaCompresor;
+            $fichaTecnica->tipoVentilador = $this->tipoVentilador;
+            $fichaTecnica->imgEtiqVentilador = $this->imgEtiqVentilador;
+            $fichaTecnica->qrEvaporador = $this->qrEvaporador;
+            $fichaTecnica->imgEvaporador = $this->imgEvaporador;
+            $fichaTecnica->oficina = $this->oficina;
+            $fichaTecnica->piso = $this->piso;
+            $fichaTecnica->agencia = $this->agencia;
+            $fichaTecnica->estado = $this->estado;
+            $fichaTecnica->save();
+
+        }
+
+            $this->resetInputFields();
+
+            $this->notification()->success(
+                $title = 'EXITO!',
+                $description = 'La ficha técnica fue registrada con éxito'
+            );
+
+        } catch (\Throwable $th) {
+            $this->notification()->error(
+                $title = 'ERROR!',
+                $description = 'Function store() - livewire.ficha-tecnica'
+            );
+        }
+
+        
+
 
     }
 

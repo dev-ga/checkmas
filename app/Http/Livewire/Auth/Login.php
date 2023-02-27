@@ -45,7 +45,7 @@ class Login extends Component
         $this->validateOnly($propertyName);
     }
 
-    public function completarRegistro()
+    public function dashTecnicos()
     {
         redirect()->to('/dash-tecnicos');
     }
@@ -79,13 +79,11 @@ class Login extends Component
 
                     Auth::attempt($credenciales);
                     $user = Auth::user();
-                    if ($user->rol != '1')
-                    {
-                        
-                        $this->completarRegistro();
+                    if ($user->rol == '7')
+                    { 
+                        $this->dashTecnicos();
 
                     } else {
-
                         $this->retornaDash();
                     }
 

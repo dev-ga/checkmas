@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('ficha_tecnicas', function (Blueprint $table) {
             $table->id();
-            $table->string('uid');
+            $table->string('uid')->nullable();
             $table->string('qrConden');
             $table->string('tipoConden');
             $table->string('voltaje');
@@ -25,12 +25,11 @@ return new class extends Migration
             $table->string('tipoCompresor');
             $table->string('marcaCompresor');
             $table->string('ampCompresor');
-            $table->string('placaCompresor');
+            $table->string('imgPlacaCompresor');
             $table->string('tipoVentilador');
-            $table->string('etiqVentilador');
-            $table->string('compreCorriente');
-            $table->string('qrEvaporador');
-            $table->string('fotoEvaporador');
+            $table->string('imgEtiqVentilador');
+            $table->string('qrEvaporador')->nullable();
+            $table->string('imgEvaporador')->nullable();
             $table->string('oficina');
             $table->string('piso');
             $table->string('agencia');
