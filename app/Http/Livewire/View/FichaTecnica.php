@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\View;
 
 use App\Models\FichaTecnica as ModelFichaTecnica;
+use App\Models\Qr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -47,12 +48,13 @@ class FichaTecnica extends Component
         'selection'
     ];
 
-    public function selection($value){
-        if($value == 'compacto'){
+    public function selection($value)
+    {
+        if ($value == 'compacto') {
             $this->atr = 'hidden';
         }
 
-        if($value != 'compacto'){
+        if ($value != 'compacto') {
             $this->atr = '';
             $this->label = $value;
         }
@@ -60,7 +62,7 @@ class FichaTecnica extends Component
 
     public function validateData()
     {
-        if($this->tipoConden == 'compacto'){
+        if ($this->tipoConden == 'compacto') {
             $this->validate([
                 'qrConden'  => 'required',
                 'tipoConden'  => 'required',
@@ -81,7 +83,7 @@ class FichaTecnica extends Component
             ]);
         }
 
-        if($this->tipoConden != 'compacto'){
+        if ($this->tipoConden != 'compacto') {
             $this->validate([
                 'qrConden'  => 'required',
                 'tipoConden'  => 'required',
@@ -104,12 +106,11 @@ class FichaTecnica extends Component
 
             ]);
         }
-
-
     }
 
     private function resetInputFields()
     {
+        $this->qrConden = '';
         $this->tipoConden = '';
         $this->voltaje = '';
         $this->phases = '';
@@ -140,113 +141,130 @@ class FichaTecnica extends Component
         'tipoCompresor.required'     => 'Campo Requerido',
         'marcaCompresor.required'    => 'Campo Requerido',
         'ampCompresor.required'      => 'Campo Requerido',
-        'imgPlacaCompresor.required'    => 'Campo Requerido',
+        'imgPlacaCompresor.required' => 'Campo Requerido',
         'tipoVentilador.required'    => 'Campo Requerido',
-        'imgEtiqVentilador.required'    => 'Campo Requerido',
+        'imgEtiqVentilador.required' => 'Campo Requerido',
         'qrEvaporador.required'      => 'Campo Requerido',
-        'imgEvaporador.required'    => 'Campo Requerido',
-        'oficina.required'    => 'Campo Requerido',
-        'piso.required'    => 'Campo Requerido',
-        'agencia.required'    => 'Campo Requerido',
-        'estado.required'    => 'Campo Requerido',
+        'imgEvaporador.required'     => 'Campo Requerido',
+        'oficina.required'           => 'Campo Requerido',
+        'piso.required'              => 'Campo Requerido',
+        'imgPlacaCompresor.mimes'    => 'El formato del archivo no esta permitido',
+        'imgEtiqVentilador.mimes'    => 'El formato del archivo no esta permitido',
+        'imgEvaporador.mimes'        => 'El formato del archivo no esta permitido',
+
     ];
 
-    public function store(){
+    public function store()
+    {
+
+        $this->validateData();
 
         try {
-            
+
             $user = Auth::user();
-        // $this->validateData();
 
-        $fichaTecnica = new ModelFichaTecnica();
+            $fichaTecnica = new ModelFichaTecnica();
 
-        if($this->tipoConden == 'compacto'){
+            $qrs = new Qr();
 
-            $this->validateData();
+            if ($this->tipoConden == 'compacto') {
 
-            $uidFt = DB::table('ficha_tecnicas')->latest("id")->first();
+                $uidFt = DB::table('ficha_tecnicas')->latest("id")->first();
 
-            if($uidFt == NULL){
-                $fichaTecnica->uid = $this->agencia.'-'.$this->estado.'-1';
+                if ($uidFt == NULL) {
+                    $fichaTecnica->uid = $this->agencia . '-' . $this->estado . '-1';
+                    
+                } else {
+                    $tercerTer = $uidFt->id * 10;
+                    $fichaTecnica->uid = $this->agencia . '-' . $this->estado . '-' . $tercerTer;
+                }
 
-            }else{
-                $tercerTer = $uidFt->id * 10;
-                $fichaTecnica->uid = $this->agencia.'-'.$this->estado.'-'.$tercerTer;
+                $fichaTecnica->qrConden     = $this->qrConden;
+                $fichaTecnica->tipoConden   = $this->tipoConden;
+                $fichaTecnica->voltaje      = $this->voltaje;
+                $fichaTecnica->phases       = $this->phases;
+                $fichaTecnica->tipoRefri    = $this->tipoRefri;
+                $fichaTecnica->btu          = $this->btu;
+                $fichaTecnica->tipoCompresor    = $this->tipoCompresor;
+                $fichaTecnica->marcaCompresor   = $this->marcaCompresor;
+                $fichaTecnica->ampCompresor     = $this->ampCompresor;
+                $fichaTecnica->imgPlacaCompresor    = $this->imgPlacaCompresor;
+                $fichaTecnica->tipoVentilador       = $this->tipoVentilador;
+                $fichaTecnica->imgEtiqVentilador    = $this->imgEtiqVentilador;
+                $fichaTecnica->oficina      = $this->oficina;
+                $fichaTecnica->piso         = $this->piso;
+                $fichaTecnica->agencia      = $this->agencia;
+                $fichaTecnica->estado       = $this->estado;
+                $fichaTecnica->save();
+
+                /**
+                 * Logia para colocar el CodigoQR seleccionado
+                 * como asignado
+                 */
+                DB::table('qrs')
+                ->where('codigo', $fichaTecnica->qrConden)
+                ->update(['asignado' => 1]);
             }
 
-            $fichaTecnica->qrConden = $this->qrConden;
-            $fichaTecnica->tipoConden = $this->tipoConden;
-            $fichaTecnica->voltaje = $this->voltaje;
-            $fichaTecnica->phases = $this->phases;
-            $fichaTecnica->tipoRefri = $this->tipoRefri;
-            $fichaTecnica->btu = $this->btu;
-            $fichaTecnica->tipoCompresor = $this->tipoCompresor;
-            $fichaTecnica->marcaCompresor = $this->marcaCompresor;
-            $fichaTecnica->ampCompresor = $this->ampCompresor;
-            $fichaTecnica->imgPlacaCompresor = $this->imgPlacaCompresor;
-            $fichaTecnica->tipoVentilador = $this->tipoVentilador;
-            $fichaTecnica->imgEtiqVentilador = $this->imgEtiqVentilador;
-            $fichaTecnica->oficina = $this->oficina;
-            $fichaTecnica->piso = $this->piso;
-            $fichaTecnica->agencia = $this->agencia;
-            $fichaTecnica->estado = $this->estado;
-            $fichaTecnica->save();
+            if ($this->tipoConden != 'compacto') {
 
-        }
+                $uidFt = DB::table('ficha_tecnicas')->latest("id")->first();
 
-        if($this->tipoConden != 'compacto'){
+                if ($uidFt == NULL) {
+                    $fichaTecnica->uid = $this->agencia . '-' . $this->estado . '-1';
+                } else {
+                    $tercerTer = $uidFt->id * 10;
+                    $fichaTecnica->uid = $this->agencia . '-' . $this->estado . '-' . $tercerTer;
+                }
 
-            $this->validateData();
+                $fichaTecnica->qrConden = $this->qrConden;
+                $fichaTecnica->tipoConden = $this->tipoConden;
+                $fichaTecnica->voltaje = $this->voltaje;
+                $fichaTecnica->phases = $this->phases;
+                $fichaTecnica->tipoRefri = $this->tipoRefri;
+                $fichaTecnica->btu = $this->btu;
+                $fichaTecnica->tipoCompresor = $this->tipoCompresor;
+                $fichaTecnica->marcaCompresor = $this->marcaCompresor;
+                $fichaTecnica->ampCompresor = $this->ampCompresor;
+                $fichaTecnica->imgPlacaCompresor = $this->imgPlacaCompresor;
+                $fichaTecnica->tipoVentilador = $this->tipoVentilador;
+                $fichaTecnica->imgEtiqVentilador = $this->imgEtiqVentilador;
+                $fichaTecnica->qrEvaporador = $this->qrEvaporador;
+                $fichaTecnica->imgEvaporador = $this->imgEvaporador;
+                $fichaTecnica->oficina = $this->oficina;
+                $fichaTecnica->piso = $this->piso;
+                $fichaTecnica->agencia = $this->agencia;
+                $fichaTecnica->estado = $this->estado;
+                $fichaTecnica->save();
 
-            $uidFt = DB::table('ficha_tecnicas')->latest("id")->first();
+                /**
+                 * Logia para colocar el CodigoQR seleccionado
+                 * como asignado
+                 */
+                DB::table('qrs')
+                ->where('codigo', $fichaTecnica->qrConden)
+                ->update(['asignado' => 1]);
 
-            if($uidFt == NULL){
-                $fichaTecnica->uid = $this->agencia.'-'.$this->estado.'-1';
+                DB::table('qrs')
+                ->where('codigo', $fichaTecnica->qrEvaporador)
+                ->update(['asignado' => 1]);
 
-            }else{
-                $tercerTer = $uidFt->id * 10;
-                $fichaTecnica->uid = $this->agencia.'-'.$this->estado.'-'.$tercerTer;
+
             }
-
-            $fichaTecnica->qrConden = $this->qrConden;
-            $fichaTecnica->tipoConden = $this->tipoConden;
-            $fichaTecnica->voltaje = $this->voltaje;
-            $fichaTecnica->phases = $this->phases;
-            $fichaTecnica->tipoRefri = $this->tipoRefri;
-            $fichaTecnica->btu = $this->btu;
-            $fichaTecnica->tipoCompresor = $this->tipoCompresor;
-            $fichaTecnica->marcaCompresor = $this->marcaCompresor;
-            $fichaTecnica->ampCompresor = $this->ampCompresor;
-            $fichaTecnica->imgPlacaCompresor = $this->imgPlacaCompresor;
-            $fichaTecnica->tipoVentilador = $this->tipoVentilador;
-            $fichaTecnica->imgEtiqVentilador = $this->imgEtiqVentilador;
-            $fichaTecnica->qrEvaporador = $this->qrEvaporador;
-            $fichaTecnica->imgEvaporador = $this->imgEvaporador;
-            $fichaTecnica->oficina = $this->oficina;
-            $fichaTecnica->piso = $this->piso;
-            $fichaTecnica->agencia = $this->agencia;
-            $fichaTecnica->estado = $this->estado;
-            $fichaTecnica->save();
-
-        }
 
             $this->resetInputFields();
 
             $this->notification()->success(
-                $title = 'EXITO!',
+                $title = 'ÉXITO!',
                 $description = 'La ficha técnica fue registrada con éxito'
             );
-
         } catch (\Throwable $th) {
+            // dd($th);
             $this->notification()->error(
                 $title = 'ERROR!',
                 $description = 'Function store() - livewire.ficha-tecnica'
             );
         }
-
-        
-
-
     }
 
 

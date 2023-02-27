@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('estatus', function (Blueprint $table) {
             $table->id();
+            $table->string('codigo');
+            $table->string('descripcon');
+            $table->string('tipo_estatus');
             $table->timestamps();
         });
     }

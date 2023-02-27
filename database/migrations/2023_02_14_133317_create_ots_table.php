@@ -21,7 +21,8 @@ return new class extends Migration
              */
             $table->string('otUid');
             $table->string('fechaInicio');
-            $table->string('tecRespondable');
+            $table->string('tecRes_NomApe');
+            $table->string('tecRes_email');
             $table->string('equipoUid');
             $table->string('tipoMantenimiento');
             $table->string('owner');

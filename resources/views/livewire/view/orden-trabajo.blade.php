@@ -9,7 +9,7 @@
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4 mt-8">
             <div class="p-2">
                 <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.fechaInicio')</label>
-                <x-datetime-picker wire:model="fechaInicio" />
+                <x-input type="date" wire:model="fechaInicio" />
             </div>
             <div class="p-2">
                 <x-lista-tecnicos></x-lista-tecnicos>

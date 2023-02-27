@@ -102,6 +102,7 @@
                 <div class="p-2">
                     <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.placa')</label>
                     <input id="" wire:model="imgPlacaCompresor" type="file" class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-gray-200 outline-none focus:border-indigo-500 disabledDocCC">
+                    @error('imgPlacaCompresor') <span class="error text-xs text-red-700">{{ $message }}</span> @enderror
                 </div>
             </div>
         </div>
@@ -127,6 +128,7 @@
             <div class="p-2">
                 <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.etiqueta')</label>
                 <input id="" wire:model="imgEtiqVentilador" type="file" class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-gray-200 outline-none focus:border-indigo-500 disabledDocCC">
+                @error('imgEtiqVentilador') <span class="error text-xs text-red-700">{{ $message }}</span> @enderror
             </div>
         </div>
     </div>
@@ -144,6 +146,7 @@
             <div class="p-2 ml-8">
                 <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.representativa')</label>
                 <input id="" wire:model="imgEvaporador" type="file" class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-gray-200 outline-none focus:border-indigo-500 disabledDocCC">
+                @error('imgEvaporador') <span class="error text-xs text-red-700">{{ $message }}</span> @enderror
             </div>
         </div>
     </div>

@@ -7,6 +7,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use App\Models\Ot;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 
@@ -24,6 +25,18 @@ class OrdenTrabajo extends Component
     public $tipoMantenimiento;
     public $owner;
     public $statusOts;
+    
+
+    public function datosTecRes(){
+        $datos =User::where('email', $this->tecRespondable)->get();
+        foreach($datos as $item){
+            $nombre = $item->nombre;
+            $apellido = $item->apellido;
+        }
+        $data = $nombre.' '.$apellido;
+        return $data;
+
+    }
 
     private function resetInputFields()
     {
@@ -62,19 +75,22 @@ class OrdenTrabajo extends Component
     }
 
     public function store(){
+        
+        $fecha = Carbon::createFromFormat('Y-m-d', $this->fechaInicio)->format('dmY');
 
-        $fecha = Carbon::create($this->fechaInicio);
         // dd($fecha->format('dmYhis'));
         $user = Auth::user();
+
         // $otUid = $fecha->format('dmYhis').'-'.$this->equipoUid.'-'.$this->tipoMantenimiento;
         // dd($otUid);
 
         $this->validate();
 
         $ot = new Ot();
-        $ot->otUid = $fecha->format('dmYhis').'-'.$this->equipoUid.'-'.$this->tipoMantenimiento;
-        $ot->fechaInicio = $this->fechaInicio;
-        $ot->tecRespondable = $this->tecRespondable;
+        $ot->otUid = $fecha.'-'.$this->equipoUid.'-'.$this->tipoMantenimiento;
+        $ot->fechaInicio = Carbon::createFromFormat('Y-m-d', $this->fechaInicio)->format('d-m-Y');
+        $ot->tecRes_NomApe = $this->datosTecRes();
+        $ot->tecRes_email = $this->tecRespondable;
         $ot->equipoUid = $this->equipoUid;
         $ot->tipoMantenimiento = $this->tipoMantenimiento;
         $ot->owner = $user->email;
