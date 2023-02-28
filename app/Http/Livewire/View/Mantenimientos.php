@@ -17,6 +17,12 @@ class Mantenimientos extends Component
     public $buscar;
     public $atr = 'text-gray-400';
 
+    public function showFicha($id, $equipoUid)
+    {
+        $this->emit('showFichaModal', $equipoUid);
+        // dd($id, $equipoUid);
+    }
+
     public function updateStatusAdmin($id, $btr){
         $data = ot::find($id)->statusOts;
 
@@ -65,7 +71,7 @@ class Mantenimientos extends Component
 
         }else{
             return view('livewire.view.mantenimientos', [
-                'data' => Ot::where('tecRespondable', $tecEmail)
+                'data' => Ot::where('tecRes_email', $tecEmail)
                     ->Where('otUid', 'like', "%{$this->buscar}%")
                     ->paginate(5)
             ]);

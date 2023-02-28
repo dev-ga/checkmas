@@ -74,8 +74,17 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{{ $item->equipoUid }}</td>
+                                {{-- <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{{ $item->equipoUid }}</td> --}}
+                                <td class="px-4 py-4 text-sm whitespace-nowrap">
+                                    <div class="flex items-center gap-x-6">
+                                        <button wire:click="showFicha({{ $item->id }}, '{{ $item->equipoUid }}')" class="text-blue-900 transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
+                                            {{ $item->equipoUid }}
+                                        </button>
+                                    </div>
+                                </td>
                                 <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{{ $item->tipoMantenimiento }}</td>
+                                
+                                {{-- Owner --}}
                                 <td class="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
                                     <div class="flex items-center gap-x-2">
                                         <img class="object-cover w-8 h-8 rounded-full" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80" alt="">
@@ -84,8 +93,9 @@
                                             <p class="text-xs font-normal text-gray-600 dark:text-gray-400">{{ $item->owner }}</p>
                                         </div>
                                     </div>
-                                {{-- Estatus de las Ordenes de trabajo --}}
                                 </td>
+
+                                {{-- Estatus de las Ordenes de trabajo --}}
                                 @if($item->statusOts == '1')
                                     <td class="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
                                         <div class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-sky-500 bg-sky-100/60 dark:bg-gray-800">
@@ -137,15 +147,7 @@
                                         </div>
                                     </td>
                                 @endif
-                                {{-- <td class="px-4 py-4 text-sm whitespace-nowrap">
-                                    <div class="flex items-center gap-x-6">
-                                        <button class="text-yellow-800 transition-colors duration-200 font-extrabold  dark:hover:text-indigo-500 dark:text-gray-300 hover:text-green-500 focus:outline-none">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
-                                              </svg>                                              
-                                        </button>
-                                    </div>
-                                </td> --}}
+
                                 {{-- Cambio de estatus --}}
                                 <td class="px-4 py-4 text-sm whitespace-nowrap">
                                     @if(Auth::user()->rol == 5)
@@ -189,3 +191,5 @@
             </div>
         </div>
     </div>
+    
+    

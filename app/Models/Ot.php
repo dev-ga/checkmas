@@ -14,7 +14,8 @@ class Ot extends Model
     protected $fillable = [
         'otUid',
         'fechaInicio',
-        'tecRespondable',
+        'tecRes_NomApe',
+        'tecRes_email',
         'equipoUid',
         'tipoMantenimiento',
         'owner',

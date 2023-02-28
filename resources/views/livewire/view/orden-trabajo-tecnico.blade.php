@@ -15,7 +15,7 @@
     </div>
 
     {{-- Tareas realizadas MP --}}
-    <div class="border border-gray-200 rounded-lg shadow-md px-4" hidden>
+    <div class="border border-gray-200 rounded-lg shadow-md px-4">
         <div class="p-2 mb-4">
             <label class="text-xs font-extrabold text-black drop-shadow-lg">@lang('messages.label.tareasMp')</label>
         </div>
@@ -85,7 +85,7 @@
 
 
     {{-- Tareas realizadas MC --}}
-    <div class="border border-gray-200 rounded-lg shadow-md px-4" hidden>
+    <div class="border border-gray-200 rounded-lg shadow-md px-4">
         <div class="p-2 mb-4">
             <label class="text-xs font-extrabold text-black drop-shadow-lg">@lang('messages.label.tareasMc')</label>
         </div>
