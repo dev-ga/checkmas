@@ -20,11 +20,37 @@
             </div>
             <div class="p-2">
                 <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.tipoMan')</label>
-                <x-native-select wire:model="tipoMantenimiento">
+                <x-native-select wire:model="tipoMantenimiento" wire:change="$emit('selection', $event.target.value)">
                     <option></option>
                     <option value="MP">Preventivo</option>
                     <option value="MC">Correctivo</option>
                 </x-native-select>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4 mt-8 {{ $atr }}">
+            <div class="p-2">
+                <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.costo_Opera')</label>
+                <x-inputs.currency icon="currency-dollar" thousands="." decimal="," precision="2" wire:model="costo_oper"/>
+            </div>
+            <div class="p-2">
+                <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.costo_preCli')</label>
+                <x-inputs.currency icon="currency-dollar" thousands="." decimal="," precision="2" wire:model="costo_preCli" wire:change="$emit('calc', $event.target.value)"/>
+            </div>
+            <div class="p-2">
+                <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.utilBruta')</label>
+                <x-input icon="currency-dollar" thousands="." decimal="," precision="2" wire:model="porcen" value="{{ $porcen }}" class="cursor-none"/>
+            </div>
+            
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4 mt-8 {{ $atr }}">
+            
+            <div class="p-2">
+                <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.presupuesto1')</label>
+                <input wire:model="pdf_pre_oper" type="file" class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-gray-200 outline-none focus:border-indigo-500 disabledDocCC">
+            </div>
+            <div class="p-2">
+                <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.presupuesto2')</label>
+                <input wire:model="pdf_pre_preCli" type="file" class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-gray-200 outline-none focus:border-indigo-500 disabledDocCC">
             </div>
         </div>
 

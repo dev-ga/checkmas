@@ -18,6 +18,10 @@ class Ot extends Model
         'tecRes_email',
         'equipoUid',
         'tipoMantenimiento',
+        'costo_oper',
+        'costo_preCli',
+        'pdf_pre_oper',
+        'pdf_pre_preCli',
         'owner',
         'statusOts',
     ];

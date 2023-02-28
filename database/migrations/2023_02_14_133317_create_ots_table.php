@@ -25,15 +25,19 @@ return new class extends Migration
             $table->string('tecRes_email');
             $table->string('equipoUid');
             $table->string('tipoMantenimiento');
+            $table->decimal('costo_oper', 18, 2)->nullable()->default(0.00);
+            $table->decimal('costo_preCli', 18, 2)->nullable()->default(0.00);
+            $table->string('pdf_pre_oper');
+            $table->string('pdf_pre_preCli');
             $table->string('owner');
             /**
              * @param $statusOts
              * Status de las Ots.
              * 1 - creada
              * 2 - aprobada
-             * 3 - en ejecución
-             * 4 - revision
-             * 5 - cerrada
+             * 3 - ejecución
+             * 4 - supervision
+             * 5 - finalizada
              */
             $table->string('statusOts')->default(1);
             $table->timestamps();
