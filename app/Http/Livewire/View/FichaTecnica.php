@@ -285,6 +285,9 @@ class FichaTecnica extends Component
 
     public function render()
     {
-        return view('livewire.view.ficha-tecnica');
+        return view('livewire.view.ficha-tecnica', [
+            'data' => ModelFichaTecnica::orderby('created_at')
+                ->paginate(5)
+        ]);
     }
 }
