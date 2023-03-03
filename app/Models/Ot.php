@@ -26,8 +26,5 @@ class Ot extends Model
         'statusOts',
     ];
 
-    public function otTecnico()
-    {
-        return $this->hasOne(OtTecnico::class);
-    }
+
 }

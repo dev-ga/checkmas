@@ -83,7 +83,6 @@
         </div>
     </div>
 
-
     {{-- Tareas realizadas MC --}}
     <div class="border border-gray-200 rounded-lg shadow-md px-4">
         <div class="p-2 mb-4">

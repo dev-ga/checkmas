@@ -16,11 +16,19 @@ class Mantenimientos extends Component
 
     public $buscar;
     public $atr = 'text-gray-400';
+    public $campo = 'created_at';
+    public $orden = 'desc';
 
     public function showFicha($id, $equipoUid)
     {
         $this->emit('showFichaModal', $equipoUid);
         // dd($id, $equipoUid);
+    }
+
+    public function ePrint($id)
+    {
+        return redirect()->to('/printOt/'.$id);
+        
     }
 
     public function updateStatusAdmin($id, $btr){
@@ -57,6 +65,7 @@ class Mantenimientos extends Component
     }
 
 
+
     public function render()
     {
         $user = Auth::user();
@@ -64,7 +73,7 @@ class Mantenimientos extends Component
 
         if($user->rol != '7'){
             return view('livewire.view.mantenimientos', [
-                'data' => Ot::orderBy('created_at', 'desc')
+                'data' => Ot::orderBy($this->campo, $this->orden)
                     ->Where('otUid', 'like', "%{$this->buscar}%")
                     ->paginate(5)
             ]);
@@ -72,6 +81,7 @@ class Mantenimientos extends Component
         }else{
             return view('livewire.view.mantenimientos', [
                 'data' => Ot::where('tecRes_email', $tecEmail)
+                    ->Where('otUid', 'like', "%{$this->buscar}%")
                     ->Where('otUid', 'like', "%{$this->buscar}%")
                     ->paginate(5)
             ]);

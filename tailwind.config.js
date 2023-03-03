@@ -19,6 +19,12 @@ module.exports = {
 
     theme: {
         extend: {
+            width: {
+                '792': '49rem',
+              },
+            heigth: {
+                '612': '39rem',
+              },
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },

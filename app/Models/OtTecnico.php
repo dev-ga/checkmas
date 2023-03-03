@@ -12,8 +12,6 @@ class OtTecnico extends Model
     protected $table = 'ot_tecnicos';
 
     protected $fillable = [
-        'ot_id',
-        'otUid_id',
         'fechaEjecucion',
         'tipoMantenimiento',
         'limConden',
@@ -35,13 +33,4 @@ class OtTecnico extends Model
 
     ];
 
-    public function ot()
-    {
-        return $this->belongsTo(Ot::class);
-    }
-
-    public function OtUid()
-    {
-        return $this->belongsTo(Ot::class, 'otUid');
-    }
 }

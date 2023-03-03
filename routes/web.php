@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\View\Dashboard;
+use App\Models\Ot;
 use App\Models\User;
 use Illuminate\Support\Str;
 
@@ -74,6 +75,15 @@ Route::middleware(['auth:sanctum','verified'])->group(function () {
      */
     Route::get('/logout', [\App\Http\Controllers\UserController::class, 'destroy'])
         ->name('logout');
+    
+    /**
+     * Ruta para imprimir la OTs
+     */
+    Route::get('/printOt/{id}', function ($id) {
+        $data = Ot::find($id);
+        $keySecurity = Hash :: make($id);
+        return view('tecnicos.printOt', compact(['data', 'keySecurity']));
+    })->name('print-ot');
 });
 
 /**

@@ -6,6 +6,4 @@
         </div>
     </div>
 
-    
-
 </x-layout-tecnicos>

@@ -41,12 +41,20 @@ class FichaTecnica extends Component
     public $estado;
 
 
+    public $buscar;
     public $atr = '';
     public $label = '';
+    public $atr_form = 'hidden';
+    public $atr_table = '';
 
     protected $listeners = [
         'selection'
     ];
+
+    public function viewForm(){
+        $this->atr_form = '';
+        $this->atr_table = 'hidden';
+    }
 
     public function selection($value)
     {
@@ -179,6 +187,13 @@ class FichaTecnica extends Component
                     $fichaTecnica->uid = $this->agencia . '-' . $this->estado . '-' . $tercerTer;
                 }
 
+                /**
+                 * Cargamos las imagenes
+                 */
+                $img_compresor = $this->imgPlacaCompresor->store($this->qrConden.'/compresor', 'public');
+                $img_ventilador = $this->imgEtiqVentilador->store($this->qrConden.'/ventilador', 'public');
+
+
                 $fichaTecnica->qrConden     = $this->qrConden;
                 $fichaTecnica->tipoConden   = $this->tipoConden;
                 $fichaTecnica->voltaje      = $this->voltaje;
@@ -188,9 +203,9 @@ class FichaTecnica extends Component
                 $fichaTecnica->tipoCompresor    = $this->tipoCompresor;
                 $fichaTecnica->marcaCompresor   = $this->marcaCompresor;
                 $fichaTecnica->ampCompresor     = $this->ampCompresor;
-                $fichaTecnica->imgPlacaCompresor    = $this->imgPlacaCompresor;
+                $fichaTecnica->imgPlacaCompresor    = $img_compresor;
                 $fichaTecnica->tipoVentilador       = $this->tipoVentilador;
-                $fichaTecnica->imgEtiqVentilador    = $this->imgEtiqVentilador;
+                $fichaTecnica->imgEtiqVentilador    = $img_ventilador;
                 $fichaTecnica->oficina      = $this->oficina;
                 $fichaTecnica->piso         = $this->piso;
                 $fichaTecnica->agencia      = $this->agencia;
@@ -217,6 +232,13 @@ class FichaTecnica extends Component
                     $fichaTecnica->uid = $this->agencia . '-' . $this->estado . '-' . $tercerTer;
                 }
 
+                /**
+                 * Cargamos las imagenes
+                 */
+                $img_compresor  = $this->imgPlacaCompresor->store($this->qrConden.'/compresor', 'public');
+                $img_ventilador = $this->imgEtiqVentilador->store($this->qrConden.'/ventilador', 'public');
+                $img_evaporador = $this->imgEvaporador->store($this->qrEvaporador.'/evaporador', 'public');
+
                 $fichaTecnica->qrConden = $this->qrConden;
                 $fichaTecnica->tipoConden = $this->tipoConden;
                 $fichaTecnica->voltaje = $this->voltaje;
@@ -226,11 +248,11 @@ class FichaTecnica extends Component
                 $fichaTecnica->tipoCompresor = $this->tipoCompresor;
                 $fichaTecnica->marcaCompresor = $this->marcaCompresor;
                 $fichaTecnica->ampCompresor = $this->ampCompresor;
-                $fichaTecnica->imgPlacaCompresor = $this->imgPlacaCompresor;
+                $fichaTecnica->imgPlacaCompresor = $img_compresor;
                 $fichaTecnica->tipoVentilador = $this->tipoVentilador;
-                $fichaTecnica->imgEtiqVentilador = $this->imgEtiqVentilador;
+                $fichaTecnica->imgEtiqVentilador = $img_ventilador;
                 $fichaTecnica->qrEvaporador = $this->qrEvaporador;
-                $fichaTecnica->imgEvaporador = $this->imgEvaporador;
+                $fichaTecnica->imgEvaporador = $img_evaporador;
                 $fichaTecnica->oficina = $this->oficina;
                 $fichaTecnica->piso = $this->piso;
                 $fichaTecnica->agencia = $this->agencia;
@@ -252,7 +274,7 @@ class FichaTecnica extends Component
 
             }
 
-            $this->resetInputFields();
+            $this->reset();
 
             $this->notification()->success(
                 $title = 'ÉXITO!',
@@ -269,24 +291,19 @@ class FichaTecnica extends Component
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public function render()
     {
         return view('livewire.view.ficha-tecnica', [
-            'data' => ModelFichaTecnica::orderby('created_at')
+            'data' => ModelFichaTecnica::where('uid', 'like', "%{$this->buscar}%")
+                ->orWhere('tipoConden', 'like', "%{$this->buscar}%")
+                ->orWhere('phases', 'like', "%{$this->buscar}%")
+                ->orWhere('voltaje', 'like', "%{$this->buscar}%")
+                ->orWhere('tipoRefri', 'like', "%{$this->buscar}%")
+                ->orWhere('btu', 'like', "%{$this->buscar}%")
+                ->orWhere('tipoCompresor', 'like', "%{$this->buscar}%")
+                ->orWhere('marcaCompresor', 'like', "%{$this->buscar}%")
+                ->orWhere('ampCompresor', 'like', "%{$this->buscar}%")
+                ->orderBy('id', 'desc')
                 ->paginate(5)
         ]);
     }
