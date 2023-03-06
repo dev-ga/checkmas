@@ -60,6 +60,11 @@ class Login extends Component
         redirect()->to('/registro-index');
     }
 
+    public function completarRegistroBanco()
+    {
+        redirect()->to('/completar-registro-banco');
+    }
+
 
     public function login()
     {
@@ -84,14 +89,31 @@ class Login extends Component
 
                     Auth::attempt($credenciales);
                     $user = Auth::user();
-                    if ($user->rol == '7')
+
+                    if ($user->rol == '7' || $user->rol == '8')
                     { 
                         $this->dashTecnicos();
 
-                    } else {
+                    }
+
+                    if ($user->rol == '6' || $user->rol == '5' || $user->rol == '4' || $user->rol == '3' || $user->rol == '2' || $user->rol == '1') {
                         $this->retornaDash();
                     }
 
+                    if ($user->rol == '200')
+                    { 
+                        $this->completarRegistroBanco();
+
+                    }
+
+                    if ($user->rol == '400')
+                    { 
+                        $this->notification()->success(
+                            $title = 'ERROR!',
+                            $description = 'El correo administrador@checkmas.com fue DESACTIVADO'
+                        );
+                    }
+                    
                 } else {
 
                     $this->password = '';

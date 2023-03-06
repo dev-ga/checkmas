@@ -32,15 +32,6 @@
                     <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.pass')</label>
                     <x-inputs.password wire:model="password" />
                 </div>
-                {{-- rol --}}
-                <div class="p-2">
-                    <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.rol')</label>
-                    <x-native-select wire:model="rol">
-                        <option></option>
-                        <option value="3">@lang('messages.label.gteBanco')</option>
-                        <option value="4">@lang('messages.label.gteServicios')</option>
-                    </x-native-select>
-                </div>
                 {{-- estado --}}
                 <div class="p-2">
                     <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.estado')</label>
@@ -81,4 +72,3 @@
         </div>
     </div>
 </div>
-

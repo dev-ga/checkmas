@@ -103,7 +103,7 @@ return [
         'presupuesto1' => 'Cargue el presupuesto Operacional',
         'presupuesto2' => 'Cargue el Presupuesto/Cliente',
         'utilBruta' => 'T.I.R.(%)',
-        '' => '',
+        'analistaCostostrx' => 'Analista de Costos',
         '' => '',
         '' => '',
         '' => '',

@@ -128,6 +128,9 @@ class RegistroTrx extends Component
                     $title = 'Perfil Creado!',
                     $description = 'El usuario fue registrado de forma satisfactoria'
                 );
+                sleep(1);
+                redirect()->to('/');
+
             }
         } catch (\Throwable $th) {
 

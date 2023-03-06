@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\View\Dashboard;
 use App\Models\Ot;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /*
@@ -85,7 +86,7 @@ Route::middleware(['auth:sanctum','verified'])->group(function () {
      */
     Route::get('/printOt/{id}', function ($id) {
         $data = Ot::find($id);
-        $keySecurity = Hash :: make($id);
+        $keySecurity = Hash::make($id);
         return view('tecnicos.printOt', compact(['data', 'keySecurity']));
     })->name('print-ot');
 });
@@ -108,6 +109,10 @@ Route::get('registro-trx', function () {
 Route::get('registro-banco', function () {
     return view('auth.registro-banco');
 })->name('registro-banco');
+
+Route::get('/completar-registro-banco', function () {
+    return view('auth.completar-registro-banco');
+})->name('completar-registro-banco');
 
 
 
