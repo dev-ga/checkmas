@@ -55,6 +55,11 @@ class Login extends Component
         redirect()->to('/dashboard-admin');
     }
 
+    public function registrate()
+    {
+        redirect()->to('/registro-index');
+    }
+
 
     public function login()
     {

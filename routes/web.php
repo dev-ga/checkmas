@@ -18,7 +18,7 @@ use Illuminate\Support\Str;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 
@@ -46,6 +46,10 @@ Route::middleware(['auth:sanctum','verified'])->group(function () {
     Route::get('ots', function () {
         return view('tecnicos.ots');
     })->name('ots');
+
+    Route::get('lista-usuarios', function () {
+        return view('dashboard.listado-usuarios');
+    })->name('lista-usuarios');
 
     Route::get('dash-mantenimientos', function () {
         return view('dashboard.mantenimientos');
@@ -92,6 +96,10 @@ Route::middleware(['auth:sanctum','verified'])->group(function () {
  Route::get('admin-registro', function () {
     return view('auth.admin-registro');
 })->name('admin-registro');
+
+Route::get('registro-index', function () {
+    return view('auth.registro-index');
+})->name('registro-index');
 
 Route::get('registro-trx', function () {
     return view('auth.registro-trx');

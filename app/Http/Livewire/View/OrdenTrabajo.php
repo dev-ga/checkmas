@@ -104,8 +104,8 @@ class OrdenTrabajo extends Component
                 'tipoMantenimiento'  => 'required',
                 'costo_oper'  => 'required',
                 'costo_preCli'  => 'required',
-                // 'pdf_pre_oper'  => 'required|file|mimes:pdf|max:2048',
-                // 'pdf_pre_preCli'  => 'required|file|mimes:pdf|max:2048',
+                'pdf_pre_oper'  => 'required|file|mimes:pdf|max:2048',
+                'pdf_pre_preCli'  => 'required|file|mimes:pdf|max:2048',
 
             ]);
         }
@@ -140,13 +140,15 @@ class OrdenTrabajo extends Component
         try {
 
             $fecha = Carbon::createFromFormat('Y-m-d', $this->fechaInicio)->format('dmY');
+            $otUid = $fecha . '-' . $this->equipoUid . '-' . $this->tipoMantenimiento;
 
             $user = Auth::user();
 
             $ot = new Ot();
 
             if ($this->tipoMantenimiento == 'MP') {
-                $ot->otUid = $fecha . '-' . $this->equipoUid . '-' . $this->tipoMantenimiento;
+
+                $ot->otUid = $otUid;
                 $ot->fechaInicio = Carbon::createFromFormat('Y-m-d', $this->fechaInicio)->format('d-m-Y');
                 $ot->tecRes_NomApe = $this->datosTecRes();
                 $ot->tecRes_email = $this->tecRespondable;
@@ -165,7 +167,14 @@ class OrdenTrabajo extends Component
             }
 
             if ($this->tipoMantenimiento == 'MC') {
-                $ot->otUid = $fecha . '-' . $this->equipoUid . '-' . $this->tipoMantenimiento;
+
+                 /**
+                 * Cargamos las imagenes
+                 */
+                $pdf_pre_oper  = $this->pdf_pre_oper->store($otUid.'/presupuesto-operacion', 'public');
+                $pdf_pre_preCli = $this->pdf_pre_preCli->store($otUid.'/presupuesto-cliente', 'public');
+
+                $ot->otUid = $otUid;
                 $ot->fechaInicio = Carbon::createFromFormat('Y-m-d', $this->fechaInicio)->format('d-m-Y');
                 $ot->tecRes_NomApe = $this->datosTecRes();
                 $ot->tecRes_email = $this->tecRespondable;
@@ -173,8 +182,8 @@ class OrdenTrabajo extends Component
                 $ot->tipoMantenimiento = $this->tipoMantenimiento;
                 $ot->costo_oper = $this->costo_oper;
                 $ot->costo_preCli = $this->costo_preCli;
-                // $ot->pdf_pre_oper = $this->pdf_pre_oper;
-                // $ot->pdf_pre_preCli = $this->pdf_pre_preCli;
+                $ot->pdf_pre_oper = $pdf_pre_oper;
+                $ot->pdf_pre_preCli = $pdf_pre_preCli;
                 $ot->owner = $user->email;
                 $ot->statusOts = '1';
                 $ot->save();

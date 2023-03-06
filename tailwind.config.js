@@ -28,6 +28,10 @@ module.exports = {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
+            colors:{
+                'check-green': '#0e6634',
+                'check-blue': '#0e446f',
+            },
         },
     },
 

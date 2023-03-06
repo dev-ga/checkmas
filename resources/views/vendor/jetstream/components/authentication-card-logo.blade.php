@@ -5,6 +5,6 @@
     </svg>
 </a> --}}
     <div class="flex items-center">
-        <img class="w-96 h-auto" src="{{ asset('images/check_logo.png') }}" alt="">
+        <img class="w-96 h-auto ml-4" src="{{ asset('images/check_logo.png') }}" alt="">
     </div>
 

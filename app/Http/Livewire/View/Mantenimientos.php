@@ -81,7 +81,7 @@ class Mantenimientos extends Component
         }else{
             return view('livewire.view.mantenimientos', [
                 'data' => Ot::where('tecRes_email', $tecEmail)
-                    ->Where('otUid', 'like', "%{$this->buscar}%")
+                    ->Where('statusOts', '3')
                     ->Where('otUid', 'like', "%{$this->buscar}%")
                     ->paginate(5)
             ]);

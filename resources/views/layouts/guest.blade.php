@@ -24,7 +24,7 @@
     </head>
     <body>
         <x-notifications />
-        <div class="font-sans bg-gradient-to-l hover:bg-gradient-to-r from-cyan-500 to-blue-500 text-gray-900 antialiased">
+        <div class="font-sans antialiased">
             {{ $slot }}
         </div>
         @stack('modals')
