@@ -34,6 +34,8 @@ class User extends Authenticatable
         'estado',
         'agencia',
         'direccion',
+        'status_registro',
+        'empresa',
     ];
 
     /**

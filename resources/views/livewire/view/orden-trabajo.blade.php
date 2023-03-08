@@ -54,34 +54,6 @@
             </div>
         </div>
 
-        {{-- Descripcion del equipo --}}
-        {{-- <div class="border border-gray-200 rounded-lg shadow-md px-4">
-            <div class="p-2">
-                <label class="text-xs font-extrabold text-black drop-shadow-lg">@lang('messages.label.dte')</label>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-                <div class="p-2">
-                    <ul class="list-disc">
-                        <li>Agencia:</li>
-                        <li>Estado:</li>
-                        <li>Oficina:</li>
-                        <li>Piso:</li>
-                        <li>Capacidad(BTU):</li>
-                        <li>Tipo de Sistema:</li>
-                        <!-- ... -->
-                    </ul>
-                </div>
-                <div class="p-2">
-                    <label class="font-extrabold text-black drop-shadow-lg">@lang('messages.label.qrConden')</label>
-                    {!! QrCode::size(300)->generate('123456') !!}
-                </div>
-                <div class="p-2">
-                    <label class="font-extrabold text-black drop-shadow-lg">@lang('messages.label.qrEva')</label>
-                    {!! QrCode::size(300)->generate('123456') !!}
-                </div>
-            </div>
-        </div> --}}
-
         {{-- Boton de registro --}}
         <div class="flex items-center justify-end mt-8 mb-8">
             <button type="submit" wire:click.prevent="store()" class="ml-3 inline-flex justify-center rounded-md border border-transparent bg-red-200 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-200">

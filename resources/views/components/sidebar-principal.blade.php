@@ -1,3 +1,9 @@
+@php
+use App\Models\User;
+    $rol = Auth::user()->rol;
+    $nroUser = User::count();
+
+@endphp
 <aside class="sidebar w-64 md:shadow transform -translate-x-full md:translate-x-0 transition-transform duration-150 ease-in bg-gray-200">
     <div class="sidebar-header flex items-center justify-center">
         <div class="inline-flex">
@@ -22,6 +28,7 @@
                     <span class="ml-3">Dashboard</span>
                 </a>
             </li>
+            @if($rol == 5 || $rol == 2)
             <li class="my-px">
                 <span class="flex font-medium text-sm text-gray-300 px-4 my-4 uppercase">Usuarios</span>
             </li>
@@ -29,15 +36,50 @@
                 <a href="{{ route('lista-usuarios') }}" class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-gray-700">
                     <span class="flex items-center justify-center text-lg text-gray-400">
                         <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
-                            <path d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+                            <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                         </svg>
                     </span>
-                    <span class="ml-3">Lista de Usuarios</span>
+                    <span class="ml-3">Usuarios</span>
+                    <span class="flex items-center justify-center text-xs text-red-500 font-semibold bg-red-100 h-6 px-2 rounded-full ml-auto">{{$nroUser}}</span>
                 </a>
             </li>
+            @endif
             <li class="my-px">
                 <span class="flex font-medium text-sm text-gray-300 px-4 my-4 uppercase">Administracion</span>
             </li>
+            @if($rol == 5 || $rol == 6 || $rol == 7)
+            <li class="my-px">
+                <a href="{{ route('ots') }}" class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+                    <span class="flex items-center justify-center text-lg text-gray-400">
+                        <img class="object-cover w-auto h-4" src="{{ asset('images/DEL-TESORO-COLOR.png') }}" alt="">
+                    </span>
+                    <span class="ml-3">Tikects</span>
+                </a>
+            </li>
+            @endif
+            @if($rol == 1 || $rol == 2 || $rol == 3 || $rol == 4)
+            <li class="my-px">
+                <a href="{{ route('ots') }}" class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+                    <span class="flex items-center justify-center text-lg text-gray-400">
+                        <img class="object-cover w-auto h-4" src="{{ asset('images/LOGO_TRX.png') }}" alt="">
+                    </span>
+                    <span class="ml-3">Tikects</span>
+                </a>
+            </li>
+            @endif
+            @if($rol == 2 || $rol == 3 || $rol == 4)
+            <li class="my-px">
+                <a href="#" class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+                    <span class="flex items-center justify-center text-lg text-check-green">
+                        <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+                            <path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </span>
+                    <span class="ml-3">Crear Tikect</span>
+                </a>
+            </li>
+            @endif
+            @if($rol == 5 || $rol == 6 || $rol == 7)
             <li class="my-px">
                 <a href="{{ route('ots') }}" class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-gray-700">
                     <span class="flex items-center justify-center text-lg text-gray-400">
@@ -45,19 +87,11 @@
                             <path d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
                         </svg>
                     </span>
-                    <span class="ml-3">Tikects Generados</span>
+                    <span class="ml-3">Crear OTs</span>
                 </a>
             </li>
-            <li class="my-px">
-                <a href="{{ route('ots') }}" class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-gray-700">
-                    <span class="flex items-center justify-center text-lg text-gray-400">
-                        <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
-                            <path d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
-                        </svg>
-                    </span>
-                    <span class="ml-3">Orden de Trabajo</span>
-                </a>
-            </li>
+            @endif
+            @if($rol == 1 || $rol == 2 || $rol == 3 || $rol == 4 || $rol == 5 || $rol == 6)
             <li class="my-px">
                 <a href="{{ route('dash-mantenimientos') }}" class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-gray-700">
                     <span class="flex items-center justify-center text-lg text-gray-400">
@@ -68,6 +102,7 @@
                     <span class="ml-3">Lista de OTs</span>
                 </a>
             </li>
+            @endif
             <li class="my-px">
                 <a href="#" class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-gray-700">
                     <span class="flex items-center justify-center text-lg text-gray-400">
@@ -76,7 +111,7 @@
                         </svg>
                     </span>
                     <span class="ml-3">Clientes</span>
-                    <span class="flex items-center justify-center text-xs text-red-500 font-semibold bg-red-100 h-6 px-2 rounded-full ml-auto">1k</span>
+                    <span class="flex items-center justify-center text-xs text-red-500 font-semibold bg-red-100 h-6 px-2 rounded-full ml-auto">1</span>
                 </a>
             </li>
             <li class="my-px">

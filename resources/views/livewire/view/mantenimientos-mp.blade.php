@@ -40,10 +40,6 @@
                             </th>
 
                             <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                Mantenimiento
-                            </th>
-
-                            <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                 Owner/Supervisor
                             </th>
 
@@ -75,7 +71,6 @@
                                     </div>
                                 </div>
                             </td>
-                            {{-- <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{{ $item->equipoUid }}</td> --}}
                             <td class="px-4 py-4 text-sm whitespace-nowrap">
                                 <div class="flex items-center gap-x-6">
                                     <button wire:click="showFicha({{ $item->id }}, '{{ $item->equipoUid }}')" class="text-blue-900 transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
@@ -83,7 +78,6 @@
                                     </button>
                                 </div>
                             </td>
-                            <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{{ $item->tipoMantenimiento }}</td>
                             
                             {{-- Owner --}}
                             <td class="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">

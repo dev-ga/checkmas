@@ -109,7 +109,11 @@ class RegistroTrx extends Component
             $resgistro->password = Hash::make($this->password);
             $resgistro->cargo = $this->cargo($this->rol);
             $resgistro->rol = $this->rol;
+            $resgistro->empresa = 'Trx';
             $resgistro->direccion = $this->direccion;
+            if($this->rol == '5'){
+                $resgistro->status_registro = '1';
+            }
 
             if ($this->terminos != true) {
 
@@ -117,21 +121,27 @@ class RegistroTrx extends Component
                     $title = 'Validación!',
                     $description = 'Debe aceptar los términos y condiciones'
                 );
-
                 $this->terminos = '';
+
             } else {
+
                 $resgistro->save();
 
                 $this->resetInputFields();
 
-                $this->notification()->success(
-                    $title = 'Perfil Creado!',
-                    $description = 'El usuario fue registrado de forma satisfactoria'
-                );
-                sleep(1);
-                redirect()->to('/');
+                if($resgistro->rol == '5'){
+                    session()->flash('notification', 'Usuario ADMINISTRADOR, fue registrado con éxito!');
+                    redirect()->to('/');
+
+                }else{
+                    session()->flash('notification', 'El usuario fue registrado de forma satisfactoria, debe esperar la aprobación del Administrador');
+                    redirect()->to('/');
+                }
+
+                
 
             }
+
         } catch (\Throwable $th) {
 
             $this->notification()->Error(

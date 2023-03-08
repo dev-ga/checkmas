@@ -20,10 +20,12 @@ class Ot extends Model
         'tipoMantenimiento',
         'costo_oper',
         'costo_preCli',
+        'tir',
         'pdf_pre_oper',
         'pdf_pre_preCli',
         'owner',
         'statusOts',
+        'statusOts_banco',
     ];
 
 

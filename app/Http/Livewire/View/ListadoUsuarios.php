@@ -3,25 +3,34 @@
 namespace App\Http\Livewire\View;
 
 use App\Models\User;
-use Illuminate\Support\Facades\DB;
 use Livewire\Component;
+use Livewire\WithPagination;
+use Illuminate\Support\Facades\DB;
 
 class ListadoUsuarios extends Component
 {
+
+    use WithPagination;
+
     public $buscar;
 
     public function updateStatusRegistro($id, $status)
     {
-        $data = User::find($id);
-        if($status == '0'){
+        $data = User::find($id)->status_registro;
+        if($data == '0' && $status == '1'){
             DB::table('users')
                 ->where('id', $id)
                 ->update(['status_registro' => 1]);
         }
-        if($status == '1'){
+        if($data == '1' && $status == '2'){
             DB::table('users')
                 ->where('id', $id)
-                ->update(['status_registro' => 0]);
+                ->update(['status_registro' => 2]);
+        }
+        if($data == '2' && $status == '3'){
+            DB::table('users')
+                ->where('id', $id)
+                ->update(['status_registro' => 1]);
         }
     }
 
@@ -36,6 +45,7 @@ class ListadoUsuarios extends Component
                 ->orWhere('email', 'like', "%{$this->buscar}%")
                 ->orWhere('cargo', 'like', "%{$this->buscar}%")
                 ->orWhere('status_registro', 'like', "%{$this->buscar}%")
+                ->orWhere('empresa', 'like', "%{$this->buscar}%")
                 ->orderBy('id', 'desc')
                 ->paginate(5)
         ]);

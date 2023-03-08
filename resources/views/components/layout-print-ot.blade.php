@@ -31,14 +31,13 @@
 
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between h-16">
-                    <div class="flex">
+                    <div class="flex justify-between">
                         <!-- Logo -->
                         <div class="shrink-0 flex items-center">
-                            <a href="{{ route('dashboard') }}">
-                                <x-jet-application-mark class="block h-9 w-auto" />
-                            </a>
+                            <div class="flex items-center justify-end">
+                                <img class="w-60 h-auto" src="{{ asset('images/check_logo.png') }}" alt="">
+                              </div>
                         </div>
-
                     </div>
 
                 </div>
@@ -46,7 +45,7 @@
 
         <!-- Page Content -->
         <main>
-            <div class="py-12">
+            <div class="py-4">
                 <div class="w-792 h-612 mx-auto sm:px-6 lg:px-8">
                     <div class="overflow-hidden shadow-xl sm:rounded-lg">
                         {{ $slot }}

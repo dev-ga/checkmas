@@ -84,38 +84,41 @@ class Login extends Component
                 if (Hash::check($this->password, $password)) {
                     $credenciales = [
                         'email' => $this->email,
-                        'password' => $this->password
+                        'password' => $this->password,
                     ];
 
                     Auth::attempt($credenciales);
                     $user = Auth::user();
 
-                    if ($user->rol == '7' || $user->rol == '8')
-                    { 
-                        $this->dashTecnicos();
+                    if ($user->status_registro == '1') {
+                        if ($user->rol == '7' || $user->rol == '8') {
+                            $this->dashTecnicos();
+                        }
 
-                    }
+                        if ($user->rol == '6' || $user->rol == '5' || $user->rol == '4' || $user->rol == '3' || $user->rol == '2' || $user->rol == '1') {
+                            $this->retornaDash();
+                        }
 
-                    if ($user->rol == '6' || $user->rol == '5' || $user->rol == '4' || $user->rol == '3' || $user->rol == '2' || $user->rol == '1') {
-                        $this->retornaDash();
-                    }
+                        if ($user->rol == '200') {
+                            $this->completarRegistroBanco();
+                        }
 
-                    if ($user->rol == '200')
-                    { 
-                        $this->completarRegistroBanco();
-
-                    }
-
-                    if ($user->rol == '400')
-                    { 
+                        if ($user->rol == '400') {
+                            $this->notification()->success(
+                                $title = 'ERROR!',
+                                $description = 'El correo administrador@checkmas.com fue DESACTIVADO'
+                            );
+                        }
+                    }else{
                         $this->notification()->success(
-                            $title = 'ERROR!',
-                            $description = 'El correo administrador@checkmas.com fue DESACTIVADO'
+                            $title = 'NOTIFICACIÓN!',
+                            $description = 'El usuario esta en ESPERA DE APROBACIÓN!'
                         );
+                        $this->reset();
                     }
                     
+                    
                 } else {
-
                     $this->password = '';
                     $this->notification()->success(
                         $title = 'ERROR!',

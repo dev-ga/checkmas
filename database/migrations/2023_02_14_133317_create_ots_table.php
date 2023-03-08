@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('tipoMantenimiento');
             $table->decimal('costo_oper', 18, 2)->nullable()->default(0.00);
             $table->decimal('costo_preCli', 18, 2)->nullable()->default(0.00);
+            $table->decimal('tir');
             $table->string('pdf_pre_oper');
             $table->string('pdf_pre_preCli');
             $table->string('owner');
@@ -40,6 +41,7 @@ return new class extends Migration
              * 5 - finalizada
              */
             $table->string('statusOts')->default(1);
+            $table->string('statusOts_banco')->default(1);
             $table->timestamps();
         });
     }

@@ -71,7 +71,7 @@ class Mantenimientos extends Component
         $user = Auth::user();
         $tecEmail = $user->email;
 
-        if($user->rol != '7'){
+        if($user->rol == '7'){
             return view('livewire.view.mantenimientos', [
                 'data' => Ot::orderBy($this->campo, $this->orden)
                     ->Where('otUid', 'like', "%{$this->buscar}%")

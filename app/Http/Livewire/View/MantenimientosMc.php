@@ -61,7 +61,8 @@ class MantenimientosMc extends Component
         return view('livewire.view.mantenimientos-mc', [
             'data' => Ot::where('tipoMantenimiento', 'MC')
                 ->Where('otUid', 'like', "%{$this->buscar}%")
-                ->paginate(4)
+                ->orderBy('created_at', 'desc')
+                ->paginate(5)
         ]);
     }
 }

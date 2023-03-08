@@ -61,7 +61,8 @@ class MantenimientosMp extends Component
         return view('livewire.view.mantenimientos-mp', [
             'dataMp' => Ot::where('tipoMantenimiento', 'MP')
                 ->Where('otUid', 'like', "%{$this->buscar}%")
-                ->paginate(4)
+                ->orderBy('created_at', 'desc')
+                ->paginate(5)
         ]);
     }
 }

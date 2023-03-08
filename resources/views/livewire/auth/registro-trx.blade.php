@@ -42,8 +42,8 @@
                     <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.rol')</label>
                     <x-native-select wire:model="rol">
                         <option></option>
-                        <option value="5">@lang('messages.label.analistaCostostrx')</option>
-                        <option value="6">@lang('messages.label.admintrx')</option>
+                        <option value="5">@lang('messages.label.admintrx')</option>
+                        <option value="6">@lang('messages.label.analistaCostostrx')</option>
                         <option value="7">@lang('messages.label.supertrx')</option>
                         <option value="8">@lang('messages.label.tec')</option>
                     </x-native-select>

@@ -3,11 +3,16 @@
         <img src="{{ asset('images/linea-verde-degrade.png') }}" class="w-full" alt="">
     </div>
     <div class="flex justify-between">
-        <x-jet-authentication-card-logo />
+        <div class="flex items-center">
+            <img class="ml-6 w-1/2 h-auto" src="{{ asset('images/check_logo.png') }}" alt="">
+          </div>
         @livewire('auth.login')
     </div>
     <div class="w-full">
-        <img src="{{ asset('images/banner_button.png') }}" class="w-full" alt="">
+        <img src="{{ asset('images/bannerV3.png') }}" class="w-full" alt="">
+    </div>
+    <div class="w-full">
+        <img src="{{ asset('images/seccionV3.png') }}" class="w-full" alt="">
     </div>
     <div>
         <footer class="bg-neutral-200 text-center text-white dark:bg-neutral-600">

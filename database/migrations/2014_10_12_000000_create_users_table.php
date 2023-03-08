@@ -25,7 +25,8 @@ return new class extends Migration
             $table->string('rol');
             $table->string('agencia')->nullable();
             $table->string('estado')->nullable();
-            $table->string('status_registro')->default(0);
+            $table->string('status_registro')->default(1);
+            $table->string('empresa')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

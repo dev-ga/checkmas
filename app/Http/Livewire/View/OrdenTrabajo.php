@@ -32,6 +32,7 @@ class OrdenTrabajo extends Component
     public $pdf_pre_preCli;
     public $owner;
     public $statusOts;
+    public $statusOts_banco;
 
     public $atr = 'hidden';
 
@@ -58,7 +59,7 @@ class OrdenTrabajo extends Component
     {
         // $calc = (($this->costo_oper * 100)/$this->costo_preCli)/100;
         $calc = (($this->costo_preCli/$this->costo_oper)-1)*100;
-        $this->porcen = $calc;
+        $this->porcen = round($calc, 2);
 
     }
 
@@ -124,10 +125,10 @@ class OrdenTrabajo extends Component
         'tecRespondable.required'       => 'Campo Requerido',
         'equipoUid.required'            => 'Campo Requerido',
         'tipoMantenimiento.required'    => 'Campo Requerido',
-        'costo_oper.required'          => 'Campo Requerido',
+        'costo_oper.required'           => 'Campo Requerido',
         'costo_preCli.required'         => 'Campo Requerido',
-        'pdf_pre_oper.required'          => 'Documento Requerido',
-        'pdf_pre_preCli.required'          => 'Documento Requerido',
+        'pdf_pre_oper.required'         => 'Documento Requerido',
+        'pdf_pre_preCli.required'       => 'Documento Requerido',
 
 
     ];
@@ -184,8 +185,10 @@ class OrdenTrabajo extends Component
                 $ot->costo_preCli = $this->costo_preCli;
                 $ot->pdf_pre_oper = $pdf_pre_oper;
                 $ot->pdf_pre_preCli = $pdf_pre_preCli;
+                $ot->tir = $this->porcen;
                 $ot->owner = $user->email;
                 $ot->statusOts = '1';
+                $ot->statusOts_banco = '1';
                 $ot->save();
 
                 $this->reset();
