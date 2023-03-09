@@ -6,19 +6,6 @@
     <div class="border border-gray-200 rounded-lg shadow-md px-4">
 
         {{-- Datos Orden de trabajo --}}
-        <div class="{{ $atr_info_tikect }}">
-        <div class="grid grid-cols-1 md:grid-cols-6 gap-4 mb-4 mt-8">
-            <div class="p-2">
-                <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">Nro. de Tikect</label>
-                <x-input icon="pencil" wire:model="tikect_id" />
-            </div>
-            <div class="p-2">
-                <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">Creado Por:</label>
-                <x-input icon="pencil" wire:model="owner_tikect" />
-            </div>
-        </div>
-        </div>
-        {{-- Datos Orden de trabajo --}}
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4 mt-8">
             <div class="p-2">
                 <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.fechaInicio')</label>
@@ -78,5 +65,3 @@
         </div>
     </div>
 </div>
-
-

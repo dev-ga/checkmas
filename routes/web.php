@@ -44,6 +44,14 @@ Route::middleware(['auth:sanctum','verified'])->group(function () {
         return view('tecnicos.ficha-tecnica');
     })->name('ficha-tecnica');
 
+    Route::get('crear-tikect', function () {
+        return view('dashboard.crear-tikect');
+    })->name('crear-tikect');
+
+    Route::get('lista-tikects', function () {
+        return view('dashboard.lista-tikects');
+    })->name('lista-tikects');
+
     Route::get('ots', function () {
         return view('tecnicos.ots');
     })->name('ots');

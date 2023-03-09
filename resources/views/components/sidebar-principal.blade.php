@@ -49,7 +49,7 @@ use App\Models\User;
             </li>
             @if($rol == 5 || $rol == 6 || $rol == 7)
             <li class="my-px">
-                <a href="{{ route('ots') }}" class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+                <a href="{{ route('lista-tikects') }}" class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-gray-700">
                     <span class="flex items-center justify-center text-lg text-gray-400">
                         <img class="object-cover w-auto h-4" src="{{ asset('images/DEL-TESORO-COLOR.png') }}" alt="">
                     </span>
@@ -59,7 +59,7 @@ use App\Models\User;
             @endif
             @if($rol == 1 || $rol == 2 || $rol == 3 || $rol == 4)
             <li class="my-px">
-                <a href="{{ route('ots') }}" class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+                <a href="{{ route('lista-tikects') }}" class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-gray-700">
                     <span class="flex items-center justify-center text-lg text-gray-400">
                         <img class="object-cover w-auto h-4" src="{{ asset('images/LOGO_TRX.png') }}" alt="">
                     </span>
@@ -69,7 +69,7 @@ use App\Models\User;
             @endif
             @if($rol == 2 || $rol == 3 || $rol == 4)
             <li class="my-px">
-                <a href="#" class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+                <a href="{{ route('crear-tikect') }}" class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-gray-700">
                     <span class="flex items-center justify-center text-lg text-check-green">
                         <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
                             <path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />

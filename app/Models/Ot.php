@@ -13,6 +13,8 @@ class Ot extends Model
 
     protected $fillable = [
         'otUid',
+        'tikect_id',
+        'owner_tikect',
         'fechaInicio',
         'tecRes_NomApe',
         'tecRes_email',

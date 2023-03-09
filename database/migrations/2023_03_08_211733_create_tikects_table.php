@@ -15,6 +15,15 @@ return new class extends Migration
     {
         Schema::create('tikects', function (Blueprint $table) {
             $table->id();
+            $table->string('tipoServicio');
+            $table->string('oficina');
+            $table->string('piso');
+            $table->string('estado');
+            $table->string('agencia');
+            $table->string('observaciones');
+            $table->string('owner');
+            $table->string('owner_email');
+            $table->string('status_tikect');
             $table->timestamps();
         });
     }

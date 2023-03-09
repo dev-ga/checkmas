@@ -7,20 +7,17 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use App\Models\Ot;
-use App\Models\Tikect;
 use App\Models\User;
 use Carbon\Carbon;
 use WireUi\Traits\Actions;
 use Illuminate\Support\Str;
 
-class OrdenTrabajo extends Component
+class CrearOtModal extends Component
 {
 
-    use Actions;
-
-    use WithPagination;
-
     use WithFileUploads;
+
+    public $atr_showModal = 'hidden';
 
     public $otUid;
     public $tikect_id;
@@ -38,7 +35,6 @@ class OrdenTrabajo extends Component
     public $statusOts_banco;
 
     public $atr = 'hidden';
-    public $atr_info_tikect = 'hidden';
 
     public $porcen = '';
 
@@ -46,20 +42,17 @@ class OrdenTrabajo extends Component
         'selection',
         'formatMonto',
         'calc',
-        'showFormOts'
+        'showOtModal'
     ];
 
-    public function showFormOts($id)
-    {
-        $this->atr_info_tikect = '';
+    
 
-        $info = Tikect::find($id);
-        $nroTikect  = $info->tikect_uid;
-        $owner_email = $info->owner_email;
+    public function closeModal(){
+        $this->atr_showModal = 'hidden';
+    }
 
-        $this->tikect_id = $nroTikect;
-        $this->owner_tikect = $owner_email; 
-
+    public function showOtModal($id){
+        $this->atr_showModal = '';
     }
 
     public function selection($value)
@@ -138,14 +131,16 @@ class OrdenTrabajo extends Component
     }
 
     protected $messages = [
-        'fechaInicio.required'       => 'Campo Requerido',
-        'tecRespondable.required'    => 'Campo Requerido',
-        'equipoUid.required'         => 'Campo Requerido',
-        'tipoMantenimiento.required' => 'Campo Requerido',
-        'costo_oper.required'        => 'Campo Requerido',
-        'costo_preCli.required'      => 'Campo Requerido',
-        'pdf_pre_oper.required'      => 'Documento Requerido',
-        'pdf_pre_preCli.required'    => 'Documento Requerido',
+
+        'fechaInicio.required'          => 'Campo Requerido',
+        'tecRespondable.required'       => 'Campo Requerido',
+        'equipoUid.required'            => 'Campo Requerido',
+        'tipoMantenimiento.required'    => 'Campo Requerido',
+        'costo_oper.required'           => 'Campo Requerido',
+        'costo_preCli.required'         => 'Campo Requerido',
+        'pdf_pre_oper.required'         => 'Documento Requerido',
+        'pdf_pre_preCli.required'       => 'Documento Requerido',
+
 
     ];
 
@@ -153,8 +148,6 @@ class OrdenTrabajo extends Component
     {
 
         $this->validateData();
-
-
 
         try {
 
@@ -175,11 +168,6 @@ class OrdenTrabajo extends Component
                 $ot->tipoMantenimiento = $this->tipoMantenimiento;
                 $ot->owner = $user->email;
                 $ot->statusOts = '1';
-                if($this->tikect_id != 'null' && $this->owner_tikect != 'null')
-                {
-                    $ot->tikect_id = $this->tikect_id;
-                    $ot->owner_tikect = $this->owner_tikect;
-                }
                 $ot->save();
 
                 $this->reset();
@@ -212,13 +200,6 @@ class OrdenTrabajo extends Component
                 $ot->owner = $user->email;
                 $ot->statusOts = '1';
                 $ot->statusOts_banco = '1';
-
-                if($this->tikect_id != 'null' && $this->owner_tikect != 'null')
-                {
-                    $ot->tikect_id = $this->tikect_id;
-                    $ot->owner_tikect = $this->owner_tikect;
-                }
-
                 $ot->save();
 
                 $this->reset();
@@ -238,10 +219,8 @@ class OrdenTrabajo extends Component
     }
 
 
-
     public function render()
     {
-
-        return view('livewire.view.orden-trabajo');
+        return view('livewire.view.crear-ot-modal');
     }
 }

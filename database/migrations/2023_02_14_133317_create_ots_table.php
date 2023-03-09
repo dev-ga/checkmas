@@ -20,6 +20,8 @@ return new class extends Migration
              * Formula: $fechaInicio(mdY) + $equipoUid + $tipoMantenimiento('mc' o 'mp')
              */
             $table->string('otUid');
+            $table->string('tikect_id');
+            $table->string('owner_tikect');
             $table->string('fechaInicio');
             $table->string('tecRes_NomApe');
             $table->string('tecRes_email');
