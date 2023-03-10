@@ -19,7 +19,7 @@ class CompletarRegistroBanco extends Component
     public $password;
     public $email;
     public $rol = '2';
-    public $cargo = 'Analista de Costos';
+    public $cargo = 'Administrador Banco';
     public $agencia;
     public $estado;
     public $terminos = false;
@@ -92,6 +92,7 @@ class CompletarRegistroBanco extends Component
         $resgistro->rol = $this->rol;
         $resgistro->estado = $this->estado;
         $resgistro->agencia = $this->agencia;
+        $resgistro->empresa = 'Banco del Tesoro';
 
 
         if($this->terminos != true)

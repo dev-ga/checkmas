@@ -8,9 +8,12 @@ use Illuminate\Support\Str;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use WireUi\Traits\Actions;
 
 class MantenimientosMc extends Component
 {
+    use Actions;
+
     use WithPagination;
 
     public $buscar;
@@ -30,6 +33,33 @@ class MantenimientosMc extends Component
                 ->where('id', $id)
                 ->update(['statusOts' => 2]);
         }
+
+    }
+
+    public function updateStatusBanco($id, $btr){
+
+        try {
+
+            if(Auth::User()->rol == '2'){
+                $data = ot::find($id)->statusOts_banco;
+
+                if ($data == '1' && $btr == '1') {
+                    DB::table('ots')
+                        ->where('id', $id)
+                        ->update(['statusOts_banco' => 2]);
+                }
+            }else{
+                $this->notification()->error(
+                    $title = 'NOTIFICACION',
+                    $description = 'Usted no tiene permitido realizar esta operacion'
+                );
+            }
+            
+        } catch (\Throwable $th) {
+            dd($th);
+        }
+
+        
 
     }
 

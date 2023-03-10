@@ -31,7 +31,7 @@
             <button @click="dropdownOpen = ! dropdownOpen" class="flex flex-row items-center">
                 <img src="https://pbs.twimg.com/profile_images/378800000298815220/b567757616f720812125bfbac395ff54_normal.png" alt class="h-10 w-10 bg-gray-200 border rounded-full" />
                 <span class="flex flex-col ml-2">
-                    <span class="truncate w-30 font-semibold text-white tracking-wide leading-none">{{ Auth::user()->email }}</span>
+                    <span class="truncate w-30 font-semibold text-white tracking-wide leading-none">{{ Auth::user()->nombre }} {{ Auth::user()->apellido }}</span>
                     <span class="truncate w-30 text-white text-xs leading-none mt-1">{{ Auth::user()->email }}</span>
                 </span>
             </button>

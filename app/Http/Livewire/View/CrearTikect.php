@@ -110,6 +110,8 @@ class CrearTikect extends Component
                 $description = 'La Tikect fue registrado con éxito'
             );
 
+            $this->emitTo('lista-tikects','refreshComponent');
+
         } catch (\Throwable $th) {
             dd($th);
             $this->notification()->error(

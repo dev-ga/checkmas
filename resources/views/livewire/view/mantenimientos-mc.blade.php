@@ -30,37 +30,58 @@
                                 Fecha Incio
                             </th>
 
+                            @if(Auth::user()->rol == 5 || Auth::user()->rol == 6)
                             <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                 Tecnico Responsable
                             </th>
+                            @endif
 
                             <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                 Equipo
                             </th>
-
+ 
+                            @if(Auth::user()->rol == 5 || Auth::user()->rol == 6)
                             <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                 Costo Operacional
                             </th>
+                            @endif
 
+                            @if(Auth::user()->rol == 5 || Auth::user()->rol == 6)
                             <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                Costo Presupuesto/Cliente
+                                Presupuesto/Cliente
                             </th>
+                            @else
+                            <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                Presupuesto
+                            </th>
+                            @endif
 
+                            @if(Auth::user()->rol == 5 || Auth::user()->rol == 6)
                             <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                 T.I.R.(%)
                             </th>
+                            @endif
 
                             <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                Owner/Supervisor
+                                Supervisor
                             </th>
 
+                            @if(Auth::user()->rol == 5 || Auth::user()->rol == 6)
                             <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                 Estatus
                             </th>
+                            @else
+                            <th scope="col" class="content-center px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                <img class="object-cover ml-6 w-auto h-6" src="{{ asset('images/LOGO_TRX.png') }}" alt="">
+                            </th>
+                            @endif
+                            
 
+                            @if(Auth::user()->rol == 5 || Auth::user()->rol == 6)
                             <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                 Acciones
                             </th>
+                            @endif
 
                             <th scope="col" class="content-center px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                 <img class="object-cover ml-6 w-auto h-6" src="{{ asset('images/DEL-TESORO-COLOR.png') }}" alt="">
@@ -70,6 +91,7 @@
                     <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
                         @foreach ($data as $item)
                         <tr>
+                            {{-- Orden de trabajo --}}
                             <td class="px-4 py-4 text-sm font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap">
                                 <div class="flex items-center gap-x-2 mr-8">
                                     <img class="object-cover w-7 h-7 rounded-full" src="{{ asset('images/orden-de-trabajo.png') }}" alt="">
@@ -80,7 +102,13 @@
                                     </div>
                                 </div>
                             </td>
+
+                            
+                            {{-- Fecha Incio --}}
                             <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{{ $item->fechaInicio }}</td>
+
+                            @if(Auth::user()->rol == 5 || Auth::user()->rol == 6)
+                            {{-- Tecnico Responsable --}}
                             <td class="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
                                 <div class="flex items-center gap-x-2 mr-8">
                                     <img class="object-cover w-7 h-7 rounded-full" src="{{ asset('images/admi.png') }}" alt="">
@@ -90,7 +118,10 @@
                                     </div>
                                 </div>
                             </td>
-                            {{-- <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{{ $item->equipoUid }}</td> --}}
+                            @endif
+
+                            
+                            {{-- Equipo --}}
                             <td class="px-4 py-4 text-sm whitespace-nowrap">
                                 <div class="flex items-center gap-x-6">
                                     <button wire:click="showFicha({{ $item->id }}, '{{ $item->equipoUid }}')" class="text-blue-900 transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
@@ -98,12 +129,22 @@
                                     </button>
                                 </div>
                             </td>
+
                             
+                            @if(Auth::user()->rol == 5 || Auth::user()->rol == 6)
+                            {{-- Costo Operacional --}}
                             <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{{ $item->costo_oper }}</td>
+                            @endif
+
+                            {{-- Costo Cliente --}}
                             <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{{ $item->costo_preCli }}</td>
+
+                            @if(Auth::user()->rol == 5 || Auth::user()->rol == 6)
+                            {{-- TIR --}}
                             <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{{ $item->tir }}</td>
-                            
-                            {{-- Owner --}}
+                            @endif
+
+                            {{-- Owner/SUPERVISOR --}}
                             <td class="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
                                 <div class="flex items-center gap-x-2">
                                     <img class="object-cover w-7 h-7 rounded-full" src="{{ asset('images/supervi.png') }}" alt="">
@@ -113,6 +154,7 @@
                                     </div>
                                 </div>
                             </td>
+
 
                             {{-- Estatus de las Ordenes de trabajo --}}
                             @if($item->statusOts == '1')
@@ -167,7 +209,8 @@
                                 </td>
                             @endif
 
-                            {{-- Cambio de estatus --}}
+                            @if(Auth::user()->rol == 5 || Auth::user()->rol == 6)
+                            {{-- Estatus Banco --}}
                             <td class="px-4 py-4 text-sm whitespace-nowrap">
                                 @if(Auth::user()->rol == 5)
                                 <button type="submit" wire:click="updateStatusAdmin({{ $item->id }}, '2')" class="text-yellow-800 transition-colors duration-200 font-extrabold  dark:hover:text-indigo-500 dark:text-gray-300 hover:text-green-500 focus:outline-none">
@@ -196,10 +239,11 @@
                                 </button>
                                 @endif
                             </td>
-                            
-                                @if($item->statusOts_banco == '1')
+                            @endif
+
+                            @if($item->statusOts_banco == '1')
                                 <td class="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
-                                    <div class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-orange-500 bg-orange-100/60 dark:bg-gray-800">
+                                    <div wire:click="updateStatusBanco({{ $item->id }}, '1')" class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-orange-500 bg-orange-100/60 dark:bg-gray-800 cursor-pointer">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
                                           </svg>
@@ -219,7 +263,6 @@
                                     </div>
                                 </td>
                             @endif
-
                         </tr>
                         @endforeach
                     </tbody>
@@ -233,15 +276,5 @@
             </div>
         </div>
     </div>
-    {{-- <script>
-        var ratonParado = null;
-        var milisegundosLimite = 5000;
-        $(document).on('mousemove', function() {
-            clearTimeout(ratonParado);
-            ratonParado = setTimeout(function() {
-                location.reload();
-            }, milisegundosLimite);
-        });
-    </script> --}}
 </div>
 

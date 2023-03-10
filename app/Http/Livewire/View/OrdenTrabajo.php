@@ -154,8 +154,6 @@ class OrdenTrabajo extends Component
 
         $this->validateData();
 
-
-
         try {
 
             $fecha = Carbon::createFromFormat('Y-m-d', $this->fechaInicio)->format('dmY');

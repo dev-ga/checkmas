@@ -1,6 +1,7 @@
 <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-700 dark:border-gray-600">
     <div class="items-center justify-start mb-8 mt-4 sm:flex">
-        <time class="mb-1 text-2xl font-extrabold text-blue-900 drop-shadow-lg sm:order-last sm:mb-0">@lang('messages.label.ots')</time>
+        <h1 class="font-bold text-2xl text-check-blue drop-shadow-lg">@lang('messages.label.ots')</h1>
+        {{-- <time class="mb-1 text-2xl font-extrabold text-blue-900 drop-shadow-lg sm:order-last sm:mb-0">@lang('messages.label.ots')</time> --}}
     </div>
 
     <div class="border border-gray-200 rounded-lg shadow-md px-4">
@@ -22,7 +23,7 @@
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4 mt-8">
             <div class="p-2">
                 <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.fechaInicio')</label>
-                <x-input type="date" wire:model="fechaInicio" />
+                <x-input type="date" wire:model="fechaInicio" id="focus" />
             </div>
             <div class="p-2">
                 <x-lista-tecnicos></x-lista-tecnicos>
@@ -78,5 +79,6 @@
         </div>
     </div>
 </div>
+
 
 

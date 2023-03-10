@@ -13,6 +13,8 @@ class ListaTikects extends Component
 
     public $buscar;
 
+    protected $listeners = ['refreshComponent' => '$refresh']; 
+
     public function updateStatusTikect($id, $btr){
 
         try {
@@ -40,7 +42,7 @@ class ListaTikects extends Component
     public function CrearOt($id)
     {
         $this->emit('showFormOts', $id);
-        
+    
     }
 
     public function render()
