@@ -26,14 +26,29 @@ class MantenimientosMc extends Component
     }
 
     public function updateStatusAdmin($id, $btr){
-        $data = ot::find($id)->statusOts;
 
-        if($data == '1' && $btr == '2'){
-            DB::table('ots')
-                ->where('id', $id)
-                ->update(['statusOts' => 2]);
+        try {
+            if (ot::find($id)->statusOts_banco == 1) {
+                $this->notification()->error(
+                    $title = 'NOTIFICACIÓN',
+                    $description = 'Acción No Valida!, El cliente debe aprobar la orden de trabajo para luego usted pueda realizar la Aprobación respectiva.'
+                );
+            } else {
+    
+                $data = ot::find($id)->statusOts;
+    
+                if ($data == '1' && $btr == '2') {
+                    DB::table('ots')
+                        ->where('id', $id)
+                        ->update(['statusOts' => 2]);
+                }
+            }
+            //code...
+        } catch (\Throwable $th) {
+            dd($th);
         }
-
+        
+        
     }
 
     public function updateStatusBanco($id, $btr){
@@ -50,8 +65,8 @@ class MantenimientosMc extends Component
                 }
             }else{
                 $this->notification()->error(
-                    $title = 'NOTIFICACION',
-                    $description = 'Usted no tiene permitido realizar esta operacion'
+                    $title = 'NOTIFICACIÓN',
+                    $description = 'Usted no tiene permitido realizar esta operación'
                 );
             }
             

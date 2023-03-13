@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\View;
 
+use App\Models\Agencia;
+use App\Models\Estado;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use App\Models\Tikect as ModelTikect;
@@ -65,6 +67,18 @@ class CrearTikect extends Component
 
             $user = Auth::user();
 
+            $desEstado = Estado::where('codigo', $this->estado)->get();
+            foreach ($desEstado as $item) {
+                $estadoDes = $item->descripcion;
+
+            }
+
+            $desAgencia = Agencia::where('codigo', $this->agencia)->get();
+            foreach ($desAgencia as $item) {
+                $agenciaDes = $item->descripcion;
+
+            }
+
             /**
              * Owner tikect
              */
@@ -89,8 +103,8 @@ class CrearTikect extends Component
             $creaTikect->tipoServicio   = $this->tipoServicio;
             $creaTikect->piso           = $this->piso;
             $creaTikect->oficina        = $this->oficina;
-            $creaTikect->agencia        = $this->agencia;
-            $creaTikect->estado         = $this->estado;
+            $creaTikect->agencia        = $agenciaDes;
+            $creaTikect->estado         = $estadoDes;
             $creaTikect->observaciones  = $this->observaciones;
             $creaTikect->owner          = $owner;
             $creaTikect->owner_email    = $owner_email;

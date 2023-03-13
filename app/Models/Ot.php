@@ -19,6 +19,8 @@ class Ot extends Model
         'tecRes_NomApe',
         'tecRes_email',
         'equipoUid',
+        'estado',
+        'agencia',
         'tipoMantenimiento',
         'costo_oper',
         'costo_preCli',

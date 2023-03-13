@@ -26,6 +26,8 @@ return new class extends Migration
             $table->string('tecRes_NomApe');
             $table->string('tecRes_email');
             $table->string('equipoUid');
+            $table->string('estado');
+            $table->string('agencia');
             $table->string('tipoMantenimiento');
             $table->decimal('costo_oper', 18, 2)->nullable()->default(0.00);
             $table->decimal('costo_preCli', 18, 2)->nullable()->default(0.00);

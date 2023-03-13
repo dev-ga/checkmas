@@ -18,19 +18,18 @@ class ListaTikects extends Component
     public function updateStatusTikect($id, $btr){
 
         try {
+                $data = Tikect::find($id)->status_tikect;
 
-            $data = Tikect::find($id)->status_tikect;
-
-            if ($data == '0' && $btr == '1') {
-                DB::table('tikects')
-                    ->where('id', $id)
-                    ->update(['status_tikect' => 1]);
-            }
-            if ($data == '1' && $btr == '2') {
-                DB::table('tikects')
-                    ->where('id', $id)
-                    ->update(['status_tikect' => 2]);
-            }
+                    if ($data == '0' && $btr == '1') {
+                        DB::table('tikects')
+                            ->where('id', $id)
+                            ->update(['status_tikect' => 1]);
+                    }
+                    if ($data == '1' && $btr == '2') {
+                        DB::table('tikects')
+                            ->where('id', $id)
+                            ->update(['status_tikect' => 2]);
+                    }
 
         } catch (\Throwable $th) {
             dd($th);
@@ -41,7 +40,15 @@ class ListaTikects extends Component
 
     public function CrearOt($id)
     {
-        $this->emit('showFormOts', $id);
+        if(Tikect::find($id)->status_tikect == '1'){
+            $this->notification()->error(
+                $title = 'NOTIFICACIÓN!',
+                $description = 'La Orden de Trabajo no puede ser generada. El Tikect debe estar en estatus Abierto.'
+            );
+        }else{
+            $this->emit('showFormOts', $id);
+
+        }
     
     }
 

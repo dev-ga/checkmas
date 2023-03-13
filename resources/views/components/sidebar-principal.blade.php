@@ -1,8 +1,16 @@
 @php
 use App\Models\User;
+use App\Models\Tikect;
     $rol = Auth::user()->rol;
-    $nroUser = User::count();
+    $nroUserBT = User::where('empresa', 'Banco del Tesoro')->count();
 
+    if($rol == 1 || $rol <= 4){
+        $nroUser = $nroUserBT;
+        $nroTikect = Tikect::count();  
+    }else{
+        $nroUser = User::count();
+        $nroTikect = Tikect::count();     
+    }
 @endphp
 <aside class="sidebar w-64 md:shadow transform -translate-x-full md:translate-x-0 transition-transform duration-150 ease-in bg-gray-200">
     <div class="sidebar-header flex items-center justify-center">
@@ -19,7 +27,7 @@ use App\Models\User;
     <div class="sidebar-content px-4 py-6">
         <ul class="flex flex-col w-full">
             <li class="my-px">
-                <a href="#" class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-700 bg-gray-100">
+                <a href="{{ route('dashboard-admin') }}" class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-700 bg-gray-100">
                     <span class="flex items-center justify-center text-lg text-gray-400">
                         <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
                             <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
@@ -40,7 +48,7 @@ use App\Models\User;
                         </svg>
                     </span>
                     <span class="ml-3">Usuarios</span>
-                    <span class="flex items-center justify-center text-xs text-red-500 font-semibold bg-red-100 h-6 px-2 rounded-full ml-auto">{{$nroUser}}</span>
+                    <span class="flex items-center justify-center text-xs text-check-blue font-bold bg-green-100 h-6 px-2 rounded-full ml-auto">{{$nroUser}}</span>
                 </a>
             </li>
             @endif
@@ -54,6 +62,7 @@ use App\Models\User;
                         <img class="object-cover w-auto h-4" src="{{ asset('images/DEL-TESORO-COLOR.png') }}" alt="">
                     </span>
                     <span class="ml-3">Tikects</span>
+                    <span class="flex items-center justify-center text-xs text-check-blue font-bold bg-green-100 h-6 px-2 rounded-full ml-auto">{{$nroTikect}}</span>
                 </a>
             </li>
             @endif
@@ -64,6 +73,7 @@ use App\Models\User;
                         <img class="object-cover w-auto h-4" src="{{ asset('images/LOGO_TRX.png') }}" alt="">
                     </span>
                     <span class="ml-3">Tikects</span>
+                    <span class="flex items-center justify-center text-xs text-check-blue font-bold bg-green-100 h-6 px-2 rounded-full ml-auto">{{$nroTikect}}</span>
                 </a>
             </li>
             @endif
@@ -103,7 +113,7 @@ use App\Models\User;
                 </a>
             </li>
             @endif
-            <li class="my-px">
+            {{-- <li class="my-px">
                 <a href="#" class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-gray-700">
                     <span class="flex items-center justify-center text-lg text-gray-400">
                         <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
@@ -123,7 +133,7 @@ use App\Models\User;
                     </span>
                     <span class="ml-3">Add new</span>
                 </a>
-            </li>
+            </li> --}}
             <li class="my-px">
                 <span class="flex font-medium text-sm text-gray-300 px-4 my-4 uppercase">Account</span>
             </li>

@@ -2,6 +2,9 @@
 
 namespace App\Http\Livewire\View;
 
+use App\Models\Agencia;
+use App\Models\Estado;
+use App\Models\FichaTecnica;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -156,6 +159,27 @@ class OrdenTrabajo extends Component
 
         try {
 
+            /**
+             * Logica para obtener el codigo del estado y el codigo de la agencia
+             */
+            $datos = FichaTecnica::where('uid', $this->equipoUid)->get();
+            foreach ($datos as $item) {
+                $estado = $item->estado;
+                $agencia = $item->agencia;
+            }
+
+            $desEstado = Estado::where('codigo', $estado)->get();
+            foreach ($desEstado as $item) {
+                $estadoDes = $item->descripcion;
+
+            }
+
+            $desAgencia = Agencia::where('codigo', $agencia)->get();
+            foreach ($desAgencia as $item) {
+                $agenciaDes = $item->descripcion;
+
+            }
+
             $fecha = Carbon::createFromFormat('Y-m-d', $this->fechaInicio)->format('dmY');
             $otUid = $fecha . '-' . $this->equipoUid . '-' . $this->tipoMantenimiento;
 
@@ -170,6 +194,8 @@ class OrdenTrabajo extends Component
                 $ot->tecRes_NomApe = $this->datosTecRes();
                 $ot->tecRes_email = $this->tecRespondable;
                 $ot->equipoUid = $this->equipoUid;
+                $ot->estado = $estadoDes;
+                $ot->agencia = $agenciaDes;
                 $ot->tipoMantenimiento = $this->tipoMantenimiento;
                 $ot->owner = $user->email;
                 $ot->statusOts = '1';
@@ -201,6 +227,8 @@ class OrdenTrabajo extends Component
                 $ot->tecRes_NomApe = $this->datosTecRes();
                 $ot->tecRes_email = $this->tecRespondable;
                 $ot->equipoUid = $this->equipoUid;
+                $ot->estado = $estadoDes;
+                $ot->agencia = $agenciaDes;
                 $ot->tipoMantenimiento = $this->tipoMantenimiento;
                 $ot->costo_oper = $this->costo_oper;
                 $ot->costo_preCli = $this->costo_preCli;
