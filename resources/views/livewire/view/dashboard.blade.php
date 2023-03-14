@@ -24,137 +24,101 @@ $r = 4;
         </div>
     </div> --}}
 
-    <div class="flex flex-wrap justify-between bg-gray-100 dark:bg-gray-900">
-                <div class="p-5 bg-white rounded shadow-sm">
-
-                    <div class="flex items-center space-x-4">
-
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4 mt-8">
+        <div class="p-2">
+            <div class="flex-auto p-4 shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] bg-gradient-to-r from-sky-400 to-cyan-300 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg p-4 max-w-72 w-full h-auto" style="cursor: auto;">
+                <div class="flex flex-row -mx-3">
+                    <div class="flex-none w-2/3 max-w-full px-3">
                         <div>
-
-                            <div class="flex items-center justify-center w-12 h-12 rounded-full bg-fuchsia-50 text-fuchsia-400">
-
-                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-
-                                    <path d="M17.3333 9.33334H28M28 9.33334V20M28 9.33334L17.3333 20L12 14.6667L4 22.6667" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-
-                                </svg>
-
-                            </div>
-
+                            <p class="mb-0 font-sans font-semibold leading-normal uppercase dark:text-white dark:opacity-60 text-sm">Today's Money</p>
+                            <h5 class="mb-2 font-bold dark:text-white">$53,000</h5>
+                            <p class="mb-0 dark:text-white dark:opacity-60">
+                            <span class="font-bold leading-normal text-sm text-emerald-500">+55%</span>
+                            since yesterday
+                            </p>
                         </div>
-
-                        <div>
-
-                            <div class="text-gray-400">Total Sales</div>
-
-                            <div class="text-2xl font-bold text-gray-900">$9850.90</div>
-
-                        </div>
-
                     </div>
-
+                    <div class="px-3 text-right basis-1/3">
+                        5.596
+                    </div>
                 </div>
-
-                <div class="p-5 bg-white rounded shadow-sm">
-
-                    <div class="flex items-center space-x-4">
-
+            </div>
+        </div>
+        <div class="p-2">
+            <div class="flex-auto p-4 shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] bg-gradient-to-r from-sky-400 to-cyan-300 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg p-4 max-w-72 w-full h-auto" style="cursor: auto;">
+                <div class="flex flex-row -mx-3">
+                    <div class="flex-none w-2/3 max-w-full px-3">
                         <div>
-
-                            <div class="flex items-center justify-center w-12 h-12 rounded-full bg-cyan-50 text-cyan-400">
-
-                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-
-                                    <path d="M8.52325 6.61231C10.2911 5.20443 12.4206 4.32434 14.6667 4.07333V17.3333H27.9267C27.6757 19.5794 26.7956 21.7089 25.3877 23.4767C23.9798 25.2446 22.1013 26.5791 19.9685 27.3265C17.8357 28.0739 15.5351 28.2039 13.3317 27.7015C11.1282 27.1991 9.11142 26.0847 7.51336 24.4866C5.91529 22.8886 4.80094 20.8718 4.29854 18.6683C3.79614 16.4649 3.92612 14.1643 4.67352 12.0315C5.42092 9.89866 6.75535 8.0202 8.52325 6.61231Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-
-                                    <path d="M20 12H27.3173C26.7188 10.3128 25.7513 8.78047 24.4854 7.5146C23.2195 6.24873 21.6872 5.28125 20 4.68268V12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-
-                                </svg>
-
-                            </div>
-
+                            <p class="mb-0 font-sans font-semibold leading-normal uppercase dark:text-white dark:opacity-60 text-sm">Today's Money</p>
+                            <h5 class="mb-2 font-bold dark:text-white">$53,000</h5>
+                            <p class="mb-0 dark:text-white dark:opacity-60">
+                            <span class="font-bold leading-normal text-sm text-emerald-500">+55%</span>
+                            since yesterday
+                            </p>
                         </div>
-
-                        <div>
-
-                            <div class="text-gray-400">Net Revenue</div>
-
-                            <div class="text-2xl font-bold text-gray-900">$7520.50</div>
-
-                        </div>
-
                     </div>
-
+                    <div class="px-3 text-right basis-1/3">
+                        5.596
+                    </div>
+                    
                 </div>
-
-                <div class="p-5 bg-white rounded shadow-sm">
-
-                    <div class="flex items-center space-x-4">
-
+            </div>
+        </div>
+        <div class="p-2">
+            
+            <div class="flex-auto p-4 shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] bg-gradient-to-r from-sky-400 to-cyan-300 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg max-w-72 w-full h-auto" 
+            style="
+            background-image: url('https://images.unsplash.com/photo-1578836537282-3171d77f8632?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80');
+            background-repeat: no-repat;
+            background-size: cover;
+            background-blend-mode: multiply;
+            ">
+                <div class="flex flex-row -mx-3">
+                    <div class="flex-none w-2/3 max-w-full px-3">
                         <div>
-
-                            <div class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-50 text-amber-400">
-
-                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-
-                                    <path d="M19.7712 13.1046C20.7714 12.1044 21.3333 10.7478 21.3333 9.33333C21.3333 7.91885 20.7714 6.56229 19.7712 5.5621C18.771 4.5619 17.4145 4 16 4C14.5855 4 13.2289 4.5619 12.2288 5.5621C11.2286 6.56229 10.6667 7.91885 10.6667 9.33333C10.6667 10.7478 11.2286 12.1044 12.2288 13.1046C13.2289 14.1048 14.5855 14.6667 16 14.6667C17.4145 14.6667 18.771 14.1048 19.7712 13.1046Z" stroke="#FBBF24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-
-                                    <path d="M9.40033 21.4003C11.1507 19.65 13.5246 18.6667 16 18.6667C18.4753 18.6667 20.8493 19.65 22.5997 21.4003C24.35 23.1507 25.3333 25.5246 25.3333 28H6.66666C6.66666 25.5246 7.64999 23.1507 9.40033 21.4003Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-
-                                </svg>
-
-                            </div>
-
+                            <p class="mb-0 font-sans font-semibold leading-normal uppercase dark:text-white dark:opacity-60 text-sm">Today's Money</p>
+                            <h5 class="mb-2 font-bold dark:text-white">$53,000</h5>
+                            <p class="mb-0 dark:text-white dark:opacity-60">
+                            <span class="font-bold leading-normal text-sm text-emerald-500">+55%</span>
+                            since yesterday
+                            </p>
                         </div>
-
-                        <div>
-
-                            <div class="text-gray-400">Customers</div>
-
-                            <div class="text-2xl font-bold text-gray-900">1375</div>
-
-                        </div>
-
                     </div>
-
+                    
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-1/4 h-auto">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
+                          </svg>
+                          
+                    
                 </div>
-
-                <div class="p-5 bg-white rounded shadow-sm">
-                    <div class="flex items-center space-x-4">
-                        
-
+            </div>
+        </div>
+        <div class="p-2">
+            <div class="flex-auto p-4 shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] bg-gradient-to-r from-sky-400 to-cyan-300 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg p-4 max-w-72 w-full h-auto" style="cursor: auto;">
+                <div class="flex flex-row -mx-3">
+                    <div class="flex-none w-2/3 max-w-full px-3">
                         <div>
-
-                            <div class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-50 text-emerald-400">
-
-                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-
-                                    <path d="M12 25.3333V17.3333C12 16.6261 11.719 15.9478 11.219 15.4477C10.7189 14.9476 10.0406 14.6667 9.33333 14.6667H6.66667C5.95942 14.6667 5.28115 14.9476 4.78105 15.4477C4.28095 15.9478 4 16.6261 4 17.3333V25.3333C4 26.0406 4.28095 26.7189 4.78105 27.219C5.28115 27.719 5.95942 28 6.66667 28H9.33333C10.0406 28 10.7189 27.719 11.219 27.219C11.719 26.7189 12 26.0406 12 25.3333ZM12 25.3333V12C12 11.2928 12.281 10.6145 12.781 10.1144C13.2811 9.61428 13.9594 9.33333 14.6667 9.33333H17.3333C18.0406 9.33333 18.7189 9.61428 19.219 10.1144C19.719 10.6145 20 11.2928 20 12V25.3333M12 25.3333C12 26.0406 12.281 26.7189 12.781 27.219C13.2811 27.719 13.9594 28 14.6667 28H17.3333C18.0406 28 18.7189 27.719 19.219 27.219C19.719 26.7189 20 26.0406 20 25.3333M20 25.3333V6.66667C20 5.95942 20.281 5.28115 20.781 4.78105C21.2811 4.28095 21.9594 4 22.6667 4H25.3333C26.0406 4 26.7189 4.28095 27.219 4.78105C27.719 5.28115 28 5.95942 28 6.66667V25.3333C28 26.0406 27.719 26.7189 27.219 27.219C26.7189 27.719 26.0406 28 25.3333 28H22.6667C21.9594 28 21.2811 27.719 20.781 27.219C20.281 26.7189 20 26.0406 20 25.3333Z" stroke="currentColor " stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-
-                                </svg>
-
-                            </div>
-
+                            <p class="mb-0 font-sans font-semibold leading-normal uppercase dark:text-white dark:opacity-60 text-sm">Today's Money</p>
+                            <h5 class="mb-2 font-bold dark:text-white">$53,000</h5>
+                            <p class="mb-0 dark:text-white dark:opacity-60">
+                            <span class="font-bold leading-normal text-sm text-emerald-500">+55%</span>
+                            since yesterday
+                            </p>
                         </div>
-
-                        <div>
-
-                            <div class="text-gray-400">MRR</div>
-
-                            <div class="text-2xl font-bold text-gray-900">$250.00</div>
-
-                        </div>
-
                     </div>
-
-
+                    <div class="px-3 text-right basis-1/3">
+                        5.596
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div>
-        <canvas id="myChart"></canvas>
-    </div>
-    <div cla>
+    
+
+    <div class="flex w-1/2 h-auto mt-8">
         <canvas id="myChart2"></canvas>
+        <canvas id="myChart"></canvas>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 

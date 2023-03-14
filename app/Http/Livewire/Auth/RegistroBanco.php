@@ -107,6 +107,7 @@ class RegistroBanco extends Component
         $resgistro->rol = $this->rol;
         $resgistro->estado = $this->estado;
         $resgistro->agencia = $this->agencia;
+        $resgistro->status_registro = '0';
         $resgistro->empresa = 'Banco del Tesoro';
 
 
@@ -124,11 +125,6 @@ class RegistroBanco extends Component
             $resgistro->save();
 
             $this->resetInputFields();
-
-            // $this->notification()->success(
-            //     $title = 'Perfil Creado!',
-            //     $description = 'El usuario fue registrado de forma satisfactoria'
-            // );
 
             session()->flash('notification', 'El usuario fue registrado de forma satisfactoria, debe esperar la aprobación del Administrador');
 

@@ -1,6 +1,6 @@
 @php
 use App\Models\User;
-$tecnicos = User::where('rol', '7')->get();
+$tecnicos = User::where('rol', '8')->get();
 @endphp
 
 <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.tecnico')</label>

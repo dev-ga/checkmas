@@ -113,6 +113,8 @@ class RegistroTrx extends Component
             $resgistro->direccion = $this->direccion;
             if($this->rol == '5'){
                 $resgistro->status_registro = '1';
+            }else{
+                $resgistro->status_registro = '0';
             }
 
             if ($this->terminos != true) {
