@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('oficina');
             $table->string('piso');
             $table->string('estado');
+            $table->string('color');
             $table->string('agencia');
             $table->string('observaciones');
             $table->string('owner');

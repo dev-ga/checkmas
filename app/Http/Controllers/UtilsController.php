@@ -19,9 +19,20 @@ class UtilsController extends Controller
     {
         $date = date('Y-m-d');
         $inver = Ot::where('statusOts', '5')
-                    ->where('updated_at', '<', '2023-03-14')
+                    ->where('updated_at', '<', $date)
+                    ->where('tipoMantenimiento', 'MC')
                     ->sum('costo_preCli');
         return $inver;
+
+    }
+
+    static function porcenInverPorEstado($total_estado)
+    {
+        $totalOts = Ot::select(DB::raw("sum(costo_preCli) as total"))->where('tipoMantenimiento', 'MC')->where('statusOts', 5)->pluck('total');
+       
+        $valor = ($total_estado * 100) / $totalOts['0'];
+        
+        return number_format($valor, 2, ',', '.');
 
     }
 }

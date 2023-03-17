@@ -171,6 +171,7 @@ class OrdenTrabajo extends Component
             $desEstado = Estado::where('codigo', $estado)->get();
             foreach ($desEstado as $item) {
                 $estadoDes = $item->descripcion;
+                $color = $item->color;
 
             }
 
@@ -195,6 +196,7 @@ class OrdenTrabajo extends Component
                 $ot->tecRes_email = $this->tecRespondable;
                 $ot->equipoUid = $this->equipoUid;
                 $ot->estado = $estadoDes;
+                $ot->color = $color;
                 $ot->agencia = $agenciaDes;
                 $ot->tipoMantenimiento = $this->tipoMantenimiento;
                 $ot->owner = $user->email;
@@ -228,6 +230,7 @@ class OrdenTrabajo extends Component
                 $ot->tecRes_email = $this->tecRespondable;
                 $ot->equipoUid = $this->equipoUid;
                 $ot->estado = $estadoDes;
+                $ot->color = $color;
                 $ot->agencia = $agenciaDes;
                 $ot->tipoMantenimiento = $this->tipoMantenimiento;
                 $ot->costo_oper = $this->costo_oper;

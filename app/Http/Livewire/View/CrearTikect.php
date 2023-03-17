@@ -70,6 +70,7 @@ class CrearTikect extends Component
             $desEstado = Estado::where('codigo', $this->estado)->get();
             foreach ($desEstado as $item) {
                 $estadoDes = $item->descripcion;
+                $color = $item->color;
 
             }
 
@@ -105,6 +106,7 @@ class CrearTikect extends Component
             $creaTikect->oficina        = $this->oficina;
             $creaTikect->agencia        = $agenciaDes;
             $creaTikect->estado         = $estadoDes;
+            $creaTikect->color          = $color;
             $creaTikect->observaciones  = $this->observaciones;
             $creaTikect->owner          = $owner;
             $creaTikect->owner_email    = $owner_email;
