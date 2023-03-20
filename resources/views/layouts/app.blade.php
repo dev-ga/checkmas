@@ -26,15 +26,14 @@
     </head>
     <body class="font-sans antialiased">
         <x-notifications /> 
-        {{-- <x-jet-banner /> --}}
 
-        {{-- <div class="min-h-screen bg-gray-100"> --}}
+        <div x-data="{ sidebarOpen: false }" class="min-h-screen bg-gray-100">
             <div class="flex flex-row min-h-screen bg-gray-100">
                 
                 {{-- Sidebar principal --}}
                 <x-sidebar-principal></x-sidebar-principal>
 
-                <main class="main flex flex-col flex-grow -ml-64 md:ml-0 transition-all duration-150 ease-in">
+                <main class="main flex flex-col flex-grow  md:ml-0 transition-all duration-150 ease-in">
                     
                     {{-- Headers principal --}}
                     <x-header-ppal></x-header-ppal>
@@ -51,7 +50,8 @@
 
                 </main>
             </div>
-        {{-- </div> --}}
+        </div>
+
 
         @stack('modals')
 

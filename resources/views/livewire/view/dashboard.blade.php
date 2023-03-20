@@ -53,6 +53,10 @@ $ots = $otsList->pluck('ots');
             </div>
         </div>
     </div> --}}
+
+
+
+
     <div class="grid grid-cols-1 md:grid-cols-5 gap-4 mb-4 mt-8">
         {{-- TOTAL INVERSION --}}
         <div class="p-2">
@@ -181,26 +185,36 @@ $ots = $otsList->pluck('ots');
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 mt-8">
-        <div class="flex flex-col p-8 w-2/3 mx-32 items-center my-1">
-            <p class="mb-0 font-sans font-bold leading-normal uppercase dark:text-white dark:opacity-60 text-2xl text-center">Inversion por Estados</p>
-            <canvas id="myChart2"></canvas> 
+        <div class="p-2">
+            <div class="flex flex-col p-8 w-2/3 mx-32 items-center my-1">
+                <p class="mb-0 font-sans font-bold leading-normal uppercase dark:text-white dark:opacity-60 text-2xl text-center">Inversion por Estados</p>
+                <canvas id="myChart2"></canvas> 
+            </div>
         </div>
-        <div class="flex-none w-full px-3 my-8">
-            <p class="mb-0 font-sans font-bold leading-normal uppercase dark:text-white dark:opacity-60 text-2xl text-center">Detalle</p>
-            @livewire('view.tabla-leyenda')
+        <div class="p-2">
+            <div class="flex-none w-full px-3 my-8">
+                <p class="mb-0 font-sans font-bold leading-normal uppercase dark:text-white dark:opacity-60 text-2xl text-center">Detalle</p>
+                @livewire('view.tabla-leyenda')
+            </div>
         </div>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 mt-8">
-        <div class="flex flex-col p-14 w-full h-auto items-center my-1">
-            <p class="font-sans font-bold leading-normal uppercase dark:text-white dark:opacity-60 text-2xl text-center mb-6">Top Tikects</p>
-            <canvas id="myChart3"></canvas> 
+        <div class="p-2">
+            <div class="flex flex-col p-14 w-full h-auto items-center my-1">
+                <p class="font-sans font-bold leading-normal uppercase dark:text-white dark:opacity-60 text-2xl text-center mb-6">Top Tikects</p>
+                <canvas id="myChart3"></canvas> 
+            </div>
         </div>
-        <div class="flex flex-col p-14 w-2/3 mx-24 items-center my-1">
-            <p class="mb-0 font-sans font-bold leading-normal uppercase dark:text-white dark:opacity-60 text-2xl text-center">Top Ordenes de Trabajo</p>
-            <canvas id="myChart4" ></canvas> 
+        <div class="p-2">
+            <div class="flex flex-col p-14 w-2/3 mx-24 items-center my-1">
+                <p class="mb-0 font-sans font-bold leading-normal uppercase dark:text-white dark:opacity-60 text-2xl text-center">Top Ordenes de Trabajo</p>
+                <canvas id="myChart4" ></canvas> 
+            </div>
         </div>
     </div>
+
+
     
     
 
