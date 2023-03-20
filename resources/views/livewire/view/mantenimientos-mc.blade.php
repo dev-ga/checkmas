@@ -127,12 +127,12 @@
 
                     @if(Auth::user()->rol == 5 || Auth::user()->rol == 6)
                     {{-- Costo Operacional --}}
-                    <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 ">{{ $item->costo_oper }}</td>
+                    <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 ">${{ number_format($item->costo_oper, 2, ',', '.') }}</td>
                     @endif
 
                     {{-- Costo Cliente --}}
                     <td class="flex mt-4 px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                        ${{ $item->costo_preCli }}
+                        ${{ number_format($item->costo_preCli, 2, ',', '.') }}
                         <a class="flex text-orange-500  transition-colors duration-200 hover:text-indigo-500 focus:outline-none" href="{{ asset($item->pdf_pre_preCli) }}" target="_blank">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m.75 12l3 3m0 0l3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
@@ -142,7 +142,7 @@
 
                     @if(Auth::user()->rol == 5 || Auth::user()->rol == 6)
                     {{-- TIR --}}
-                    <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{{ $item->tir }}</td>
+                    <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{{ number_format($item->tir, 2, ',', '.') }}%</td>
                     @endif
 
 
@@ -296,13 +296,13 @@
                 <div>
                     <h2 class="text-sm font-bold text-gray-800 dark:text-white ">Costos</h2>
                     @if (Auth::user()->rol == 5 || Auth::user()->rol == 6)
-                    <p class="text-xs font-normal text-gray-600 dark:text-white ">OPERACION: ${{ $item->costo_oper }}</p>
+                    <p class="text-xs font-normal text-gray-600 dark:text-white ">OPERACION: ${{ number_format($item->costo_oper, 2, ',', '.') }}</p>
                     @endif
 
-                    <p class="text-xs font-normal text-gray-600 dark:text-gray-400">CLIENTE: ${{ $item->costo_preCli }}</p>
+                    <p class="text-xs font-normal text-gray-600 dark:text-gray-400">CLIENTE: ${{ number_format($item->costo_preCli, 2, ',', '.') }}</p>
 
                     @if (Auth::user()->rol == 5 || Auth::user()->rol == 6)
-                    <p class="text-xs font-normal text-gray-600 dark:text-gray-400">TIR: ${{ $item->tir }}</p>
+                    <p class="text-xs font-normal text-gray-600 dark:text-gray-400">TIR: {{ number_format($item->tir, 2, ',', '.') }}</p>
                     @endif
                 </div>
             </div>

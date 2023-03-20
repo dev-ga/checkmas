@@ -15,6 +15,7 @@ class Ot extends Model
         'otUid',
         'tikect_id',
         'owner_tikect',
+        'estado_tikect',
         'fechaInicio',
         'tecRes_NomApe',
         'tecRes_email',

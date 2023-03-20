@@ -26,7 +26,7 @@
     <x-notifications />
     {{-- <x-jet-banner /> --}}
 
-    <div class="min-h-screen bg-gray-100">
+    <div class="min-h-screen">
         {{-- <div class="flex flex-row min-h-screen bg-gray-100"> --}}
 
         @livewire('navigation-menu')

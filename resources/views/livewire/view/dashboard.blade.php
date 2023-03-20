@@ -1,6 +1,7 @@
 @php
 use App\Models\Ot;
 use App\Models\Tikect;
+use App\Models\Estado;
 
 /*
 Logica para calcular el porcentaje de inversion por cada estado
@@ -37,6 +38,12 @@ $otsList = Ot::select(DB::raw("count(*) as ots"), DB::raw("estado as estados"), 
 $colorOts = $otsList->pluck('colores');
 $estOts = $otsList->pluck('estados');
 $ots = $otsList->pluck('ots');
+
+$estados = Estado::select(DB::raw("descripcion as estados"))
+            ->orderBy('estados', 'asc')
+            ->get();
+$listaEstados = $estados->pluck('estados');
+
 
 @endphp
 <x-app-layout>
@@ -186,14 +193,14 @@ $ots = $otsList->pluck('ots');
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 mt-8">
         <div class="p-2">
-            <div class="flex flex-col p-8 w-2/3 mx-32 items-center my-1">
-                <p class="mb-0 font-sans font-bold leading-normal uppercase dark:text-white dark:opacity-60 text-2xl text-center">Inversion por Estados</p>
+            <div class="flex flex-col items-center my-1 md:p-8 md:w-2/3 md:mx-32 min-[420px]:w-full min-[420px]:mx-0 min-[420px]:p-4">
+                <p class="mb-0 font-sans font-bold leading-normal dark:text-white dark:opacity-60 text-2xl text-center">Inversion por Estados</p>
                 <canvas id="myChart2"></canvas> 
             </div>
         </div>
         <div class="p-2">
             <div class="flex-none w-full px-3 my-8">
-                <p class="mb-0 font-sans font-bold leading-normal uppercase dark:text-white dark:opacity-60 text-2xl text-center">Detalle</p>
+                <p class="mb-0 font-sans font-bold leading-normal dark:text-white dark:opacity-60 text-2xl text-center">Inversion($) Vs Porcentaje por estado</p>
                 @livewire('view.tabla-leyenda')
             </div>
         </div>
@@ -201,15 +208,23 @@ $ots = $otsList->pluck('ots');
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 mt-8">
         <div class="p-2">
-            <div class="flex flex-col p-14 w-full h-auto items-center my-1">
-                <p class="font-sans font-bold leading-normal uppercase dark:text-white dark:opacity-60 text-2xl text-center mb-6">Top Tikects</p>
+            <div class="flex flex-col md:p-14 md:w-full md:h-auto md:items-center my-1 min-[420px]:w-full min-[420px]:mx-0 min-[420px]:p-4">
+                <p class="font-sans font-bold leading-normal uppercase dark:text-white dark:opacity-60 text-2xl text-center mb-6">Top Tickets</p>
                 <canvas id="myChart3"></canvas> 
             </div>
         </div>
         <div class="p-2">
-            <div class="flex flex-col p-14 w-2/3 mx-24 items-center my-1">
+            <div class="flex flex-col md:p-14 md:w-2/3 md:mx-24 md:items-center my-1 min-[420px]:w-full min-[420px]:mx-0 min-[420px]:p-4">
                 <p class="mb-0 font-sans font-bold leading-normal uppercase dark:text-white dark:opacity-60 text-2xl text-center">Top Ordenes de Trabajo</p>
                 <canvas id="myChart4" ></canvas> 
+            </div>
+        </div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-1 gap-4 mb-4 mt-8">
+        <div class="p-2">
+            <div class="flex flex-col md:p-14 md:w-4/5 md:h-auto md:items-center my-1 min-[420px]:w-full min-[420px]:p-4">
+                <p class="font-sans font-bold leading-normal uppercase dark:text-white dark:opacity-60 text-2xl text-center mb-6">Ticket con orden de trabajo asignada</p>
+                <canvas id="myChart5"></canvas> 
             </div>
         </div>
     </div>
@@ -254,7 +269,7 @@ $ots = $otsList->pluck('ots');
         const dataBar = {
         labels: labelsBar,
             datasets: [{
-                label: 'Tikects Creados',
+                label: 'Tickets Creados',
                 data: tikects,
                 backgroundColor: colorTi,
                 borderColor: colorTi,
@@ -265,7 +280,7 @@ $ots = $otsList->pluck('ots');
             type: 'bar',
             data: dataBar,
                 options: {
-                    indexAxis: 'y',
+                    indexAxis: 'x',
                     scales: {
                         y: {
                             beginAtZero: true
@@ -309,6 +324,46 @@ $ots = $otsList->pluck('ots');
             document.getElementById('myChart4'),
             configTorta
         );
+
+        // Grafico Unido
+        var estadosUnion = @json($listaEstados);
+        var tikectsUnion = @json($tikects);
+        var colorTiUnion = @json($colorTi);
+        const labelsEstados = estadosUnion;
+        const dataUnion = {
+                labels: ['Amazonas', 'Bolivar', 'Distrito Capital', 'Merida'],
+                    datasets: [
+                        {
+                        type: 'bar',
+                        label: 'Bar Dataset',
+                        data: [5,1,2,1],
+                        borderColor: 'rgb(255, 99, 132)',
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)'
+                    }, {
+                        type: 'line',
+                        label: 'Line Dataset',
+                        data: [2,1,3,1],
+                        fill: false,
+                        borderColor: 'rgb(54, 162, 235)'
+                    }
+                ]
+            };
+        const configBarUnion = {
+            type: 'scatter',
+            data: dataUnion,
+                options: {
+                scales: {
+                y: {
+                    beginAtZero: true
+                }
+                }
+            }
+        };
+        new Chart(
+            document.getElementById('myChart5'),
+            configBarUnion
+        );
+
     </script>
 
 </x-app-layout>

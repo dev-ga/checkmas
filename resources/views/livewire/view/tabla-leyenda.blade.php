@@ -23,7 +23,7 @@
                 </th>
 
                 <th scope="col" class="px-4 py-3.5 text-sm font-normal text-center rtl:text-right text-gray-500 dark:text-gray-400 w-20">
-                    Inversion(%)
+                    Porcentaje Inv.(%)
                 </th>
             </tr>
         </thead>
@@ -40,8 +40,8 @@
                     </div>
                 </td>
                 <td class="px-4 py-4 text-sm font-extrabold text-gray-500 dark:text-gray-300">{{ $item->estados }}</td>
-                <td class="px-4 py-4 text-sm font-extrabold text-gray-500 dark:text-gray-300 text-center">{{ number_format($item->totales, 2, ',', '.') }}</td>
-                <td class="px-4 py-4 text-sm font-extrabold text-gray-500 dark:text-gray-300 text-center">{{ app('App\Http\Controllers\UtilsController')->porcenInverPorEstado($item->totales) }}</td>
+                <td class="px-4 py-4 text-sm font-extrabold text-gray-500 dark:text-gray-300 text-center">{{ number_format($item->totales, 2, ',', '.') }}$</td>
+                <td class="px-4 py-4 text-sm font-extrabold text-gray-500 dark:text-gray-300 text-center">{{ app('App\Http\Controllers\UtilsController')->porcenInverPorEstado($item->totales) }}%</td>
             </tr>
             @endforeach
         </tbody>

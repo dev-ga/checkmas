@@ -24,5 +24,6 @@
             <span> SIGUIENTE</span>
         </button>
     </div>
+
 </div>
 

@@ -2,8 +2,8 @@
     <div class="w-full mt-4">
         <img src="{{ asset('images/linea-verde-degrade.png') }}" class="w-full" alt="">
     </div>
-    <div class="flex justify-between">
-        <div class="flex items-center">
+    <div class="flex justify-between sm:flex sm:flex-wrap">
+        <div class="flex items-center sm:items-center">
             <img class="ml-6 w-1/2 h-auto" src="{{ asset('images/check_logo.png') }}" alt="">
           </div>
         @livewire('auth.login')

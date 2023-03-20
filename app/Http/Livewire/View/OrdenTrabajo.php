@@ -28,6 +28,7 @@ class OrdenTrabajo extends Component
     public $otUid;
     public $tikect_id;
     public $owner_tikect;
+    public $estado_tikect;
     public $fechaInicio;
     public $tecRespondable;
     public $equipoUid;
@@ -59,9 +60,11 @@ class OrdenTrabajo extends Component
         $info = Tikect::find($id);
         $nroTikect  = $info->tikect_uid;
         $owner_email = $info->owner_email;
+        $estado_tikect = $info->estado;
 
         $this->tikect_id = $nroTikect;
-        $this->owner_tikect = $owner_email; 
+        $this->owner_tikect = $owner_email;
+        $this->estado_tikect = $estado_tikect; 
 
     }
 
@@ -160,7 +163,8 @@ class OrdenTrabajo extends Component
         try {
 
             /**
-             * Logica para obtener el codigo del estado y el codigo de la agencia
+             * Logica para obtener el codigo del estado y el codigo de la agencia 
+             * de la ubicacion del equipo
              */
             $datos = FichaTecnica::where('uid', $this->equipoUid)->get();
             foreach ($datos as $item) {
@@ -205,6 +209,7 @@ class OrdenTrabajo extends Component
                 {
                     $ot->tikect_id = $this->tikect_id;
                     $ot->owner_tikect = $this->owner_tikect;
+                    $ot->estado_tikect = $this->estado_tikect;
                 }
                 $ot->save();
 
@@ -246,6 +251,7 @@ class OrdenTrabajo extends Component
                 {
                     $ot->tikect_id = $this->tikect_id;
                     $ot->owner_tikect = $this->owner_tikect;
+                    $ot->estado_tikect = $this->estado_tikect;
                 }
 
                 $ot->save();

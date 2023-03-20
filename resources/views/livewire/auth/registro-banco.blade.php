@@ -1,4 +1,4 @@
-<div class="min-h-screen flex flex-col gap-4 sm:justify-center items-center pt-6 sm:pt-0 bg-gradient-to-l hover:bg-gradient-to-r from-cyan-500 to-blue-500">
+<div class="min-h-screen flex flex-col gap-4 sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
     <div>
         <x-jet-authentication-card-logo />
     </div>
