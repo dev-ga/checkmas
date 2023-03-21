@@ -8,4 +8,4 @@ $porcenTikect = UtilsController::porcentaje($cardValor, $valorTotal);
 $porcenTikect = round($porcenTikect, 2);
 @endphp
 
-<h5 class="mb-2 font-bold dark:text-white">%{{ $porcenTikect }}</h5>
+<h5 class="mb-2 font-bold dark:text-white">{{ $porcenTikect }}%</h5>

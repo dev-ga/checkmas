@@ -13,7 +13,7 @@
                         <div class="flex items-center gap-x-3">
                             <img class="object-cover w-7 h-7 rounded-full" src="{{ asset('images/orden-de-trabajo.png') }}" alt="">
                             <button class="flex items-center gap-x-2">
-                                <span>Orden de Trabajo(Ots)</span>
+                                <span>@lang('messages.tablas.ot')</span>
                                 <svg class="h-3" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M2.13347 0.0999756H2.98516L5.01902 4.79058H3.86226L3.45549 3.79907H1.63772L1.24366 4.79058H0.0996094L2.13347 0.0999756ZM2.54025 1.46012L1.96822 2.92196H3.11227L2.54025 1.46012Z" fill="currentColor" stroke="currentColor" stroke-width="0.1" />
                                     <path d="M0.722656 9.60832L3.09974 6.78633H0.811638V5.87109H4.35819V6.78633L2.01925 9.60832H4.43446V10.5617H0.722656V9.60832Z" fill="currentColor" stroke="currentColor" stroke-width="0.1" />
@@ -22,54 +22,45 @@
                             </button>
                         </div>
                     </th>
-
                     @if(Auth::user()->rol == 5 || Auth::user()->rol == 6)
                     <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        Tecnicos
+                        @lang('messages.tablas.tecnico')
                     </th>
                     @endif
-
                     <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        Equipo
+                        @lang('messages.tablas.equipo')
                     </th>
-
                     @if(Auth::user()->rol == 5 || Auth::user()->rol == 6)
                     <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        Costo Operacional
+                        @lang('messages.tablas.costoOper')
                     </th>
                     @endif
-
                     @if(Auth::user()->rol == 5 || Auth::user()->rol == 6)
                     <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        Presupuesto/Cliente
+                        @lang('messages.tablas.pre_cli')
                     </th>
                     @else
                     <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        Presupuesto(Dolares)
+                        @lang('messages.tablas.presupuesto')
                     </th>
                     @endif
-
                     @if(Auth::user()->rol == 5 || Auth::user()->rol == 6)
                     <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        T.I.R.(%)
+                        @lang('messages.tablas.tir')
                     </th>
                     @endif
-
                     @if(Auth::user()->rol == 5 || Auth::user()->rol == 6)
                     <th scope="col" class="px-4 py-3.5 text-sm font-normal text-center rtl:text-right text-gray-500 dark:text-gray-400">
-                        Estatus
+                        @lang('messages.tablas.estatus')
                     </th>
                     @else
                     <th scope="col" class="content-center px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        {{-- <img class="object-cover ml-6 w-auto h-6" src="{{ asset('images/LOGO_TRX.png') }}" alt=""> --}}
-                        Estatus(Ots)
+                        @lang('messages.tablas.estatusOt')
                     </th>
                     @endif
-
-
                     @if(Auth::user()->rol == 5 || Auth::user()->rol == 6)
                     <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        Acciones
+                        @lang('messages.tablas.accion')
                     </th>
                     @endif
 
@@ -87,9 +78,9 @@
                             <img class="object-cover w-7 h-7 rounded-full" src="{{ asset('images/orden-de-trabajo.png') }}" alt="">
                             <div>
                                 <h2 class="text-sm font-medium text-gray-800 dark:text-white ">{{ $item->otUid }}</h2>
-                                <p class="text-xs font-normal text-gray-600 dark:text-gray-400">Creado por: {{ $item->owner_tikect }}</p>
-                                <p class="text-xs font-normal text-gray-600 dark:text-gray-400">Tikect Nro. {{ $item->tikect_id }}</p>
-                                <p class="text-xs font-normal text-gray-600 dark:text-gray-400">Fecha Inicio: {{ $item->fechaInicio }}</p>
+                                <p class="text-xs font-normal text-gray-600 dark:text-gray-400">@lang('messages.tablas.creadopor') {{ $item->owner_tikect }}</p>
+                                <p class="text-xs font-normal text-gray-600 dark:text-gray-400">@lang('messages.tablas.t_nro') {{ $item->tikect_id }}</p>
+                                <p class="text-xs font-normal text-gray-600 dark:text-gray-400">@lang('messages.tablas.fecha_inico') {{ $item->fechaInicio }}</p>
                             </div>
                         </div>
                     </td>
@@ -104,8 +95,8 @@
                         <div class="flex items-center gap-x-2 mr-8">
                             <img class="object-cover w-7 h-7 rounded-full" src="{{ asset('images/admi.png') }}" alt="">
                             <div>
-                                <h2 class="text-sm font-medium text-gray-800 dark:text-white ">Res: {{ $item->tecRes_NomApe }}</h2>
-                                <p class="text-xs font-normal text-gray-600 dark:text-gray-400">Super: {{ $item->tecRes_email }}</p>
+                                <h2 class="text-sm font-medium text-gray-800 dark:text-gray-400">@lang('messages.tablas.res') {{ $item->tecRes_NomApe }}</h2>
+                                <p class="text-sm font-medium text-gray-600 dark:text-gray-400">@lang('messages.tablas.super') {{ $item->tecRes_email }}</p>
                             </div>
                         </div>
                     </td>
@@ -114,12 +105,11 @@
 
                     {{-- Equipo --}}
                     <td class="px-4 py-4 text-sm whitespace-nowrap">
-
                         <div class="flex items-center gap-x-2 mr-8">
                             <div>
-                                <h2 class="text-sm font-bold text-gray-800 dark:text-white ">Equipo: {{ $item->equipoUid }}</h2>
-                                <p class="text-xs font-normal text-gray-600 dark:text-gray-400">Agencia: {{ $item->agencia }}</p>
-                                <p class="text-xs font-normal text-gray-600 dark:text-gray-400">Estado: {{ $item->estado }}</p>
+                                <h2 class="text-sm font-bold text-gray-800 dark:text-white ">@lang('messages.tablas.equipo'): {{ $item->equipoUid }}</h2>
+                                <p class="text-xs font-normal text-gray-600 dark:text-gray-400">@lang('messages.tablas.agencia') {{ $item->agencia }}</p>
+                                <p class="text-xs font-normal text-gray-600 dark:text-gray-400">@lang('messages.tablas.estado') {{ $item->estado }}</p>
                             </div>
                         </div>
                     </td>
@@ -127,22 +117,26 @@
 
                     @if(Auth::user()->rol == 5 || Auth::user()->rol == 6)
                     {{-- Costo Operacional --}}
-                    <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 ">${{ number_format($item->costo_oper, 2, ',', '.') }}</td>
+                    <td class="px-4 py-4 text-sm text-check-blue font-bold dark:text-gray-300 ">${{ number_format($item->costo_oper, 2, ',', '.') }}</td>
                     @endif
 
                     {{-- Costo Cliente --}}
-                    <td class="flex mt-4 px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                        ${{ number_format($item->costo_preCli, 2, ',', '.') }}
-                        <a class="flex text-orange-500  transition-colors duration-200 hover:text-indigo-500 focus:outline-none" href="{{ asset($item->pdf_pre_preCli) }}" target="_blank">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m.75 12l3 3m0 0l3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
-                            </svg>
-                        </a>
+                    <td class="px-4 py-4 w-8 text-sm whitespace-nowrap">
+                        <div class="flex items-center justify-start gap-x-2">
+                            <button class="flex text-check-blue font-bold transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
+                                ${{ number_format($item->costo_preCli, 2, ',', '.') }}
+                            </button>
+                            <a class="flex text-orange-500  transition-colors duration-200 hover:text-indigo-500 focus:outline-none" href="{{ asset($item->pdf_pre_oper) }}" target="_blank">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m.75 12l3 3m0 0l3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                                </svg>                                              
+                            </a>    
+                        </div>
                     </td>
 
                     @if(Auth::user()->rol == 5 || Auth::user()->rol == 6)
                     {{-- TIR --}}
-                    <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{{ number_format($item->tir, 2, ',', '.') }}%</td>
+                    <td class="px-4 py-4 text-sm text-check-blue font-bold dark:text-gray-300 whitespace-nowrap">{{ number_format($item->tir, 2, ',', '.') }}%</td>
                     @endif
 
 
@@ -153,7 +147,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
-                            <h2 class="text-sm font-normal">Creada</h2>
+                            <h2 class="text-sm font-normal">@lang('messages.estatus.creada')</h2>
                         </div>
                     </td>
                     @endif
@@ -164,7 +158,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0118 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3l1.5 1.5 3-3.75" />
                             </svg>
-                            <h2 class="text-sm font-normal">Aprobada</h2>
+                            <h2 class="text-sm font-normal">@lang('messages.estatus.aprobada')</h2>
                         </div>
                     </td>
                     @endif
@@ -177,8 +171,8 @@
                             </svg>
                             <div class="flex items-center gap-x-2 mr-8">
                                 <div>
-                                    <h2 class="text-sm font-bold text-orange-500 dark:text-white ">Ejecucion</h2>
-                                    <p class="text-xs font-normal text-orange-500 dark:text-gray-400">Orden de trabajo<br>en ejecucion</p>
+                                    <h2 class="text-sm font-bold text-orange-500 dark:text-white ">@lang('messages.estatus.ejecucion')</h2>
+                                    <p class="text-xs font-normal text-orange-500 dark:text-gray-400">Orden de trabajo<br>en ejecución</p>
                                 </div>
                             </div>
                         </div>
@@ -193,8 +187,8 @@
                             </svg>
                             <div class="flex items-center gap-x-2 mr-8">
                                 <div>
-                                    <h2 class="text-sm font-bold text-yellow-500 dark:text-white ">Supervicion</h2>
-                                    <p class="text-xs font-normal text-yellow-500 dark:text-gray-400">Orden de trabajo<br>esta en supervicion</p>
+                                    <h2 class="text-sm font-bold text-yellow-500 dark:text-white ">@lang('messages.estatus.supervicion')</h2>
+                                    <p class="text-xs font-normal text-yellow-500 dark:text-gray-400">Orden de trabajo<br>esta en supervisión</p>
                                 </div>
                             </div>
                         </div>
@@ -207,7 +201,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
                             </svg>
-                            <h2 class="text-sm font-normal">Finalizada</h2>
+                            <h2 class="text-sm font-normal">@lang('messages.estatus.finalizada')</h2>
                         </div>
                     </td>
                     @endif
@@ -249,7 +243,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
                             </svg>
 
-                            <h2 class="text-sm font-normal">Por Aprobacion</h2>
+                            <h2 class="text-sm font-normal">@lang('messages.estatus.poraprobacion')</h2>
                         </div>
                     </td>
                     @endif
@@ -259,7 +253,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0M3.124 7.5A8.969 8.969 0 015.292 3m13.416 0a8.969 8.969 0 012.168 4.5" />
                             </svg>
-                            <h2 class="text-sm font-normal">Aprobada</h2>
+                            <h2 class="text-sm font-normal">@lang('messages.estatus.aprobada')</h2>
                         </div>
                     </td>
                     @endif
@@ -270,7 +264,7 @@
     {{-- Div para la paginacion --}}
     <div class="bg-white px-4 py-3 items-center justify-between border-t border-gray-200 sm:px-6">
         {{-- Paginacion --}}
-        {{ $data->links() }}
+        {{ $data->links('vendor.livewire.tailwind') }}
     </div>
     {{-- Fin Div paginacion --}}
 </div>
@@ -280,29 +274,29 @@
         @foreach ($data as $item)
         <div class="bg-white p-4 rounded-lg shadow">
             <div class="mb-3">
-                <h2 class="text-sm font-bold text-gray-800 dark:text-white ">Nro. {{ $item->otUid }}</h2>
-                <p class="text-xs font-normal text-gray-600 dark:text-gray-400">Por: {{ $item->owner_tikect }}</p>
+                <h2 class="text-sm font-bold text-gray-800 dark:text-white ">@lang('messages.tablas.nro') {{ $item->otUid }}</h2>
+                <p class="text-xs font-normal text-gray-600 dark:text-gray-400">@lang('messages.tablas.por'): {{ $item->owner_tikect }}</p>
             </div>
             {{-- Orden de trabajo --}}
             <div class="flex justify-between items-center gap-x-2 mr-8">
                 <img class="object-cover w-7 h-7 rounded-full" src="{{ asset('images/orden-de-trabajo.png') }}" alt="">
                 <div>
-                    <p class="text-xs font-normal text-gray-600 dark:text-gray-400">Tikect Nro. {{ $item->tikect_id }}</p>
-                    <p class="text-xs font-normal text-gray-600 dark:text-gray-400">Fecha Inicio: {{ $item->fechaInicio }}</p>
-                    <p class="text-xs font-normal text-gray-600 dark:text-gray-400">Agencia: {{ $item->agencia }}</p>
-                    <p class="text-xs font-normal text-gray-600 dark:text-gray-400">Estado: {{ $item->estado }}</p>
+                    <p class="text-xs font-normal text-gray-600 dark:text-gray-400">@lang('messages.tablas.t_nro') {{ $item->tikect_id }}</p>
+                    <p class="text-xs font-normal text-gray-600 dark:text-gray-400">@lang('messages.tablas.fecha_inicio') {{ $item->fechaInicio }}</p>
+                    <p class="text-xs font-normal text-gray-600 dark:text-gray-400">@lang('messages.tablas.agencia') {{ $item->agencia }}</p>
+                    <p class="text-xs font-normal text-gray-600 dark:text-gray-400">@lang('messages.tablas.estado'){{ $item->estado }}</p>
                 </div>
 
                 <div>
-                    <h2 class="text-sm font-bold text-gray-800 dark:text-white ">Costos</h2>
+                    <h2 class="text-sm font-bold text-gray-800 dark:text-white ">@lang('messages.tablas.costo')</h2>
                     @if (Auth::user()->rol == 5 || Auth::user()->rol == 6)
-                    <p class="text-xs font-normal text-gray-600 dark:text-white ">OPERACION: ${{ number_format($item->costo_oper, 2, ',', '.') }}</p>
+                    <p class="text-xs font-normal text-gray-600 dark:text-white ">@lang('messages.tablas.oper'): ${{ number_format($item->costo_oper, 2, ',', '.') }}</p>
                     @endif
 
-                    <p class="text-xs font-normal text-gray-600 dark:text-gray-400">CLIENTE: ${{ number_format($item->costo_preCli, 2, ',', '.') }}</p>
+                    <p class="text-xs font-normal text-gray-600 dark:text-gray-400">@lang('messages.tablas.cli'): ${{ number_format($item->costo_preCli, 2, ',', '.') }}</p>
 
                     @if (Auth::user()->rol == 5 || Auth::user()->rol == 6)
-                    <p class="text-xs font-normal text-gray-600 dark:text-gray-400">TIR: {{ number_format($item->tir, 2, ',', '.') }}</p>
+                    <p class="text-xs font-normal text-gray-600 dark:text-gray-400">@lang('messages.tablas.tir_mobile'): {{ number_format($item->tir, 2, ',', '.') }}</p>
                     @endif
                 </div>
             </div>
@@ -317,14 +311,14 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
-                                <h2 class="text-sm font-normal">Creada</h2>
+                                <h2 class="text-sm font-normal">@lang('messages.estatus.creada')</h2>
                             </div>
                         @else
                         <div class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-sky-500 bg-sky-100/60 dark:bg-gray-800">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
-                            <h2 class="text-sm font-normal">Creada</h2>
+                            <h2 class="text-sm font-normal">@lang('messages.estatus.creada')</h2>
                         </div>
                         @endif
                     @endif
@@ -335,7 +329,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0118 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3l1.5 1.5 3-3.75" />
                         </svg>
-                        <h2 class="text-sm font-normal">Aprobada</h2>
+                        <h2 class="text-sm font-normal">@lang('messages.estatus.aprobada')</h2>
                     </div>
 
                     @endif
@@ -348,7 +342,7 @@
                         </svg>
                         <div class="flex items-center gap-x-2 mr-8">
                             <div>
-                                <h2 class="text-sm font-bold text-orange-500 dark:text-white ">Ejecucion</h2>
+                                <h2 class="text-sm font-bold text-orange-500 dark:text-white ">@lang('messages.estatus.ejecucion')</h2>
                             </div>
                         </div>
                     </div>
@@ -363,7 +357,7 @@
                         </svg>
                         <div class="flex items-center gap-x-2 mr-8">
                             <div>
-                                <h2 class="text-sm font-bold text-yellow-500 dark:text-white ">Supervicion</h2>
+                                <h2 class="text-sm font-bold text-yellow-500 dark:text-white ">@lang('messages.estatus.supervicion')</h2>
                             </div>
                         </div>
                     </div>
@@ -376,7 +370,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
                         </svg>
-                        <h2 class="text-sm font-normal">Finalizada</h2>
+                        <h2 class="text-sm font-normal">@lang('messages.estatus.finalizada')</h2>
                     </div>
 
                     @endif
@@ -387,13 +381,13 @@
                     @if($item->statusOts_banco == '1')
                     <div wire:click="updateStatusBanco({{ $item->id }}, '1')" class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-orange-500 bg-orange-100/60 dark:bg-gray-800 cursor-pointer">
                         <img class="object-cover ml-2 my-2 w-auto h-6" src="{{ asset('images/DEL-TESORO-COLOR.png') }}" alt="">
-                        <h2 class="text-sm font-normal">Por Aprobacion</h2>
+                        <h2 class="text-sm font-normal">@lang('messages.estatus.poraprobacion')</h2>
                     </div>
                     @endif
                     @if($item->statusOts_banco == '2')
                     <div class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-green-500 bg-green-100/60 dark:bg-gray-800">
                         <img class="object-cover ml-2 my-2 w-auto h-6" src="{{ asset('images/DEL-TESORO-COLOR.png') }}" alt="">
-                        <h2 class="text-sm font-normal">Aprobada</h2>
+                        <h2 class="text-sm font-normal">@lang('messages.estatus.aprobada')</h2>
                     </div>
                     @endif
                 </div>

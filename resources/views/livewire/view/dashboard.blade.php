@@ -38,6 +38,7 @@ $otsList = Ot::select(DB::raw("count(*) as ots"), DB::raw("estado as estados"), 
 $colorOts = $otsList->pluck('colores');
 $estOts = $otsList->pluck('estados');
 $ots = $otsList->pluck('ots');
+// dd($otsList);
 
 $estados = Estado::select(DB::raw("descripcion as estados"))
             ->orderBy('estados', 'asc')
@@ -47,37 +48,18 @@ $listaEstados = $estados->pluck('estados');
 
 @endphp
 <x-app-layout>
-    {{-- <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-    </h2>
-    </x-slot> --}}
-
-    {{-- <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                   
-            </div>
-        </div>
-    </div> --}}
-
-
-
 
     <div class="grid grid-cols-1 md:grid-cols-5 gap-4 mb-4 mt-8">
         {{-- TOTAL INVERSION --}}
         <div class="p-2">
-            <div class="flex-auto shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] bg-gradient-to-r from-sky-400 to-cyan-300 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg p-4 max-w-72 w-full h-auto" style="cursor: auto;">
+            <div class="flex-auto shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg p-4 max-w-72 w-full h-auto" style="cursor: auto;">
                 <div class="flex flex-row -mx-3">
                     <div class="flex-none w-2/3 max-w-full px-3">
                         <div>
                             <p class="mb-0 font-sans font-bold leading-normal uppercase dark:text-white dark:opacity-60 text-2xl">TOTAL</p>
                             <p class="mb-0 font-sans font-sm leading-normal dark:text-white dark:opacity-60 text-sm">Inversion($) - Ordenes de trabajo Finalizadas</p>
                             <x-inversion />
-                            <p class="mb-0 dark:text-white dark:opacity-60">
-                            <span class="font-bold leading-normal text-sm text-emerald-500">+55%</span>
-                            since yesterday
-                            </p>
+                            
                         </div>
                     </div>
                     <x-ots_generadas />
@@ -86,17 +68,14 @@ $listaEstados = $estados->pluck('estados');
         </div>
         {{-- TIKECT GENERADOS --}}
         <div class="p-2">
-            <div class="flex-auto shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] bg-gradient-to-r from-sky-400 to-cyan-300 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg p-4 max-w-72 w-full h-auto" style="cursor: auto;">
+            <div class="flex-auto shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg p-4 max-w-72 w-full h-auto" style="cursor: auto;">
                 <div class="flex flex-row -mx-3">
                     <div class="flex-none w-2/3 max-w-full px-3">
                         <div>
                             <p class="mb-0 font-sans font-bold leading-normal uppercase dark:text-white dark:opacity-60 text-2xl">TOTAL</p>
                             <p class="mb-0 font-sans font-sm leading-normal dark:text-white dark:opacity-60 text-sm">Tikects<br>Abiertos</p>
                             <x-porcen_tikects_abiertos />
-                            <p class="mb-0 dark:text-white dark:opacity-60">
-                            <span class="font-bold leading-normal text-sm text-emerald-500">+55%</span>
-                            since yesterday
-                            </p>
+                            
                         </div>
                     </div>
                     <x-tikects_abiertos />
@@ -117,10 +96,7 @@ $listaEstados = $estados->pluck('estados');
                         <div>
                             <p class="mb-0 font-sans font-semibold leading-normal uppercase dark:text-white dark:opacity-60 text-sm">Today's Money</p>
                             <h5 class="mb-2 font-bold dark:text-white">$53,000</h5>
-                            <p class="mb-0 dark:text-white dark:opacity-60">
-                            <span class="font-bold leading-normal text-sm text-emerald-500">+55%</span>
-                            since yesterday
-                            </p>
+                            
                         </div>
                     </div>
                     
@@ -134,17 +110,14 @@ $listaEstados = $estados->pluck('estados');
         </div> --}}
         {{-- TIKECTS CERRADOS --}}
         <div class="p-2">
-            <div class="flex-auto shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] bg-gradient-to-r from-sky-400 to-cyan-300 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg p-4 max-w-72 w-full h-auto" style="cursor: auto;">
+            <div class="flex-auto shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg p-4 max-w-72 w-full h-auto" style="cursor: auto;">
                 <div class="flex flex-row -mx-3">
                     <div class="flex-none w-2/3 max-w-full px-3">
                         <div>
                             <p class="mb-0 font-sans font-bold leading-normal uppercase dark:text-white dark:opacity-60 text-2xl">TOTAL</p>
                             <p class="mb-0 font-sans font-sm leading-normal dark:text-white dark:opacity-60 text-sm">Tikects<br>Cerrados</p>
                             <x-porcen_tikects_cerrados />
-                            <p class="mb-0 dark:text-white dark:opacity-60">
-                            <span class="font-bold leading-normal text-sm text-emerald-500">+55%</span>
-                            since yesterday
-                            </p>
+
                         </div>
                     </div>
                     <x-tikects_cerrados />
@@ -153,17 +126,14 @@ $listaEstados = $estados->pluck('estados');
         </div>
         {{-- ORDENES DE TRABAJO CERRADAS --}}
         <div class="p-2">
-            <div class="flex-auto shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] bg-gradient-to-r from-sky-400 to-cyan-300 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg p-4 max-w-72 w-full h-auto" style="cursor: auto;">
+            <div class="flex-auto shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg p-4 max-w-72 w-full h-auto" style="cursor: auto;">
                 <div class="flex flex-row -mx-3">
                     <div class="flex-none w-2/3 max-w-full px-3">
                         <div>
                             <p class="mb-0 font-sans font-bold leading-normal uppercase dark:text-white dark:opacity-60 text-2xl">TOTAL</p>
                             <p class="mb-0 font-sans font-sm leading-normal dark:text-white dark:opacity-60 text-sm">Ordenes de Trabajo Finalizadas</p>
                             <x-porcen_ots_cerradas />
-                            <p class="mb-0 dark:text-white dark:opacity-60">
-                            <span class="font-bold leading-normal text-sm text-emerald-500">+55%</span>
-                            since yesterday
-                            </p>
+
                         </div>
                     </div>
                     <x-ots_generadas />
@@ -172,17 +142,17 @@ $listaEstados = $estados->pluck('estados');
         </div>
         {{-- ORDENES DE TRABAJO EN EJECUCION --}}
         <div class="p-2">
-            <div class="flex-auto shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] bg-gradient-to-r from-sky-400 to-cyan-300 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg p-4 max-w-72 w-full h-auto" style="cursor: auto;">
+            <div class="flex-auto shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg p-4 max-w-72 w-full h-auto" style="cursor: auto;">
                 <div class="flex flex-row -mx-3">
                     <div class="flex-none w-2/3 max-w-full px-3">
                         <div>
                             <p class="mb-0 font-sans font-bold leading-normal uppercase dark:text-white dark:opacity-60 text-2xl">TOTAL</p>
                             <p class="mb-0 font-sans font-sm leading-normal dark:text-white dark:opacity-60 text-sm">Ordenes de Trabajo en Ejecucion</p>
                             <x-porcen_ots_cerradas />
-                            <p class="mb-0 dark:text-white dark:opacity-60">
+                            {{-- <p class="mb-0 dark:text-white dark:opacity-60">
                             <span class="font-bold leading-normal text-sm text-emerald-500">+55%</span>
                             since yesterday
-                            </p>
+                            </p> --}}
                         </div>
                     </div>
                     <x-ots_generadas />
@@ -192,13 +162,14 @@ $listaEstados = $estados->pluck('estados');
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 mt-8">
-        <div class="p-2">
+        <div class="p-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200  rounded-lg">
             <div class="flex flex-col items-center my-1 md:p-8 md:w-2/3 md:mx-32 min-[420px]:w-full min-[420px]:mx-0 min-[420px]:p-4">
                 <p class="mb-0 font-sans font-bold leading-normal dark:text-white dark:opacity-60 text-2xl text-center">Inversion por Estados</p>
-                <canvas id="myChart2"></canvas> 
+                <canvas id="myChart2"></canvas>
+                
             </div>
         </div>
-        <div class="p-2">
+        <div class="p-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200  rounded-lg">
             <div class="flex-none w-full px-3 my-8">
                 <p class="mb-0 font-sans font-bold leading-normal dark:text-white dark:opacity-60 text-2xl text-center">Inversion($) Vs Porcentaje por estado</p>
                 @livewire('view.tabla-leyenda')
@@ -207,31 +178,72 @@ $listaEstados = $estados->pluck('estados');
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 mt-8">
-        <div class="p-2">
-            <div class="flex flex-col md:p-14 md:w-full md:h-auto md:items-center my-1 min-[420px]:w-full min-[420px]:mx-0 min-[420px]:p-4">
-                <p class="font-sans font-bold leading-normal uppercase dark:text-white dark:opacity-60 text-2xl text-center mb-6">Top Tickets</p>
-                <canvas id="myChart3"></canvas> 
-            </div>
+        <div class="p-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200  rounded-lg">
+            {{-- Grafico de Barras 1 --}}
+            <canvas id="myChart3" style="padding: 30px"></canvas>
+            <article class="rounded-xl p-4">
+                <ul class="">
+                    <li>
+                        <a href="#" class="block h-full rounded-lg border border-gray-200 p-4 hover:border-check-blue">
+                            <strong class="font-medium text-black">Tickets creados</strong>
+                            <p class="mt-1 text-xs font-medium text-gray-800">
+                            Este grafico muestra la cantidad de ticket que han sido creados hasta la fecha.
+                            </p>
+                        </a>
+                    </li>
+                </ul>
+            </article> 
         </div>
-        <div class="p-2">
-            <div class="flex flex-col md:p-14 md:w-2/3 md:mx-24 md:items-center my-1 min-[420px]:w-full min-[420px]:mx-0 min-[420px]:p-4">
-                <p class="mb-0 font-sans font-bold leading-normal uppercase dark:text-white dark:opacity-60 text-2xl text-center">Top Ordenes de Trabajo</p>
-                <canvas id="myChart4" ></canvas> 
+        
+        <div class="p-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200  rounded-lg">
+            <div class="flex flex-col md:items-center my-1 min-[420px]:w-full min-[420px]:mx-0 min-[420px]:p-4">
+                <article class="rounded-xl p-8">
+                    {{-- Grafico de Torta 2 --}}
+                    <div class="flex justify-center items-center gap-4 md:w-8/12 md:mx-28 min-[420px]:w-full min-[420px]:mx-0 min-[420px]:p-4">
+                        <canvas id="myChart4" ></canvas> 
+                    </div>
+                    <ul class="mt-4 space-y-2">
+                      <li>
+                        <a href="#" class="block h-full rounded-lg border border-gray-200 p-4 hover:border-pink-600">
+                          <strong class="font-medium text-black">Ordenes de trabajo</strong>
+                          <p class="mt-1 text-xs font-medium text-gray-800">
+                            Este grafico muestra la cantidad de ordenes de trabajo en estatus FINALIZADA por cada estado.
+                          </p>
+                        </a>
+                      </li>
+                      <li>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+                            @foreach ($otsList as $item)
+                            <a href="#" class="block h-full rounded-lg border border-gray-200 p-4 hover:border-pink-600" style="background-color:{{ $item->colores }}">
+                            <strong class="font-medium text-gray-800">{{ $item->estados }}: {{ $item->ots }}</strong>
+                            </a>
+                            @endforeach
+                        </div>
+                      </li>
+                    </ul>
+                  </article>      
             </div>
         </div>
     </div>
+
     <div class="grid grid-cols-1 md:grid-cols-1 gap-4 mb-4 mt-8">
-        <div class="p-2">
-            <div class="flex flex-col md:p-14 md:w-4/5 md:h-auto md:items-center my-1 min-[420px]:w-full min-[420px]:p-4">
-                <p class="font-sans font-bold leading-normal uppercase dark:text-white dark:opacity-60 text-2xl text-center mb-6">Ticket con orden de trabajo asignada</p>
-                <canvas id="myChart5"></canvas> 
-            </div>
+        <div class="p-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200  rounded-lg min-[420px]:w-full min-[420px]:mx-0 min-[420px]:p-4">
+            {{-- Grafico de barras 2 --}}
+            <canvas id="myChart5" style="padding: 5% 10%"></canvas>
+            <article class="rounded-xl p-4">
+                <ul class="">
+                    <li>
+                        <a href="#" class="block h-full rounded-lg border border-gray-200 p-4 hover:border-check-blue">
+                            <strong class="font-medium text-black">Tickets creados</strong>
+                            <p class="mt-1 text-xs font-medium text-gray-800">
+                            Este grafico muestra la cantidad de ticket que han sido creados hasta la fecha.
+                            </p>
+                        </a>
+                    </li>
+                </ul>
+            </article>
         </div>
     </div>
-
-
-    
-    
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -298,7 +310,7 @@ $listaEstados = $estados->pluck('estados');
         var ots = @json($ots);
         var colorOts = @json($colorOts);
         const dataTorta = {
-            labels: estOts,
+            // labels: estOts,
                 data: ots,
             datasets: [{
                 label: 'Ots Cerradas',
@@ -331,18 +343,18 @@ $listaEstados = $estados->pluck('estados');
         var colorTiUnion = @json($colorTi);
         const labelsEstados = estadosUnion;
         const dataUnion = {
-                labels: ['Amazonas', 'Bolivar', 'Distrito Capital', 'Merida'],
+                labels: ['Amazonas', 'Bolivar', 'Distrito Capital', 'Merida', 'Monagas', 'Trujillo'],
                     datasets: [
                         {
                         type: 'bar',
                         label: 'Bar Dataset',
-                        data: [5,1,2,1],
+                        data: [5,1,2,1,8,9],
                         borderColor: 'rgb(255, 99, 132)',
                         backgroundColor: 'rgba(255, 99, 132, 0.2)'
                     }, {
                         type: 'line',
                         label: 'Line Dataset',
-                        data: [2,1,3,1],
+                        data: [2,1,3,1,2,7],
                         fill: false,
                         borderColor: 'rgb(54, 162, 235)'
                     }
@@ -352,11 +364,17 @@ $listaEstados = $estados->pluck('estados');
             type: 'scatter',
             data: dataUnion,
                 options: {
-                scales: {
-                y: {
-                    beginAtZero: true
-                }
-                }
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Custom Chart Title'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
             }
         };
         new Chart(

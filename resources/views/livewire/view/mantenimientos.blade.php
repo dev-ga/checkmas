@@ -1,5 +1,5 @@
-    <div class="flex flex-col bg-gray-100">
-        <div class="mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 bg-gray-100">
+    <div class="flex flex-col">
+        <div class="mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
                 <h1 class="font-bold text-2xl text-gray-700 drop-shadow-lg">Ordenes de trabajo asignadas</h1>
 				<div class="py-5 mt-4">

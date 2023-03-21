@@ -52,7 +52,7 @@ class ListadoUsuarios extends Component
                     ->orWhere('cargo', 'like', "%{$this->buscar}%")
                     ->orWhere('status_registro', 'like', "%{$this->buscar}%")
                     ->orWhere('empresa', 'like', "%{$this->buscar}%")
-                    ->paginate(3)
+                    ->paginate(8)
             ]);
 
         }else{
@@ -61,7 +61,7 @@ class ListadoUsuarios extends Component
                     ->where('nombre', 'like', "%{$this->buscar}%")
                     ->where('apellido', 'like', "%{$this->buscar}%")
                     ->orderBy('id', 'desc')
-                    ->paginate(3)
+                    ->paginate(8)
             ]);
 
         }

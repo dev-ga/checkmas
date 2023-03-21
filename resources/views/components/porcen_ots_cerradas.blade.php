@@ -8,4 +8,4 @@ $porcenOts = UtilsController::porcentaje($cardValor, $valorTotal);
 $porcenOts = round($porcenOts, 2);
 @endphp
 
-<h5 class="mb-2 font-bold dark:text-white">%{{ $porcenOts }}</h5>
+<h5 class="mb-2 font-bold dark:text-white">{{ $porcenOts }}%</h5>
