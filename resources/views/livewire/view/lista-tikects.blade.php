@@ -3,6 +3,7 @@
     <div class="py-5 mt-4">
         <div class="flex justify-between">
             <input wire:model="buscar" type="search" name="buscar" class="border-b border-gray-200 py-2 text-sm rounded-full sm:w-1/3 md:w-1/4 shadow-lg" placeholder="Buscar..." autocomplete="off">
+            <x-status />
         </div>
     </div>
     <div class="overflow-auto rounded-lg shadow hidden md:block">
@@ -35,11 +36,16 @@
                     </th>
 
                     <th scope="col" class="w-20 px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        @lang('messages.tablas.observaciones')
+                        @lang('messages.tablas.observacion')
                     </th>
 
                     <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        @lang('messages.tablas.estatus')
+                        <div class="flex items-center gap-x-3">
+                            <span>@lang('messages.tablas.estatus')</span>
+                            <button wire:click="filtro('status_tikect')" class="flex items-center gap-x-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-up-alt" viewBox="0 0 16 16"> <path d="M3.5 13.5a.5.5 0 0 1-1 0V4.707L1.354 5.854a.5.5 0 1 1-.708-.708l2-1.999.007-.007a.498.498 0 0 1 .7.006l2 2a.5.5 0 1 1-.707.708L3.5 4.707V13.5zm4-9.5a.5.5 0 0 1 0-1h1a.5.5 0 0 1 0 1h-1zm0 3a.5.5 0 0 1 0-1h3a.5.5 0 0 1 0 1h-3zm0 3a.5.5 0 0 1 0-1h5a.5.5 0 0 1 0 1h-5zM7 12.5a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7a.5.5 0 0 0-.5.5z"/> </svg>
+                            </button>
+                        </div>
                     </th>
 
                     <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -56,6 +62,7 @@
                             <div>
                                 <h2 class="text-sm font-medium text-gray-800 dark:text-white ">{{ $item->tikect_uid }}</h2>
                                 <p class="text-xs font-normal text-gray-600 dark:text-gray-400">@lang('messages.tablas.creadopor') {{ $item->owner }}</p>
+                                <p class="text-xs font-normal text-gray-600 dark:text-gray-400">@lang('messages.tablas.fecha_creado') {{ $item->created_at }}</p>
                                 <p class="text-xs font-normal text-gray-600 dark:text-gray-400">@lang('messages.tablas.correo') {{ $item->owner_email }}</p>
                                 <p class="text-xs font-normal text-gray-600 dark:text-gray-400">@lang('messages.tablas.servicio') {{ $item->tipoServicio }}</p>
                             </div>

@@ -12,8 +12,13 @@ class ListaTikects extends Component
     use Actions;
 
     public $buscar;
+    public $campo = 'id';
+    public $filtro_estatus;
 
-    protected $listeners = ['refreshComponent' => '$refresh']; 
+    protected $listeners = [
+        'refreshComponent' => '$refresh',
+        'filtro'
+    ]; 
 
     public function updateStatusTikect($id, $btr){
 
@@ -35,6 +40,12 @@ class ListaTikects extends Component
             dd($th);
         }
         
+
+    }
+
+    public function filtro($value)
+    {
+        $this->campo = $value;
 
     }
 
@@ -65,8 +76,8 @@ class ListaTikects extends Component
                 ->orWhere('observaciones', 'like', "%{$this->buscar}%")
                 ->orWhere('owner', 'like', "%{$this->buscar}%")
                 ->orWhere('owner_email', 'like', "%{$this->buscar}%")
-                ->orWhere('status_tikect', 'like', "%{$this->buscar}%")
-                ->orderBy('id', 'desc')
+                ->orWhere('created_at', 'like', "%{$this->buscar}%")
+                ->orderBy($this->campo, 'desc')
                 ->paginate(5)
         ]);
     }

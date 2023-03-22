@@ -32,7 +32,6 @@ class FichaTecnicaModal extends Component
         $this->atr_showModal = '';
 
         $data = FichaTecnica::where('uid', $equipoUid)->get();
-        // dd($data, $equipoUid);
 
         foreach($data as $item){
             $agencia = $item->agencia;
@@ -47,6 +46,7 @@ class FichaTecnicaModal extends Component
         }
 
         $edo = Estado::where('codigo', $estado)->get();
+
         foreach($edo as $item){
             $estadoDef = $item->descripcion;
     

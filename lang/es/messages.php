@@ -111,7 +111,6 @@ return [
 
     ],
 
-
     'tablas' => [
         'nombre' => 'Nombre',
         'apellido' => 'Apellido',
@@ -139,7 +138,7 @@ return [
         'tir' => 'T.I.R.(%)',
         'presupuesto' => 'Presupuesto($)',
         't_nro' => 'Ticket Nro.:',
-        'fecha_inicio' => 'Fecha inicio:',
+        'fecha_inicio' => 'Fecha ejecución ots:',
         'res' => 'R:',
         'super' => 'S:',
         'nro' => 'Nro.',
@@ -148,8 +147,9 @@ return [
         'oper' => 'Operación',
         'cli' => 'Cliente',
         'tir_mobile' => 'TIR',
-        'nro' => 'Nro.',
-        'nro' => 'Nro.',
+        'observacion' => 'Observaciones',
+        'fecha_creado' => 'Fecha de creación',
+        'fecha_creado_ot' => 'Fecha creación ots',
         'nro' => 'Nro.',
         'nro' => 'Nro.',
         'nro' => 'Nro.',
@@ -159,7 +159,6 @@ return [
         'nro' => 'Nro.',
 
     ],
-
     
     'estatus' => [
         'registrado' => 'Registrado',
@@ -174,7 +173,25 @@ return [
         'finalizada' => 'Finalizada',
         'poraprobacion' => 'Por aprobación',
         'finalizada' => 'Finalizada',
+        'deshabilitado' => 'Deshabilitado',
 
+    ],
+
+    'menu' => [
+        'dash' => 'Dashboard',
+        'ticket' => 'Ticket',
+        'crearOts' => 'Crear Ots',
+        'listaOts' => 'Lista de Ots',
+        'crearTicket' => 'Crear Ticket',
+        'administracion' => 'Administración',
+        'reportes' => 'Reportes',
+        'usuarios' => 'Usuarios',
+    ],
+
+    'reportes' => [
+        'ots' => 'Ordenes de trabajo',
+        'ticket' => 'Tickets',
+        'usuarios' => 'Usuarios',
     ]
 
 ];

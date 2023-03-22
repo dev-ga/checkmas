@@ -42,7 +42,7 @@
                                     <img class="object-cover w-7 h-7 rounded-full" src="{{ asset('images/admi.png') }}" alt="">
                                     <div>
                                         <h2 class="text-sm font-medium text-gray-800 dark:text-white ">{{ $item->otUid }}</h2>
-                                        <p class="text-xs font-normal text-gray-600 dark:text-gray-400">@lang('messages.tablas.fecha_inicio'): {{ $item->fechaInicio }}</p>
+                                        <p class="text-xs font-normal text-gray-600 dark:text-gray-400">@lang('messages.tablas.fecha_inicio') {{ $item->fechaInicio }}</p>
                                     </div>
                                 </div>
                             </td>
@@ -190,7 +190,7 @@
                                 <path d="M10 3L4.5 8.5L2 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
 
-                            <h2 class="text-sm font-normal">@lang('messages.estatus.creada')</h2>
+                            <h2 class="text-sm font-normal">@lang('messages.estatus.creada')</h2>333
                         </div>
                     
                     @endif

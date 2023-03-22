@@ -32,6 +32,7 @@ class CrearTikect extends Component
     public $owner;
     public $owner_email;
     public $status_tikect;
+    public $des_status;
 
 
     protected $rules = [
@@ -117,6 +118,7 @@ class CrearTikect extends Component
              * 2 -> anulado
              */
             $creaTikect->status_tikect  = '0';
+            $creaTikect->des_status  = $creaTikect->status_tikect = 0 ? 'abierto' : 'cerrado';
             $creaTikect->save();
 
             $this->reset();
