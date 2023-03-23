@@ -138,24 +138,7 @@ Route::get('uuid', function () {
 });
 
 Route::get('/pp', function () {
-    $users = User::select(DB::raw("COUNT(*) as count"), DB::raw("MONTHNAME(created_at) as month_name"))
-                    ->whereYear('created_at', date('Y'))
-                    ->groupBy(DB::raw("month_name"))
-
-                    ->pluck('count', 'month_name');
-
-    $ti = Tikect::select(DB::raw("COUNT(*) as count"), DB::raw("MONTHNAME(estado) as month_name"))
-                    ->whereYear('created_at', date('Y'))
-                    ->groupBy(DB::raw("month_name"))
-
-                    ->pluck('count', 'month_name');
-    $ti2 = Tikect::select(DB::raw("COUNT(*) as totales"), DB::raw("estado as estados"))
-                    ->groupBy(DB::raw("estado"))
-                    ->pluck('totales', 'estados');
-    $labels = $ti2->keys();
-    $data = $ti2->values();
-    dd($ti2, $labels, $data);
-    return view('prueba');
+    return view('modal');
 })->name('pp');
 
 

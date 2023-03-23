@@ -1,3 +1,6 @@
+@php
+    use Carbon\Carbon;
+@endphp
 <div class="p-5">
     <h1 class="text-xl mb-4">Listado de Tikects</h1>
     <div class="py-5 mt-4">
@@ -62,7 +65,7 @@
                             <div>
                                 <h2 class="text-sm font-medium text-gray-800 dark:text-white ">{{ $item->tikect_uid }}</h2>
                                 <p class="text-xs font-normal text-gray-600 dark:text-gray-400">@lang('messages.tablas.creadopor') {{ $item->owner }}</p>
-                                <p class="text-xs font-normal text-gray-600 dark:text-gray-400">@lang('messages.tablas.fecha_creado') {{ $item->created_at }}</p>
+                                <p class="text-xs font-normal text-gray-600 dark:text-gray-400">@lang('messages.tablas.fecha_creado') {{ Carbon::parse($item->created_at)->format('d-m-Y') }}</p>
                                 <p class="text-xs font-normal text-gray-600 dark:text-gray-400">@lang('messages.tablas.correo') {{ $item->owner_email }}</p>
                                 <p class="text-xs font-normal text-gray-600 dark:text-gray-400">@lang('messages.tablas.servicio') {{ $item->tipoServicio }}</p>
                             </div>

@@ -40,6 +40,7 @@ class OrdenTrabajo extends Component
     public $owner;
     public $statusOts;
     public $statusOts_banco;
+    public $atr_form_ot = 'hidden';
 
     public $atr = 'hidden';
     public $atr_info_tikect = 'hidden';
@@ -64,7 +65,8 @@ class OrdenTrabajo extends Component
 
         $this->tikect_id = $nroTikect;
         $this->owner_tikect = $owner_email;
-        $this->estado_tikect = $estado_tikect; 
+        $this->estado_tikect = $estado_tikect;
+        $this->atr_form_ot = '';
 
     }
 

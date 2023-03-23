@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('tecRes_email');
             $table->string('equipoUid');
             $table->string('estado');
+            $table->string('color');
             $table->string('agencia');
             $table->string('tipoMantenimiento');
             $table->decimal('costo_oper', 18, 2)->nullable()->default(0.00);
@@ -35,6 +36,8 @@ return new class extends Migration
             $table->decimal('tir');
             $table->string('pdf_pre_oper');
             $table->string('pdf_pre_preCli');
+            $table->string('statusOts');
+            $table->string('statusOts_banco');
             $table->string('owner');
             /**
              * @param $statusOts
