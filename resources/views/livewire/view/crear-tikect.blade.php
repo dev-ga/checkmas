@@ -1,3 +1,7 @@
+@php
+    use App\Models\Servicio;
+    $servicios = Servicio::all();
+@endphp
 <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-700 dark:border-gray-600">
     <div class="items-center justify-start mb-8 mt-4 sm:flex">
         <time class="mb-1 text-2xl font-extrabold text-blue-900 drop-shadow-lg sm:order-last sm:mb-0">@lang('messages.label.reporteIncidencias')</time>
@@ -7,12 +11,20 @@
 
         {{-- Datos Orden de trabajo --}}
         <div class="grid grid-cols-1 md:grid-cols-5 gap-4 mb-4 mt-8">
-            <div class="p-2">
+            <div class="p-2 {{ $atr_select_servicio }}">
                 <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.tipoServicio')</label>
-                <x-native-select wire:model="tipoServicio">
-                    <option value="">...</option> 
-                    <option value="aire acondicionado">Aire Acondicionado</option>  
+                {{-- <x-input wire:model="otroServicio" class="{{ $atr_otro_servicio }}"/> --}}
+                <x-native-select wire:model="tipoServicio" wire:change="$emit('otro_servicio', $event.target.value)" >
+                    <option value="">...</option>
+                    @foreach ($servicios as $item)
+                    <option value="{{ $item->descripcion }}">{{ $item->descripcion }}</option>
+                    @endforeach 
+                    <option value="otro">Otro</option>
                 </x-native-select>
+            </div>
+            <div class="p-2 {{ $atr_otro_servicio }}">
+                <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">Otro Servicio</label>
+                <x-input wire:model="otroServicio" />
             </div>
             <div class="p-2">
                 <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.oficina')</label>

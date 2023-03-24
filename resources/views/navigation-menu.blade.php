@@ -22,7 +22,7 @@
                         {{ __('Mantenimientos') }}
                     </x-jet-nav-link>
                 </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                {{-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="#" :active="request()->routeIs('dashboard')">
                         {{ __('Observaciones') }}
                     </x-jet-nav-link>
@@ -31,7 +31,7 @@
                     <x-jet-nav-link href="#" :active="request()->routeIs('dashboard')">
                         {{ __('Notificaciones') }}
                     </x-jet-nav-link>
-                </div>
+                </div> --}}
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
@@ -89,10 +89,10 @@
                 <div class="ml-3 relative">
                     <div x-data="{ dropdownOpen: false }"  class="flex ml-auto relative">
                         <button @click="dropdownOpen = ! dropdownOpen" class="flex flex-row items-center">
-                            <img src="https://pbs.twimg.com/profile_images/378800000298815220/b567757616f720812125bfbac395ff54_normal.png" alt class="h-10 w-10 bg-gray-200 border rounded-full" />
+                            <img src="{{ asset('images/tecnico.jpg') }}" alt class="h-10 w-10 bg-gray-200 border rounded-full" />
                             <span class="flex flex-col ml-2">
-                                <span class="truncate w-40 font-semibold tracking-wide leading-none">{{ Auth::user()->nombre }} {{ Auth::user()->apellido }}</span>
-                                <span class="truncate w-40 text-gray-500 text-xs leading-none mt-1">{{ Auth::user()->email }}</span>
+                                <span class="truncate w-40 text-left font-semibold tracking-wide leading-none">{{ Auth::user()->nombre }} {{ Auth::user()->apellido }}</span>
+                                <span class="truncate w-40 text-left text-gray-500 text-xs leading-none mt-1">{{ Auth::user()->email }}</span>
                             </span>
                         </button>
             
@@ -122,19 +122,21 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+            <x-jet-responsive-nav-link href="{{ route('ficha-tecnica') }}" :active="request()->routeIs('ficha-tecnica')">
+                {{ __('Ficha Tecnica') }}
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('mantenimientos') }}" :active="request()->routeIs('mantenimientos')">
+                {{ __('Mantenimientos') }}
             </x-jet-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="flex items-center px-4">
-                @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
+                
                 <div class="shrink-0 mr-3">
-                    <img class="h-10 w-10 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+                    <img src="{{ asset('images/tecnico.jpg') }}" alt class="h-10 w-10 bg-gray-200 border rounded-full" />
                 </div>
-                @endif
 
                 <div>
                     <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
@@ -144,9 +146,9 @@
 
             <div class="mt-3 space-y-1">
                 <!-- Account Management -->
-                <x-jet-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
+                {{-- <x-jet-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
                     {{ __('Profile') }}
-                </x-jet-responsive-nav-link>
+                </x-jet-responsive-nav-link> --}}
 
                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                 <x-jet-responsive-nav-link href="{{ route('api-tokens.index') }}" :active="request()->routeIs('api-tokens.index')">
@@ -157,7 +159,6 @@
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}" x-data>
                     @csrf
-
                     <x-jet-responsive-nav-link href="{{ route('logout') }}" @click.prevent="$root.submit();">
                         {{ __('Log Out') }}
                     </x-jet-responsive-nav-link>

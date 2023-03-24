@@ -17,7 +17,7 @@
                 </div>
                 <div class="p-2">
                     <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.tipo')</label>
-                    <x-native-select wire:model="tipoConden" wire:change="$emit('selection', $event.target.value)" class="w-32">
+                    <x-native-select wire:model="tipoConden" wire:change="$emit('selection', $event.target.value)" class="w-32 focus:ring-check-blue focus:border-check-blue">
                         <option></option>
                         <option value="compacto">@lang('messages.label.compacto')</option>
                         <option value="fancoil">@lang('messages.label.fancoil')</option>
@@ -32,7 +32,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
                     <div class="p-2">
                         <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.voltaje')</label>
-                        <x-native-select wire:model="voltaje">
+                        <x-native-select wire:model="voltaje" class="focus:ring-check-blue focus:border-check-blue">
                             <option></option>
                             <option value="110V">110V</option>
                             <option value="220V">220V</option>
@@ -42,7 +42,7 @@
                     </div>
                     <div class="p-2">
                         <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.phases')</label>
-                        <x-native-select wire:model="phases">
+                        <x-native-select wire:model="phases" class="focus:ring-check-blue focus:border-check-blue">
                             <option></option>
                             <option value="1PH">1PH</option>
                             <option value="2PH">2PH</option>
@@ -52,7 +52,7 @@
                     </div>
                     <div class="p-2">
                         <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.refri')</label>
-                        <x-native-select wire:model="tipoRefri">
+                        <x-native-select wire:model="tipoRefri" class="focus:ring-check-blue focus:border-check-blue">
                             <option></option>
                             <option value="R22">R22</option>
                             <option value="RF10A">RF10A</option>
@@ -61,7 +61,7 @@
                     </div>
                     <div class="p-2">
                         <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.BTU')</label>
-                        <x-native-select wire:model="btu">
+                        <x-native-select wire:model="btu" class="focus:ring-check-blue focus:border-check-blue">
                             <option></option>
                             <option value="12.000">12.000</option>
                             <option value="18.000">18.000</option>
@@ -86,7 +86,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
                     <div class="p-2">
                         <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.tipo')</label>
-                        <x-native-select wire:model="tipoCompresor">
+                        <x-native-select wire:model="tipoCompresor" class="focus:ring-check-blue focus:border-check-blue">
                             <option></option>
                             <option value="scroll">@lang('messages.label.scroll')</option>
                             <option value="piston">@lang('messages.label.piston')</option>
@@ -94,11 +94,11 @@
                     </div>
                     <div class="p-2">
                         <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.marca')</label>
-                        <x-input icon="pencil" wire:model="marcaCompresor" />
+                        <x-input icon="pencil" wire:model="marcaCompresor" class="focus:ring-check-blue focus:border-check-blue" />
                     </div>
                     <div class="p-2">
                         <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.amp')</label>
-                        <x-input icon="pencil" wire:model="ampCompresor" />
+                        <x-input icon="pencil" wire:model="ampCompresor" class="focus:ring-check-blue focus:border-check-blue"/>
                     </div>
                     <div class="p-2">
                         <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.placa')</label>
@@ -122,7 +122,7 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
                 <div class="p-2">
                     <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.tipo')</label>
-                    <x-native-select wire:model="tipoVentilador">
+                    <x-native-select wire:model="tipoVentilador" class="focus:ring-check-blue focus:border-check-blue">
                         <option></option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -177,11 +177,11 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
                 <div class="p-2">
                     <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.oficina')</label>
-                    <x-input icon="pencil" wire:model="oficina" />
+                    <x-input icon="pencil" wire:model="oficina" class="focus:ring-check-blue focus:border-check-blue"/>
                 </div>
                 <div class="p-2">
                     <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.piso')</label>
-                    <x-input icon="pencil" wire:model="piso" />
+                    <x-input icon="pencil" wire:model="piso" class="focus:ring-check-blue focus:border-check-blue"/>
                 </div>
                 <div class="p-2">
                     <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.agencia')</label>
@@ -206,7 +206,7 @@
                 <h1 class="font-bold text-2xl text-gray-700 drop-shadow-lg">Equipos</h1>
                 <div class="py-5 mt-4">
                     <div class="flex justify-between">
-                        <input wire:model="buscar" type="search" name="buscar" class="border-b border-gray-200 py-2 text-sm rounded-full sm:w-1/3 md:w-1/4 shadow-lg" placeholder="Buscar..." autocomplete="off">
+                        <input wire:model="buscar" type="search" name="buscar" class="border-b border-gray-200 py-2 text-sm rounded-full sm:w-1/3 md:w-1/4 shadow-lg focus:ring-check-blue focus:border-check-blue" placeholder="Buscar..." autocomplete="off">
                         <button wire:click="viewForm" class="ml-3 inline-flex justify-center rounded-md border border-transparent bg-check-blue py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-green-700">
                             {{-- <svg xmlns="http://www.w3.org/2000/svg" wire:loading wire:target="viewForm" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="animate-spin h-5 w-5 mr-3">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
@@ -285,8 +285,6 @@
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
                                             <path fill-rule="evenodd" d="M5.5 3A2.5 2.5 0 003 5.5v2.879a2.5 2.5 0 00.732 1.767l6.5 6.5a2.5 2.5 0 003.536 0l2.878-2.878a2.5 2.5 0 000-3.536l-6.5-6.5A2.5 2.5 0 008.38 3H5.5zM6 7a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
                                           </svg>
-                                          
-                                          
                                         <span>{{ $item->uid }}</span>
                                     </div>
                                 </td>
@@ -321,22 +319,22 @@
                                 <td class="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
                                     <div class="flex items-center gap-x-2">
                                         @if($item->tipoConden == 'compacto')
-                                            <a class="ml-8" href="{{ asset($item->imgPlacaCompresor) }}" target="_blank">Con
-                                                <img src="{{ asset($item->imgPlacaCompresor) }}" class="w-8 h-8"/>
+                                            <a class="ml-8" href="{{ asset('/storage/'.$item->imgPlacaCompresor) }}" target="_blank">Con
+                                                <img src="{{ asset('/storage/'.$item->imgPlacaCompresor) }}" class="w-8 h-8"/>
                                             </a>
-                                            <a href="{{ asset($item->imgEtiqVentilador) }}" target="_blank" >Ven
-                                                <img src="{{ asset($item->imgEtiqVentilador) }}" class="w-8 h-8"/>
+                                            <a href="{{ asset('/storage/'.$item->imgEtiqVentilador) }}" target="_blank" >Ven
+                                                <img src="{{ asset('/storage/'.$item->imgEtiqVentilador) }}" class="w-8 h-8"/>
                                             </a>
                                         @endif
                                         @if($item->tipoConden != 'compacto')
-                                            <a class="ml-8" href="{{ asset($item->imgPlacaCompresor) }}" target="_blank">Con
-                                                <img src="{{ asset($item->imgPlacaCompresor) }}" class="w-8 h-8"/>
+                                            <a class="ml-8" href="{{ asset('/storage/'.$item->imgPlacaCompresor) }}" target="_blank">Con
+                                                <img src="{{ asset('/storage/'.$item->imgPlacaCompresor) }}" class="w-8 h-8"/>
                                             </a>
-                                            <a href="{{ asset($item->imgEtiqVentilador) }}" target="_blank" >Ven
-                                                <img src="{{ asset($item->imgEtiqVentilador) }}" class="w-8 h-8"/>
+                                            <a href="{{ asset('/storage/'.$item->imgEtiqVentilador) }}" target="_blank" >Ven
+                                                <img src="{{ asset('/storage/'.$item->imgEtiqVentilador) }}" class="w-8 h-8"/>
                                             </a>
-                                            <a href="{{ asset($item->imgEvaporador) }}" target="_blank" >Eva
-                                                <img src="{{ asset($item->imgEvaporador) }}" class="w-8 h-8"/>
+                                            <a href="{{ asset('/storage/'.$item->imgEvaporador) }}" target="_blank" >Eva
+                                                <img src="{{ asset('/storage/'.$item->imgEvaporador) }}" class="w-8 h-8"/>
                                             </a>
                                         @endif
                                           

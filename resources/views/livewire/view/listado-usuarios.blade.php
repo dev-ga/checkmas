@@ -76,7 +76,7 @@
                     <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{{ $item->cargo }}</td>
                     @if($item->empresa == 'Trx')
                     <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                        <img class="object-cover w-auto h-7" src="{{ asset('images/LOGO_TRX.png') }}" alt="">
+                        <img class="object-cover w-16 h-auto" src="{{ asset('images/logo-trx.png') }}" alt="">
                     </td>
                     @endif
                     @if($item->empresa == 'Banco del Tesoro')

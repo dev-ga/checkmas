@@ -1,7 +1,8 @@
 
 <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-700 dark:border-gray-600">
     <div class="items-center justify-start mb-8 mt-4 sm:flex">
-        <h1 class="font-bold text-2xl text-check-blue drop-shadow-lg">@lang('messages.label.ots')</h1>
+        {{-- <h1 class="font-bold text-2xl text-check-blue drop-shadow-lg">@lang('messages.label.ots')</h1> --}}
+        <h1 class="text-xl mb-4">Asignación de orden de trabajo</h1>
     </div>
 
     <div class="border border-gray-200 rounded-lg shadow-md px-4">

@@ -1,4 +1,6 @@
-
+@php
+    use Carbon\Carbon;
+@endphp
 <div class="p-5 mt-4">
     <h1 class="text-xl mb-4">Mantenimiento Preventivos</h1>
     <div class="py-5 mt-4">
@@ -7,7 +9,7 @@
         </div>
     </div>
     {{-- Tabla Responsive para PC --}}
-    <div class="overflow rounded-lg shadow hidden md:block">
+    <div class="overflow-x-auto rounded-lg shadow hidden md:block">
                 <table class="w-full">
                     <thead class="bg-gray-50 dark:bg-gray-800">
                         <tr>
@@ -43,6 +45,7 @@
                                     <div>
                                         <h2 class="text-sm font-medium text-gray-800 dark:text-white ">{{ $item->otUid }}</h2>
                                         <p class="text-xs font-normal text-gray-600 dark:text-gray-400">@lang('messages.tablas.fecha_inicio') {{ $item->fechaInicio }}</p>
+                                        <p class="text-xs font-normal text-gray-600 dark:text-gray-400">@lang('messages.tablas.fecha_creado') {{ Carbon::parse($item->created_at)->format('d-m-Y') }}</p>
                                     </div>
                                 </div>
                             </td>
@@ -190,7 +193,7 @@
                                 <path d="M10 3L4.5 8.5L2 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
 
-                            <h2 class="text-sm font-normal">@lang('messages.estatus.creada')</h2>333
+                            <h2 class="text-sm font-normal">@lang('messages.estatus.creada')</h2>
                         </div>
                     
                     @endif

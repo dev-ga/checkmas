@@ -14,6 +14,8 @@ class ListaTikects extends Component
     public $buscar;
     public $campo = 'id';
     public $filtro_estatus;
+    public $atr_tabla_ticket = '';
+    public $atr_form_otsTicket = 'hidden';
 
     protected $listeners = [
         'refreshComponent' => '$refresh',
@@ -58,6 +60,8 @@ class ListaTikects extends Component
             );
         }else{
             $this->emit('showFormOts', $id);
+            $this->atr_form_otsTicket = '';
+            $this->atr_tabla_ticket = 'hidden';
 
         }
     

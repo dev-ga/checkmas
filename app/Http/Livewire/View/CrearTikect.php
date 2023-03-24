@@ -4,6 +4,7 @@ namespace App\Http\Livewire\View;
 
 use App\Models\Agencia;
 use App\Models\Estado;
+use App\Models\Servicio;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use App\Models\Tikect as ModelTikect;
@@ -34,6 +35,10 @@ class CrearTikect extends Component
     public $status_tikect;
     public $des_status;
 
+    public $atr_otro_servicio = 'hidden';
+    public $atr_select_servicio = '';
+    public $otroServicio;
+
 
     protected $rules = [
         'tipoServicio'    => 'required',
@@ -55,6 +60,21 @@ class CrearTikect extends Component
 
     ];
 
+    protected $listeners = [
+        'otro_servicio'
+    ];
+
+    public function otro_servicio($value)
+    {
+        if ($value == 'otro') {
+            $this->atr_otro_servicio = '';
+            $this->atr_select_servicio = 'hidden';
+        } else {
+            $this->atr_otro_servicio = 'hidden';
+            $this->atr_select_servicio = '';
+        }
+    }
+
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName);
@@ -62,6 +82,7 @@ class CrearTikect extends Component
 
     public function store()
     {
+
         $this->validate();
 
         try {
@@ -72,13 +93,11 @@ class CrearTikect extends Component
             foreach ($desEstado as $item) {
                 $estadoDes = $item->descripcion;
                 $color = $item->color;
-
             }
 
             $desAgencia = Agencia::where('codigo', $this->agencia)->get();
             foreach ($desAgencia as $item) {
                 $agenciaDes = $item->descripcion;
-
             }
 
             /**
@@ -95,14 +114,22 @@ class CrearTikect extends Component
              */
             $uid = DB::table('tikects')->latest("id")->first();
 
-                if ($uid == NULL) {
-                    $creaTikect->tikect_uid = $this->agencia . '-' . $this->estado . '-1';
-                } else {
-                    $tercerTer = $uid->id + 1;
-                    $creaTikect->tikect_uid = $this->agencia . '-' . $this->estado . '-' . $tercerTer;
-                }
+            if ($uid == NULL) {
+                $creaTikect->tikect_uid = $this->agencia . '-' . $this->estado . '-1';
+            } else {
+                $tercerTer = $uid->id + 1;
+                $creaTikect->tikect_uid = $this->agencia . '-' . $this->estado . '-' . $tercerTer;
+            }
 
-            $creaTikect->tipoServicio   = $this->tipoServicio;
+            if ($this->tipoServicio != 'aire acondicionado') {
+                $creaTikect->tipoServicio   = $this->otroServicio;
+                $servicio = new Servicio();
+                $servicio->descripcion = $creaTikect->tipoServicio;
+                $servicio->save();
+
+            } else {
+                $creaTikect->tipoServicio   = $this->tipoServicio;
+            }
             $creaTikect->piso           = $this->piso;
             $creaTikect->oficina        = $this->oficina;
             $creaTikect->agencia        = $agenciaDes;
@@ -118,7 +145,7 @@ class CrearTikect extends Component
              * 2 -> anulado
              */
             $creaTikect->status_tikect  = '0';
-            $creaTikect->des_status  = $creaTikect->status_tikect = 0 ? 'abierto' : 'cerrado';
+            $creaTikect->des_status  = 'abierto';
             $creaTikect->save();
 
             $this->reset();
@@ -128,8 +155,7 @@ class CrearTikect extends Component
                 $description = 'La Tikect fue registrado con éxito'
             );
 
-            $this->emitTo('lista-tikects','refreshComponent');
-
+            $this->emitTo('lista-tikects', 'refreshComponent');
         } catch (\Throwable $th) {
             dd($th);
             $this->notification()->error(

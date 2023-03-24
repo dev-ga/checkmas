@@ -1,5 +1,4 @@
 <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-
     <div class="mt-4">
         <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.email')</label>
         <x-input class="pr-28" wire:model="email" />

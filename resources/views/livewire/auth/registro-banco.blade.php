@@ -9,33 +9,33 @@
                     {{-- Nombre --}}
                     <div class="p-2">
                         <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.nombre')</label>
-                        <x-input wire:model="nombre" icon="user" />
+                        <x-input wire:model="nombre" icon="user"  class="focus:ring-check-blue focus:border-check-blue"/>
                     </div>
                     {{-- Apellido --}}
                     <div class="p-2">
                         <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.apellido')</label>
-                        <x-input wire:model="apellido" icon="user" />
+                        <x-input wire:model="apellido" icon="user"  class="focus:ring-check-blue focus:border-check-blue"/>
                     </div>
                 </div>
                 {{-- Telefono --}}
                 <div class="p-2">
                     <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.telefono')</label>
-                    <x-input wire:model="telefono" icon="phone"/>
+                    <x-input wire:model="telefono" icon="phone" class="focus:ring-check-blue focus:border-check-blue"/>
                 </div>
                 {{-- email --}}
                 <div class="p-2">
                     <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.email')</label>
-                    <x-input wire:model="email" icon="user" />
+                    <x-input wire:model="email" icon="user"  class="focus:ring-check-blue focus:border-check-blue"/>
                 </div>
                 {{-- password --}}
                 <div class="p-2">
                     <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.pass')</label>
-                    <x-inputs.password wire:model="password" />
+                    <x-inputs.password wire:model="password"  class="focus:ring-check-blue focus:border-check-blue"/>
                 </div>
                 {{-- rol --}}
                 <div class="p-2">
                     <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.rol')</label>
-                    <x-native-select wire:model="rol">
+                    <x-native-select wire:model="rol" class="focus:ring-check-blue focus:border-check-blue">
                         <option></option>
                         <option value="3">@lang('messages.label.gteBanco')</option>
                         <option value="4">@lang('messages.label.gteServicios')</option>
@@ -44,12 +44,12 @@
                 {{-- estado --}}
                 <div class="p-2">
                     <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.estado')</label>
-                    <x-input wire:model="estado" icon="user" />
+                    <x-estados></x-estados>
                 </div>
                 {{-- agencia --}}
                 <div class="p-2">
                     <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.agencia')</label>
-                    <x-input wire:model="agencia" icon="user" />
+                    <x-agencias></x-agencias>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols- gap-1 px-3 mt-4">
                     <div class="relative flex items-start">
@@ -65,7 +65,7 @@
             </div>
         </div>
         <div class="flex items-center justify-center mt-4">
-            <button type="submit" wire:click.prevent="store()" class="ml-3 inline-flex justify-center rounded-md border border-transparent bg-red-200 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-200">
+            <button type="submit" wire:click.prevent="store()" class="ml-3 inline-flex justify-center rounded-md border border-transparent bg-check-blue py-2 px-4 text-sm font-bold text-white shadow-sm hover:bg-check-green">
                 <svg xmlns="http://www.w3.org/2000/svg" wire:loading wire:target="store" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="animate-spin h-5 w-5 mr-3">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
                 </svg>

@@ -16,17 +16,17 @@
         </div> --}}
         <div x-data="{ dropdownOpen: false }"  class="flex ml-auto relative">
             <button @click="dropdownOpen = ! dropdownOpen" class="flex flex-row items-center">
-                <img src="https://pbs.twimg.com/profile_images/378800000298815220/b567757616f720812125bfbac395ff54_normal.png" alt class="h-10 w-10 bg-gray-200 border rounded-full" />
-                <span class="flex flex-col ml-2">
-                    <span class="truncate w-40 font-semibold tracking-wide leading-none">{{ Auth::user()->nombre }} {{ Auth::user()->apellido }}</span>
-                    <span class="truncate w-40 text-gray-500 text-xs leading-none mt-1">{{ Auth::user()->email }}</span>
+                <img src="{{ asset('images/user.png') }}" alt class="h-10 w-10 bg-gray-200 border rounded-full" />
+                <span class="flex flex-col">
+                    <span class="truncate w-40 text-white font-semibold tracking-wide leading-none">{{ Auth::user()->nombre }} {{ Auth::user()->apellido }}</span>
+                    <span class="truncate w-40 text-white text-xs leading-none mt-1">{{ Auth::user()->email }}</span>
                 </span>
             </button>
 
             <div x-cloak x-show="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 z-10 w-full h-full"></div>
 
             <div x-cloak x-show="dropdownOpen" class="absolute right-0 z-10 w-48 mt-16 overflow-hidden bg-white rounded-md shadow-xl">
-                <a href="{{ route('profile.show') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-italblue hover:text-white">Profile</a>
+                {{-- <a href="{{ route('profile.show') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-italblue hover:text-white">Profile</a> --}}
                 {{-- <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-italblue hover:text-white">Products</a> --}}
                 <a href="{{ route('logout') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-italblue hover:text-white">Logout</a>
             </div>

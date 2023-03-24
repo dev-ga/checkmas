@@ -83,31 +83,6 @@ $listaEstados = $estados->pluck('estados');
                 </div>
             </div>
         </div>
-        {{-- <div class="p-2">  
-            <div class="flex-auto p-4 shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] bg-gradient-to-r from-sky-400 to-cyan-300 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg max-w-72 w-full h-auto" 
-            style="
-            background-image: url('https://images.unsplash.com/photo-1578836537282-3171d77f8632?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80');
-            background-repeat: no-repat;
-            background-size: cover;
-            background-blend-mode: multiply;
-            ">
-                <div class="flex flex-row -mx-3">
-                    <div class="flex-none w-2/3 max-w-full px-3">
-                        <div>
-                            <p class="mb-0 font-sans font-semibold leading-normal uppercase dark:text-white dark:opacity-60 text-sm">Today's Money</p>
-                            <h5 class="mb-2 font-bold dark:text-white">$53,000</h5>
-                            
-                        </div>
-                    </div>
-                    
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-1/4 h-auto">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
-                          </svg>
-                          
-                    
-                </div>
-            </div>
-        </div> --}}
         {{-- TIKECTS CERRADOS --}}
         <div class="p-2">
             <div class="flex-auto shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg p-4 max-w-72 w-full h-auto" style="cursor: auto;">
@@ -161,15 +136,15 @@ $listaEstados = $estados->pluck('estados');
         </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 mt-8">
+    <div class="grafico-dona grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 mt-8">
         <div class="p-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200  rounded-lg">
             <div class="flex flex-col items-center my-1 md:p-8 md:w-2/3 md:mx-32 min-[420px]:w-full min-[420px]:mx-0 min-[420px]:p-4">
-                <p class="mb-0 font-sans font-bold leading-normal dark:text-white dark:opacity-60 text-2xl text-center">Inversion por Estados</p>
+                <p class="mb-0 font-sans font-bold leading-normal dark:text-white dark:opacity-60 text-2xl text-center">Inversion por estados</p>
                 <canvas id="myChart2"></canvas>
                 
             </div>
         </div>
-        <div class="p-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200  rounded-lg">
+        <div class="grafico-dona-leyenda p-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200  rounded-lg">
             <div class="flex-none w-full px-3 my-8">
                 <p class="mb-0 font-sans font-bold leading-normal dark:text-white dark:opacity-60 text-2xl text-center">Inversion($) Vs Porcentaje por estado</p>
                 @livewire('view.tabla-leyenda')
@@ -180,8 +155,9 @@ $listaEstados = $estados->pluck('estados');
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 mt-8">
         <div class="p-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200  rounded-lg">
             {{-- Grafico de Barras 1 --}}
+            <p class=" mt-4 mb-0 font-sans font-bold leading-normal dark:text-white dark:opacity-60 text-2xl text-center">Tickets creados por estado</p>
             <canvas id="myChart3" style="padding: 30px"></canvas>
-            <article class="rounded-xl p-4">
+            <article class="rounded-xl p-4 -mt-5">
                 <ul class="">
                     <li>
                         <a href="#" class="block h-full rounded-lg border border-gray-200 p-4 hover:border-check-blue">
@@ -197,10 +173,25 @@ $listaEstados = $estados->pluck('estados');
         
         <div class="p-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200  rounded-lg">
             <div class="flex flex-col md:items-center my-1 min-[420px]:w-full min-[420px]:mx-0 min-[420px]:p-4">
+                <p class="mb-0 font-sans font-bold leading-normal dark:text-white dark:opacity-60 text-2xl text-center">Ordenes de trabajo</p>
                 <article class="rounded-xl p-8">
                     {{-- Grafico de Torta 2 --}}
-                    <div class="flex justify-center items-center gap-4 md:w-8/12 md:mx-28 min-[420px]:w-full min-[420px]:mx-0 min-[420px]:p-4">
+                    <div class="flex justify-center items-center gap-4 md:w-8/12 md:mx-10 min-[420px]:w-full min-[420px]:mx-0 min-[420px]:p-4">
+                        
                         <canvas id="myChart4" ></canvas> 
+                            <div class="flex flex-wrap mt-0 -mx-3">
+                                <div class="flex-none w-full max-w-full py-4 pl-0 pr-3 mt-0">
+                                    @foreach ($otsList as $item)
+                                    <div class="flex w-24 mb-2 ml-3">
+                                        <div class="flex items-center justify-center w-5 h-5 mr-2 text-center bg-center rounded fill-current shadow-soft-2xl" style="background-color:{{ $item->colores }}">
+                                            <svg width="60px" height="60px" viewBox="0 0 40 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            </svg>
+                                        </div>
+                                        <p class="mt-1 mb-0 font-semibold leading-tight text-xs dark:opacity-60">{{ $item->estados }}: {{ $item->ots }}</p>
+                                    </div>
+                                    @endforeach
+                                </div>
+                            </div>
                     </div>
                     <ul class="mt-4 space-y-2">
                       <li>
@@ -210,15 +201,6 @@ $listaEstados = $estados->pluck('estados');
                             Este grafico muestra la cantidad de ordenes de trabajo en estatus FINALIZADA por cada estado.
                           </p>
                         </a>
-                      </li>
-                      <li>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-4">
-                            @foreach ($otsList as $item)
-                            <a href="#" class="block h-full rounded-lg border border-gray-200 p-4 hover:border-pink-600" style="background-color:{{ $item->colores }}">
-                            <strong class="font-medium text-gray-800">{{ $item->estados }}: {{ $item->ots }}</strong>
-                            </a>
-                            @endforeach
-                        </div>
                       </li>
                     </ul>
                   </article>      
@@ -281,7 +263,6 @@ $listaEstados = $estados->pluck('estados');
         const dataBar = {
         labels: labelsBar,
             datasets: [{
-                label: 'Tickets Creados',
                 data: tikects,
                 backgroundColor: colorTi,
                 borderColor: colorTi,
