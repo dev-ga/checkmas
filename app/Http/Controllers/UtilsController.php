@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Agencia;
+use App\Models\Estado;
 use App\Models\Ot;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -35,4 +37,33 @@ class UtilsController extends Controller
         return number_format($valor, 2, ',', '.');
 
     }
+
+    static function estado($codigo)
+    {
+        $estado = Estado::where('codigo', $codigo)->get();
+        foreach ($estado as $item) {
+            $value = $item->descripcion;
+        }
+        return $value;
+
+    }
+
+    static function agencia($codigo)
+    {
+        $agencia = Agencia::where('codigo', $codigo)->get();
+        foreach ($agencia as $item) {
+            $value = $item->descripcion;
+        }
+        return $value;
+        
+
+    }
+
+
+
+
+
+
+
+
 }

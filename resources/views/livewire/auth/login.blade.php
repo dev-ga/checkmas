@@ -1,4 +1,4 @@
-<div class="p-8">
+<div class="p-8 min-[420px]:-mt-16 md:mt-0">
     <div class="mt-4">
         <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.email')</label>
         <x-input class="pr-28 focus:ring-check-blue focus:border-check-blue" wire:model="email" />

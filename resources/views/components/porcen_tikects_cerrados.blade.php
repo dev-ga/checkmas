@@ -12,4 +12,4 @@ if($valorTotal == 0){
 }
 @endphp
 
-<h5 class="mb-2 font-bold dark:text-white">{{ $porcenTikect }}%</h5>
+<span class="text-red-500 mr-2"><i class="fas fa-arrow-down"></i>{{ $porcenTikect }}%</span>
