@@ -147,7 +147,23 @@ $listaEstados = $estados->pluck('estados');
         <div class="p-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200  rounded-lg">
             {{-- Grafico de Barras 1 --}}
             <p class=" mt-5 mb-0 font-sans font-bold leading-normal dark:text-white dark:opacity-60 text-2xl text-center">Tickets creados por estado</p>
-            <canvas id="myChart3" style="padding: 30px;" class="mt-16"></canvas>
+
+            <div class="flex justify-center items-center gap-4 md:w-8/12 md:mx-10 min-[340px]:w-3/4 min-[340px]:ml-4 min-[420px]:mx-0 min-[420px]:p-4">
+                <canvas id="chartDoughnut" style="margin-left:80px;"></canvas>
+                    <div class="flex flex-wrap mt-0 -mx-3">
+                        <div class="flex-none w-full max-w-full py-4 pl-0 pr-3 mt-0">
+                            @foreach ($tikectList as $item)
+                            <div class="flex w-40 mb-2 ml-3">
+                                <div class="flex items-center justify-center w-3 h-3 mr-2 text-center bg-center rounded fill-current shadow-soft-2xl" style="background-color:{{ $item->colores }}">
+                                    <svg width="60px" height="60px" viewBox="0 0 40 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    </svg>
+                                </div>
+                                <p class="mt-0 mb-0 leading-tight text-xs dark:opacity-60">{{ $item->estados }}: {{ $item->tikects }}</p>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+            </div>
             <article class="rounded-xl p-4 mt-10">
                 <ul class="">
                     <li>
@@ -165,19 +181,18 @@ $listaEstados = $estados->pluck('estados');
         <div class="p-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200  rounded-lg">
             <div class="flex flex-col md:items-center my-1 min-[420px]:w-full min-[420px]:mx-0 min-[420px]:p-4">
                 <p class="mb-0 font-sans font-bold leading-normal dark:text-white dark:opacity-60 text-2xl text-center">Ordenes de trabajo</p>
-
                     {{-- Grafico de Torta 2 --}}
-                    <div class="flex justify-center items-center gap-4 md:w-8/12 md:mx-10 min-[420px]:w-full min-[420px]:mx-0 min-[420px]:p-4">
-                        <canvas id="myChart4"></canvas> 
+                    <div class="flex justify-center items-center gap-4 md:w-8/12 md:mx-10 min-[340px]:w-3/4 min-[340px]:ml-4 min-[420px]:mx-0 min-[420px]:p-4">
+                        <canvas id="myChart4" style="margin-left:80px;"></canvas>
                             <div class="flex flex-wrap mt-0 -mx-3">
                                 <div class="flex-none w-full max-w-full py-4 pl-0 pr-3 mt-0">
                                     @foreach ($otsList as $item)
                                     <div class="flex w-40 mb-2 ml-3">
-                                        <div class="flex items-center justify-center w-5 h-5 mr-2 text-center bg-center rounded fill-current shadow-soft-2xl" style="background-color:{{ $item->colores }}">
+                                        <div class="flex items-center justify-center w-3 h-3 mr-2 text-center bg-center rounded fill-current shadow-soft-2xl" style="background-color:{{ $item->colores }}">
                                             <svg width="60px" height="60px" viewBox="0 0 40 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                             </svg>
                                         </div>
-                                        <p class="mt-1 mb-0 font-semibold leading-tight text-xs dark:opacity-60">{{ $item->estados }}: {{ $item->ots }}</p>
+                                        <p class="mt-0 mb-0 leading-tight text-xs dark:opacity-60">{{ $item->estados }}: {{ $item->ots }}</p>
                                     </div>
                                     @endforeach
                                 </div>
@@ -246,13 +261,15 @@ $listaEstados = $estados->pluck('estados');
             config
         );
 
+
+
         // Grafico de barras
         var estTi = @json($estTi);
         var tikects = @json($tikects);
         var colorTi = @json($colorTi);
         console.log(colorTi);
         const labelsBar = estTi;
-        const dataBar = {
+        const dataDona = {
         labels: labelsBar,
             datasets: [{
                 data: tikects,
@@ -262,26 +279,21 @@ $listaEstados = $estados->pluck('estados');
             }]
         };
         const configBar = {
-            type: 'bar',
-            data: dataBar,
-                options: {
-                    indexAxis: 'x',
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                },
+            type: 'doughnut',
+            data: dataDona,
         };
         new Chart(
             document.getElementById('myChart3'),
             configBar
         );
 
+
+
         // Grafico de torta
         var estOts = @json($estOts);
         var ots = @json($ots);
         var colorOts = @json($colorOts);
+        console.log(colorOts);
         const dataTorta = {
             // labels: estOts,
                 data: ots,
@@ -354,6 +366,46 @@ $listaEstados = $estados->pluck('estados');
             document.getElementById('myChart5'),
             configBarUnion
         );
+
+
+
+
+
+
+
+
+//prueba
+    var estTi = @json($estTi);
+        var tikects = @json($tikects);
+        var colorTi = @json($colorTi);
+  const dataDoughnut = {
+    datasets: [
+      {
+        label: "My First Dataset",
+        data: tikects,
+        backgroundColor: colorTi,
+        hoverOffset: 4,
+      },
+    ],
+  };
+
+  const configDoughnut = {
+    type: "doughnut",
+    data: dataDoughnut,
+    options: {},
+  };
+
+  var chartBar = new Chart(
+    document.getElementById("chartDoughnut"),
+    configDoughnut
+  );
+
+
+
+
+
+  
+
 
     </script>
 
