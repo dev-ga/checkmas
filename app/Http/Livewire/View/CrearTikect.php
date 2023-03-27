@@ -121,7 +121,7 @@ class CrearTikect extends Component
                 $creaTikect->tikect_uid = $this->agencia . '-' . $this->estado . '-' . $tercerTer;
             }
 
-            if ($this->tipoServicio != 'aire acondicionado') {
+            if (isset($this->otroServicio)) {
                 $creaTikect->tipoServicio   = $this->otroServicio;
                 $servicio = new Servicio();
                 $servicio->descripcion = $creaTikect->tipoServicio;

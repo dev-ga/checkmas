@@ -187,7 +187,7 @@ $listaEstados = $estados->pluck('estados');
                                             <svg width="60px" height="60px" viewBox="0 0 40 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                             </svg>
                                         </div>
-                                        <p class="mt-1 mb-0 font-semibold leading-tight text-xs dark:opacity-60">{{ $item->estados }}: {{ $item->ots }}</p>
+                                        <p class="mt-1 mb-0 font-xs leading-tight text-xs dark:opacity-60">{{ $item->estados }}: {{ $item->ots }}</p>
                                     </div>
                                     @endforeach
                                 </div>
@@ -229,7 +229,7 @@ $listaEstados = $estados->pluck('estados');
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-        <script type="text/javascript">
+    <script type="text/javascript">
 
         // Grafico de Dona
         var estados = @json($estados);

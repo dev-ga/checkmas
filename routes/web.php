@@ -90,6 +90,14 @@ Route::middleware(['auth:sanctum','verified'])->group(function () {
      */
     Route::get('/logout', [\App\Http\Controllers\UserController::class, 'destroy'])
         ->name('logout');
+
+    /**
+     * Ruta para reportes
+     */
+    Route::get('/reporte/users', [\App\Http\Controllers\UtilsController::class, 'reporte_users'])
+        ->name('reporte.users');
+    Route::get('/reporte/ots', [\App\Http\Controllers\UtilsController::class, 'reporte_ots'])
+        ->name('reporte.ots');
     
     /**
      * Ruta para imprimir la OTs
