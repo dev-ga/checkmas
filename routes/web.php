@@ -132,6 +132,10 @@ Route::get('/completar-registro-banco', function () {
     return view('auth.completar-registro-banco');
 })->name('completar-registro-banco');
 
+Route::get('/recuperar-password', function () {
+    return view('auth.recuperar-password');
+})->name('recuperar-password');
+
 
 
 Route::post('/store-resgistro', [\App\Http\Controllers\UserController::class, 'store-registro'])

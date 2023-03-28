@@ -58,12 +58,15 @@ $listaEstados = $estados->pluck('estados');
                             <h5 class="text-blueGray-400 uppercase font-bold text-xs">Total<br>inversion($)</h5><x-inversion />
                         </div>
                         <div class="relative w-auto pl-4 flex-initial">
-                            <div class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-red-500"><i class="far fa-chart-bar"></i></div>
+                            <div class="text-white text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full ">
+                                <img src="{{ asset('images/dolar.png') }}" class="w-36" alt="">
+                                {{-- <i class="far fa-chart-bar"></i> --}}
+                            </div>
                         </div>
                     </div>
                     <p class="text-sm text-blueGray-400 mt-4">
                         <x-porInver_ots_cerradas/>
-                        <span class="whitespace-nowrap">Since last month</span></p>
+                        <span class="whitespace-nowrap"></span></p>
                 </div>
             </div>
         </div>
@@ -77,12 +80,15 @@ $listaEstados = $estados->pluck('estados');
                             <x-tikects_abiertos />
                         </div>
                         <div class="relative w-auto pl-4 flex-initial">
-                            <div class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-orange-500"><i class="fas fa-chart-pie"></i></div>
+                            <div class="text-white text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full ">
+                                <img src="{{ asset('images/mantenimiento.png') }}" class="w-36" alt="">
+                                {{-- <i class="far fa-chart-bar"></i> --}}
+                            </div>
                         </div>
                     </div>
                     <p class="text-sm text-blueGray-400 mt-4">
                         <x-porcen_tikects_cerrados />
-                        <span class="whitespace-nowrap">Since last week</span></p>
+                        <span class="whitespace-nowrap"></span></p>
                 </div>
             </div>
         </div>
@@ -92,16 +98,19 @@ $listaEstados = $estados->pluck('estados');
                 <div class="flex-auto p-4">
                     <div class="flex flex-wrap">
                         <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
-                            <h5 class="text-blueGray-400 uppercase font-bold text-xs">Ots <br> finalizadas</h5>
-                            <x-ots_generadas />
+                            <h5 class="text-blueGray-400 uppercase font-bold text-xs">Ordenes de trabajo<br> finalizadas</h5>
+                            <x-ots_finalizadas />
                         </div>
                         <div class="relative w-auto pl-4 flex-initial">
-                            <div class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-pink-500"><i class="fas fa-users"></i></div>
+                            <div class="text-white text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full ">
+                                <img src="{{ asset('images/check_icon.png') }}" class="w-36" alt="">
+                                {{-- <i class="far fa-chart-bar"></i> --}}
+                            </div>
                         </div>
                     </div>
                     <p class="text-sm text-blueGray-400 mt-4">
                         <span class="text-orange-500 mr-2"><i class="fas fa-arrow-down"></i> 1.10%</span>
-                        <span class="whitespace-nowrap">Since yesterday</span></p>
+                        <span class="whitespace-nowrap"></span></p>
                 </div>
             </div>
         </div>
@@ -115,12 +124,15 @@ $listaEstados = $estados->pluck('estados');
                             <x-total_ots_ejecucion />
                         </div>
                         <div class="relative w-auto pl-4 flex-initial">
-                            <div class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-lightBlue-500"><i class="fas fa-percent"></i></div>
+                            <div class="text-white text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full ">
+                                <img src="{{ asset('images/ejecucion.png') }}" class="w-36" alt="">
+                                {{-- <i class="far fa-chart-bar"></i> --}}
+                            </div>
                         </div>
                     </div>
                     <p class="text-sm text-blueGray-400 mt-4">
                         <x-porcen_ots_ejecucion />
-                        <span class="whitespace-nowrap">Since last month</span></p>
+                        <span class="whitespace-nowrap"></span></p>
                 </div>
             </div>
         </div>
@@ -144,36 +156,20 @@ $listaEstados = $estados->pluck('estados');
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 mt-8">
-        <div class="p-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200  rounded-lg">
-            {{-- Grafico de Barras 1 --}}
-            <p class=" mt-5 mb-0 font-sans font-bold leading-normal dark:text-white dark:opacity-60 text-2xl text-center">Tickets creados por estado</p>
-
-            <div class="flex justify-center items-center gap-4 md:w-8/12 md:mx-10 min-[340px]:w-3/4 min-[340px]:ml-4 min-[420px]:mx-0 min-[420px]:p-4">
-                <canvas id="chartDoughnut" style="margin-left:80px;"></canvas>
-                    <div class="flex flex-wrap mt-0 -mx-3">
-                        <div class="flex-none w-full max-w-full py-4 pl-0 pr-3 mt-0">
-                            @foreach ($tikectList as $item)
-                            <div class="flex w-40 mb-2 ml-3">
-                                <div class="flex items-center justify-center w-3 h-3 mr-2 text-center bg-center rounded fill-current shadow-soft-2xl" style="background-color:{{ $item->colores }}">
-                                    <svg width="60px" height="60px" viewBox="0 0 40 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                    </svg>
-                                </div>
-                                <p class="mt-0 mb-0 leading-tight text-xs dark:opacity-60">{{ $item->estados }}: {{ $item->tikects }}</p>
-                            </div>
-                            @endforeach
-                        </div>
-                    </div>
-            </div>
-            <article class="rounded-xl p-4 mt-10">
-                <ul class="">
-                    <li>
-                        <a href="#" class="block h-full rounded-lg border border-gray-200 p-4 hover:border-check-blue">
-                            <strong class="font-medium text-black">Tickets creados</strong>
-                            <p class="mt-1 text-xs font-medium text-gray-800">
-                            Este grafico muestra el número de incidencias registradas por la agencia.
-                            </p>
-                        </a>
-                    </li>
+        
+        <div  class=" shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200  rounded-lg">
+            <p class="mb-0 font-sans font-bold leading-normal dark:text-white dark:opacity-60 text-2xl text-center">Ordenes de trabajo</p>
+            <div id="piechart" style="width: 100%; min-height: 500px;"></div>
+            <article class="rounded-xl px-8 mb-8">
+                <ul class="mt-4 space-y-2">
+                  <li>
+                    <a href="#" class="block h-full rounded-lg border border-gray-200 p-4 hover:border-pink-600">
+                      <strong class="font-medium text-black">Órdenes de trabajo</strong>
+                      <p class="mt-1 text-xs font-medium text-gray-800">
+                        Este grafico muestra la cantidad de ordenes de trabajo registradas y que ya fueron aprbadas y ejecutadas por cada estado.
+                      </p>
+                    </a>
+                  </li>
                 </ul>
             </article> 
         </div>
@@ -192,11 +188,7 @@ $listaEstados = $estados->pluck('estados');
                                             <svg width="60px" height="60px" viewBox="0 0 40 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                             </svg>
                                         </div>
-<<<<<<< HEAD
-                                        <p class="mt-1 mb-0 font-xs leading-tight text-xs dark:opacity-60">{{ $item->estados }}: {{ $item->ots }}</p>
-=======
                                         <p class="mt-0 mb-0 leading-tight text-xs dark:opacity-60">{{ $item->estados }}: {{ $item->ots }}</p>
->>>>>>> cda6fc477accf2e697bbf40af5ea33612c6554d0
                                     </div>
                                     @endforeach
                                 </div>
@@ -238,10 +230,9 @@ $listaEstados = $estados->pluck('estados');
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <script type="text/javascript">
-
+<script type="text/javascript">
         // Grafico de Dona
         var estados = @json($estados);
         var valores = @json($valores);
@@ -249,20 +240,20 @@ $listaEstados = $estados->pluck('estados');
         const data = {
             // labels: estados,
             datasets: [{
-                label: 'Inversion($)',
-                data: valores,
-                backgroundColor: colores,
-                hoverOffset: 10
+                label: 'Inversion($)'
+                , data: valores
+                , backgroundColor: colores
+                , hoverOffset: 10
             }]
         };
         const config = {
-            type: 'doughnut',
-            data: data,
+            type: 'doughnut'
+            , data: data,
             // options: {}
         };
         new Chart(
-            document.getElementById('myChart2'),
-            config
+            document.getElementById('myChart2')
+            , config
         );
 
 
@@ -274,21 +265,21 @@ $listaEstados = $estados->pluck('estados');
         console.log(colorTi);
         const labelsBar = estTi;
         const dataDona = {
-        labels: labelsBar,
-            datasets: [{
-                data: tikects,
-                backgroundColor: colorTi,
-                borderColor: colorTi,
-                borderWidth: 1
+            labels: labelsBar
+            , datasets: [{
+                data: tikects
+                , backgroundColor: colorTi
+                , borderColor: colorTi
+                , borderWidth: 1
             }]
         };
         const configBar = {
-            type: 'doughnut',
-            data: dataDona,
-        };
+            type: 'doughnut'
+            , data: dataDona
+        , };
         new Chart(
-            document.getElementById('myChart3'),
-            configBar
+            document.getElementById('myChart3')
+            , configBar
         );
 
 
@@ -300,30 +291,30 @@ $listaEstados = $estados->pluck('estados');
         console.log(colorOts);
         const dataTorta = {
             // labels: estOts,
-                data: ots,
-            datasets: [{
-                label: 'Ots Cerradas',
-                data: ots,
-                backgroundColor: colorOts,
-                hoverOffset: 30
+            data: ots
+            , datasets: [{
+                label: 'Ots Cerradas'
+                , data: ots
+                , backgroundColor: colorOts
+                , hoverOffset: 30
             }]
         };
         const configTorta = {
-            type: 'pie',
-            data: dataTorta,
-            options: {
+            type: 'pie'
+            , data: dataTorta
+            , options: {
                 plugins: {
                     legend: {
-                        position: 'right',
-                    }
+                        position: 'right'
+                    , }
                 }
 
             }
 
         };
         new Chart(
-            document.getElementById('myChart4'),
-            configTorta
+            document.getElementById('myChart4')
+            , configTorta
         );
 
         // Grafico Unido
@@ -332,43 +323,41 @@ $listaEstados = $estados->pluck('estados');
         var colorTiUnion = @json($colorTi);
         const labelsEstados = estadosUnion;
         const dataUnion = {
-                labels: ['Amazonas', 'Bolivar', 'Distrito Capital', 'Merida', 'Monagas', 'Trujillo'],
-                    datasets: [
-                        {
-                        type: 'bar',
-                        label: 'Bar Dataset',
-                        data: [5,1,2,1,8,9],
-                        borderColor: 'rgb(255, 99, 132)',
-                        backgroundColor: 'rgba(255, 99, 132, 0.2)'
-                    }, {
-                        type: 'line',
-                        label: 'Line Dataset',
-                        data: [2,1,3,1,2,7],
-                        fill: false,
-                        borderColor: 'rgb(54, 162, 235)'
-                    }
-                ]
-            };
+            labels: ['Amazonas', 'Bolivar', 'Distrito Capital', 'Merida', 'Monagas', 'Trujillo']
+            , datasets: [{
+                type: 'bar'
+                , label: 'Bar Dataset'
+                , data: [5, 1, 2, 1, 8, 9]
+                , borderColor: 'rgb(255, 99, 132)'
+                , backgroundColor: 'rgba(255, 99, 132, 0.2)'
+            }, {
+                type: 'line'
+                , label: 'Line Dataset'
+                , data: [2, 1, 3, 1, 2, 7]
+                , fill: false
+                , borderColor: 'rgb(54, 162, 235)'
+            }]
+        };
         const configBarUnion = {
-            type: 'scatter',
-            data: dataUnion,
-                options: {
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: 'Custom Chart Title'
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
+            type: 'scatter'
+            , data: dataUnion
+            , options: {
+                plugins: {
+                    title: {
+                        display: true
+                        , text: 'Custom Chart Title'
                     }
+                }
+                , scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
             }
         };
         new Chart(
-            document.getElementById('myChart5'),
-            configBarUnion
+            document.getElementById('myChart5')
+            , configBarUnion
         );
 
 
@@ -378,40 +367,74 @@ $listaEstados = $estados->pluck('estados');
 
 
 
-//prueba
-    var estTi = @json($estTi);
+        //prueba
+        var estTi = @json($estTi);
         var tikects = @json($tikects);
         var colorTi = @json($colorTi);
-  const dataDoughnut = {
-    datasets: [
-      {
-        label: "My First Dataset",
-        data: tikects,
-        backgroundColor: colorTi,
-        hoverOffset: 4,
-      },
-    ],
-  };
+        const dataDoughnut = {
+            datasets: [{
+                label: "My First Dataset"
+                , data: tikects
+                , backgroundColor: colorTi
+                , hoverOffset: 4
+            , }, ]
+        , };
 
-  const configDoughnut = {
-    type: "doughnut",
-    data: dataDoughnut,
-    options: {},
-  };
+        const configDoughnut = {
+            type: "doughnut"
+            , data: dataDoughnut
+            , options: {}
+        , };
 
-  var chartBar = new Chart(
-    document.getElementById("chartDoughnut"),
-    configDoughnut
-  );
+        var chartBar = new Chart(
+            document.getElementById("chartDoughnut")
+            , configDoughnut
+        );
+
+</script>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', {
+        'packages': ['corechart']
+    });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+            ['Task', 'Hours per Day']
+            , ['Work', 11]
+            , ['Eat', 2]
+            , ['Commute', 2]
+            , ['Watch TV', 2]
+            , ['Sleep', 7]
+        ]);
+
+        var options = {
+            title: 'Ordenes de trabajo',
+            width: '100%',
+            height: 500,
+            responsive: true,
+                legend: {
+                    position : 'right',
+                    alignment : 'center'
+                }
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+    }
+    $(window).resize(function(){
+        drawChart();
+
+    });
+
+</script>
 
 
 
-
-
-  
-
-
-    </script>
 
 </x-app-layout>
 

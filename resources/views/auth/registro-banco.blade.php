@@ -1,3 +1,3 @@
-<x-guest-layout>
+<x-layout-registro>
     @livewire('auth.registro-banco')
-</x-guest-layout>
+</x-layout-registro>

@@ -41,7 +41,6 @@ class UtilsController extends Controller
 
     }
 
-<<<<<<< HEAD
     public function reporte_users()
     {
         $data = User::all();
@@ -70,34 +69,4 @@ class UtilsController extends Controller
         return $pdf->stream('reporte_usuarios.pdf');
 
     }
-=======
-    static function estado($codigo)
-    {
-        $estado = Estado::where('codigo', $codigo)->get();
-        foreach ($estado as $item) {
-            $value = $item->descripcion;
-        }
-        return $value;
-
-    }
-
-    static function agencia($codigo)
-    {
-        $agencia = Agencia::where('codigo', $codigo)->get();
-        foreach ($agencia as $item) {
-            $value = $item->descripcion;
-        }
-        return $value;
-        
-
-    }
-
-
-
-
-
-
-
-
->>>>>>> cda6fc477accf2e697bbf40af5ea33612c6554d0
 }

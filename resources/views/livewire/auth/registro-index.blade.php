@@ -14,7 +14,14 @@
 
     </div>
     <div class="grid grid-cols-1 mr-4 md:grid-cols-4 ml-10 mt-12">
-        <x-select label="¿Cuál es el Nombre de tu Empresa?" placeholder="Selecione..." :options="['BANCO DEL TESORO', 'TRX', 'Otra']" wire:model.defer="tipoEmpresa" />
+        <div class="p-2">
+            <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">¿Cuál es el Nombre de tu Empresa?</label>
+                <x-native-select wire:model.defer="tipoEmpresa" class="focus:ring-check-blue focus:border-check-blue">
+                    <option></option>
+                    <option value="BANCO DEL TESORO">BANCO DEL TESORO</option>
+                    <option value="TRX">TRX</option>
+                </x-native-select>
+        </div>  
     </div>
     <div class="flex items-center justify-start mt-10 ml-8">
         <button type="submit" wire:click.prevent="verRegistro()" class="ml-3 inline-flex justify-center rounded-md border border-transparent bg-check-blue py-2 px-4 text-sm font-bold text-white shadow-sm hover:bg-check-green">

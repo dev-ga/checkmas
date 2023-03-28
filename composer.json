@@ -6,11 +6,8 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
-<<<<<<< HEAD
         "barryvdh/laravel-dompdf": "^2.0",
-=======
         "davmixcool/laravel-meta-manager": "^1.2",
->>>>>>> cda6fc477accf2e697bbf40af5ea33612c6554d0
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.19",
         "laravel/jetstream": "^2.16",

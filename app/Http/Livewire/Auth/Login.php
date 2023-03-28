@@ -65,6 +65,11 @@ class Login extends Component
         redirect()->to('/completar-registro-banco');
     }
 
+    public function recuperar_pass()
+    {
+        redirect()->to('/recuperar-password');
+    }
+
 
     public function login()
     {

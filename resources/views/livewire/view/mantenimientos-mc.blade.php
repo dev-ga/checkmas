@@ -5,7 +5,7 @@
     <h1 class="text-xl mb-4">Mantenimientos Correctivos</h1>
     <div class="py-5 mt-4">
         <div class="flex justify-between">
-            <input wire:model="buscar" type="search" name="buscar" class="border-b border-gray-200 py-2 text-sm rounded-full sm:w-1/3 md:w-1/4 shadow-lg" placeholder="Buscar..." autocomplete="off">
+            <input wire:model="buscar" type="search" name="buscar" class="border-b border-gray-200 py-2 text-sm rounded-full sm:w-1/3 md:w-1/4 shadow-lg focus:ring-check-blue focus:border-check-blue" placeholder="Buscar..." autocomplete="off">
         </div>
     </div>
     <div class="overflow-auto rounded-lg shadow hidden md:block">
@@ -175,7 +175,7 @@
                             <div class="flex items-center gap-x-2 mr-8">
                                 <div>
                                     <h2 class="text-sm font-bold text-orange-500 dark:text-white ">@lang('messages.estatus.ejecucion')</h2>
-                                    <p class="text-xs font-normal text-orange-500 dark:text-gray-400">Orden de trabajo<br>en ejecución</p>
+                                    <p class="text-xs text-orange-500 dark:text-gray-400">Orden de trabajo<br>en ejecución</p>
                                 </div>
                             </div>
                         </div>

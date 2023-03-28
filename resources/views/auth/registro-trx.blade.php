@@ -1,3 +1,3 @@
-<x-guest-layout>
+<x-layout-registro>
     @livewire('auth.registro-trx')
-</x-guest-layout>
+</x-layout-registro>

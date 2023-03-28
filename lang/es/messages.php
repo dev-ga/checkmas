@@ -129,7 +129,6 @@ return [
         'servicio' => 'Servicio:',
         'agencia' => 'Agencia:',
         'estado' => 'Estado:',
-        'asignar' => 'Asignar',
         'ot' => 'Orden de trabajo(Ots)',
         'tecnico' => 'Técnicos/responsable(R) - supervisor(S)',
         'equipo' => 'Equipo',
