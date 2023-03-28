@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use WireUi\Traits\Actions;
+use App\Http\Controllers\UtilsController;
+
 
 class RegistroBanco extends Component
 {
@@ -105,8 +107,8 @@ class RegistroBanco extends Component
         $resgistro->password = Hash::make($this->password);
         $resgistro->cargo = $this->cargo($this->rol);
         $resgistro->rol = $this->rol;
-        $resgistro->estado = $this->estado;
-        $resgistro->agencia = $this->agencia;
+        $resgistro->estado = UtilsController::estado($this->estado);
+        $resgistro->agencia = UtilsController::agencia($this->agencia);
         $resgistro->status_registro = '0';
         $resgistro->empresa = 'Banco del Tesoro';
 
@@ -133,7 +135,6 @@ class RegistroBanco extends Component
         
 
         } catch (\Throwable $th) {
-            
             $this->notification()->Error(
                 $title = 'Excepción!',
                 $description ='Error interno del sistema, Favor contacte al administrador'

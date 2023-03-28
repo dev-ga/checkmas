@@ -150,14 +150,13 @@
             {{ $data->links('vendor.livewire.tailwind') }}
         </div>
     </div>
+    {{-- Table para mobile app --}}
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:hidden">
         @foreach ($data as $item)
         <div class="bg-white p-4 rounded-lg shadow">
-            <div class="flex justify-between mb-6">
+            <div class="flex items-center justify-between mb-6">
                 @if($item->empresa == 'Trx')
-
-                <img class="object-cover w-auto h-7" src="{{ asset('images/LOGO_TRX.png') }}" alt="">
-
+                <img class="object-cover w-20 h-auto" src="{{ asset('images/logo-trx.png') }}" alt="">
                 @endif
                 @if($item->empresa == 'Banco del Tesoro')
 
@@ -166,8 +165,14 @@
                 <div class="text-sm font-bold text-right text-gray-700">{{ $item->cargo }}</div>
             </div>
             <div class="text-sm text-gray-700">Nombre: {{ $item->nombre }} {{ $item->apellido }}</div>
+            @if($item->empresa == 'Trx')
             <div class="text-sm text-gray-700">C.I.: {{ $item->ci_rif }}</div>
+            @else
+            <div class="text-sm text-gray-700">Telefono: {{ $item->telefono }}</div>
+            @endif
             <div class="text-sm font-medium text-black">Email: {{ $item->email }}</div>
+            <div class="text-sm font-medium text-black">Agencia: {{ $item->agencia }}</div>
+            <div class="text-sm font-medium text-black">Estado: {{ $item->estado }}</div>
             @if($item->status_registro == '0')
             <div wire:click="updateStatusRegistro({{ $item->id }}, '1')" class="inline-flex items-center px-3 py-1 mt-8 rounded-full gap-x-2 text-sky-500 bg-sky-100/60 dark:bg-gray-800">
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">

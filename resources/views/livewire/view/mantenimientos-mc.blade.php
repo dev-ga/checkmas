@@ -8,7 +8,7 @@
             <input wire:model="buscar" type="search" name="buscar" class="border-b border-gray-200 py-2 text-sm rounded-full sm:w-1/3 md:w-1/4 shadow-lg" placeholder="Buscar..." autocomplete="off">
         </div>
     </div>
-    <div class="overflow-x-auto rounded-lg shadow hidden md:block">
+    <div class="overflow-auto rounded-lg shadow hidden md:block">
         <table class="w-full">
             <thead class="bg-gray-50 dark:bg-gray-800">
                 <tr>
@@ -264,12 +264,12 @@
                 @endforeach
             </tbody>
         </table>
-    {{-- Div para la paginacion --}}
-    <div class="bg-white px-4 py-3 items-center justify-between border-t border-gray-200 sm:px-6">
-        {{-- Paginacion --}}
-        {{ $data->links('vendor.livewire.tailwind') }}
-    </div>
-    {{-- Fin Div paginacion --}}
+        {{-- Div para la paginacion --}}
+        <div class="bg-white px-4 py-3 items-center justify-between border-t border-gray-200 sm:px-6">
+            {{-- Paginacion --}}
+            {{ $data->links('vendor.livewire.tailwind') }}
+        </div>
+        {{-- Fin Div paginacion --}}
 </div>
 
     {{-- Tabla Responsive para movil --}}

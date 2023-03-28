@@ -9,7 +9,7 @@
         </div>
     </div>
     {{-- Tabla Responsive para PC --}}
-    <div class="overflow-x-auto rounded-lg shadow hidden md:block">
+    <div class="overflow-auto rounded-lg shadow hidden md:block">
                 <table class="w-full">
                     <thead class="bg-gray-50 dark:bg-gray-800">
                         <tr>

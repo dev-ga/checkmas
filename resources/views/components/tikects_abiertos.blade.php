@@ -1,7 +1,8 @@
 @php
 use App\Models\Tikect;
-$total = Tikect::where('status_tikect', 0)->count();
+$total = Tikect::all()->count();
 @endphp
-<div class="w-full h-auto m-auto text-6xl px-3 text-center font-bold basis-1/3">
+{{-- <div class="w-full h-auto m-auto text-6xl px-3 text-center font-bold basis-1/3">
     {{ $total }}
-</div>
+</div> --}}
+<span class="font-semibold text-xl text-blueGray-700">{{ $total }}</span>

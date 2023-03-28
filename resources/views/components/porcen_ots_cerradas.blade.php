@@ -13,4 +13,5 @@ if($valorTotal == 0){
 
 @endphp
 
-<h5 class="mb-2 font-bold dark:text-white">{{ $porcenOts }}%</h5>
+{{-- <h5 class="mb-2 font-bold dark:text-white">{{ $porcenOts }}%</h5> --}}
+<span class="text-orange-500 mr-2"><i class="fas fa-arrow-down"></i>{{ $porcenOts }}%</span>
