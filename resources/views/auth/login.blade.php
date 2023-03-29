@@ -16,7 +16,7 @@
     </div>
     <div>
         <footer class="bg-neutral-200 text-center text-white dark:bg-neutral-600">
-            <div class="w-full pt-9">
+            {{-- <div class="w-full pt-9">
                 <div class="mb-9 flex justify-center">
                     <a href="#!" class="mr-9 text-check-blue dark:text-neutral-200">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
@@ -49,7 +49,7 @@
                         </svg>
                     </a>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="bg-neutral-300 p-4 text-center text-check-green dark:bg-neutral-700 dark:text-neutral-200">
                 © 2023 Copyright:

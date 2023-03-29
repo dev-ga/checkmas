@@ -154,6 +154,10 @@ class OrdenTrabajo extends Component
         'costo_preCli.required'      => 'Campo Requerido',
         'pdf_pre_oper.required'      => 'Documento Requerido',
         'pdf_pre_preCli.required'    => 'Documento Requerido',
+        'pdf_pre_oper.mimes'        => 'El formato del documento es incorrecto',
+        'pdf_pre_preCli.mimes'      => 'El formato del documento es incorrecto',
+        'pdf_pre_oper.max'          => 'El tamaño del documento no esta permitido',
+        'pdf_pre_preCli.max'        => 'El tamaño del documento no esta permitido',
 
     ];
 

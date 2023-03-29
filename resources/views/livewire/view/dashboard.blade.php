@@ -29,6 +29,8 @@ $tikects = $tikectList->pluck('tikects');
 
 /*
 Logica para calcular el Nro. de Ots cerradas por estado
+GRAFICO DE DONA
+GRAFICO Nro. 1
 */
 $otsList = Ot::select(DB::raw("count(*) as ots"), DB::raw("estado as estados"), DB::raw("color as colores"))
             ->where('statusOts', 5)
@@ -136,119 +138,174 @@ $listaEstados = $estados->pluck('estados');
                 </div>
             </div>
         </div>
-
-    </div>
-    
-
-    <div class="grafico-dona grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 mt-8">
-        <div class="p-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200  rounded-lg">
-            <div class="flex flex-col items-center my-1 md:p-8 md:w-2/3 md:mx-32 min-[420px]:w-full min-[420px]:mx-0 min-[420px]:p-4">
-                <p class="mb-0 font-sans font-bold leading-normal dark:text-white dark:opacity-60 text-2xl text-center">Inversion por estados</p>
-                <canvas id="myChart2"></canvas>  
-            </div>
-        </div>
-        <div class="grafico-dona-leyenda p-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200  rounded-lg">
-            <div class="flex-none w-full px-3 my-8">
-                <p class="mb-0 font-sans font-bold leading-normal dark:text-white dark:opacity-60 text-2xl text-center">Total inversion($) por estado</p>
-                @livewire('view.tabla-leyenda')
-            </div>
-        </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 mt-8">
-        
-        <div  class=" shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200  rounded-lg">
-            <p class="mb-0 font-sans font-bold leading-normal dark:text-white dark:opacity-60 text-2xl text-center">Ordenes de trabajo</p>
-            <div id="piechart" style="width: 100%; min-height: 500px;"></div>
-            <article class="rounded-xl px-8 mb-8">
-                <ul class="mt-4 space-y-2">
-                  <li>
-                    <a href="#" class="block h-full rounded-lg border border-gray-200 p-4 hover:border-pink-600">
-                      <strong class="font-medium text-black">Órdenes de trabajo</strong>
-                      <p class="mt-1 text-xs font-medium text-gray-800">
-                        Este grafico muestra la cantidad de ordenes de trabajo registradas y que ya fueron aprbadas y ejecutadas por cada estado.
-                      </p>
-                    </a>
-                  </li>
-                </ul>
-            </article> 
-        </div>
-        
-        <div class="p-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200  rounded-lg">
-            <div class="flex flex-col md:items-center my-1 min-[420px]:w-full min-[420px]:mx-0 min-[420px]:p-4">
-                <p class="mb-0 font-sans font-bold leading-normal dark:text-white dark:opacity-60 text-2xl text-center">Ordenes de trabajo</p>
-                    {{-- Grafico de Torta 2 --}}
-                    <div class="flex justify-center items-center gap-4 md:w-8/12 md:mx-10 min-[340px]:w-3/4 min-[340px]:ml-4 min-[420px]:mx-0 min-[420px]:p-4">
-                        <canvas id="myChart4" style="margin-left:80px;"></canvas>
-                            <div class="flex flex-wrap mt-0 -mx-3">
-                                <div class="flex-none w-full max-w-full py-4 pl-0 pr-3 mt-0">
-                                    @foreach ($otsList as $item)
-                                    <div class="flex w-40 mb-2 ml-3">
-                                        <div class="flex items-center justify-center w-3 h-3 mr-2 text-center bg-center rounded fill-current shadow-soft-2xl" style="background-color:{{ $item->colores }}">
-                                            <svg width="60px" height="60px" viewBox="0 0 40 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                            </svg>
-                                        </div>
-                                        <p class="mt-0 mb-0 leading-tight text-xs dark:opacity-60">{{ $item->estados }}: {{ $item->ots }}</p>
-                                    </div>
-                                    @endforeach
-                                </div>
-                            </div>
+    {{-- prueba --}}
+    <section class="bg-white dark:bg-gray-900">
+        <div class=" px-5 py-10 mx-auto">
+            <div class="grid grid-cols-1 gap-8 mt-8 xl:mt-12 xl:gap-12 sm:grid-cols-3 xl:grid-cols-3 lg:grid-cols-3">
+                <div class="w-full ">
+                    <h1 class="w-full text-center px-8 py-4 rounded-lg dark:bg-gray-700">
+                        Inversión por estados
+                    </h1>
+                    <div class="w-full shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200 rounded-lg dark:bg-gray-600 py-4">
+                        <canvas id="myChart4" 
+                            style="padding-left: 0;
+                            padding-right: 0;
+                            margin-left: auto;
+                            margin-right: auto;
+                            margin-bottom: 10px;
+                            display: block;
+                            width: auto;">
+                        </canvas>
                     </div>
-                <article class="rounded-xl p-8">
-                    <ul class="mt-4 space-y-2">
-                      <li>
-                        <a href="#" class="block h-full rounded-lg border border-gray-200 p-4 hover:border-pink-600">
-                          <strong class="font-medium text-black">Órdenes de trabajo</strong>
-                          <p class="mt-1 text-xs font-medium text-gray-800">
-                            Este grafico muestra la cantidad de ordenes de trabajo registradas y que ya fueron aprbadas y ejecutadas por cada estado.
-                          </p>
-                        </a>
-                      </li>
-                    </ul>
-                </article>      
+                    {{-- <button id="pdf" onclick="downloadPDF()">PDF</button> --}}
+                    <div class="mx-auto mt-8 w-52 sm:w-auto px-4">
+                        @foreach($otsList as $item)
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 mr-3 rounded-full" style="background-color:{{ $item->colores }}"></div>
+                            <span class="truncate">{{ $item->estados }}</span>
+                            <span class="ml-auto font-medium">{{ $item->ots }}</span>
+                        </div>
+                        @endforeach
+                    </div>
+                    
+                </div>
+    
+                <div class="w-full ">
+                    <h1 class="w-full text-center px-8 py-4 rounded-lg dark:bg-gray-700">
+                        Ordenes de trabajo finalizadas
+                    </h1>
+                    <div class="w-full shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200 rounded-lg dark:bg-gray-600 pt-4 pb-6">
+                        <canvas id="myChart2" 
+                            style="padding-left: 0;
+                            padding-right: 0;
+                            margin-left: auto;
+                            margin-right: auto;
+                            display: block;
+                            width: auto;">
+                        </canvas>
+                    </div>
+                    
+                    <h1 class="w-56 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></h1>
+                    <p class="w-24 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
+                </div>
+    
+                <div class="w-full ">
+                    <h1 class="w-full text-center px-8 py-4 rounded-lg dark:bg-gray-700">
+                        Tickets generados
+                    </h1>
+                    <div class="w-full shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200 rounded-lg dark:bg-gray-600 pt-4 pb-6">
+                        <canvas id="chartDoughnut" 
+                            style="padding-left: 0;
+                            padding-right: 0;
+                            margin-left: auto;
+                            margin-right: auto;
+                            display: block;
+                            width: auto;">
+                        </canvas>
+                    </div>
+                    
+                    <h1 class="w-56 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></h1>
+                    <p class="w-24 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="grid grid-cols-1 md:grid-cols-1 gap-4 mb-4 mt-8">
-        <div class="p-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200  rounded-lg min-[420px]:w-full min-[420px]:mx-0 min-[420px]:p-4">
-            {{-- Grafico de barras 2 --}}
-            <p class=" mt-5 mb-0 font-sans font-bold leading-normal dark:text-white dark:opacity-60 text-2xl text-center">Ordenes de trabajo(Ots) vs Tickets cerrados por estado</p>
-            <canvas id="myChart5" style="padding: 4% 10%"></canvas>
-            <article class="rounded-xl p-4 -mt-8">
-                <ul class="">
-                    <li>
-                        <a href="#" class="block h-full rounded-lg border border-gray-200 p-4 hover:border-check-blue">
-                            <strong class="font-medium text-black">Órdenes de trabajo</strong>
-                            <p class="mt-1 text-xs font-medium text-gray-800">
-                                Esta gráfica muestra las solicitudes de trabajo, sobre las incidencias registradas previamente en el sistema.
-                            </p>
-                        </a>
-                    </li>
-                </ul>
-            </article>
+    <section class="bg-white dark:bg-gray-900">
+        <div class="grid grid-cols-1 md:grid-cols-1 gap-4 mb-4 mt-8">
+            <div class="p-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200  rounded-lg min-[420px]:w-full min-[420px]:mx-0 min-[420px]:p-4">
+                {{-- Grafico de barras 2 --}}
+                <p class=" mt-5 mb-0 font-sans font-bold leading-normal dark:text-white dark:opacity-60 text-2xl text-center">Ordenes de trabajo(Ots) vs Tickets cerrados por estado</p>
+                <canvas id="myChart5" style="padding: 4% 10%"></canvas>
+                <article class="rounded-xl p-4 -mt-8">
+                    <ul class="">
+                        <li>
+                            <a href="#" class="block h-full rounded-lg border border-gray-200 p-4 hover:border-check-blue">
+                                <strong class="font-medium text-black">Órdenes de trabajo</strong>
+                                <p class="mt-1 text-xs font-medium text-gray-800">
+                                    Esta gráfica muestra las solicitudes de trabajo, sobre las incidencias registradas previamente en el sistema.
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
+                </article>
+            </div>
         </div>
-    </div>
+    </section>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js" integrity="sha512-ml/QKfG3+Yes6TwOzQb7aCNtJF4PUyha6R3w8pSTo/VJSywl7ZreYvvtUso7fKevpsI+pYVVwnu82YO0q3V6eg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script type="text/javascript">
+
+        // **************************************Grafico de torta
+
+        var estOts = @json($estOts);
+        var ots = @json($ots);
+        var colorOts = @json($colorOts);
+        const dataTorta = {
+            // labels: estOts,
+            data: ots
+            , datasets: [{
+                label: 'Ots Cerradas'
+                , data: ots
+                , backgroundColor: colorOts
+                , hoverOffset: 30
+            }]
+        };
+       
+        const configTorta = {
+            type: 'pie',
+            plugins: [plugin], 
+            data: dataTorta, 
+            options: {
+                plugins:{
+                    datalabels:{
+                        formatter:((context, args) => {
+                            const index = args.dataIndex;
+                            // console.log(estOts)
+                            return estOts[index];
+                        })
+                    }
+                }
+
+            },
+            plugins: [ChartDataLabels]
+
+        };
+        new Chart(
+            document.getElementById('myChart4')
+            , configTorta
+        );
+
+        //************************************FIN GRAFICO DE TORTA
+
+
+
+
+
+
+
+
         // Grafico de Dona
         var estados = @json($estados);
         var valores = @json($valores);
         var colores = @json($colores);
         const data = {
-            // labels: estados,
+            //labels: estados,
             datasets: [{
-                label: 'Inversion($)'
-                , data: valores
-                , backgroundColor: colores
-                , hoverOffset: 10
+                label: 'Inversion($)',
+                data: valores,
+                backgroundColor: colores,
+                hoverOffset: 10
             }]
         };
         const config = {
-            type: 'doughnut'
-            , data: data,
+            type: 'doughnut', 
+            data: data,
             // options: {}
         };
         new Chart(
@@ -262,7 +319,6 @@ $listaEstados = $estados->pluck('estados');
         var estTi = @json($estTi);
         var tikects = @json($tikects);
         var colorTi = @json($colorTi);
-        console.log(colorTi);
         const labelsBar = estTi;
         const dataDona = {
             labels: labelsBar
@@ -274,9 +330,10 @@ $listaEstados = $estados->pluck('estados');
             }]
         };
         const configBar = {
-            type: 'doughnut'
-            , data: dataDona
-        , };
+            type: 'doughnut', 
+            data: dataDona,
+
+        };
         new Chart(
             document.getElementById('myChart3')
             , configBar
@@ -284,38 +341,7 @@ $listaEstados = $estados->pluck('estados');
 
 
 
-        // Grafico de torta
-        var estOts = @json($estOts);
-        var ots = @json($ots);
-        var colorOts = @json($colorOts);
-        console.log(colorOts);
-        const dataTorta = {
-            // labels: estOts,
-            data: ots
-            , datasets: [{
-                label: 'Ots Cerradas'
-                , data: ots
-                , backgroundColor: colorOts
-                , hoverOffset: 30
-            }]
-        };
-        const configTorta = {
-            type: 'pie'
-            , data: dataTorta
-            , options: {
-                plugins: {
-                    legend: {
-                        position: 'right'
-                    , }
-                }
 
-            }
-
-        };
-        new Chart(
-            document.getElementById('myChart4')
-            , configTorta
-        );
 
         // Grafico Unido
         var estadosUnion = @json($listaEstados);
@@ -392,49 +418,5 @@ $listaEstados = $estados->pluck('estados');
         );
 
 </script>
-
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-    google.charts.load('current', {
-        'packages': ['corechart']
-    });
-    google.charts.setOnLoadCallback(drawChart);
-
-    function drawChart() {
-
-        var data = google.visualization.arrayToDataTable([
-            ['Task', 'Hours per Day']
-            , ['Work', 11]
-            , ['Eat', 2]
-            , ['Commute', 2]
-            , ['Watch TV', 2]
-            , ['Sleep', 7]
-        ]);
-
-        var options = {
-            title: 'Ordenes de trabajo',
-            width: '100%',
-            height: 500,
-            responsive: true,
-                legend: {
-                    position : 'right',
-                    alignment : 'center'
-                }
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
-        chart.draw(data, options);
-    }
-    $(window).resize(function(){
-        drawChart();
-
-    });
-
-</script>
-
-
-
-
 </x-app-layout>
 

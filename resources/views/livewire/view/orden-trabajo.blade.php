@@ -68,6 +68,7 @@
                         file:text-sm file:font-semibold
                         file:bg-green-50 file:text-check-blue
                         hover:file:bg-green-100">
+                @error('pdf_pre_oper') <span class="error text-xs text-red-500 italic">{{ $message }}</span> @enderror
             </div>
             <div class="p-2">
                 <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.presupuesto2')</label>
@@ -78,6 +79,7 @@
                         file:text-sm file:font-semibold
                         file:bg-green-50 file:text-check-blue
                         hover:file:bg-green-100">
+                @error('pdf_pre_preCli') <span class="error text-xs text-red-500 italic">{{ $message }}</span> @enderror
             </div>
         </div>
 
