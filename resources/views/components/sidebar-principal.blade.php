@@ -156,7 +156,7 @@ use App\Models\Ot;
                     </a>
                 </li>
                 <li class="my-px">
-                    <a href="#" class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+                    <a href="{{ route('reporte.tickets') }}" class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-gray-700">
                         <span class="flex items-center justify-center text-lg text-gray-400">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="h-6 w-6 bi bi-file-earmark-pdf" viewBox="0 0 16 16"> 
                                 <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/> 
@@ -185,7 +185,7 @@ use App\Models\Ot;
                                 <path d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
                             </svg>
                         </span>
-                        <span class="ml-3">Logout</span>
+                        <span class="ml-3">Cerrar sesión</span>
                     </a>
                 </li>
             </ul>

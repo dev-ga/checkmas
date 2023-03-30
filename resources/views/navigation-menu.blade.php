@@ -22,6 +22,11 @@
                         {{ __('Mantenimientos') }}
                     </x-jet-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('bitacora') }}" :active="request()->routeIs('mantenimientos')">
+                        {{ __('Bitacora') }}
+                    </x-jet-nav-link>
+                </div>
                 {{-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="#" :active="request()->routeIs('dashboard')">
                         {{ __('Observaciones') }}

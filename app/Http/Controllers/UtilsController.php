@@ -62,11 +62,13 @@ class UtilsController extends Controller
 
     }
 
-    public function reporte_tickect()
+    public function reporte_tickets()
     {
         $data = Tikect::all();
-        $pdf = Pdf::loadView('pdf.tikects', compact('data'));
-        return $pdf->stream('reporte_usuarios.pdf');
+        $count_a = Tikect::where('status_tikect', '0')->count();
+        $count_c = Tikect::where('status_tikect', '1')->count();
+        $pdf = Pdf::loadView('pdf.tickets', compact('data', 'count_a', 'count_c'));
+        return $pdf->stream('reporte_tickets.pdf');
 
     }
 }

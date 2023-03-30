@@ -70,6 +70,10 @@ Route::middleware(['auth:sanctum','verified'])->group(function () {
         return view('tecnicos.mantenimientos');
     })->name('mantenimientos');
 
+    Route::get('bitacora', function () {
+        return view('tecnicos.bitacora');
+    })->name('bitacora');
+
     Route::get('prueba', function () {
         return view('prueba');
     })->name('prueba');
@@ -98,6 +102,8 @@ Route::middleware(['auth:sanctum','verified'])->group(function () {
         ->name('reporte.users');
     Route::get('/reporte/ots', [\App\Http\Controllers\UtilsController::class, 'reporte_ots'])
         ->name('reporte.ots');
+    Route::get('/reporte/tickets', [\App\Http\Controllers\UtilsController::class, 'reporte_tickets'])
+        ->name('reporte.tickets');
     
     /**
      * Ruta para imprimir la OTs
