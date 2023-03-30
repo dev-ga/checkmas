@@ -4,31 +4,7 @@ use App\Models\Tikect;
 use App\Models\Estado;
 
 /*
-Logica para calcular el porcentaje de inversion por cada estado
-*/
-$porList = Ot::select(DB::raw("sum(costo_preCli) as totales"), DB::raw("estado as estados"), DB::raw("color as colores"))
-            ->where('tipoMantenimiento', 'MC')
-            ->where('statusOts', 5)
-            ->orderBy('estados', 'asc')
-            ->groupBy(DB::raw("estado, color"))
-            ->get();
-$colores = $porList->pluck('colores');
-$estados = $porList->pluck('estados');
-$valores = $porList->pluck('totales');
-
-/*
-Logica para calcular el Nro. de tikects creados por estado
-*/
-$tikectList = Tikect::select(DB::raw("count(*) as tikects"), DB::raw("estado as estados"), DB::raw("color as colores"))
-            ->orderBy('estados', 'asc')
-            ->groupBy(DB::raw("estado, color"))
-            ->get();
-$colorTi = $tikectList->pluck('colores');
-$estTi = $tikectList->pluck('estados');
-$tikects = $tikectList->pluck('tikects');
-
-/*
-Logica para calcular el Nro. de Ots cerradas por estado
+Logica para calcular el Nro. de Ots finalizadas por estado
 GRAFICO DE DONA
 GRAFICO Nro. 1
 */
@@ -46,6 +22,37 @@ $estados = Estado::select(DB::raw("descripcion as estados"))
             ->orderBy('estados', 'asc')
             ->get();
 $listaEstados = $estados->pluck('estados');
+
+/*
+Logica para calcular el porcentaje de inversion por cada estado
+GRAFICO DE DONA
+GRAFICO Nro. 2
+*/
+$porList = Ot::select(DB::raw("sum(costo_preCli) as totales"), DB::raw("estado as estados"), DB::raw("color as colores"))
+            ->where('tipoMantenimiento', 'MC')
+            ->where('statusOts', 5)
+            ->orderBy('estados', 'asc')
+            ->groupBy(DB::raw("estado, color"))
+            ->get();
+$colores = $porList->pluck('colores');
+$estados = $porList->pluck('estados');
+$valores = $porList->pluck('totales');
+
+/*
+Logica para calcular el Nro. de tikects creados por estado
+GRAFICO DE DONA
+GRAFICO Nro. 3
+*/
+$tikectList = Tikect::select(DB::raw("count(*) as tikects"), DB::raw("estado as estados"), DB::raw("color as colores"))
+            ->orderBy('estados', 'asc')
+            ->groupBy(DB::raw("estado, color"))
+            ->get();
+$colorTi = $tikectList->pluck('colores');
+$estTi = $tikectList->pluck('estados');
+$tikects = $tikectList->pluck('tikects');
+
+
+
 
 
 @endphp
@@ -146,7 +153,7 @@ $listaEstados = $estados->pluck('estados');
             <div class="grid grid-cols-1 gap-8 mt-8 xl:mt-12 xl:gap-12 sm:grid-cols-3 xl:grid-cols-3 lg:grid-cols-3">
                 <div class="w-full ">
                     <h1 class="w-full text-center px-8 py-4 rounded-lg dark:bg-gray-700">
-                        Inversión por estados
+                        Ordenes de trabajo finalizadas por estado
                     </h1>
                     <div class="w-full shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200 rounded-lg dark:bg-gray-600 py-4">
                         <canvas id="myChart4" 
@@ -160,12 +167,12 @@ $listaEstados = $estados->pluck('estados');
                         </canvas>
                     </div>
                     {{-- <button id="pdf" onclick="downloadPDF()">PDF</button> --}}
-                    <div class="mx-auto mt-8 w-52 sm:w-auto px-4">
+                    <div class="mx-auto mt-8 w-52 sm:w-auto px-4 divide-y">
                         @foreach($otsList as $item)
                         <div class="flex items-center">
                             <div class="w-3 h-3 mr-3 rounded-full" style="background-color:{{ $item->colores }}"></div>
-                            <span class="truncate">{{ $item->estados }}</span>
-                            <span class="ml-auto font-medium">{{ $item->ots }}</span>
+                            <span class="text-xs">{{ $item->estados }}</span>
+                            <span class="ml-auto text-xs">{{ $item->ots }}</span>
                         </div>
                         @endforeach
                     </div>
@@ -174,7 +181,7 @@ $listaEstados = $estados->pluck('estados');
     
                 <div class="w-full ">
                     <h1 class="w-full text-center px-8 py-4 rounded-lg dark:bg-gray-700">
-                        Ordenes de trabajo finalizadas
+                        Inversión por estados
                     </h1>
                     <div class="w-full shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200 rounded-lg dark:bg-gray-600 pt-4 pb-6">
                         <canvas id="myChart2" 
@@ -186,9 +193,15 @@ $listaEstados = $estados->pluck('estados');
                             width: auto;">
                         </canvas>
                     </div>
-                    
-                    <h1 class="w-56 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></h1>
-                    <p class="w-24 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
+                    <div class="mx-auto mt-8 w-52 sm:w-auto px-4 divide-y">
+                        @foreach($porList as $item)
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 mr-3 rounded-full" style="background-color:{{ $item->colores }}"></div>
+                            <span class="text-xs">{{ $item->estados }}</span>
+                            <span class="ml-auto text-xs">{{ number_format($item->totales, 2, ',', '.') }}$ - {{ app('App\Http\Controllers\UtilsController')->porcenInverPorEstado($item->totales) }}%</span>
+                        </div>
+                        @endforeach
+                    </div>
                 </div>
     
                 <div class="w-full ">
@@ -205,43 +218,37 @@ $listaEstados = $estados->pluck('estados');
                             width: auto;">
                         </canvas>
                     </div>
-                    
-                    <h1 class="w-56 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></h1>
-                    <p class="w-24 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
+                    <div class="mx-auto mt-8 w-52 sm:w-auto px-4 divide-y">
+                        @foreach($tikectList as $item)
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 mr-3 rounded-full" style="background-color:{{ $item->colores }}"></div>
+                            <span class="text-xs">{{ $item->estados }}</span>
+                            <span class="ml-auto text-xs">{{ $item->tikects }}</span>
+                        </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="bg-white dark:bg-gray-900">
+
         <div class="grid grid-cols-1 md:grid-cols-1 gap-4 mb-4 mt-8">
             <div class="p-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200  rounded-lg min-[420px]:w-full min-[420px]:mx-0 min-[420px]:p-4">
                 {{-- Grafico de barras 2 --}}
                 <p class=" mt-5 mb-0 font-sans font-bold leading-normal dark:text-white dark:opacity-60 text-2xl text-center">Ordenes de trabajo(Ots) vs Tickets cerrados por estado</p>
                 <canvas id="myChart5" style="padding: 4% 10%"></canvas>
-                <article class="rounded-xl p-4 -mt-8">
-                    <ul class="">
-                        <li>
-                            <a href="#" class="block h-full rounded-lg border border-gray-200 p-4 hover:border-check-blue">
-                                <strong class="font-medium text-black">Órdenes de trabajo</strong>
-                                <p class="mt-1 text-xs font-medium text-gray-800">
-                                    Esta gráfica muestra las solicitudes de trabajo, sobre las incidencias registradas previamente en el sistema.
-                                </p>
-                            </a>
-                        </li>
-                    </ul>
-                </article>
             </div>
         </div>
-    </section>
+
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js" integrity="sha512-ml/QKfG3+Yes6TwOzQb7aCNtJF4PUyha6R3w8pSTo/VJSywl7ZreYvvtUso7fKevpsI+pYVVwnu82YO0q3V6eg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js" integrity="sha512-ml/QKfG3+Yes6TwOzQb7aCNtJF4PUyha6R3w8pSTo/VJSywl7ZreYvvtUso7fKevpsI+pYVVwnu82YO0q3V6eg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
 
 <script type="text/javascript">
 
-        // **************************************Grafico de torta
+        // **************************************Grafico de torta 1
 
         var estOts = @json($estOts);
         var ots = @json($ots);
@@ -259,18 +266,18 @@ $listaEstados = $estados->pluck('estados');
        
         const configTorta = {
             type: 'pie',
-            plugins: [plugin], 
+            // plugins: [plugin], 
             data: dataTorta, 
             options: {
-                plugins:{
-                    datalabels:{
-                        formatter:((context, args) => {
-                            const index = args.dataIndex;
-                            // console.log(estOts)
-                            return estOts[index];
-                        })
-                    }
-                }
+                // plugins:{
+                //     datalabels:{
+                //         formatter:((context, args) => {
+                //             const index = args.dataIndex;
+                //             // console.log(estOts)
+                //             return estOts[index];
+                //         })
+                //     }
+                // }
 
             },
             plugins: [ChartDataLabels]
@@ -284,13 +291,7 @@ $listaEstados = $estados->pluck('estados');
         //************************************FIN GRAFICO DE TORTA
 
 
-
-
-
-
-
-
-        // Grafico de Dona
+        // **************************************Grafico de DONA 2
         var estados = @json($estados);
         var valores = @json($valores);
         var colores = @json($colores);
@@ -315,7 +316,7 @@ $listaEstados = $estados->pluck('estados');
 
 
 
-        // Grafico de barras
+        // **************************************Grafico de DONA 3
         var estTi = @json($estTi);
         var tikects = @json($tikects);
         var colorTi = @json($colorTi);
@@ -399,7 +400,7 @@ $listaEstados = $estados->pluck('estados');
         var colorTi = @json($colorTi);
         const dataDoughnut = {
             datasets: [{
-                label: "My First Dataset"
+                label: "Total ticket"
                 , data: tikects
                 , backgroundColor: colorTi
                 , hoverOffset: 4

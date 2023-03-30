@@ -120,12 +120,24 @@
 
                     @if(Auth::user()->rol == 5 || Auth::user()->rol == 6)
                     {{-- Costo Operacional --}}
-                    <td class="px-4 py-4 text-sm text-check-blue font-bold dark:text-gray-300 ">${{ number_format($item->costo_oper, 2, ',', '.') }}</td>
+                    <td class="px-4 py-4 text-sm text-check-blue font-bold dark:text-gray-300 ">
+                        <div class="flex items-center justify-between gap-x-2">
+                            <button class="flex text-check-blue font-bold transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
+                                ${{ number_format($item->costo_oper, 2, ',', '.') }}
+                            </button>
+                            <a class="flex text-check-blue  transition-colors duration-200 hover:text-check-green focus:outline-none" href="{{ asset('/storage/'.$item->pdf_pre_oper) }}" target="_blank">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m.75 12l3 3m0 0l3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                                </svg>                                              
+                            </a>    
+                        </div>
+                    </td>
+                    
                     @endif
 
                     {{-- Costo Cliente --}}
                     <td class="px-4 py-4 w-8 text-sm whitespace-nowrap">
-                        <div class="flex items-center justify-start gap-x-2">
+                        <div class="flex items-center justify-between gap-x-2">
                             <button class="flex text-check-blue font-bold transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
                                 ${{ number_format($item->costo_preCli, 2, ',', '.') }}
                             </button>
