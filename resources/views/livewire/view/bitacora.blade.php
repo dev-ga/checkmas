@@ -50,7 +50,7 @@
                 @error('foto2') <span class="error text-xs text-red-500 italic">{{ $message }}</span> @enderror
             </div>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-1 gap-4 mb-4 mt-8 {{ $atr_obser }}">
+        <div class="grid grid-cols-1 md:grid-cols-1 gap-4 mb-4 mt-8">
             <div class="p-2">
                 <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">Observaciones generales de la actividad</label>
                 <x-textarea wire:model="observaciones" placeholder="Por favor indique cual es su Incidencia de forma Detallada" class="focus:ring-check-blue focus:border-check-blue" />
@@ -62,6 +62,7 @@
             <x-boton />
         </div>
     </div>
+
     {{-- Tabla --}}
     <div class="flex flex-col sm:flex" >
         <div class="mx-4 -my-2 overflow-x-auto sm:mx-4 lg:-mx-8" {{ $atr_table }}>
@@ -78,7 +79,7 @@
                     <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                         <thead class="bg-gray-50 dark:bg-gray-800">
                             <tr>
-                                <th scope="col" class="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                <th scope="col" class="w-20 py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                     <div class="flex items-center gap-x-3">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
                                             <path fill-rule="evenodd" d="M5.5 3A2.5 2.5 0 003 5.5v2.879a2.5 2.5 0 00.732 1.767l6.5 6.5a2.5 2.5 0 003.536 0l2.878-2.878a2.5 2.5 0 000-3.536l-6.5-6.5A2.5 2.5 0 008.38 3H5.5zM6 7a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
@@ -95,27 +96,30 @@
                                     </div>
                                 </th>
 
-                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                <th scope="col" class="w-20 px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                     Foto antes(1)
                                 </th>
 
-                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                <th scope="col" class="w-20 px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                     Foto antes(2)
                                 </th>
 
-                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                <th scope="col" class="w-20 px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                     Foto después(1)
                                 </th>
 
-                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                <th scope="col" class="w-20 px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                     Foto después(2)
+                                </th>
+                                <th scope="col" class="w-20 px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                    Observaciones
                                 </th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
                             @foreach ($data as $item)
                             <tr>
-                                <td class="px-4 py-4 text-sm font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap">
+                                <td class="px-4 py-4 text-sm font-medium text-gray-700 dark:text-gray-200">
                                     <div class="inline-flex items-center gap-x-3">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
                                             <path fill-rule="evenodd" d="M5.5 3A2.5 2.5 0 003 5.5v2.879a2.5 2.5 0 00.732 1.767l6.5 6.5a2.5 2.5 0 003.536 0l2.878-2.878a2.5 2.5 0 000-3.536l-6.5-6.5A2.5 2.5 0 008.38 3H5.5zM6 7a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
@@ -125,41 +129,40 @@
                                 </td>
 
                                 {{-- antes --}}
-                                <td class="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
+                                <td class="px-4 py-4 text-sm font-medium text-gray-700">
                                     <div class="flex items-center gap-x-2">
                                         <a class="ml-8" href="{{ asset('/storage/'.$item->foto1_antes) }}" target="_blank">
-                                            <img src="{{ asset('/storage/'.$item->foto1_antes) }}" class="w-8 h-8" />
+                                            <img src="{{ asset('/storage/'.$item->foto1_antes) }}" class="w-16 h-16 sm:w-8 h-8" />
                                         </a>
                                     </div>
 
                                 </td>
-                                <td class="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
+                                <td class="px-4 py-4 text-sm font-medium text-gray-700">
                                     <div class="flex items-center gap-x-2">
                                         <a class="ml-8" href="{{ asset('/storage/'.$item->foto2_antes) }}" target="_blank">
-                                            <img src="{{ asset('/storage/'.$item->foto2_antes) }}" class="w-8 h-8" />
+                                            <img src="{{ asset('/storage/'.$item->foto2_antes) }}" class="w-16 h-16 sm:w-8 h-8" />
                                         </a>
                                     </div>
 
                                 </td>
 
                                 {{-- despues --}}
-                                <td class="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
+                                <td class="px-4 py-4 text-sm font-medium text-gray-700">
                                     <div class="flex items-center gap-x-2">
                                         <a class="ml-8" href="{{ asset('/storage/'.$item->foto1_despues) }}" target="_blank">
-                                            <img src="{{ asset('/storage/'.$item->foto1_despues) }}" class="w-8 h-8" />
+                                            <img src="{{ asset('/storage/'.$item->foto1_despues) }}" class="w-16 h-16 sm:w-8 h-8" />
                                         </a>
                                     </div>
 
                                 </td>
-                                <td class="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
+                                <td class="px-4 py-4 text-sm font-medium text-gray-700">
                                     <div class="flex items-center gap-x-2">
                                         <a class="ml-8" href="{{ asset('/storage/'.$item->foto2_despues) }}" target="_blank">
-                                            <img src="{{ asset('/storage/'.$item->foto2_despues) }}" class="w-8 h-8" />
+                                            <img src="{{ asset('/storage/'.$item->foto2_despues) }}" class="w-16 h-16 sm:w-8 h-8" />
                                         </a>
                                     </div>
-
                                 </td>
-
+                                <td class="w-20 px-4 py-4 text-sm font-medium text-justify text-gray-700">{{ $item->observaciones }}</td>
                             </tr>
                             @endforeach
                         </tbody>

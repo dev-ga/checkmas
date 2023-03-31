@@ -19,10 +19,11 @@ return new class extends Migration
             $table->string('tipo_fotos');
             $table->string('foto1_antes')->nullable();
             $table->string('foto2_antes')->nullable();
+            $table->string('observaciones_antes')->nullable();
             $table->string('foto1_despues')->nullable();
             $table->string('foto2_despues')->nullable();
+            $table->string('observaciones')->nullable();
             $table->string('tecnico');
-            $table->string('observaciones');
             $table->timestamps();
         });
     }

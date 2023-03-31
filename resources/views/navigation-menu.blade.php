@@ -27,16 +27,6 @@
                         {{ __('Bitacora') }}
                     </x-jet-nav-link>
                 </div>
-                {{-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="#" :active="request()->routeIs('dashboard')">
-                        {{ __('Observaciones') }}
-                    </x-jet-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="#" :active="request()->routeIs('dashboard')">
-                        {{ __('Notificaciones') }}
-                    </x-jet-nav-link>
-                </div> --}}
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
@@ -106,7 +96,7 @@
                         <div x-cloak x-show="dropdownOpen" class="absolute right-0 z-10 w-48 mt-16 overflow-hidden bg-white rounded-md shadow-xl">
                             <a href="{{ route('profile.show') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-italblue hover:text-white">Profile</a>
                             {{-- <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-italblue hover:text-white">Products</a> --}}
-                            <a href="{{ route('logout') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-italblue hover:text-white">Logout</a>
+                            <a href="{{ route('logout') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-italblue hover:text-white">Cerrar sesion</a>
                         </div>
                     </div>
                 </div>
@@ -132,6 +122,9 @@
             </x-jet-responsive-nav-link>
             <x-jet-responsive-nav-link href="{{ route('mantenimientos') }}" :active="request()->routeIs('mantenimientos')">
                 {{ __('Mantenimientos') }}
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('bitacora') }}" :active="request()->routeIs('mantenimientos')">
+                {{ __('Bitacora') }}
             </x-jet-responsive-nav-link>
         </div>
 
@@ -165,7 +158,7 @@
                 <form method="POST" action="{{ route('logout') }}" x-data>
                     @csrf
                     <x-jet-responsive-nav-link href="{{ route('logout') }}" @click.prevent="$root.submit();">
-                        {{ __('Log Out') }}
+                        {{ __('Cerrar sesion') }}
                     </x-jet-responsive-nav-link>
                 </form>
 

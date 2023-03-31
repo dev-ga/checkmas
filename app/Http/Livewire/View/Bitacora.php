@@ -47,16 +47,6 @@ class Bitacora extends Component
     public function selection($value)
     {
         $this->atr_fotos = $value;
-
-        if($value != 'antes')
-        {
-            $this->atr_obser = '';
-        }
-
-        if($value == 'antes')
-        {
-            $this->atr_obser = 'hidden';
-        }
  
     }
 
@@ -72,16 +62,16 @@ class Bitacora extends Component
         if ($this->tipo_fotos == 'antes') {
             $this->validate([
                 'nro_ot'  => 'required',
-                'foto1'   => 'required|file|mimes:jpg,jpeg,png|max:2048',
-                'foto2'   => 'required|file|mimes:jpg,jpeg,png|max:2048',
+                'foto1'   => 'required|file|mimes:jpg,jpeg,png|max:3072',
+                'foto2'   => 'required|file|mimes:jpg,jpeg,png|max:3072',
             ]);
         }
 
         if ($this->tipo_fotos == 'despues') {
             $this->validate([
                 'nro_ot'         => 'required',
-                'foto1'          => 'required|file|mimes:jpg,jpeg,png|max:2048',
-                'foto2'          => 'required|file|mimes:jpg,jpeg,png|max:2048',
+                'foto1'          => 'required|file|mimes:jpg,jpeg,png|max:3072',
+                'foto2'          => 'required|file|mimes:jpg,jpeg,png|max:3072',
                 'observaciones'  => 'required',
             ]);
         }
@@ -130,6 +120,7 @@ class Bitacora extends Component
                 $bitacora->tipo_fotos = $this->tipo_fotos;
                 $bitacora->foto1_antes = $foto1_antes;
                 $bitacora->foto2_antes = $foto2_antes;
+                $bitacora->observaciones_antes = $this->observaciones;
                 $bitacora->tecnico = $user;
                 $bitacora->save();
 
@@ -142,20 +133,12 @@ class Bitacora extends Component
             }
 
             if ($this->tipo_fotos == 'despues') {
-
+                // dd($this->observaciones);
                 /**
                  * Cargamos las fotos
                  */
                 $foto1_despues  = $this->foto1->store($this->nro_ot.'/despues', 'public');
                 $foto2_despues  = $this->foto2->store($this->nro_ot.'/despues', 'public');
-
-                // $bitacora->nro_ot = $this->nro_ot;
-                // $bitacora->tipo_fotos = $this->tipo_fotos;
-                // $bitacora->foto1_despues = $foto1_despues;
-                // $bitacora->foto2_despues = $foto2_despues;
-                // $bitacora->observaciones = $this->observaciones;
-                // $bitacora->tecnico = $user;
-                // $bitacora->save();
 
                 ModelsBitacora::updateOrCreate(
                     ['nro_ot' => $this->nro_ot],
@@ -163,7 +146,7 @@ class Bitacora extends Component
                         'tipo_fotos'        => $this->tipo_fotos,
                         'foto1_despues'     => $foto1_despues,
                         'foto2_despues'     => $foto2_despues,
-                        'observaciones'     => $this->observaciones,
+                        'observaciones' => $this->observaciones,
                         'tecnico'           => $user,
 
                     ]

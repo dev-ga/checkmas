@@ -66,6 +66,10 @@ Route::middleware(['auth:sanctum','verified'])->group(function () {
         return view('dashboard.mantenimientos');
     })->name('dash-mantenimientos');
 
+    Route::get('dash-mantenimientos-culminados', function () {
+        return view('dashboard.mantenimientos_culminados');
+    })->name('dash-mantenimientos-culminados');
+
     Route::get('mantenimientos', function () {
         return view('tecnicos.mantenimientos');
     })->name('mantenimientos');
