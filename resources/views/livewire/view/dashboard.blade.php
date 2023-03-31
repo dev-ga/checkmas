@@ -51,10 +51,6 @@ $colorTi = $tikectList->pluck('colores');
 $estTi = $tikectList->pluck('estados');
 $tikects = $tikectList->pluck('tikects');
 
-
-
-
-
 @endphp
 <x-app-layout>
     <div class="flex flex-wrap">
@@ -155,16 +151,45 @@ $tikects = $tikectList->pluck('tikects');
                     <h1 class="w-full text-center px-8 py-4 rounded-lg dark:bg-gray-700">
                         Ordenes de trabajo finalizadas por estado
                     </h1>
-                    <div class="w-full shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200 rounded-lg dark:bg-gray-600 py-4">
-                        <canvas id="myChart4" 
-                            style="padding-left: 0;
+                    <style>
+                        .mobile{
+                            padding-left: 0;
                             padding-right: 0;
                             margin-left: auto;
                             margin-right: auto;
                             margin-bottom: 10px;
                             display: block;
-                            width: auto;">
-                        </canvas>
+                            width: auto;
+                        }
+                        @media only screen and (max-width: 768px){
+                                .mobile 
+                                {
+                                    padding-left: 0;
+                                    padding-right: 0;
+                                    margin-left: auto;
+                                    margin-right: auto;
+                                    margin-bottom: 10px;
+                                    display: block;
+                                    width: 80%;
+                                    height: auto;
+                                }
+                        }
+                        @media only screen and (max-width: 320px){
+                                .mobile 
+                                {
+                                    padding-left: 0;
+                                    padding-right: 0;
+                                    margin-left: auto;
+                                    margin-right: auto;
+                                    margin-bottom: 10px;
+                                    display: block;
+                                    width: 80%;
+                                    height: auto;
+                                }
+                        }
+                    </style>
+                    <div class="w-full shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200 rounded-lg dark:bg-gray-600 py-4">
+                        <canvas id="myChart4" class="mobile"></canvas>
                     </div>
                     {{-- <button id="pdf" onclick="downloadPDF()">PDF</button> --}}
                     <div class="mx-auto mt-8 w-52 sm:w-auto px-4 divide-y">
@@ -184,14 +209,7 @@ $tikects = $tikectList->pluck('tikects');
                         Inversión por estados
                     </h1>
                     <div class="w-full shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200 rounded-lg dark:bg-gray-600 pt-4 pb-6">
-                        <canvas id="myChart2" 
-                            style="padding-left: 0;
-                            padding-right: 0;
-                            margin-left: auto;
-                            margin-right: auto;
-                            display: block;
-                            width: auto;">
-                        </canvas>
+                        <canvas id="myChart2" class="mobile"</canvas>
                     </div>
                     <div class="mx-auto mt-8 w-52 sm:w-auto px-4 divide-y">
                         @foreach($porList as $item)
@@ -209,14 +227,7 @@ $tikects = $tikectList->pluck('tikects');
                         Tickets generados
                     </h1>
                     <div class="w-full shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200 rounded-lg dark:bg-gray-600 pt-4 pb-6">
-                        <canvas id="chartDoughnut" 
-                            style="padding-left: 0;
-                            padding-right: 0;
-                            margin-left: auto;
-                            margin-right: auto;
-                            display: block;
-                            width: auto;">
-                        </canvas>
+                        <canvas id="chartDoughnut" class="mobile"></canvas>
                     </div>
                     <div class="mx-auto mt-8 w-52 sm:w-auto px-4 divide-y">
                         @foreach($tikectList as $item)
@@ -231,17 +242,14 @@ $tikects = $tikectList->pluck('tikects');
             </div>
         </div>
     </section>
-
-
+    
         <div class="grid grid-cols-1 md:grid-cols-1 gap-4 mb-4 mt-8">
             <div class="p-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200  rounded-lg min-[420px]:w-full min-[420px]:mx-0 min-[420px]:p-4">
                 {{-- Grafico de barras 2 --}}
-                <p class=" mt-5 mb-0 font-sans font-bold leading-normal dark:text-white dark:opacity-60 text-2xl text-center">Ordenes de trabajo(Ots) vs Tickets cerrados por estado</p>
+                {{-- <p class=" mt-5 mb-0 font-sans font-bold leading-normal dark:text-white dark:opacity-60 text-2xl text-center">Ordenes de trabajo(Ots) vs Tickets cerrados por estado</p> --}}
                 <canvas id="myChart5" style="padding: 4% 10%"></canvas>
             </div>
         </div>
-
-
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js" integrity="sha512-ml/QKfG3+Yes6TwOzQb7aCNtJF4PUyha6R3w8pSTo/VJSywl7ZreYvvtUso7fKevpsI+pYVVwnu82YO0q3V6eg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
