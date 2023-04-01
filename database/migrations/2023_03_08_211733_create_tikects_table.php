@@ -25,6 +25,8 @@ return new class extends Migration
             $table->string('owner');
             $table->string('owner_email');
             $table->string('status_tikect');
+            $table->string('fecha_fin')->nullable();
+            $table->string('observaciones_cierre')->nullable();
             $table->timestamps();
         });
     }

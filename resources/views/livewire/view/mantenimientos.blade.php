@@ -1,5 +1,6 @@
-    <div class="flex flex-col">
-        <div class="mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+<div class="flex flex-col">
+
+        <div class="mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8" {{ $atr_table }}>
             <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
                 <h1 class="font-bold text-2xl text-gray-700 drop-shadow-lg">Ordenes de trabajo asignadas</h1>
 				<div class="py-5 mt-4">
@@ -228,11 +229,30 @@
                 </div>
             </div>
         </div>
-        
-    </div>
-    {{-- <script type="text/javascript">
-        $('.print').click(function() {
-    window.print();
-});
-    </script> --}}
-    
+
+        {{-- formulario cierre de ots --}}
+        <div class="border border-gray-200 rounded-lg shadow-md px-4" {{ $atr_form }}>
+            {{-- Datos Orden de trabajo --}}
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4 mt-8">
+                <div class="p-2">
+                    <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">Nro. de orden</label>
+                    <x-input icon="pencil" wire:model="nro_ot" class="focus:ring-check-blue focus:border-check-blue cursor-none"/>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-1 gap-4 mb-4 mt-8">
+                <div class="p-2">
+                    <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">Observaciones</label>
+                    <x-textarea wire:model="observaciones" placeholder="Por favor indique cual es su Incidencia de forma Detallada" class="focus:ring-check-blue focus:border-check-blue" />
+                </div>
+            </div>
+            {{-- Boton de registro --}}
+            <div class="flex items-center justify-end mt-8 mb-8">
+                <button type="submit" wire:click.prevent="actualiza_estatus()" class="ml-3 inline-flex justify-center rounded-md border border-transparent bg-check-blue py-2 px-4 text-sm font-bold text-white shadow-sm hover:bg-check-green">
+                    <svg xmlns="http://www.w3.org/2000/svg" wire:loading wire:target="actualiza_estatus" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="animate-spin h-5 w-5 mr-3">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+                    </svg>
+                    <span>Finalizar orden de trabajo</span>
+                </button>
+            </div>
+        </div>
+</div>

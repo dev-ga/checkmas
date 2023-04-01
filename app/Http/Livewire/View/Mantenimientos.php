@@ -8,9 +8,12 @@ use Illuminate\Support\Str;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use WireUi\Traits\Actions;
 
 class Mantenimientos extends Component
 {
+
+    use Actions;
 
     use WithPagination;
 
@@ -18,6 +21,10 @@ class Mantenimientos extends Component
     public $atr = 'text-gray-400';
     public $campo = 'created_at';
     public $orden = 'desc';
+    public $atr_form = 'hidden';
+    public $atr_table;
+    public $nro_ot;
+    public $observaciones;
 
     public function showFicha($id, $equipoUid)
     {
@@ -57,11 +64,58 @@ class Mantenimientos extends Component
                 ->update(['statusOts' => 4]);
         }
         if($data == '4' && $btr == '5'){
-            DB::table('ots')
-                ->where('id', $id)
-                ->update(['statusOts' => 5]);
+            $this->nro_ot = Ot::find($id)->otUid;
+            $this->atr_form = '';
+            $this->atr_table = 'hidden';
         }
 
+    }
+
+    public function validateData()
+    {
+        $this->validate([
+            'nro_ot'        => 'required',
+            'observaciones' => 'required',
+        ]);
+    }
+
+    protected $messages = [
+
+        'nro_ot.required'           => 'Campo Requerido',
+        'observaciones.required'    => 'Campo requerido',
+
+    ];
+
+
+    public function actualiza_estatus()
+    {
+
+        $this->validateData();
+
+        try {
+
+            DB::table('ots')
+                ->where('otUid', $this->nro_ot)
+                ->update([
+                    'statusOts' => 5,
+                    'fecha_fin' => date('d-m-Y'),
+                    'observaciones' => $this->observaciones,
+                ]);
+
+                $this->reset();
+
+                $this->notification()->success(
+                    $title = 'ÉXITO!',
+                    $description = 'La orden de trabajo fue finalizada con éxito'
+                );
+
+        } catch (\Throwable $th) {
+            dd($th);
+            $this->notification()->error(
+                $title = 'ERROR!',
+                $description = 'Function actualiza_estatus() - livewire.mantenimientos'
+            );
+        }
     }
 
 

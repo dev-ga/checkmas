@@ -16,6 +16,9 @@ class ListaTikects extends Component
     public $filtro_estatus;
     public $atr_tabla_ticket = '';
     public $atr_form_otsTicket = 'hidden';
+    public $atr_form = 'hidden';
+    public $nro_ticket;
+    public $observaciones_cierre;
 
     protected $listeners = [
         'refreshComponent' => '$refresh',
@@ -24,25 +27,65 @@ class ListaTikects extends Component
 
     public function updateStatusTikect($id, $btr){
 
-        try {
+        try { 
                 $data = Tikect::find($id)->status_tikect;
-
                     if ($data == '0' && $btr == '1') {
-                        DB::table('tikects')
-                            ->where('id', $id)
-                            ->update(['status_tikect' => 1]);
-                    }
-                    if ($data == '1' && $btr == '2') {
-                        DB::table('tikects')
-                            ->where('id', $id)
-                            ->update(['status_tikect' => 2]);
+                        $this->nro_ticket = Tikect::find($id)->tikect_uid;
+                        $this->atr_form = '';
+                        $this->atr_tabla_ticket = 'hidden';
                     }
 
         } catch (\Throwable $th) {
             dd($th);
         }
-        
+    }
 
+    public function validateData()
+    {
+        $this->validate([
+            'nro_ticket'   => 'required',
+            'observaciones_cierre'=> 'required',
+        ]);
+    }
+
+    protected $messages = [
+
+        'nro_ticket.required'    => 'Campo Requerido',
+        'observaciones_cierre.required' => 'Campo requerido',
+
+    ];
+
+
+    public function actualiza_estatus()
+    {
+        dd(date('d-m-Y'));
+
+        $this->validateData();
+
+        try {
+
+            DB::table('tikects')
+                ->where('tikect_uid', $this->nro_ticket)
+                ->update([
+                    'status_tikect' => 1,
+                    'fecha_fin' => date('d-m-Y'),
+                    'observaciones_cierre' => $this->observaciones_cierre,
+                ]);
+
+                $this->reset();
+
+                $this->notification()->success(
+                    $title = 'ÉXITO!',
+                    $description = 'El ticket fue cerrado con éxito'
+                );
+
+        } catch (\Throwable $th) {
+            dd($th);
+            $this->notification()->error(
+                $title = 'ERROR!',
+                $description = 'Function actualiza_estatus() - livewire.ListaTikects'
+            );
+        }
     }
 
     public function filtro($value)

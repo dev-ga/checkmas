@@ -36,8 +36,6 @@ return new class extends Migration
             $table->decimal('tir');
             $table->string('pdf_pre_oper');
             $table->string('pdf_pre_preCli');
-            $table->string('statusOts');
-            $table->string('statusOts_banco');
             $table->string('owner');
             /**
              * @param $statusOts
@@ -50,6 +48,8 @@ return new class extends Migration
              */
             $table->string('statusOts')->default(1);
             $table->string('statusOts_banco')->default(1);
+            $table->string('fecha_fin')->nullable();
+            $table->string('observaciones')->nullable();
             $table->timestamps();
         });
     }
