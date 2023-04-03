@@ -16,7 +16,7 @@ $otsList = Ot::select(DB::raw("count(*) as ots"), DB::raw("estado as estados"), 
 $colorOts = $otsList->pluck('colores');
 $estOts = $otsList->pluck('estados');
 $ots = $otsList->pluck('ots');
-// dd($otsList);
+
 
 $estados = Estado::select(DB::raw("descripcion as estados"))
             ->orderBy('estados', 'asc')
@@ -37,6 +37,7 @@ $porList = Ot::select(DB::raw("sum(costo_preCli) as totales"), DB::raw("estado a
 $colores = $porList->pluck('colores');
 $estados = $porList->pluck('estados');
 $valores = $porList->pluck('totales');
+
 
 /*
 Logica para calcular el Nro. de tikects creados por estado
@@ -192,7 +193,7 @@ $tikects = $tikectList->pluck('tikects');
                         <canvas id="myChart4" class="mobile"></canvas>
                     </div>
                     {{-- <button id="pdf" onclick="downloadPDF()">PDF</button> --}}
-                    <div class="mx-auto mt-8 w-52 sm:w-auto px-4 divide-y">
+                    <div class="mx-auto mt-8 w-52 sm:w-auto divide-y">
                         @foreach($otsList as $item)
                         <div class="flex items-center">
                             <div class="w-3 h-3 mr-3 rounded-full" style="background-color:{{ $item->colores }}"></div>
@@ -211,7 +212,7 @@ $tikects = $tikectList->pluck('tikects');
                     <div class="w-full shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200 rounded-lg dark:bg-gray-600 pt-4 pb-6">
                         <canvas id="myChart2" class="mobile"</canvas>
                     </div>
-                    <div class="mx-auto mt-8 w-52 sm:w-auto px-4 divide-y">
+                    <div class="mx-auto mt-8 w-52 sm:w-auto divide-y">
                         @foreach($porList as $item)
                         <div class="flex items-center">
                             <div class="w-3 h-3 mr-3 rounded-full" style="background-color:{{ $item->colores }}"></div>
@@ -229,7 +230,7 @@ $tikects = $tikectList->pluck('tikects');
                     <div class="w-full shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200 rounded-lg dark:bg-gray-600 pt-4 pb-6">
                         <canvas id="chartDoughnut" class="mobile"></canvas>
                     </div>
-                    <div class="mx-auto mt-8 w-52 sm:w-auto px-4 divide-y">
+                    <div class="mx-auto mt-8 w-52 sm:w-auto divide-y">
                         @foreach($tikectList as $item)
                         <div class="flex items-center">
                             <div class="w-3 h-3 mr-3 rounded-full" style="background-color:{{ $item->colores }}"></div>
@@ -244,6 +245,9 @@ $tikects = $tikectList->pluck('tikects');
     </section>
     
         <div class="grid grid-cols-1 md:grid-cols-1 gap-4 mb-4 mt-8">
+            <h1 class="w-full text-center px-8 py-4 rounded-lg dark:bg-gray-700">
+                Ordenes de trabajo vs tickets registrados
+            </h1>
             <div class="p-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200  rounded-lg min-[420px]:w-full min-[420px]:mx-0 min-[420px]:p-4">
                 {{-- Grafico de barras 2 --}}
                 {{-- <p class=" mt-5 mb-0 font-sans font-bold leading-normal dark:text-white dark:opacity-60 text-2xl text-center">Ordenes de trabajo(Ots) vs Tickets cerrados por estado</p> --}}
@@ -303,8 +307,9 @@ $tikects = $tikectList->pluck('tikects');
         var estados = @json($estados);
         var valores = @json($valores);
         var colores = @json($colores);
+        console.log(estados);
         const data = {
-            //labels: estados,
+            // labels: estados,
             datasets: [{
                 label: 'Inversion($)',
                 data: valores,
@@ -344,8 +349,8 @@ $tikects = $tikectList->pluck('tikects');
 
         };
         new Chart(
-            document.getElementById('myChart3')
-            , configBar
+            document.getElementById('myChart3'), 
+            configBar,
         );
 
 
@@ -361,13 +366,13 @@ $tikects = $tikectList->pluck('tikects');
             labels: ['Amazonas', 'Bolivar', 'Distrito Capital', 'Merida', 'Monagas', 'Trujillo']
             , datasets: [{
                 type: 'bar'
-                , label: 'Bar Dataset'
+                , label: 'Tickets registrados'
                 , data: [5, 1, 2, 1, 8, 9]
                 , borderColor: 'rgb(255, 99, 132)'
                 , backgroundColor: 'rgba(255, 99, 132, 0.2)'
             }, {
                 type: 'line'
-                , label: 'Line Dataset'
+                , label: 'Ots registradas'
                 , data: [2, 1, 3, 1, 2, 7]
                 , fill: false
                 , borderColor: 'rgb(54, 162, 235)'
@@ -379,8 +384,8 @@ $tikects = $tikectList->pluck('tikects');
             , options: {
                 plugins: {
                     title: {
-                        display: true
-                        , text: 'Custom Chart Title'
+                        display: false,
+                        text: 'Custom Chart Title'
                     }
                 }
                 , scales: {

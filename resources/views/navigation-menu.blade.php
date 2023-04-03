@@ -23,7 +23,7 @@
                     </x-jet-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('bitacora') }}" :active="request()->routeIs('mantenimientos')">
+                    <x-jet-nav-link href="{{ route('bitacora') }}" :active="request()->routeIs('bitacora')">
                         {{ __('Bitacora') }}
                     </x-jet-nav-link>
                 </div>
@@ -123,7 +123,7 @@
             <x-jet-responsive-nav-link href="{{ route('mantenimientos') }}" :active="request()->routeIs('mantenimientos')">
                 {{ __('Mantenimientos') }}
             </x-jet-responsive-nav-link>
-            <x-jet-responsive-nav-link href="{{ route('bitacora') }}" :active="request()->routeIs('mantenimientos')">
+            <x-jet-responsive-nav-link href="{{ route('bitacora') }}" :active="request()->routeIs('bitacora')">
                 {{ __('Bitacora') }}
             </x-jet-responsive-nav-link>
         </div>

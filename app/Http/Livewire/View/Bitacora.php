@@ -38,6 +38,8 @@ class Bitacora extends Component
     public $atr_form = 'hidden';
     public $atr_table = '';
 
+    public $buscar;
+
 
 
     protected $listeners = [
@@ -97,6 +99,7 @@ class Bitacora extends Component
 
     ];
 
+
     public function store()
     {
 
@@ -105,6 +108,12 @@ class Bitacora extends Component
         try {
 
             $user = Auth::user()->email;
+
+            $data = Ot::where('otUid', $this->nro_ot)->get();
+            foreach($data as $item){
+                $agencia = $item->agencia;
+                $estado = $item->estado;
+            }
 
             $bitacora = new ModelsBitacora();
 
@@ -117,6 +126,8 @@ class Bitacora extends Component
                 $foto2_antes  = $this->foto2->store($this->nro_ot.'/antes', 'public');
 
                 $bitacora->nro_ot = $this->nro_ot;
+                $bitacora->agencia = $agencia;
+                $bitacora->estado = $estado;
                 $bitacora->tipo_fotos = $this->tipo_fotos;
                 $bitacora->foto1_antes = $foto1_antes;
                 $bitacora->foto2_antes = $foto2_antes;
@@ -173,6 +184,7 @@ class Bitacora extends Component
         return view('livewire.view.bitacora',  [
             'data' => ModelsBitacora::where('tecnico', Auth::user()->email)
                 ->orderBy('id', 'desc')
+                ->orWhere('nro_ot', 'like', "%{$this->buscar}%")
                 ->paginate(5)
         ]);
     }

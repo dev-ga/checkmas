@@ -95,19 +95,18 @@
                                         </button>
                                     </div>
                                 </th>
-
                                 <th scope="col" class="w-20 px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                     Foto antes(1)
                                 </th>
-
                                 <th scope="col" class="w-20 px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                     Foto antes(2)
                                 </th>
-
+                                <th scope="col" class="w-20 px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                    Observaciones
+                                </th>
                                 <th scope="col" class="w-20 px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                     Foto después(1)
                                 </th>
-
                                 <th scope="col" class="w-20 px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                     Foto después(2)
                                 </th>
@@ -145,6 +144,7 @@
                                     </div>
 
                                 </td>
+                                <td class="w-20 px-4 py-4 text-sm font-medium text-justify text-gray-700">{{ $item->observaciones_antes }}</td>
 
                                 {{-- despues --}}
                                 <td class="px-4 py-4 text-sm font-medium text-gray-700">

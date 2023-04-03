@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('bitacoras', function (Blueprint $table) {
             $table->id();
             $table->string('nro_ot');
+            $table->string('agencia');
+            $table->string('estado');
             $table->string('tipo_fotos');
             $table->string('foto1_antes')->nullable();
             $table->string('foto2_antes')->nullable();
