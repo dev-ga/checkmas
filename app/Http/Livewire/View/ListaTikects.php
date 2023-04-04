@@ -58,7 +58,6 @@ class ListaTikects extends Component
 
     public function actualiza_estatus()
     {
-        dd(date('d-m-Y'));
 
         $this->validateData();
 

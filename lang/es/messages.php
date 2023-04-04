@@ -179,8 +179,8 @@ return [
     'menu' => [
         'dash' => 'Dashboard',
         'ticket' => 'Ticket',
-        'crearOts' => 'Crear Ots',
-        'listaOts' => 'Lista de Ots',
+        'crearOts' => 'Crear (Ots)',
+        'listaOts' => 'Lista de (Ots)',
         'crearTicket' => 'Crear Ticket',
         'administracion' => 'Administración',
         'reportes' => 'Reportes',
@@ -188,7 +188,7 @@ return [
     ],
 
     'reportes' => [
-        'ots' => 'Ordenes de trabajo',
+        'ots' => 'Ordenes de trabajo (Ots)',
         'ticket' => 'Tickets',
         'usuarios' => 'Usuarios',
     ]

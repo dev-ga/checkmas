@@ -29,7 +29,7 @@
         <x-notifications />
         <x-notificaciones />
 
-        <div class="font-sans antialiased">
+        <div class="font-sans antialiased  bg-check-blue h-screen">
             {{ $slot }}
         </div>
         @stack('modals')

@@ -2,6 +2,9 @@
 use App\Models\Ot;
 use App\Models\Tikect;
 use App\Models\Estado;
+use Carbon\Carbon;
+
+$fecha = Carbon::now();
 
 /*
 Logica para calcular el Nro. de Ots finalizadas por estado
@@ -61,7 +64,7 @@ $tikects = $tikectList->pluck('tikects');
                 <div class="flex-auto p-4">
                     <div class="flex flex-wrap">
                         <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
-                            <h5 class="text-blueGray-400 uppercase font-bold text-xs">Total<br>inversion($)</h5><x-inversion />
+                            <h5 class="text-blueGray-400 uppercase font-bold text-xs">Total inversion($) <br> ordenes de trabajo al {{ Carbon::parse($fecha)->format('d-m-Y') }}</h5><x-inversion />
                         </div>
                         <div class="relative w-auto pl-4 flex-initial">
                             <div class="text-white text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full ">
@@ -70,9 +73,9 @@ $tikects = $tikectList->pluck('tikects');
                             </div>
                         </div>
                     </div>
-                    <p class="text-sm text-blueGray-400 mt-4">
+                    {{-- <p class="text-sm text-blueGray-400 mt-4">
                         <x-porInver_ots_cerradas/>
-                        <span class="whitespace-nowrap"></span></p>
+                        <span class="whitespace-nowrap"></span></p> --}}
                 </div>
             </div>
         </div>
@@ -82,7 +85,7 @@ $tikects = $tikectList->pluck('tikects');
                 <div class="flex-auto p-4">
                     <div class="flex flex-wrap">
                         <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
-                            <h5 class="text-blueGray-400 uppercase font-bold text-xs">Total<br> tickets</h5>
+                            <h5 class="text-blueGray-400 uppercase font-bold text-xs">Total tickets emitidos<br>por la agencia al {{ Carbon::parse($fecha)->format('d-m-Y') }} </h5>
                             <x-tikects_abiertos />
                         </div>
                         <div class="relative w-auto pl-4 flex-initial">
@@ -92,9 +95,9 @@ $tikects = $tikectList->pluck('tikects');
                             </div>
                         </div>
                     </div>
-                    <p class="text-sm text-blueGray-400 mt-4">
+                    {{-- <p class="text-sm text-blueGray-400 mt-4">
                         <x-porcen_tikects_cerrados />
-                        <span class="whitespace-nowrap"></span></p>
+                        <span class="whitespace-nowrap"></span></p> --}}
                 </div>
             </div>
         </div>
@@ -104,7 +107,7 @@ $tikects = $tikectList->pluck('tikects');
                 <div class="flex-auto p-4">
                     <div class="flex flex-wrap">
                         <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
-                            <h5 class="text-blueGray-400 uppercase font-bold text-xs">Ordenes de trabajo<br> finalizadas</h5>
+                            <h5 class="text-blueGray-400 uppercase font-bold text-xs">Ordenes de trabajo<br> finalizadas (Ots)</h5>
                             <x-ots_finalizadas />
                         </div>
                         <div class="relative w-auto pl-4 flex-initial">
@@ -114,9 +117,9 @@ $tikects = $tikectList->pluck('tikects');
                             </div>
                         </div>
                     </div>
-                    <p class="text-sm text-blueGray-400 mt-4">
+                    {{-- <p class="text-sm text-blueGray-400 mt-4">
                         <span class="text-orange-500 mr-2"><i class="fas fa-arrow-down"></i> 1.10%</span>
-                        <span class="whitespace-nowrap"></span></p>
+                        <span class="whitespace-nowrap"></span></p> --}}
                 </div>
             </div>
         </div>
@@ -136,21 +139,21 @@ $tikects = $tikectList->pluck('tikects');
                             </div>
                         </div>
                     </div>
-                    <p class="text-sm text-blueGray-400 mt-4">
+                    {{-- <p class="text-sm text-blueGray-400 mt-4">
                         <x-porcen_ots_ejecucion />
-                        <span class="whitespace-nowrap"></span></p>
+                        <span class="whitespace-nowrap"></span></p> --}}
                 </div>
             </div>
         </div>
     </div>
 
-    {{-- prueba --}}
+    {{-- Seccion de graficos --}}
     <section class="bg-white dark:bg-gray-900">
         <div class=" px-5 py-10 mx-auto">
             <div class="grid grid-cols-1 gap-8 mt-8 xl:mt-12 xl:gap-12 sm:grid-cols-3 xl:grid-cols-3 lg:grid-cols-3">
                 <div class="w-full ">
-                    <h1 class="w-full text-center px-8 py-4 rounded-lg dark:bg-gray-700">
-                        Ordenes de trabajo finalizadas por estado
+                    <h1 class="w-full text-center text-xs px-8 py-4 font-bold rounded-lg dark:bg-gray-700">
+                        OTS FINALIZADAS POR ESTADO
                     </h1>
                     <style>
                         .mobile{
@@ -189,7 +192,7 @@ $tikects = $tikectList->pluck('tikects');
                                 }
                         }
                     </style>
-                    <div class="w-full shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200 rounded-lg dark:bg-gray-600 py-4">
+                    <div class="w-full shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200 rounded-lg dark:bg-gray-600 pt-4 pb-6">
                         <canvas id="myChart4" class="mobile"></canvas>
                     </div>
                     {{-- <button id="pdf" onclick="downloadPDF()">PDF</button> --}}
@@ -206,8 +209,8 @@ $tikects = $tikectList->pluck('tikects');
                 </div>
     
                 <div class="w-full ">
-                    <h1 class="w-full text-center px-8 py-4 rounded-lg dark:bg-gray-700">
-                        Inversión por estados
+                    <h1 class="w-full text-center font-bold text-xs px-8 py-4 rounded-lg dark:bg-gray-700">
+                        INVERSION POR ESTADOS
                     </h1>
                     <div class="w-full shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200 rounded-lg dark:bg-gray-600 pt-4 pb-6">
                         <canvas id="myChart2" class="mobile"</canvas>
@@ -224,8 +227,8 @@ $tikects = $tikectList->pluck('tikects');
                 </div>
     
                 <div class="w-full ">
-                    <h1 class="w-full text-center px-8 py-4 rounded-lg dark:bg-gray-700">
-                        Tickets generados
+                    <h1 class="w-full text-center text-xs font-bold px-8 py-4 rounded-lg dark:bg-gray-700">
+                        TICKETS GENERADOS
                     </h1>
                     <div class="w-full shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200 rounded-lg dark:bg-gray-600 pt-4 pb-6">
                         <canvas id="chartDoughnut" class="mobile"></canvas>
@@ -245,8 +248,8 @@ $tikects = $tikectList->pluck('tikects');
     </section>
     
         <div class="grid grid-cols-1 md:grid-cols-1 gap-4 mb-4 mt-8">
-            <h1 class="w-full text-center px-8 py-4 rounded-lg dark:bg-gray-700">
-                Ordenes de trabajo vs tickets registrados
+            <h1 class="w-full text-center font-bold text-xs px-8 py-4 rounded-lg dark:bg-gray-700">
+                ORDENES DE TRABAJO (OTS) VS TICKETS REGISTRADOS
             </h1>
             <div class="p-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200  rounded-lg min-[420px]:w-full min-[420px]:mx-0 min-[420px]:p-4">
                 {{-- Grafico de barras 2 --}}

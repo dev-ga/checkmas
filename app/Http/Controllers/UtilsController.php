@@ -54,10 +54,12 @@ class UtilsController extends Controller
     public function reporte_ots()
     {
         $data = Ot::all();
+        // dd($data);
         $count_r = Ot::where('statusOts', '1')->count();
+        $count_a = Ot::where('statusOts', '2')->count();
         $count_e = Ot::where('statusOts', '3')->count();
         $count_f = Ot::where('statusOts', '5')->count();
-        $pdf = Pdf::loadView('pdf.ots', compact('data', 'count_r', 'count_e', 'count_f'));
+        $pdf = Pdf::loadView('pdf.ots', compact('data', 'count_r', 'count_a', 'count_e', 'count_f'));
         return $pdf->stream('reporte_ots.pdf');
 
     }

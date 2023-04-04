@@ -166,16 +166,6 @@ use App\Models\Ot;
                         <span class="ml-3">@lang('messages.reportes.usuarios')</span>
                     </a>
                 </li>
-                <li class="my-px">
-                    <a href="{{ route('logout') }}" class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-gray-700">
-                        <span class="flex items-center justify-center text-lg text-red-400">
-                            <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
-                                <path d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
-                            </svg>
-                        </span>
-                        <span class="ml-3">Cerrar sesión</span>
-                    </a>
-                </li>
             </ul>
         </div>
     </aside>
