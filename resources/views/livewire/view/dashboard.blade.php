@@ -72,8 +72,8 @@ $tikects = $tikectList->pluck('tikects');
                 {
                     padding-left: 0;
                     padding-right: 0;
-                    margin-left: auto;
-                    margin-right: auto;
+                    margin-left: 10px;
+                    margin-right: 10px;
                     margin-bottom: 10px;
                     display: block;
                     width: 70%;
@@ -85,8 +85,8 @@ $tikects = $tikectList->pluck('tikects');
                 {
                     padding-left: 0;
                     padding-right: 0;
-                    margin-left: auto;
-                    margin-right: auto;
+                    margin-left: 10px;
+                    margin-right: 10px;
                     margin-bottom: 10px;
                     display: block;
                     width: 70%;
