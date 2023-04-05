@@ -59,12 +59,12 @@ $tikects = $tikectList->pluck('tikects');
 <x-app-layout>
     <div class="flex flex-wrap">
         {{-- Total Ots --}}
-        <div class="w-full md:w-3/12 lg:w-6/12 xl:w-3/12 px-4">
+        <div class="w-full md:w-1/2 lg:w-6/12 xl:w-3/12 px-2">
             <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
                 <div class="flex-auto p-4">
                     <div class="flex flex-wrap">
                         <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
-                            <h5 class="text-blueGray-400 uppercase font-bold text-xs">Total inversion($) <br> ordenes de trabajo al {{ Carbon::parse($fecha)->format('d-m-Y') }}</h5><x-inversion />
+                            <h5 class="text-blueGray-400 uppercase font-bold text-xs">inversion($)<br>Ots<br>al {{ Carbon::parse($fecha)->format('d-m-Y') }}</h5><x-inversion />
                         </div>
                         <div class="relative w-auto pl-4 flex-initial">
                             <div class="text-white text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full ">
@@ -80,12 +80,12 @@ $tikects = $tikectList->pluck('tikects');
             </div>
         </div>
         {{-- Total Tickets --}}
-        <div class="w-full md:w-3/12 lg:w-6/12 xl:w-3/12 px-4">
+        <div class="w-full md:w-1/2 lg:w-6/12 xl:w-3/12 px-2">
             <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
                 <div class="flex-auto p-4">
                     <div class="flex flex-wrap">
                         <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
-                            <h5 class="text-blueGray-400 uppercase font-bold text-xs">Total tickets emitidos<br>por la agencia al {{ Carbon::parse($fecha)->format('d-m-Y') }} </h5>
+                            <h5 class="text-blueGray-400 uppercase font-bold text-xs">tickets emitidos<br>por la agencia<br>al {{ Carbon::parse($fecha)->format('d-m-Y') }} </h5>
                             <x-tikects_abiertos />
                         </div>
                         <div class="relative w-auto pl-4 flex-initial">
@@ -102,12 +102,12 @@ $tikects = $tikectList->pluck('tikects');
             </div>
         </div>
         {{-- Ots Finalizadas --}}
-        <div class="w-full md:w-3/12 lg:w-6/12 xl:w-3/12 px-4">
+        <div class="w-full md:w-1/2 lg:w-6/12 xl:w-3/12 px-2">
             <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
                 <div class="flex-auto p-4">
                     <div class="flex flex-wrap">
                         <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
-                            <h5 class="text-blueGray-400 uppercase font-bold text-xs">Ordenes de trabajo<br> finalizadas (Ots)</h5>
+                            <h5 class="text-blueGray-400 uppercase font-bold text-xs">Ots<br>finalizadas<br>al {{ Carbon::parse($fecha)->format('d-m-Y') }}</h5>
                             <x-ots_finalizadas />
                         </div>
                         <div class="relative w-auto pl-4 flex-initial">
@@ -124,12 +124,12 @@ $tikects = $tikectList->pluck('tikects');
             </div>
         </div>
         {{-- Ots en ejecucion --}}
-        <div class="w-full md:w-3/12 lg:w-6/12 xl:w-3/12 px-4">
+        <div class="w-full md:w-1/2 lg:w-6/12 xl:w-3/12 px-2">
             <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
                 <div class="flex-auto p-4">
                     <div class="flex flex-wrap">
                         <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
-                            <h5 class="text-blueGray-400 uppercase font-bold text-xs">Orden de trabajo <br> en ejecucion</h5>
+                            <h5 class="text-blueGray-400 uppercase font-bold text-xs">Ots<br>en ejecucion<br>al {{ Carbon::parse($fecha)->format('d-m-Y') }}</h5>
                             <x-total_ots_ejecucion />
                         </div>
                         <div class="relative w-auto pl-4 flex-initial">
