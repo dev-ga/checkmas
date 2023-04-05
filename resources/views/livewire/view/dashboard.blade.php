@@ -57,6 +57,43 @@ $tikects = $tikectList->pluck('tikects');
 
 @endphp
 <x-app-layout>
+    <style>
+        .mobile{
+            padding-left: 0;
+            padding-right: 0;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 10px;
+            display: block;
+            width: auto;
+        }
+        @media only screen and (max-width: 768px){
+                .mobile 
+                {
+                    padding-left: 0;
+                    padding-right: 0;
+                    margin-left: auto;
+                    margin-right: auto;
+                    margin-bottom: 10px;
+                    display: block;
+                    width: 70%;
+                    height: auto;
+                }
+        }
+        @media only screen and (max-width: 320px){
+                .mobile 
+                {
+                    padding-left: 0;
+                    padding-right: 0;
+                    margin-left: auto;
+                    margin-right: auto;
+                    margin-bottom: 10px;
+                    display: block;
+                    width: 70%;
+                    height: auto;
+                }
+        }
+    </style>
     <div class="flex flex-wrap">
         {{-- Total Ots --}}
         <div class="w-full md:w-1/2 lg:w-6/12 xl:w-3/12 px-2">
@@ -156,43 +193,7 @@ $tikects = $tikectList->pluck('tikects');
                     <h1 class="w-full text-center text-xs px-8 py-4 font-bold rounded-lg dark:bg-gray-700">
                         OTS FINALIZADAS POR ESTADO
                     </h1>
-                    <style>
-                        .mobile{
-                            padding-left: 0;
-                            padding-right: 0;
-                            margin-left: auto;
-                            margin-right: auto;
-                            margin-bottom: 10px;
-                            display: block;
-                            width: auto;
-                        }
-                        @media only screen and (max-width: 768px){
-                                .mobile 
-                                {
-                                    padding-left: 0;
-                                    padding-right: 0;
-                                    margin-left: auto;
-                                    margin-right: auto;
-                                    margin-bottom: 10px;
-                                    display: block;
-                                    width: 80%;
-                                    height: auto;
-                                }
-                        }
-                        @media only screen and (max-width: 320px){
-                                .mobile 
-                                {
-                                    padding-left: 0;
-                                    padding-right: 0;
-                                    margin-left: auto;
-                                    margin-right: auto;
-                                    margin-bottom: 10px;
-                                    display: block;
-                                    width: 80%;
-                                    height: auto;
-                                }
-                        }
-                    </style>
+
                     <div class="w-full shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200 rounded-lg dark:bg-gray-600 pt-4 pb-6">
                         <canvas id="myChart123456" class="mobile"></canvas>
                     </div>
@@ -213,6 +214,7 @@ $tikects = $tikectList->pluck('tikects');
                     <h1 class="w-full text-center font-bold text-xs px-8 py-4 rounded-lg dark:bg-gray-700">
                         INVERSION POR ESTADOS
                     </h1>
+                                           
                     <div class="w-full shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200 rounded-lg dark:bg-gray-600 pt-4 pb-6">
                         <canvas id="myChart2" class="mobile"</canvas>
                     </div>
@@ -231,6 +233,7 @@ $tikects = $tikectList->pluck('tikects');
                     <h1 class="w-full text-center text-xs font-bold px-8 py-4 rounded-lg dark:bg-gray-700">
                         TICKETS GENERADOS
                     </h1>
+          
                     <div class="w-full shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200 rounded-lg dark:bg-gray-600 pt-4 pb-6">
                         <canvas id="chartDoughnut" class="mobile"></canvas>
                     </div>
