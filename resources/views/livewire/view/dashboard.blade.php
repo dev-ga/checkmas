@@ -64,7 +64,8 @@ $tikects = $tikectList->pluck('tikects');
                 <div class="flex-auto p-4">
                     <div class="flex flex-wrap">
                         <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
-                            <h5 class="text-blueGray-400 uppercase font-bold text-xs">inversion($)<br>Ots<br>al {{ Carbon::parse($fecha)->format('d-m-Y') }}</h5><x-inversion />
+                            <h5 class="text-blueGray-400 uppercase text-xs mb-4">inversion($)<br>Ots<br>al {{ Carbon::parse($fecha)->format('d-m-Y') }}</h5>
+                            <x-inversion />
                         </div>
                         <div class="relative w-auto pl-4 flex-initial">
                             <div class="text-white text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full ">
@@ -85,7 +86,7 @@ $tikects = $tikectList->pluck('tikects');
                 <div class="flex-auto p-4">
                     <div class="flex flex-wrap">
                         <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
-                            <h5 class="text-blueGray-400 uppercase font-bold text-xs">tickets emitidos<br>por la agencia<br>al {{ Carbon::parse($fecha)->format('d-m-Y') }} </h5>
+                            <h5 class="text-blueGray-400 uppercase text-xs mb-4">tickets emitidos<br>por la agencia<br>al {{ Carbon::parse($fecha)->format('d-m-Y') }} </h5>
                             <x-tikects_abiertos />
                         </div>
                         <div class="relative w-auto pl-4 flex-initial">
@@ -107,7 +108,7 @@ $tikects = $tikectList->pluck('tikects');
                 <div class="flex-auto p-4">
                     <div class="flex flex-wrap">
                         <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
-                            <h5 class="text-blueGray-400 uppercase font-bold text-xs">Ots<br>finalizadas<br>al {{ Carbon::parse($fecha)->format('d-m-Y') }}</h5>
+                            <h5 class="text-blueGray-400 uppercase text-xs mb-4">Ots<br>finalizadas<br>al {{ Carbon::parse($fecha)->format('d-m-Y') }}</h5>
                             <x-ots_finalizadas />
                         </div>
                         <div class="relative w-auto pl-4 flex-initial">
@@ -129,7 +130,7 @@ $tikects = $tikectList->pluck('tikects');
                 <div class="flex-auto p-4">
                     <div class="flex flex-wrap">
                         <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
-                            <h5 class="text-blueGray-400 uppercase font-bold text-xs">Ots<br>en ejecucion<br>al {{ Carbon::parse($fecha)->format('d-m-Y') }}</h5>
+                            <h5 class="text-blueGray-400 uppercase text-xs mb-4">Ots<br>en ejecucion<br>al {{ Carbon::parse($fecha)->format('d-m-Y') }}</h5>
                             <x-total_ots_ejecucion />
                         </div>
                         <div class="relative w-auto pl-4 flex-initial">
@@ -193,7 +194,7 @@ $tikects = $tikectList->pluck('tikects');
                         }
                     </style>
                     <div class="w-full shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200 rounded-lg dark:bg-gray-600 pt-4 pb-6">
-                        <canvas id="myChart4" class="mobile"></canvas>
+                        <canvas id="myChart123456" class="mobile"></canvas>
                     </div>
                     {{-- <button id="pdf" onclick="downloadPDF()">PDF</button> --}}
                     <div class="mx-auto mt-8 w-52 sm:w-auto divide-y">
@@ -259,6 +260,7 @@ $tikects = $tikectList->pluck('tikects');
         </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-piechart-outlabels"></script>
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js" integrity="sha512-ml/QKfG3+Yes6TwOzQb7aCNtJF4PUyha6R3w8pSTo/VJSywl7ZreYvvtUso7fKevpsI+pYVVwnu82YO0q3V6eg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
 
 <script type="text/javascript">
@@ -268,40 +270,43 @@ $tikects = $tikectList->pluck('tikects');
         var estOts = @json($estOts);
         var ots = @json($ots);
         var colorOts = @json($colorOts);
-        const dataTorta = {
-            // labels: estOts,
-            data: ots
-            , datasets: [{
-                label: 'Ots Cerradas'
-                , data: ots
-                , backgroundColor: colorOts
-                , hoverOffset: 30
-            }]
-        };
+        // const dataTorta = {
+        //     // labels: estOts,
+        //     data: ots
+        //     , datasets: [{
+        //         label: 'Ots Cerradas'
+        //         , data: ots
+        //         , backgroundColor: colorOts
+        //         , hoverOffset: 30
+        //     }]
+        // };
        
-        const configTorta = {
-            type: 'pie',
-            // plugins: [plugin], 
-            data: dataTorta, 
-            options: {
-                // plugins:{
-                //     datalabels:{
-                //         formatter:((context, args) => {
-                //             const index = args.dataIndex;
-                //             // console.log(estOts)
-                //             return estOts[index];
-                //         })
-                //     }
-                // }
+        // const configTorta = {
+        //     type: 'pie',
+        //     // plugins: [plugin], 
+        //     data: dataTorta, 
+        //     options: {
+        //         plugins:{
+        //             datalabels: {
+        //                 color: "#073e21",
+        //                     formatter: function (value) {
+        //                     return Math.round(value) + '';
+        //                 },
+        //                     font: {
+        //                     weight: 'bold',
+        //                     size: 16,
+        //                 }
+        //             }
+        //         }
 
-            },
-            plugins: [ChartDataLabels]
+        //     },
+        //     plugins: [ChartDataLabels]
 
-        };
-        new Chart(
-            document.getElementById('myChart4')
-            , configTorta
-        );
+        // };
+        // new Chart(
+        //     document.getElementById('myChart4')
+        //     , configTorta
+        // );
 
         //************************************FIN GRAFICO DE TORTA
 
@@ -311,7 +316,7 @@ $tikects = $tikectList->pluck('tikects');
         var valores = @json($valores);
         var colores = @json($colores);
         console.log(estados);
-        const data = {
+        const dataDona2 = {
             // labels: estados,
             datasets: [{
                 label: 'Inversion($)',
@@ -322,7 +327,7 @@ $tikects = $tikectList->pluck('tikects');
         };
         const config = {
             type: 'doughnut', 
-            data: data,
+            data: dataDona2,
             // options: {}
         };
         new Chart(
@@ -355,9 +360,6 @@ $tikects = $tikectList->pluck('tikects');
             document.getElementById('myChart3'), 
             configBar,
         );
-
-
-
 
 
         // Grafico Unido
@@ -433,6 +435,128 @@ $tikects = $tikectList->pluck('tikects');
             document.getElementById("chartDoughnut")
             , configDoughnut
         );
+
+
+
+
+        const data = {
+        labels: estOts, //estados
+        datasets: [
+          {
+            data: ots, //data
+            backgroundColor: colorOts,
+          },
+        ],
+      };
+
+      // pieLabelsLine plugin
+      const pieLabelsLine = {
+        id: "pieLabelsLine",
+        afterDraw(chart) {
+          const {
+            ctx,
+            chartArea: { width, height },
+          } = chart;
+
+          const cx = chart._metasets[0].data[0].x;
+          console.log(cx);
+          const cy = chart._metasets[0].data[0].y;
+
+          const sum = chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+
+          chart.data.datasets.forEach((dataset, i) => {
+            chart.getDatasetMeta(i).data.forEach((datapoint, index) => {
+              const { x: a, y: b } = datapoint.tooltipPosition();
+
+              const x = 2 * a - cx;
+              const y = 2 * b - cy;
+
+              // draw line
+              const halfwidth = width / 2;
+              const halfheight = height / 2;
+              const xLine = x >= halfwidth ? x + 7 : x - 7;
+              const yLine = y >= halfheight ? y + 7 : y - 7;
+
+              const extraLine = x >= halfwidth ? 7 : -7;
+
+              ctx.beginPath();
+              ctx.moveTo(x, y);
+              ctx.arc(x, y, 2, 0, 2 * Math.PI, true);
+              ctx.fill();
+              ctx.moveTo(x, y);
+              ctx.lineTo(xLine, yLine);
+              ctx.lineTo(xLine + extraLine, yLine);
+            //   ctx.strokeStyle = dataset.backgroundColor[index];
+              ctx.strokeStyle = "black";
+              ctx.stroke();
+
+              // text
+              const textWidth = ctx.measureText(chart.data.labels[index]).width;
+              ctx.font = "10px Arial";
+              // control the position
+              const textXPosition = x >= halfwidth ? "left" : "right";
+              const plusFivePx = x >= halfwidth ? 5 : -5;
+              ctx.textAlign = textXPosition;
+              ctx.textBaseline = "middle";
+            //   ctx.fillStyle = dataset.backgroundColor[index];
+              ctx.fillStyle = "black";
+
+              ctx.fillText(
+                ((chart.data.datasets[0].data[index] * 100) / sum).toFixed(0) +
+                  "%",
+                xLine + extraLine + plusFivePx,
+                yLine
+              );
+            });
+          });
+        },
+      };
+      // config
+      const configPrueba = {
+        type: "pie",
+        data,
+        options: {
+          maintainAspectRatio: false,
+          layout: {
+            padding: 30,
+          },
+          scales: {
+            y: {
+              display: false,
+              beginAtZero: true,
+              ticks: {
+                display: false,
+              },
+              grid: {
+                display: false,
+              },
+            },
+            x: {
+              display: false,
+              ticks: {
+                display: false,
+              },
+              grid: {
+                display: false,
+              },
+            },
+          },
+          plugins: {
+            legend: {
+              display: false,
+            },
+          },
+        },
+        plugins: [pieLabelsLine],
+      };
+
+      const myChart = new Chart(document.getElementById("myChart123456"), configPrueba);
+
+
+
+
+
+
 
 </script>
 </x-app-layout>
