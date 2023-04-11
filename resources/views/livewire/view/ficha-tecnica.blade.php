@@ -55,7 +55,7 @@
                         <x-native-select wire:model="tipoRefri" class="focus:ring-check-blue focus:border-check-blue">
                             <option></option>
                             <option value="R22">R22</option>
-                            <option value="RF10A">RF10A</option>
+                            <option value="R410A">R410A</option>
                             <option value="otro">Otro</option>
                         </x-native-select>
                     </div>
