@@ -1,10 +1,18 @@
 @php
+
 use App\Models\Ot;
 use App\Models\Tikect;
 use App\Models\Estado;
 use Carbon\Carbon;
 
 $fecha = Carbon::now();
+
+$totalOts = Ot::where('statusOts', '5')
+        ->where('updated_at', '<', $fecha)
+        ->where('tipoMantenimiento', 'MC')
+        ->sum('costo_preCli');
+
+$totalTickets = Tikect::all()->count();
 
 /*
 Logica para calcular el Nro. de Ots finalizadas por estado
@@ -198,7 +206,7 @@ $tikects = $tikectList->pluck('tikects');
                         <canvas id="myChart123456" class="mobile"></canvas>
                     </div>
                     {{-- <button id="pdf" onclick="downloadPDF()">PDF</button> --}}
-                    <div class="mx-auto mt-8 w-52 sm:w-auto divide-y">
+                    <div class="mx-auto mt-8 w-full sm:w-auto divide-y">
                         @foreach($otsList as $item)
                         <div class="flex items-center">
                             <div class="w-3 h-3 mr-3 rounded-full" style="background-color:{{ $item->colores }}"></div>
@@ -218,7 +226,7 @@ $tikects = $tikectList->pluck('tikects');
                     <div class="w-full shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200 rounded-lg dark:bg-gray-600 pt-4 pb-6">
                         <canvas id="myChart2" class="mobile"</canvas>
                     </div>
-                    <div class="mx-auto mt-8 w-52 sm:w-auto divide-y">
+                    <div class="mx-auto mt-8 w-full sm:w-auto divide-y">
                         @foreach($porList as $item)
                         <div class="flex items-center">
                             <div class="w-3 h-3 mr-3 rounded-full" style="background-color:{{ $item->colores }}"></div>
@@ -237,7 +245,7 @@ $tikects = $tikectList->pluck('tikects');
                     <div class="w-full shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200 rounded-lg dark:bg-gray-600 pt-4 pb-6">
                         <canvas id="chartDoughnut" class="mobile"></canvas>
                     </div>
-                    <div class="mx-auto mt-8 w-52 sm:w-auto divide-y">
+                    <div class="mx-auto mt-8 w-full sm:w-auto divide-y">
                         @foreach($tikectList as $item)
                         <div class="flex items-center">
                             <div class="w-3 h-3 mr-3 rounded-full" style="background-color:{{ $item->colores }}"></div>
@@ -268,104 +276,314 @@ $tikects = $tikectList->pluck('tikects');
 
 <script type="text/javascript">
 
-        // **************************************Grafico de torta 1
-
+        // *****************GRAFICO TORTA 1*****************************
+        //**************************************************************
         var estOts = @json($estOts);
         var ots = @json($ots);
+        console.log(ots)
         var colorOts = @json($colorOts);
-        // const dataTorta = {
-        //     // labels: estOts,
-        //     data: ots
-        //     , datasets: [{
-        //         label: 'Ots Cerradas'
-        //         , data: ots
-        //         , backgroundColor: colorOts
-        //         , hoverOffset: 30
-        //     }]
-        // };
-       
-        // const configTorta = {
-        //     type: 'pie',
-        //     // plugins: [plugin], 
-        //     data: dataTorta, 
-        //     options: {
-        //         plugins:{
-        //             datalabels: {
-        //                 color: "#073e21",
-        //                     formatter: function (value) {
-        //                     return Math.round(value) + '';
-        //                 },
-        //                     font: {
-        //                     weight: 'bold',
-        //                     size: 16,
-        //                 }
-        //             }
-        //         }
+        const data = {
+            labels: estOts, //estados
+            datasets: [
+                {
+                    data: ots, //data
+                    backgroundColor: colorOts,
+                },
+            ],
+        };
+        const pieLabelsLine = {
+            id: "pieLabelsLine",
+            afterDraw(chart) {
+            const {
+                ctx,
+                chartArea: { width, height },
+            } = chart;
 
-        //     },
-        //     plugins: [ChartDataLabels]
+            const cx = chart._metasets[0].data[0].x;
+            //   console.log(cx);
+            const cy = chart._metasets[0].data[0].y;
 
-        // };
-        // new Chart(
-        //     document.getElementById('myChart4')
-        //     , configTorta
-        // );
+            const sum = chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+            console.log(chart.data.datasets[0].data)
 
-        //************************************FIN GRAFICO DE TORTA
+            chart.data.datasets.forEach((dataset, i) => {
+                chart.getDatasetMeta(i).data.forEach((datapoint, index) => {
+                const { x: a, y: b } = datapoint.tooltipPosition();
+
+                const x = 2 * a - cx;
+                const y = 2 * b - cy;
+
+                // draw line
+                const halfwidth = width / 2;
+                const halfheight = height / 2;
+                const xLine = x >= halfwidth ? x + 7 : x - 7;
+                const yLine = y >= halfheight ? y + 7 : y - 7;
+
+                const extraLine = x >= halfwidth ? 7 : -7;
+
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+                ctx.arc(x, y, 2, 0, 2 * Math.PI, true);
+                ctx.fill();
+                ctx.moveTo(x, y);
+                ctx.lineTo(xLine, yLine);
+                ctx.lineTo(xLine + extraLine, yLine);
+                //   ctx.strokeStyle = dataset.backgroundColor[index];
+                ctx.strokeStyle = "black";
+                ctx.stroke();
+
+                // text
+                const textWidth = ctx.measureText(chart.data.labels[index]).width;
+                ctx.font = "10px Arial";
+                // control the position
+                const textXPosition = x >= halfwidth ? "left" : "right";
+                const plusFivePx = x >= halfwidth ? 5 : -5;
+                ctx.textAlign = textXPosition;
+                ctx.textBaseline = "middle";
+                //   ctx.fillStyle = dataset.backgroundColor[index];
+                ctx.fillStyle = "black";
+
+                ctx.fillText(
+                    ((chart.data.datasets[0].data[index] * 100) / sum).toFixed(0) +
+                    "%",
+                    xLine + extraLine + plusFivePx,
+                    yLine
+                );
+                });
+            });
+            },
+        };
+        const configPrueba = {
+            type: "pie",
+            data,
+            options: {
+            maintainAspectRatio: false,
+            layout: {
+                padding: 30,
+            },
+            scales: {
+                y: {
+                display: false,
+                beginAtZero: true,
+                ticks: {
+                    display: false,
+                },
+                grid: {
+                    display: false,
+                },
+                },
+                x: {
+                display: false,
+                ticks: {
+                    display: false,
+                },
+                grid: {
+                    display: false,
+                },
+                },
+            },
+            plugins: {
+                legend: {
+                display: false,
+                },
+            },
+            },
+            plugins: [pieLabelsLine],
+        };
+        const myChart = new Chart(document.getElementById("myChart123456"), configPrueba);
+        //********************************************************************************
+        //***************FIN GRAFICO TORTA 1**********************************************
 
 
-        // **************************************Grafico de DONA 2
+        // **************GRAFICO DONA 2*****************
+        //**********************************************
         var estados = @json($estados);
         var valores = @json($valores);
         var colores = @json($colores);
-        console.log(estados);
+        const suma = @json($totalOts);
         const dataDona2 = {
-            // labels: estados,
+            labels: estados,
             datasets: [{
                 label: 'Inversion($)',
                 data: valores,
                 backgroundColor: colores,
-                hoverOffset: 10
+                hoverOffset: 10,
+                cutout: '90%',
+                borderRadius: 20
             }]
         };
+        const doughnutLabelsLine = {
+            id: 'doughnutLabelsLine',
+            afterDraw(chart, args, options) {
+                const { ctx, chartArea: { top, bottom, left, right, width, height } } = chart;
+
+                // console.log(chart.data.datasets)
+                chart.data.datasets.forEach((dataset, i) => {
+                    // console.log(chart.getDatasetMeta(i))
+                    chart.getDatasetMeta(i).data.forEach((datapoint, index) => {
+                        // console.log(dataset)
+                        const { x, y } = datapoint.tooltipPosition();
+
+                        
+                        // ctx.fillStyle = dataset.backgroundColor[index];
+
+                        ctx.fillStyle = 'black';
+                        // ctx.fill();
+                        ctx.fillRect(x, y, 2, 2);
+
+                        // console.log(x)
+
+                        const halfwidth = width / 2;
+                        const halfheight = height / 2;
+
+                        const xLine = x >= halfwidth ? x + 15 : x - 15;
+                        const yLine = y >= halfheight ? y + 15 : y - 15;
+                        const extraLine = x >= halfwidth ? 15 : -15;
+
+                        ctx.beginPath();
+                        ctx.moveTo(x, y);
+                        ctx.lineTo(xLine, yLine);
+                        ctx.lineTo(xLine + extraLine, yLine);
+                        ctx.strokeStyle = 'black';
+                        ctx.stroke();
+
+                        //text
+                        const textWidth = ctx.measureText(chart.data.labels[index]).width;
+                        // console.log(textWidth);
+                        ctx.font = '12px Arial';
+
+                        const textPosition = x >= halfwidth ? 'left' : 'right';
+                        ctx.textAlign = textPosition;
+                        ctx.textBaseline = 'middle';
+                        // ctx.fillStyle = dataset.backgroundColor[index];
+                        
+                        ctx.fillText((chart.data.datasets[0].data[index] * 100 / suma).toFixed(0) + "%", xLine + extraLine, yLine);
+                        // (chart.data.datasets[0].data[index] * 100) / sum)
+                    })
+                })
+            }
+        }
         const config = {
             type: 'doughnut', 
             data: dataDona2,
-            // options: {}
+            options: {
+                layout: {
+                    padding: 30
+                },
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            },
+            plugins: [doughnutLabelsLine]
         };
         new Chart(
-            document.getElementById('myChart2')
-            , config
+            document.getElementById('myChart2'), 
+            config
         );
+        //**********************************************
+        //***********FIN DE DONA 2**********************
 
 
 
-        // **************************************Grafico de DONA 3
+        //************GRAFICO DONA 3********************
+        //**********************************************
         var estTi = @json($estTi);
         var tikects = @json($tikects);
         var colorTi = @json($colorTi);
-        const labelsBar = estTi;
-        const dataDona = {
-            labels: labelsBar
-            , datasets: [{
-                data: tikects
-                , backgroundColor: colorTi
-                , borderColor: colorTi
-                , borderWidth: 1
-            }]
+        const suma2 = @json($totalTickets);
+        const dataDoughnut = {
+            datasets: [
+                {
+                    label: "Total ticket",
+                    data: tikects, 
+                    backgroundColor: colorTi, 
+                    hoverOffset: 4,
+                    cutout: '90%',
+                    borderRadius: 20 
+                },
+            ], 
         };
-        const configBar = {
-            type: 'doughnut', 
-            data: dataDona,
+        const doughnutLabelsLine2 = {
+            id: 'doughnutLabelsLine2',
+            afterDraw(chart, args, options) {
+                const { ctx, chartArea: { top, bottom, left, right, width, height } } = chart;
 
+                // console.log(chart.data.datasets)
+                chart.data.datasets.forEach((dataset, i) => {
+                    // console.log(chart.getDatasetMeta(i))
+                    chart.getDatasetMeta(i).data.forEach((datapoint, index) => {
+                        // console.log(dataset)
+                        const { x, y } = datapoint.tooltipPosition();
+
+                        
+                        // ctx.fillStyle = dataset.backgroundColor[index];
+
+                        ctx.fillStyle = 'black';
+                        // ctx.fill();
+                        ctx.fillRect(x, y, 2, 2);
+
+                        // console.log(x)
+
+                        const halfwidth = width / 2;
+                        const halfheight = height / 2;
+
+                        const xLine = x >= halfwidth ? x + 15 : x - 15;
+                        const yLine = y >= halfheight ? y + 15 : y - 15;
+                        const extraLine = x >= halfwidth ? 15 : -15;
+
+                        ctx.beginPath();
+                        ctx.moveTo(x, y);
+                        ctx.lineTo(xLine, yLine);
+                        ctx.lineTo(xLine + extraLine, yLine);
+                        ctx.strokeStyle = 'black';
+                        ctx.stroke();
+
+                        //text
+                        const textWidth = ctx.measureText(chart.data.labels[index]).width;
+                        // console.log(textWidth);
+                        ctx.font = '12px Arial';
+
+                        const textPosition = x >= halfwidth ? 'left' : 'right';
+                        ctx.textAlign = textPosition;
+                        ctx.textBaseline = 'middle';
+                        // ctx.fillStyle = dataset.backgroundColor[index];
+                        
+                        ctx.fillText((chart.data.datasets[0].data[index] * 100 / suma2).toFixed(0) + "%", xLine + extraLine, yLine);
+                        // (chart.data.datasets[0].data[index] * 100) / sum)
+                    })
+                })
+            }
+        }
+        const configDoughnut = {
+            type: "doughnut", 
+            data: dataDoughnut, 
+            options: {
+                layout: {
+                    padding: 30
+                },
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            },
+            plugins: [doughnutLabelsLine2]
         };
-        new Chart(
-            document.getElementById('myChart3'), 
-            configBar,
+        var chartBar = new Chart(
+            document.getElementById("chartDoughnut")
+            , configDoughnut
         );
+        //**********************************************
+        //***********FIN GRAFICO DONA 2*****************
 
 
-        // Grafico Unido
+
+        // **********GRAFICO BARRAS + LIENA*********************
+        //******************************************************
         var estadosUnion = @json($listaEstados);
         var tikectsUnion = @json($tikects);
         var colorTiUnion = @json($colorTi);
@@ -373,11 +591,12 @@ $tikects = $tikectList->pluck('tikects');
         const dataUnion = {
             labels: ['Amazonas', 'Bolivar', 'Distrito Capital', 'Merida', 'Monagas', 'Trujillo']
             , datasets: [{
-                type: 'bar'
-                , label: 'Tickets registrados'
-                , data: [5, 1, 2, 1, 8, 9]
-                , borderColor: 'rgb(255, 99, 132)'
-                , backgroundColor: 'rgba(255, 99, 132, 0.2)'
+                type: 'bar',
+                label: 'Tickets registrados',
+                data: [5, 1, 2, 1, 8, 9],
+                borderColor: 'rgb(255, 99, 132)',
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderRadius: 20,
             }, {
                 type: 'line'
                 , label: 'Ots registradas'
@@ -407,159 +626,8 @@ $tikects = $tikectList->pluck('tikects');
             document.getElementById('myChart5')
             , configBarUnion
         );
-
-
-
-
-
-
-
-
-        //prueba
-        var estTi = @json($estTi);
-        var tikects = @json($tikects);
-        var colorTi = @json($colorTi);
-        const dataDoughnut = {
-            datasets: [{
-                label: "Total ticket"
-                , data: tikects
-                , backgroundColor: colorTi
-                , hoverOffset: 4
-            , }, ]
-        , };
-
-        const configDoughnut = {
-            type: "doughnut"
-            , data: dataDoughnut
-            , options: {}
-        , };
-
-        var chartBar = new Chart(
-            document.getElementById("chartDoughnut")
-            , configDoughnut
-        );
-
-
-
-
-        const data = {
-        labels: estOts, //estados
-        datasets: [
-          {
-            data: ots, //data
-            backgroundColor: colorOts,
-          },
-        ],
-      };
-
-      // pieLabelsLine plugin
-      const pieLabelsLine = {
-        id: "pieLabelsLine",
-        afterDraw(chart) {
-          const {
-            ctx,
-            chartArea: { width, height },
-          } = chart;
-
-          const cx = chart._metasets[0].data[0].x;
-          console.log(cx);
-          const cy = chart._metasets[0].data[0].y;
-
-          const sum = chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
-
-          chart.data.datasets.forEach((dataset, i) => {
-            chart.getDatasetMeta(i).data.forEach((datapoint, index) => {
-              const { x: a, y: b } = datapoint.tooltipPosition();
-
-              const x = 2 * a - cx;
-              const y = 2 * b - cy;
-
-              // draw line
-              const halfwidth = width / 2;
-              const halfheight = height / 2;
-              const xLine = x >= halfwidth ? x + 7 : x - 7;
-              const yLine = y >= halfheight ? y + 7 : y - 7;
-
-              const extraLine = x >= halfwidth ? 7 : -7;
-
-              ctx.beginPath();
-              ctx.moveTo(x, y);
-              ctx.arc(x, y, 2, 0, 2 * Math.PI, true);
-              ctx.fill();
-              ctx.moveTo(x, y);
-              ctx.lineTo(xLine, yLine);
-              ctx.lineTo(xLine + extraLine, yLine);
-            //   ctx.strokeStyle = dataset.backgroundColor[index];
-              ctx.strokeStyle = "black";
-              ctx.stroke();
-
-              // text
-              const textWidth = ctx.measureText(chart.data.labels[index]).width;
-              ctx.font = "10px Arial";
-              // control the position
-              const textXPosition = x >= halfwidth ? "left" : "right";
-              const plusFivePx = x >= halfwidth ? 5 : -5;
-              ctx.textAlign = textXPosition;
-              ctx.textBaseline = "middle";
-            //   ctx.fillStyle = dataset.backgroundColor[index];
-              ctx.fillStyle = "black";
-
-              ctx.fillText(
-                ((chart.data.datasets[0].data[index] * 100) / sum).toFixed(0) +
-                  "%",
-                xLine + extraLine + plusFivePx,
-                yLine
-              );
-            });
-          });
-        },
-      };
-      // config
-      const configPrueba = {
-        type: "pie",
-        data,
-        options: {
-          maintainAspectRatio: false,
-          layout: {
-            padding: 30,
-          },
-          scales: {
-            y: {
-              display: false,
-              beginAtZero: true,
-              ticks: {
-                display: false,
-              },
-              grid: {
-                display: false,
-              },
-            },
-            x: {
-              display: false,
-              ticks: {
-                display: false,
-              },
-              grid: {
-                display: false,
-              },
-            },
-          },
-          plugins: {
-            legend: {
-              display: false,
-            },
-          },
-        },
-        plugins: [pieLabelsLine],
-      };
-
-      const myChart = new Chart(document.getElementById("myChart123456"), configPrueba);
-
-
-
-
-
-
+        //*******************************************************
+        //************FIN GRAFICO BARRAS + LINEA*****************
 
 </script>
 </x-app-layout>
