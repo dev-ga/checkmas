@@ -596,13 +596,16 @@ $tikects = $tikectList->pluck('tikects');
                 data: [5, 1, 2, 1, 8, 9],
                 borderColor: 'rgb(255, 99, 132)',
                 backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                borderRadius: 20,
+                borderRadius: 30,
+                borderSkipped: 30,
             }, {
-                type: 'line'
-                , label: 'Ots registradas'
-                , data: [2, 1, 3, 1, 2, 7]
-                , fill: false
-                , borderColor: 'rgb(54, 162, 235)'
+                type: 'bar',
+                label: 'Ots registradas',
+                data: [2, 1, 3, 1, 2, 7],
+                fill: false,
+                borderColor: 'rgb(54, 162, 235)',
+                borderRadius: 30,
+                borderSkipped: 30,
             }]
         };
         const configBarUnion = {

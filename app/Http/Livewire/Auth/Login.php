@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Auth;
 
+use App\Http\Controllers\UtilsController;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
@@ -55,6 +56,11 @@ class Login extends Component
         redirect()->to('/dashboard-admin');
     }
 
+    public function retornaListaTicket()
+    {
+        redirect()->to('/lista-tikects');
+    }
+
     public function registrate()
     {
         redirect()->to('/registro-index');
@@ -94,13 +100,26 @@ class Login extends Component
 
                     Auth::attempt($credenciales);
                     $user = Auth::user();
+                    /**
+                     * Lógica para colocar el usuario inactivo en base de datos
+                     */
+                    UtilsController::userActivo($user->id);
+
+                    /**
+                     * Lógica para contar las veces que el usuario ingresa al sistema
+                     */
+                    UtilsController::actualizaContador($user->id, $user->contador);
 
                     if ($user->status_registro == '1') {
                         if ($user->rol == '7' || $user->rol == '8') {
                             $this->dashTecnicos();
                         }
 
-                        if ($user->rol == '6' || $user->rol == '5' || $user->rol == '4' || $user->rol == '3' || $user->rol == '2' || $user->rol == '1') {
+                        if ($user->rol == '3' || $user->rol == '4') {
+                            $this->retornaListaTicket();
+                        }
+
+                        if ($user->rol == '6' || $user->rol == '5' || $user->rol == '2' || $user->rol == '1') {
                             $this->retornaDash();
                         }
 

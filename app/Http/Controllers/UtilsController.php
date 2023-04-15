@@ -31,6 +31,29 @@ class UtilsController extends Controller
 
     }
 
+    static function actualizaContador($id, $valor)
+    {
+        $total =$valor + 1;
+        DB::table('users')
+                ->where('id', $id)
+                ->update(['contador' => $total]);
+
+    }
+
+    static function userActivo($id)
+    {
+        DB::table('users')
+                ->where('id', $id)
+                ->update(['activo' => 1]);
+    }
+
+    static function userInactivo($id)
+    {
+        DB::table('users')
+                ->where('id', $id)
+                ->update(['activo' => 0]);
+    }
+
     static function porcenInverPorEstado($total_estado)
     {
         $totalOts = Ot::select(DB::raw("sum(costo_preCli) as total"))->where('tipoMantenimiento', 'MC')->where('statusOts', 5)->pluck('total');
