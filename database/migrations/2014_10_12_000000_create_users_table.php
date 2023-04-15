@@ -27,6 +27,8 @@ return new class extends Migration
             $table->string('estado')->nullable();
             $table->string('status_registro')->default(0);
             $table->string('empresa')->nullable();
+            $table->string('activo')->default(0);
+            $table->integer('contador')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

@@ -62,6 +62,14 @@ Route::middleware(['auth:sanctum','verified'])->group(function () {
         return view('dashboard.listado-usuarios');
     })->name('lista-usuarios');
 
+    Route::get('usuarios-activos', function () {
+        return view('dashboard.usuarios-activos');
+    })->name('usuarios-activos');
+
+    Route::get('equipos', function () {
+        return view('dashboard.equipos');
+    })->name('equipos');
+
     Route::get('dash-mantenimientos', function () {
         return view('dashboard.mantenimientos');
     })->name('dash-mantenimientos');

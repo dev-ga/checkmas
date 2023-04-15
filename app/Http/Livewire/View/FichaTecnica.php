@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\View;
 
+use App\Models\Agencia;
+use App\Models\Estado;
 use App\Models\FichaTecnica as ModelFichaTecnica;
 use App\Models\Qr;
 use Illuminate\Support\Facades\Auth;
@@ -173,6 +175,16 @@ class FichaTecnica extends Component
 
             $fichaTecnica = new ModelFichaTecnica();
 
+            $desEstado = Estado::where('codigo', $this->estado)->get();
+            foreach ($desEstado as $item) {
+                $estadoDes = $item->descripcion;
+            }
+
+            $desAgencia = Agencia::where('codigo', $this->agencia)->get();
+            foreach ($desAgencia as $item) {
+                $agenciaDes = $item->descripcion;
+            }
+
             $qrs = new Qr();
 
             if ($this->tipoConden == 'compacto') {
@@ -208,8 +220,8 @@ class FichaTecnica extends Component
                 $fichaTecnica->imgEtiqVentilador    = $img_ventilador;
                 $fichaTecnica->oficina      = $this->oficina;
                 $fichaTecnica->piso         = $this->piso;
-                $fichaTecnica->agencia      = $this->agencia;
-                $fichaTecnica->estado       = $this->estado;
+                $fichaTecnica->agencia      = $estadoDes;
+                $fichaTecnica->estado       = $agenciaDes;
                 $fichaTecnica->save();
 
                 /**
@@ -255,8 +267,8 @@ class FichaTecnica extends Component
                 $fichaTecnica->imgEvaporador = $img_evaporador;
                 $fichaTecnica->oficina = $this->oficina;
                 $fichaTecnica->piso = $this->piso;
-                $fichaTecnica->agencia = $this->agencia;
-                $fichaTecnica->estado = $this->estado;
+                $fichaTecnica->agencia      = $estadoDes;
+                $fichaTecnica->estado       = $agenciaDes;
                 $fichaTecnica->save();
 
                 /**

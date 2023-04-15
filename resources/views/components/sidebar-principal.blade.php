@@ -1,9 +1,11 @@
 @php
 use App\Models\User;
 use App\Models\Tikect;
+use App\Models\FichaTecnica;
 use App\Models\Ot;
     $rol = Auth::user()->rol;
     $nroUserBT = User::where('empresa', 'Banco del Tesoro')->count();
+    $nroEquipos = FichaTecnica::all()->count();
     $nroOts = Ot::count();
 
     if($rol == 1 || $rol <= 4){
@@ -30,6 +32,7 @@ use App\Models\Ot;
     </div>
     <div class="sidebar-content px-4 py-6">
             <ul class="flex flex-col w-full">
+                @if($rol == 1 || $rol == 2 || $rol == 5 || $rol == 6)
                 <li class="my-px">
                     <a href="{{ route('dashboard-admin') }}" class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-700 bg-gray-100">
                         <span class="flex items-center justify-center text-lg text-gray-400">
@@ -40,9 +43,20 @@ use App\Models\Ot;
                         <span class="ml-3">@lang('messages.menu.dash')</span>
                     </a>
                 </li>
+                @endif
                 @if($rol == 5 || $rol == 2)
                 <li class="my-px">
                     <span class="flex font-medium text-sm text-gray-400 px-4 mt-6 mb-4 uppercase">@lang('messages.menu.usuarios')</span>
+                </li>
+                <li class="my-px">
+                    <a href="{{ route('usuarios-activos') }}" class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+                        <span class="flex items-center justify-center text-lg text-gray-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z" />
+                              </svg>                              
+                        </span>
+                        <span class="ml-3">Actividad de Usuarios</span>
+                    </a>
                 </li>
                 <li class="my-px">
                     <a href="{{ route('lista-usuarios') }}" class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-gray-700">
@@ -119,6 +133,19 @@ use App\Models\Ot;
                         <span class="flex items-center justify-center text-xs text-check-blue font-bold bg-green-100 h-6 px-2 rounded-full ml-auto">{{$nroOts}}</span>
                     </a>
                 </li>
+                @if($rol == 1 || $rol == 2 || $rol == 3 || $rol == 4 || $rol == 5 || $rol == 6)
+                <li class="my-px">
+                    <a href="{{ route('equipos') }}" class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+                        <span class="flex items-center justify-center text-lg text-gray-400">
+                            <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+                                <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                            </svg>
+                        </span>
+                        <span class="ml-3">Equipos</span>
+                        <span class="flex items-center justify-center text-xs text-check-blue font-bold bg-green-100 h-6 px-2 rounded-full ml-auto">{{$nroEquipos}}</span>
+                    </a>
+                </li>
+                @endif
                 <li class="my-px">
                     <a href="{{ route('dash-mantenimientos-culminados') }}" class="flex flex-row items-center h-10 px-3 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-gray-700">
                         <span class="flex items-center justify-center text-lg text-gray-400">
