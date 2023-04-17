@@ -16,14 +16,10 @@ class Equipos extends Component
     {
         return view('livewire.view.equipos', [
             'data' => FichaTecnica::where('uid', 'like', "%{$this->buscar}%")
-                ->orWhere('tipoConden', 'like', "%{$this->buscar}%")
-                ->orWhere('phases', 'like', "%{$this->buscar}%")
-                ->orWhere('voltaje', 'like', "%{$this->buscar}%")
-                ->orWhere('tipoRefri', 'like', "%{$this->buscar}%")
-                ->orWhere('btu', 'like', "%{$this->buscar}%")
-                ->orWhere('tipoCompresor', 'like', "%{$this->buscar}%")
-                ->orWhere('marcaCompresor', 'like', "%{$this->buscar}%")
-                ->orWhere('ampCompresor', 'like', "%{$this->buscar}%")
+                ->orWhere('qrConden', 'like', "%{$this->buscar}%")
+                ->orWhere('qrEvaporador', 'like', "%{$this->buscar}%")
+                ->orWhere('agencia', 'like', "%{$this->buscar}%")
+                ->orWhere('estado', 'like', "%{$this->buscar}%")
                 ->orderBy('id', 'desc')
                 ->paginate(5)
         ]);
