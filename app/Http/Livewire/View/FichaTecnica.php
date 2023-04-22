@@ -348,8 +348,8 @@ class FichaTecnica extends Component
                 $fichaTecnica->imgEvaporador = $img_evaporador;
                 $fichaTecnica->oficina = $this->oficina;
                 $fichaTecnica->piso = $this->piso;
-                $fichaTecnica->agencia      = $estadoDes;
-                $fichaTecnica->estado       = $agenciaDes;
+                $fichaTecnica->agencia      = $agenciaDes;
+                $fichaTecnica->estado       = $estadoDes;
                 $fichaTecnica->save();
 
                 /**
