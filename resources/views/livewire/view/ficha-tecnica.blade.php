@@ -15,9 +15,9 @@
                     <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.numQR')</label>
                     <x-conden />
                 </div>
-                <div class="p-2">
+                <div class="p-2 {{ $atr_select_tipo_sistema }}">
                     <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.tipo')</label>
-                    <x-native-select wire:model="tipoConden" wire:change="$emit('selection', $event.target.value)" class="w-32 focus:ring-check-blue focus:border-check-blue">
+                    <x-native-select wire:model="tipoConden" wire:change="$emit('tipo_servicio', $event.target.value)" class="w-32 focus:ring-check-blue focus:border-check-blue">
                         <option></option>
                         <option value="compacto">@lang('messages.label.compacto')</option>
                         <option value="fancoil">@lang('messages.label.fancoil')</option>
@@ -25,6 +25,10 @@
                         <option value="gabinete">@lang('messages.label.gabinete')</option>
                         <option value="otro">@lang('messages.label.otro')</option>
                     </x-native-select>
+                </div>
+                <div class="p-2 {{ $atr_otro_servicio }}">
+                    <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">Otro tipo de sistema</label>
+                    <x-input wire:model="otroServicio" class="focus:ring-check-blue focus:border-check-blue"/>
                 </div>
             </div>
             {{-- Form Condensadora --}}
@@ -45,23 +49,25 @@
                         <x-native-select wire:model="phases" class="focus:ring-check-blue focus:border-check-blue">
                             <option></option>
                             <option value="1PH">1PH</option>
-                            <option value="2PH">2PH</option>
                             <option value="3PH">3PH</option>
-                            <option value="otro">Otro</option>
                         </x-native-select>
                     </div>
-                    <div class="p-2">
+                    <div class="p-2 {{ $atr_select_tipo_refri }}">
                         <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.refri')</label>
-                        <x-native-select wire:model="tipoRefri" class="focus:ring-check-blue focus:border-check-blue">
+                        <x-native-select wire:model="tipoRefri" wire:change="$emit('otro_tipo_refri', $event.target.value)" class="focus:ring-check-blue focus:border-check-blue">
                             <option></option>
                             <option value="R22">R22</option>
                             <option value="R410A">R410A</option>
                             <option value="otro">Otro</option>
                         </x-native-select>
                     </div>
-                    <div class="p-2">
+                    <div class="p-2 {{ $atr_otro_tipo_refri }}">
+                        <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">Otro tipo de refrigerante</label>
+                        <x-input wire:model="otroTipoRefri" class="focus:ring-check-blue focus:border-check-blue"/>
+                    </div>
+                    <div class="p-2 {{  $atr_select_tipo_btu  }}">
                         <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.BTU')</label>
-                        <x-native-select wire:model="btu" class="focus:ring-check-blue focus:border-check-blue">
+                        <x-native-select wire:model="btu" wire:change="$emit('otro_btu', $event.target.value)" class="focus:ring-check-blue focus:border-check-blue">
                             <option></option>
                             <option value="12.000">12.000</option>
                             <option value="18.000">18.000</option>
@@ -72,6 +78,10 @@
                             <option value="10TON">10TON</option>
                             <option value="otro">Otro</option>
                         </x-native-select>
+                    </div>
+                    <div class="p-2 {{ $atr_otro_btu }}">
+                        <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">Otro BTU</label>
+                        <x-input wire:model="otroBtu" class="focus:ring-check-blue focus:border-check-blue"/>
                     </div>
                 </div>
             </div>

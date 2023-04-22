@@ -31,9 +31,12 @@ class RegistroTrx extends Component
             return 'Administrador TRX';
         }
         if ($value == '6') {
-            return 'Supervisor TRX';
+            return 'Analista de costos';
         }
         if ($value == '7') {
+            return 'Supervisor';
+        }
+        if ($value == '8') {
             return 'Tecnico';
         }
     }
