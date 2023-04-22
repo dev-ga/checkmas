@@ -178,16 +178,17 @@ class OrdenTrabajo extends Component
                 $agencia = $item->agencia;
             }
 
-            $desEstado = Estado::where('descripcion', $estado)->get();
+            $desEstado = Estado::where('codigo', $estado)->get();
             foreach ($desEstado as $item) {
+                $desEstado = $item->descripcion;
                 $color = $item->color;
             }
 
-            // $desAgencia = Agencia::where('codigo', $agencia)->get();
-            // foreach ($desAgencia as $item) {
-            //     $agenciaDes = $item->descripcion;
+            $desAgencia = Agencia::where('codigo', $agencia)->get();
+            foreach ($desAgencia as $item) {
+                $desAgencia = $item->descripcion;
 
-            // }
+            }
 
             $fecha = Carbon::createFromFormat('Y-m-d', $this->fechaInicio)->format('dmY');
             $otUid = $fecha . '-' . $this->equipoUid . '-' . $this->tipoMantenimiento;
@@ -203,9 +204,9 @@ class OrdenTrabajo extends Component
                 $ot->tecRes_NomApe = $this->datosTecRes();
                 $ot->tecRes_email = $this->tecRespondable;
                 $ot->equipoUid = $this->equipoUid;
-                $ot->estado = $estado;
+                $ot->estado = $desEstado;
                 $ot->color = $color;
-                $ot->agencia = $agencia;
+                $ot->agencia = $desAgencia;
                 $ot->tipoMantenimiento = $this->tipoMantenimiento;
                 $ot->owner = $user->email;
                 $ot->statusOts = '1';
@@ -238,9 +239,9 @@ class OrdenTrabajo extends Component
                 $ot->tecRes_NomApe = $this->datosTecRes();
                 $ot->tecRes_email = $this->tecRespondable;
                 $ot->equipoUid = $this->equipoUid;
-                $ot->estado = $estadoDes;
+                $ot->estado = $desEstado;
                 $ot->color = $color;
-                $ot->agencia = $agenciaDes;
+                $ot->agencia = $desAgencia;
                 $ot->tipoMantenimiento = $this->tipoMantenimiento;
                 $ot->costo_oper = $this->costo_oper;
                 $ot->costo_preCli = $this->costo_preCli;

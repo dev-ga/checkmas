@@ -1,7 +1,7 @@
-<div class="p-8 xl:mr-16 xl:mt-60">
+<div class="p-4 mr-4 xl:mr-4 xl:mt-60">
     <div class="mt-4">
         {{-- <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.email')</label> --}}
-        <x-input class="pr-28 w-80 focus:ring-check-blue focus:border-check-blue" wire:model="email"  placeholder="Correo electrónico"/>
+        <x-input class=" w-64 focus:ring-check-blue focus:border-check-blue" wire:model="email"  placeholder="Correo electrónico"/>
     </div>
     <div class="mt-4">
         {{-- <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.pass')</label> --}}
@@ -29,5 +29,4 @@
               <span> ¿Olvidaste tu contraseña?</span>
         </button>
     </div>
-    
 </div>

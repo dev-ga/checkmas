@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('uid')->nullable();
             $table->string('qrConden');
-            $table->string('tipoConden');
+            $table->string('tipoConden')->nullable();
             $table->string('voltaje');
             $table->string('phases');
             $table->string('tipoRefri');

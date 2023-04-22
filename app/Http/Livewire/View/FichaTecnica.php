@@ -41,6 +41,9 @@ class FichaTecnica extends Component
     public $piso;
     public $agencia;
     public $estado;
+    public $otroServicio;
+    public $otroTipoRefri;
+    public $otroBtu;
 
 
     public $buscar;
@@ -48,9 +51,17 @@ class FichaTecnica extends Component
     public $label = '';
     public $atr_form = 'hidden';
     public $atr_table = '';
+    public $atr_otro_servicio = 'hidden';
+    public $atr_otro_tipo_refri = 'hidden';
+    public $atr_otro_btu = 'hidden';
+    public $atr_select_tipo_sistema = '';
+    public $atr_select_tipo_refri = '';
+    public $atr_select_tipo_btu = '';
 
     protected $listeners = [
-        'selection'
+        'tipo_servicio',
+        'otro_tipo_refri',
+        'otro_btu',
     ];
 
     public function viewForm(){
@@ -58,15 +69,45 @@ class FichaTecnica extends Component
         $this->atr_table = 'hidden';
     }
 
-    public function selection($value)
+    public function tipo_servicio($value)
     {
         if ($value == 'compacto') {
-            $this->atr = 'hidden';
+                $this->atr = 'hidden';
         }
-
+    
         if ($value != 'compacto') {
-            $this->atr = '';
-            $this->label = $value;
+                $this->atr = '';
+                $this->label = $value;
+        }
+    
+        if ($value == 'otro') {
+                $this->atr_otro_servicio = '';
+                $this->atr_select_tipo_sistema = 'hidden';
+        } else {
+                $this->atr_otro_servicio = 'hidden';
+                $this->atr_select_tipo_sistema = '';
+        }
+    }
+
+    public function otro_tipo_refri($value)
+    {
+        if ($value == 'otro') {
+                $this->atr_otro_tipo_refri = '';
+                $this->atr_select_tipo_refri = 'hidden';
+        } else {
+                $this->atr_otro_tipo_refri = 'hidden';
+                $this->atr_select_tipo_refri = '';
+        }
+    }
+
+    public function otro_btu($value)
+    {
+        if ($value == 'otro') {
+                $this->atr_otro_btu = '';
+                $this->atr_select_tipo_btu = 'hidden';
+        } else {
+                $this->atr_otro_btu = 'hidden';
+                $this->atr_select_tipo_btu = '';
         }
     }
 
@@ -210,8 +251,26 @@ class FichaTecnica extends Component
                 $fichaTecnica->tipoConden   = $this->tipoConden;
                 $fichaTecnica->voltaje      = $this->voltaje;
                 $fichaTecnica->phases       = $this->phases;
-                $fichaTecnica->tipoRefri    = $this->tipoRefri;
-                $fichaTecnica->btu          = $this->btu;
+                /**
+                 * Lógica para guardar el tipo de refrigerante
+                 * según la selección del usuario
+                 */
+                if (isset($this->otroTipoRefri)) {
+                    $fichaTecnica->tipoRefri   = Str::lower($this->otroTipoRefri);
+                } else {
+                    $fichaTecnica->tipoRefri = Str::lower($this->tipoRefri);
+                }
+
+                /**
+                 * Lógica para guardar el tipo de BTU
+                 * según la selección del usuario
+                 */
+                if (isset($this->otroBtu)) {
+                    $fichaTecnica->btu   = Str::lower($this->otroBtu);
+                } else {
+                    $fichaTecnica->btu = Str::lower($this->btu);
+                }
+
                 $fichaTecnica->tipoCompresor    = $this->tipoCompresor;
                 $fichaTecnica->marcaCompresor   = $this->marcaCompresor;
                 $fichaTecnica->ampCompresor     = $this->ampCompresor;
@@ -252,11 +311,33 @@ class FichaTecnica extends Component
                 $img_evaporador = $this->imgEvaporador->store($this->qrEvaporador.'/evaporador', 'public');
 
                 $fichaTecnica->qrConden = $this->qrConden;
-                $fichaTecnica->tipoConden = $this->tipoConden;
+
+                if (isset($this->otroServicio)) {
+                    $fichaTecnica->tipoConden   = Str::lower($this->otroServicio);
+                } else {
+                    $fichaTecnica->tipoConden = Str::lower($this->tipoConden);
+                }
                 $fichaTecnica->voltaje = $this->voltaje;
                 $fichaTecnica->phases = $this->phases;
-                $fichaTecnica->tipoRefri = $this->tipoRefri;
-                $fichaTecnica->btu = $this->btu;
+                /**
+                 * Lógica para guardar el tipo de refrigerante
+                 * según la selección del usuario
+                 */
+                if (isset($this->otroTipoRefri)) {
+                    $fichaTecnica->tipoRefri   = Str::lower($this->otroTipoRefri);
+                } else {
+                    $fichaTecnica->tipoRefri = Str::lower($this->tipoRefri);
+                }
+
+                /**
+                 * Lógica para guardar el tipo de BTU
+                 * según la selección del usuario
+                 */
+                if (isset($this->otroBtu)) {
+                    $fichaTecnica->btu   = Str::lower($this->otroBtu);
+                } else {
+                    $fichaTecnica->btu = Str::lower($this->btu);
+                }
                 $fichaTecnica->tipoCompresor = $this->tipoCompresor;
                 $fichaTecnica->marcaCompresor = $this->marcaCompresor;
                 $fichaTecnica->ampCompresor = $this->ampCompresor;
