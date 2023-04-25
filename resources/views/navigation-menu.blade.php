@@ -12,7 +12,7 @@
                 
                 
                 <!-- Navigation Links -->
-                @if(Auth::user()->rol == '7' || Auth::user()->rol == '8')
+                @if(Auth::user()->rol == 7 || Auth::user()->rol == 8)
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('ficha-tecnica') }}" :active="request()->routeIs('ficha-tecnica')">
                         {{ __('Ficha Tecnica') }}
@@ -28,7 +28,8 @@
                         {{ __('Bitacora') }}
                     </x-jet-nav-link>
                 </div>
-                @else
+                @endif
+                @if(Auth::user()->rol == 7)
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('bitacora') }}" :active="request()->routeIs('bitacora')">
                         {{ __('Bitacora') }}
