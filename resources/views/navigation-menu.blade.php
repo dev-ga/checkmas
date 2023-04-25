@@ -5,14 +5,13 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard-admin') }}">
+                    <a href="{{ route('dashboard') }}">
                         <x-jet-application-mark class="block h-9 w-auto" />
                     </a>
                 </div>
                 
                 
                 <!-- Navigation Links -->
-                @if(Auth::user()->rol == '7' || Auth::user()->rol == '8')
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('ficha-tecnica') }}" :active="request()->routeIs('ficha-tecnica')">
                         {{ __('Ficha Tecnica') }}
@@ -28,13 +27,6 @@
                         {{ __('Bitacora') }}
                     </x-jet-nav-link>
                 </div>
-                @else
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('bitacora') }}" :active="request()->routeIs('bitacora')">
-                        {{ __('Bitacora') }}
-                    </x-jet-nav-link>
-                </div>
-                @endif
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
