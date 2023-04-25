@@ -18,7 +18,7 @@
             </footer>
         </div>
     </div>
-    <div class="grid grid-cols-1 sm:grid-cols-1 gap-4 bg-check-blue max-[1024px]:h-screen xl:hidden">
+    <div class="grid grid-cols-1 sm:grid-cols-1 gap-4 bg-check-blue h-screen xl:hidden">
         <div class="w-full">
             <img src="{{ asset('images/banner_mobile.png') }}" class="w-full" alt="">
             <div class="flex justify-center bg-check-blue">
