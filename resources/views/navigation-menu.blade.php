@@ -29,7 +29,7 @@
                     </x-jet-nav-link>
                 </div>
                 @endif
-                @if(Auth::user()->rol == 7)
+                @if(Auth::user()->rol == 5)
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('bitacora') }}" :active="request()->routeIs('bitacora')">
                         {{ __('Bitacora') }}
