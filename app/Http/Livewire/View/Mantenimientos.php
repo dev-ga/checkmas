@@ -71,6 +71,13 @@ class Mantenimientos extends Component
 
     }
 
+    public function resetearStatus($id){
+        $data = ot::find($id)->statusOts;
+        DB::table('ots')
+            ->where('id', $id)
+            ->update(['statusOts' => 2]);
+    }
+
     public function validateData()
     {
         $this->validate([
