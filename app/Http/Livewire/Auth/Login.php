@@ -168,7 +168,11 @@ class Login extends Component
                 );
             }
         } catch (\Throwable $th) {
-            dd($th);
+            $this->email = '';
+                $this->notification()->error(
+                    $title = 'ERROR!',
+                    $description = $th->getMessage()
+                );
         }
     }
 
