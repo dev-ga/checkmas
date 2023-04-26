@@ -20,6 +20,24 @@ class UtilsController extends Controller
         return $porcen;
     }
 
+    static function estado($codigo)
+    {
+        $data = Estado::where('codigo', $codigo)->get();
+        foreach ($data as $item) {
+            $estado = $item->descripcion;
+        }
+        return $estado;
+    }
+
+    static function agencia($codigo)
+    {
+        $data = Estado::where('codigo', $codigo)->get();
+        foreach ($data as $item) {
+            $agencia = $item->descripcion;
+        }
+        return $agencia;
+    }
+
     static function suma()
     {
         $date = date('Y-m-d');
@@ -96,4 +114,16 @@ class UtilsController extends Controller
         return $pdf->stream('reporte_tickets.pdf');
 
     }
+
+    static function get_nombre($email)
+    {
+        $data = User::where('email', $email)->get();
+        foreach($data as $item){
+            $nombre = $item->nombre;
+            $apellido = $item->apellido;
+        }
+        $res = $nombre.' '.$apellido;
+        return $res;
+    }
+
 }
