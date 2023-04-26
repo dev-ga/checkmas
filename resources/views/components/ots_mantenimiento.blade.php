@@ -1,7 +1,6 @@
 @php
 use App\Models\Ot;
 $user = Auth::user()->rol;
-dd($user);
 $ots_supervisor = Ot::all();
 $ots = Ot::where('statusOts', '3')
             ->where('tecRes_email', Auth::user()->email)
