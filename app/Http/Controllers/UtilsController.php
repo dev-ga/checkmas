@@ -31,7 +31,7 @@ class UtilsController extends Controller
 
     static function agencia($codigo)
     {
-        $data = Estado::where('codigo', $codigo)->get();
+        $data = Agencia::where('codigo', $codigo)->get();
         foreach ($data as $item) {
             $agencia = $item->descripcion;
         }
