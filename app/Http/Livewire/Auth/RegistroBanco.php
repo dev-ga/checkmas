@@ -20,16 +20,13 @@ class RegistroBanco extends Component
     public $password;
     public $email;
     public $rol;
-    public $cargo;
     public $agencia;
     public $estado;
     public $terminos = false;
 
 
-    public function cargo($value){
-        if($value == '2'){
-            return 'Administrador de agencia';
-        }
+    public function cargo($value)
+    {
         if($value == '3'){
             return 'Gerente de agencia';
         }
@@ -94,10 +91,12 @@ class RegistroBanco extends Component
     public function store()
     {
 
-        try {
-
         // Reglas de Validación
         $this->validate();
+
+        try {
+
+
 
         $resgistro = new User();
         $resgistro->nombre = $this->nombre;
@@ -135,6 +134,7 @@ class RegistroBanco extends Component
         
 
         } catch (\Throwable $th) {
+            dd($th);
             $this->notification()->Error(
                 $title = 'Excepción!',
                 $description ='Error interno del sistema, Favor contacte al administrador'
