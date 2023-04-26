@@ -69,7 +69,10 @@ class UtilsController extends Controller
     {
         DB::table('users')
                 ->where('id', $id)
-                ->update(['activo' => 0]);
+                ->update([
+                    'activo' => 0,
+                    'updated_at' => date('d/m/Y h:m:s a')
+                ]);
     }
 
     static function porcenInverPorEstado($total_estado)
