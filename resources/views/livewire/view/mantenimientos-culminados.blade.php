@@ -89,7 +89,7 @@
         {{-- Div para la paginacion --}}
         <div class="bg-white px-4 py-3 items-center justify-between border-t border-gray-200 sm:px-6">
             {{-- Paginacion --}}
-            {{ $data->links('vendor.livewire.tailwind') }}
+            {{ $data->links() }}
         </div>
         {{-- Fin Div paginacion --}}
     </div>
