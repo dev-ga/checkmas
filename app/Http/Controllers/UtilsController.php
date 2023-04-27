@@ -71,7 +71,7 @@ class UtilsController extends Controller
                 ->where('id', $id)
                 ->update([
                     'activo' => 0,
-                    'updated_at' => now()
+                    'ultima_conexion' => date('d-m-Y h:m:s a')
                 ]);
     }
 
