@@ -73,7 +73,7 @@ $tikects = $tikectList->pluck('tikects');
             margin-right: auto;
             margin-bottom: 10px;
             display: block;
-            width: auto;
+            width: 300px;
         }
         @media only screen and (max-width: 768px){
                 .mobile 
@@ -84,7 +84,7 @@ $tikects = $tikectList->pluck('tikects');
                     margin-right: 10px;
                     margin-bottom: 10px;
                     display: block;
-                    width: 70%;
+                    width: 300px;
                     height: auto;
                 }
         }
@@ -97,7 +97,7 @@ $tikects = $tikectList->pluck('tikects');
                     margin-right: 10px;
                     margin-bottom: 10px;
                     display: block;
-                    width: 70%;
+                    width: 300px;
                     height: auto;
                 }
         }
@@ -196,7 +196,9 @@ $tikects = $tikectList->pluck('tikects');
     {{-- Seccion de graficos --}}
     <section class="bg-white dark:bg-gray-900">
         <div class=" px-5 py-10 mx-auto">
-            <div class="grid grid-cols-1 gap-8 mt-8 xl:mt-12 xl:gap-12 sm:grid-cols-3 xl:grid-cols-3 lg:grid-cols-3">
+            <div class="grid grid-cols-1 gap-8 mt-8 xl:mt-12 xl:gap-12 sm:grid-cols-1  md:grid-cols-1  lg:grid-cols-1 xl:grid-cols-3">
+                
+                <!-- Graficos de torta -->
                 <div class="w-full ">
                     <h1 class="w-full text-center text-xs px-8 py-4 font-bold rounded-lg dark:bg-gray-700">
                         OTS FINALIZADAS POR ESTADO
@@ -217,14 +219,14 @@ $tikects = $tikectList->pluck('tikects');
                     </div>
                     
                 </div>
-    
+                <!-- Graficos de dona 2 -->
                 <div class="w-full ">
                     <h1 class="w-full text-center font-bold text-xs px-8 py-4 rounded-lg dark:bg-gray-700">
                         INVERSION POR ESTADOS
                     </h1>
                                            
                     <div class="w-full shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200 rounded-lg dark:bg-gray-600 pt-4 pb-6">
-                        <canvas id="myChart2" class="mobile"</canvas>
+                        <canvas id="myChart2" width="300" height="300"</canvas>
                     </div>
                     <div class="mx-auto mt-8 w-full sm:w-auto divide-y">
                         @foreach($porList as $item)
@@ -236,14 +238,13 @@ $tikects = $tikectList->pluck('tikects');
                         @endforeach
                     </div>
                 </div>
-    
-                <div class="w-full ">
+                <!-- Graficos de dona 3 -->
+                <div class="w-full">
                     <h1 class="w-full text-center text-xs font-bold px-8 py-4 rounded-lg dark:bg-gray-700">
                         TICKETS GENERADOS
                     </h1>
-          
-                    <div class="w-full shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200 rounded-lg dark:bg-gray-600 pt-4 pb-6">
-                        <canvas id="chartDoughnut" class="mobile"></canvas>
+                    <div class="shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200 rounded-lg dark:bg-gray-600 pt-4 pb-6">
+                        <canvas id="chartDoughnut" width="300" height="300"></canvas>
                     </div>
                     <div class="mx-auto mt-8 w-full sm:w-auto divide-y">
                         @foreach($tikectList as $item)
@@ -255,6 +256,7 @@ $tikects = $tikectList->pluck('tikects');
                         @endforeach
                     </div>
                 </div>
+                
             </div>
         </div>
     </section>
@@ -269,6 +271,10 @@ $tikects = $tikectList->pluck('tikects');
                 <canvas id="myChart5" style="padding: 4% 10%"></canvas>
             </div>
         </div>
+        {{-- <div>
+            <canvas id="chartDoughnut" width="300" height="300" style="border:1px solid #d3d3d3;"></canvas>
+        </div> --}}
+        
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-piechart-outlabels"></script>
@@ -424,28 +430,41 @@ $tikects = $tikectList->pluck('tikects');
                         // console.log(dataset)
                         const { x, y } = datapoint.tooltipPosition();
 
-                        
-                        // ctx.fillStyle = dataset.backgroundColor[index];
-
                         ctx.fillStyle = 'black';
                         // ctx.fill();
                         ctx.fillRect(x, y, 2, 2);
-
-                        // console.log(x)
 
                         const halfwidth = width / 2;
                         const halfheight = height / 2;
 
                         const xLine = x >= halfwidth ? x + 15 : x - 15;
                         const yLine = y >= halfheight ? y + 15 : y - 15;
-                        const extraLine = x >= halfwidth ? 15 : -15;
+                        const extraLine = x >= halfwidth ? 160 : -160;
 
                         ctx.beginPath();
                         ctx.moveTo(x, y);
                         ctx.lineTo(xLine, yLine);
-                        ctx.lineTo(xLine + extraLine, yLine);
+                        ctx.lineTo(width / 2 + 30 + extraLine, yLine);
                         ctx.strokeStyle = 'black';
                         ctx.stroke();
+
+                        //lineas media
+                        // ctx.beginPath();
+                        // ctx.moveTo(width / 2 + 30, 20);
+                        // ctx.lineTo(width / 2 + 30, 242 + 30);
+                        // ctx.stroke();
+
+                        //lineas izquierda
+                        // ctx.beginPath();
+                        // ctx.moveTo(50, 20);
+                        // ctx.lineTo(50, 242 + 30);
+                        // ctx.stroke();
+
+                        //lineas derecha
+                        // ctx.beginPath();
+                        // ctx.moveTo(width, 20);
+                        // ctx.lineTo(width, 242 + 30);
+                        // ctx.stroke();
 
                         //text
                         const textWidth = ctx.measureText(chart.data.labels[index]).width;
@@ -457,7 +476,8 @@ $tikects = $tikectList->pluck('tikects');
                         ctx.textBaseline = 'middle';
                         // ctx.fillStyle = dataset.backgroundColor[index];
                         
-                        ctx.fillText((chart.data.datasets[0].data[index] * 100 / suma).toFixed(0) + "%", xLine + extraLine, yLine);
+                        const extraLine_text = x >= halfwidth ? 164 : -164;
+                        ctx.fillText((chart.data.datasets[0].data[index] * 100 / suma).toFixed(0) + "%", width / 2 + 30 + extraLine_text , yLine);
                         // (chart.data.datasets[0].data[index] * 100) / sum)
                     })
                 })
@@ -518,28 +538,43 @@ $tikects = $tikectList->pluck('tikects');
                         // console.log(dataset)
                         const { x, y } = datapoint.tooltipPosition();
 
-                        
-                        // ctx.fillStyle = dataset.backgroundColor[index];
-
                         ctx.fillStyle = 'black';
                         // ctx.fill();
                         ctx.fillRect(x, y, 2, 2);
 
-                        // console.log(x)
+                        console.log('ancho:', width, 'alto:', height, 'mitadAncho:', width/2, 'mitadlargo:', height/2, 'puntoMedio:', width / 2 + 30)
 
                         const halfwidth = width / 2;
                         const halfheight = height / 2;
 
                         const xLine = x >= halfwidth ? x + 15 : x - 15;
                         const yLine = y >= halfheight ? y + 15 : y - 15;
-                        const extraLine = x >= halfwidth ? 15 : -15;
+                        const extraLine = x >= halfwidth ? 160 : -160;
 
                         ctx.beginPath();
                         ctx.moveTo(x, y);
                         ctx.lineTo(xLine, yLine);
-                        ctx.lineTo(xLine + extraLine, yLine);
+                        ctx.lineTo(width / 2 + 30 + extraLine, yLine);
                         ctx.strokeStyle = 'black';
                         ctx.stroke();
+
+                        //lineas media
+                        // ctx.beginPath();
+                        // ctx.moveTo(width / 2 + 30, 20);
+                        // ctx.lineTo(width / 2 + 30, 242 + 30);
+                        // ctx.stroke();
+
+                        //lineas izquierda
+                        // ctx.beginPath();
+                        // ctx.moveTo(50, 20);
+                        // ctx.lineTo(50, 242 + 30);
+                        // ctx.stroke();
+
+                        //lineas derecha
+                        // ctx.beginPath();
+                        // ctx.moveTo(width, 20);
+                        // ctx.lineTo(width, 242 + 30);
+                        // ctx.stroke();
 
                         //text
                         const textWidth = ctx.measureText(chart.data.labels[index]).width;
@@ -551,8 +586,9 @@ $tikects = $tikectList->pluck('tikects');
                         ctx.textBaseline = 'middle';
                         // ctx.fillStyle = dataset.backgroundColor[index];
                         
-                        ctx.fillText((chart.data.datasets[0].data[index] * 100 / suma2).toFixed(0) + "%", xLine + extraLine, yLine);
-                        // (chart.data.datasets[0].data[index] * 100) / sum)
+                        const extraLine_text = x >= halfwidth ? 164 : -164;
+                        ctx.fillText((chart.data.datasets[0].data[index] * 100 / suma2).toFixed(0) + "%", width / 2 + 30 + extraLine_text , yLine);
+                        console.log('coordenada:', xLine , yLine)
                     })
                 })
             }
@@ -578,7 +614,7 @@ $tikects = $tikectList->pluck('tikects');
             , configDoughnut
         );
         //**********************************************
-        //***********FIN GRAFICO DONA 2*****************
+        //***********FIN GRAFICO DONA 3*****************
 
 
 
