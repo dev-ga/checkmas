@@ -1,6 +1,6 @@
 @php
 use App\Models\Ot;
-$total = Ot::where('statusOts', 5)->where('tipoMantenimiento', 'MC')->count();
+$total = Ot::where('statusOts', 5)->count();
 if($total == 0){
     $total = '0';
 }
