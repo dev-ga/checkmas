@@ -73,7 +73,7 @@ $tikects = $tikectList->pluck('tikects');
             margin-right: auto;
             margin-bottom: 10px;
             display: block;
-            width: 300px;
+            width: auto;
         }
         @media only screen and (max-width: 768px){
                 .mobile 
@@ -84,7 +84,7 @@ $tikects = $tikectList->pluck('tikects');
                     margin-right: 10px;
                     margin-bottom: 10px;
                     display: block;
-                    width: 300px;
+                    width: auto;
                     height: auto;
                 }
         }
@@ -97,7 +97,7 @@ $tikects = $tikectList->pluck('tikects');
                     margin-right: 10px;
                     margin-bottom: 10px;
                     display: block;
-                    width: 300px;
+                    width: auto;
                     height: auto;
                 }
         }
@@ -195,7 +195,7 @@ $tikects = $tikectList->pluck('tikects');
 
     {{-- Seccion de graficos --}}
     <section class="bg-white dark:bg-gray-900">
-        <div class=" px-5 py-10 mx-auto">
+        <div class=" px-2 py-5 mx-auto">
             <div class="grid grid-cols-1 gap-8 mt-8 xl:mt-12 xl:gap-12 sm:grid-cols-1  md:grid-cols-1  lg:grid-cols-1 xl:grid-cols-3">
                 
                 <!-- Graficos de torta -->
@@ -205,7 +205,7 @@ $tikects = $tikectList->pluck('tikects');
                     </h1>
 
                     <div class="w-full shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200 rounded-lg dark:bg-gray-600 pt-4 pb-6">
-                        <canvas id="myChart123456" class="mobile"></canvas>
+                        <canvas id="myChart123456" width="270" height="270"></canvas>
                     </div>
                     {{-- <button id="pdf" onclick="downloadPDF()">PDF</button> --}}
                     <div class="mx-auto mt-8 w-full sm:w-auto divide-y">
@@ -226,7 +226,7 @@ $tikects = $tikectList->pluck('tikects');
                     </h1>
                                            
                     <div class="w-full shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200 rounded-lg dark:bg-gray-600 pt-4 pb-6">
-                        <canvas id="myChart2" width="300" height="300"</canvas>
+                        <canvas id="myChart2" width="270" height="270"</canvas>
                     </div>
                     <div class="mx-auto mt-8 w-full sm:w-auto divide-y">
                         @foreach($porList as $item)
@@ -244,7 +244,7 @@ $tikects = $tikectList->pluck('tikects');
                         TICKETS GENERADOS
                     </h1>
                     <div class="shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] border border-gray-200 rounded-lg dark:bg-gray-600 pt-4 pb-6">
-                        <canvas id="chartDoughnut" width="300" height="300"></canvas>
+                        <canvas id="chartDoughnut" width="270" height="270"></canvas>
                     </div>
                     <div class="mx-auto mt-8 w-full sm:w-auto divide-y">
                         @foreach($tikectList as $item)
@@ -365,7 +365,7 @@ $tikects = $tikectList->pluck('tikects');
             options: {
             maintainAspectRatio: false,
             layout: {
-                padding: 30,
+                padding: 40,
             },
             scales: {
                 y: {
@@ -413,7 +413,7 @@ $tikects = $tikectList->pluck('tikects');
                 label: 'Inversion($)',
                 data: valores,
                 backgroundColor: colores,
-                hoverOffset: 10,
+                hoverOffset: 4,
                 cutout: '90%',
                 borderRadius: 20
             }]
@@ -439,7 +439,7 @@ $tikects = $tikectList->pluck('tikects');
 
                         const xLine = x >= halfwidth ? x + 15 : x - 15;
                         const yLine = y >= halfheight ? y + 15 : y - 15;
-                        const extraLine = x >= halfwidth ? 160 : -160;
+                        const extraLine = x >= halfwidth ? 140 : -140;
 
                         ctx.beginPath();
                         ctx.moveTo(x, y);
@@ -469,14 +469,14 @@ $tikects = $tikectList->pluck('tikects');
                         //text
                         const textWidth = ctx.measureText(chart.data.labels[index]).width;
                         // console.log(textWidth);
-                        ctx.font = '12px Arial';
+                        ctx.font = '11px Arial';
 
                         const textPosition = x >= halfwidth ? 'left' : 'right';
                         ctx.textAlign = textPosition;
                         ctx.textBaseline = 'middle';
                         // ctx.fillStyle = dataset.backgroundColor[index];
                         
-                        const extraLine_text = x >= halfwidth ? 164 : -164;
+                        const extraLine_text = x >= halfwidth ? 143 : -143;
                         ctx.fillText((chart.data.datasets[0].data[index] * 100 / suma).toFixed(0) + "%", width / 2 + 30 + extraLine_text , yLine);
                         // (chart.data.datasets[0].data[index] * 100) / sum)
                     })
@@ -488,7 +488,7 @@ $tikects = $tikectList->pluck('tikects');
             data: dataDona2,
             options: {
                 layout: {
-                    padding: 30
+                    padding: 23
                 },
                 maintainAspectRatio: false,
                 plugins: {
@@ -549,7 +549,7 @@ $tikects = $tikectList->pluck('tikects');
 
                         const xLine = x >= halfwidth ? x + 15 : x - 15;
                         const yLine = y >= halfheight ? y + 15 : y - 15;
-                        const extraLine = x >= halfwidth ? 160 : -160;
+                        const extraLine = x >= halfwidth ? 140 : -140;
 
                         ctx.beginPath();
                         ctx.moveTo(x, y);
@@ -579,14 +579,14 @@ $tikects = $tikectList->pluck('tikects');
                         //text
                         const textWidth = ctx.measureText(chart.data.labels[index]).width;
                         // console.log(textWidth);
-                        ctx.font = '12px Arial';
+                        ctx.font = '11px Arial';
 
                         const textPosition = x >= halfwidth ? 'left' : 'right';
                         ctx.textAlign = textPosition;
                         ctx.textBaseline = 'middle';
                         // ctx.fillStyle = dataset.backgroundColor[index];
                         
-                        const extraLine_text = x >= halfwidth ? 164 : -164;
+                        const extraLine_text = x >= halfwidth ? 143 : -143;
                         ctx.fillText((chart.data.datasets[0].data[index] * 100 / suma2).toFixed(0) + "%", width / 2 + 30 + extraLine_text , yLine);
                         console.log('coordenada:', xLine , yLine)
                     })
@@ -598,7 +598,7 @@ $tikects = $tikectList->pluck('tikects');
             data: dataDoughnut, 
             options: {
                 layout: {
-                    padding: 30
+                    padding: 25
                 },
                 maintainAspectRatio: false,
                 plugins: {
