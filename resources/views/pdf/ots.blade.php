@@ -61,7 +61,7 @@
             </tr>
             @foreach($data as $item)
             <tr style="font-size: 0.5rem;">
-                <td width="40">{{ Carbon::parse($item->created_at)->format('d-m-Y') }}</td>
+                <td width="40">{{ $item->fechaInicio }}</td>
                 <td width="45">{{ $item->fecha_fin }}</td>
                 <td width="85">{{ $item->otUid }}</td>
                 <td width="50">{{ $item->agencia }}</td>
