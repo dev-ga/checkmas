@@ -55,6 +55,7 @@
                 <th class="table-primary">Fec. creada</th>
                 <th class="table-primary">Fec. finalizada</th>
                 <th class="table-primary">Nro. de orden</th>
+                <th class="table-primary">Btu</th>
                 <th class="table-primary">Agencia</th>
                 <th class="table-primary">Estado</th>
                 <th class="table-primary">Observaciones</th>
@@ -64,7 +65,8 @@
                 <td width="40">{{ $item->fechaInicio }}</td>
                 <td width="45">{{ $item->fecha_fin }}</td>
                 <td width="85">{{ $item->otUid }}</td>
-                <td width="50">{{ $item->agencia }}</td>
+                <td width="40">{{ $item->btu }}</td>
+                <td width="50">{{ $item->agencia }} - {{ $item->codigo_agencia }} </td>
                 <td width="50">{{ $item->estado }}</td>
                 <td>{{ $item->observaciones }}</td>
             </tr>
