@@ -100,25 +100,15 @@ class Login extends Component
 
                     Auth::attempt($credenciales);
                     $user = Auth::user();
-                    
                     /**
-                     * @author Gustavo Camacho
-                     * @method UtilsController -> userActivo
-                     * @param $id, $contador
-                     * 
                      * Lógica para colocar el usuario inactivo en base de datos
                      */
                     UtilsController::userActivo($user->id);
 
                     /**
-                     * @author Gustavo Camacho
-                     * @method UtilsController -> actualizaContador
-                     * @param $id, $contador
-                     * 
                      * Lógica para contar las veces que el usuario ingresa al sistema
                      */
                     UtilsController::actualizaContador($user->id, $user->contador);
-
 
                     if ($user->status_registro == '1') {
                         if ($user->rol == '7' || $user->rol == '8') {
