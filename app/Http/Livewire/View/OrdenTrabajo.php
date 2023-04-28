@@ -184,11 +184,15 @@ class OrdenTrabajo extends Component
                 $color = $item->color;
             }
 
-            // $desAgencia = Agencia::where('codigo', $agencia)->get();
-            // foreach ($desAgencia as $item) {
-            //     $desAgencia = $item->descripcion;
+            $dataEquipo = FichaTecnica::where('uid', $this->equipoUid)->get();
+            foreach ($dataEquipo as $item) {
+                $btu = $item->btu;
+            }
 
-            // }
+            $dataAgencia = Agencia::where('descripcion', $agencia)->get();
+            foreach ($dataAgencia as $item) {
+                $codigo = $item->codigo;
+            }
 
             $fecha = Carbon::createFromFormat('Y-m-d', $this->fechaInicio)->format('dmY');
             $otUid = $fecha . '-' . $this->equipoUid . '-' . $this->tipoMantenimiento;
@@ -204,6 +208,8 @@ class OrdenTrabajo extends Component
                 $ot->tecRes_NomApe = $this->datosTecRes();
                 $ot->tecRes_email = $this->tecRespondable;
                 $ot->equipoUid = $this->equipoUid;
+                $ot->btu = $btu;
+                $ot->codigo_agencia = $codigo;
                 $ot->estado = $estado;
                 $ot->color = $color;
                 $ot->agencia = $agencia;
@@ -239,6 +245,8 @@ class OrdenTrabajo extends Component
                 $ot->tecRes_NomApe = $this->datosTecRes();
                 $ot->tecRes_email = $this->tecRespondable;
                 $ot->equipoUid = $this->equipoUid;
+                $ot->btu = $btu;
+                $ot->codigo_agencia = $codigo;
                 $ot->estado = $estado;
                 $ot->color = $color;
                 $ot->agencia = $agencia;
