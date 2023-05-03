@@ -96,7 +96,7 @@
         {{-- Tabla Responsive para movil --}}
         <div class="grid grid-cols-1 sm:grid-cols-1 gap-4 md:hidden rounded-lg p-1 shadow-sm shadow-indigo-100">
             @foreach ($data as $item)
-            <div class="bg-white p-4 rounded-lg shadow mb-4">
+            <div class="bg-white p-4 rounded-xl  shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
                 <a href="{{ asset('/storage/'.$item->foto1_antes) }}" target="_blank">
                     <img src="{{ asset('/storage/'.$item->foto1_antes) }}" class="h-56 w-full rounded-md object-cover"/>
                     <div class="mt-2">
@@ -147,7 +147,7 @@
                     </div>
                 </a>
             </div>
-            <div class="bg-white p-4 rounded-lg shadow mb-4">
+            <div class="bg-white p-4 rounded-xl  shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
                 <a href="{{ asset('/storage/'.$item->foto2_antes) }}" target="_blank">
                     <img src="{{ asset('/storage/'.$item->foto2_antes) }}" class="h-56 w-full rounded-md object-cover"/>
                     <div class="mt-2">
@@ -198,7 +198,7 @@
                     </div>
                 </a>
             </div>
-            <div class="bg-white p-4 rounded-lg shadow mb-4">
+            <div class="bg-white p-4 rounded-xl  shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
                 <a href="{{ asset('/storage/'.$item->foto1_despues) }}" target="_blank">
                     <img src="{{ asset('/storage/'.$item->foto1_despues) }}" class="h-56 w-full rounded-md object-cover"/>
                     <div class="mt-2">
@@ -249,7 +249,7 @@
                     </div>
                 </a>
             </div>
-            <div class="bg-white p-4 rounded-lg shadow">
+            <div class="bg-white p-4 rounded-xl  shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
                 <a href="{{ asset('/storage/'.$item->foto2_despues) }}" target="_blank">
                     <img src="{{ asset('/storage/'.$item->foto2_despues) }}" class="h-56 w-full rounded-md object-cover"/>
                     <div class="mt-2">
