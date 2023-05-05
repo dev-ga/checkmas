@@ -5,7 +5,7 @@
     <div class="mx-auto max-w-full sm:max-w-md mb-8 px-4 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
         <div class="grid grid-cols-4">
             <div class="col-span-4">
-                <div class="grid grid-cols-2 md:grid-cols- gap-1">
+                <div class="grid grid-cols-2 md:grid-cols-2 gap-1">
                     {{-- Nombre --}}
                     <div class="p-2">
                         <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.nombre')</label>
@@ -20,7 +20,19 @@
                 {{-- Telefono --}}
                 <div class="p-2">
                     <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.telefono')</label>
-                    <x-input wire:model="telefono" icon="phone" class="focus:ring-check-blue focus:border-check-blue"/>
+                    <div class="grid grid-cols-2 md:grid-cols-2 gap-4">
+                        <x-native-select wire:model="prefijo" class="focus:ring-check-blue focus:border-check-blue">
+                            <option></option>
+                            <option value="0212">0212</option>
+                            <option value="0412">0412</option>
+                            <option value="0416">0416</option>
+                            <option value="0426">0426</option>
+                            <option value="0414">0414</option>
+                            <option value="0424">0424</option>
+                        </x-native-select>
+                        <x-input wire:model="telefono" right-icon="phone" class="focus:ring-check-blue focus:border-check-blue w-full"/>   
+                    </div>
+                    {{-- <x-input wire:model="telefono" icon="phone" class="focus:ring-check-blue focus:border-check-blue"/> --}}
                 </div>
                 {{-- email --}}
                 <div class="p-2">
@@ -41,15 +53,15 @@
                         <option value="4">@lang('messages.label.gteServicios')</option>
                     </x-native-select>
                 </div>
-                {{-- estado --}}
-                <div class="p-2">
-                    <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.estado')</label>
-                    <x-estados></x-estados>
-                </div>
                 {{-- agencia --}}
                 <div class="p-2">
                     <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.agencia')</label>
                     <x-agencias></x-agencias>
+                </div>
+                {{-- estado --}}
+                <div class="p-2">
+                    <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.estado')</label>
+                    <x-estados></x-estados>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols- gap-1 px-3 mt-4">
                     <div class="relative flex items-start">

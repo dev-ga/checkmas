@@ -22,6 +22,7 @@ class RegistroBanco extends Component
     public $rol;
     public $agencia;
     public $estado;
+    public $prefijo;
     public $terminos = false;
 
 
@@ -43,6 +44,7 @@ class RegistroBanco extends Component
 
         'nombre'    => 'required',
         'apellido'  => 'required',
+        'prefijo'  => 'required',
         'telefono'  => 'required',
         'email'     => 'required|email|unique:users',
         'password'  => 'required',
@@ -57,6 +59,7 @@ class RegistroBanco extends Component
 
         'nombre'             => 'Campo Requerido',
         'apellido'           => 'Campo Requerido',
+        'prefijo'           => 'Campo Requerido',
         'telefono'           => 'Campo Requerido',
         'password.required'  => 'Campo Requerido',
         'email.required'     => 'Campo Requerido',
@@ -78,6 +81,7 @@ class RegistroBanco extends Component
         $this->nombre = '';
         $this->apellido = '';
         $this->telefono = '';
+        $this->prefijo = '';
         $this->password = '';
         $this->email = '';
         $this->rol = '';
@@ -101,7 +105,7 @@ class RegistroBanco extends Component
         $resgistro = new User();
         $resgistro->nombre = $this->nombre;
         $resgistro->apellido = $this->apellido;
-        $resgistro->telefono = $this->telefono;
+        $resgistro->telefono = $this->prefijo.$this->telefono;
         $resgistro->email = $this->email;
         $resgistro->password = Hash::make($this->password);
         $resgistro->cargo = $this->cargo($this->rol);
