@@ -296,7 +296,7 @@ $tikects = $tikectList->pluck('tikects');
                 data: valores,
                 backgroundColor: colores,
                 hoverOffset: 4,
-                cutout: '90%',
+                cutout: '85%',
                 borderRadius: 20
             }]
         };
@@ -403,7 +403,7 @@ $tikects = $tikectList->pluck('tikects');
                     data: tikects, 
                     backgroundColor: colorTi, 
                     hoverOffset: 4,
-                    cutout: '90%',
+                    cutout: '85%',
                     borderRadius: 20 
                 },
             ], 
@@ -563,7 +563,7 @@ $tikects = $tikectList->pluck('tikects');
                 data: ots,
                 backgroundColor: colorOts,
                 hoverOffset: 4,
-                cutout: '90%',
+                cutout: '85%',
                 borderRadius: 20
             }]
         };
