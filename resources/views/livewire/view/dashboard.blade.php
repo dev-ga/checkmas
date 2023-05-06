@@ -70,14 +70,16 @@ $tikcet_g3 = Tikect::select(DB::raw("count(*) as tikects"), DB::raw("estado as e
 $total_ticket = $tikcet_g3->pluck('tikects');
 $estados_ticket = $tikcet_g3->pluck('estados');
 
-$tikcet_ot = Ot::select(DB::raw("count(*) as tikect_id"), DB::raw("estado_tikect as estados"))
-            ->orderBy('estado_tikect', 'asc')
+
+$tikcet_ot = DB::table('ots')
+            ->join('tikects', 'ots.estado_tikect', '=', 'tikects.estado')
+            ->select(DB::raw("count(ots.otUid) as Ots"), DB::raw("ots.estado_tikect as estados"))
+            ->orderBy('ots.estado_tikect', 'asc')
             ->groupBy(DB::raw("estados"))
             ->get();
-$total_ticket_ot = $tikcet_ot->pluck('tikect_id');
+$total_ticket_ot = $tikcet_ot->pluck('Ots');
 $estados_ticket_ot = $tikcet_ot->pluck('estados');
-            // ->join('ots', 'tikect_uid', '=', 'tikect_id')
-// dd($total_ticket_ot, $estados_ticket_ot);
+
 
 @endphp
 <x-app-layout>
