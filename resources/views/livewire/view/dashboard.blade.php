@@ -63,6 +63,22 @@ $colorTi = $tikectList->pluck('colores');
 $estTi = $tikectList->pluck('estados');
 $tikects = $tikectList->pluck('tikects');
 
+$tikcet_g3 = Tikect::select(DB::raw("count(*) as tikects"), DB::raw("estado as estados"))
+            ->orderBy('estados', 'asc')
+            ->groupBy(DB::raw("estado"))
+            ->get();
+$total_ticket = $tikcet_g3->pluck('tikects');
+$estados_ticket = $tikcet_g3->pluck('estados');
+
+$tikcet_ot = Ot::select(DB::raw("count(*) as tikect_id"), DB::raw("estado_tikect as estados"))
+            ->orderBy('estado_tikect', 'asc')
+            ->groupBy(DB::raw("estados"))
+            ->get();
+$total_ticket_ot = $tikcet_ot->pluck('tikect_id');
+$estados_ticket_ot = $tikcet_ot->pluck('estados');
+            // ->join('ots', 'tikect_uid', '=', 'tikect_id')
+// dd($total_ticket_ot, $estados_ticket_ot);
+
 @endphp
 <x-app-layout>
     <style>
@@ -502,28 +518,33 @@ $tikects = $tikectList->pluck('tikects');
 
         // **********GRAFICO BARRAS + LIENA*********************
         //******************************************************
-        var estadosUnion = @json($listaEstados);
-        var tikectsUnion = @json($tikects);
-        var colorTiUnion = @json($colorTi);
+        var estadosUnion = @json($estados_ticket);
+        var tikectsUnion = @json($total_ticket);
+        var tikects_ot_Union = @json($total_ticket_ot);
+        var color_union = @json($colorTi);
         const labelsEstados = estadosUnion;
         const dataUnion = {
-            labels: ['Amazonas', 'Bolivar', 'Distrito Capital', 'Merida', 'Monagas', 'Trujillo']
+            labels: estadosUnion
             , datasets: [{
                 type: 'bar',
                 label: 'Tickets registrados',
-                data: [5, 1, 2, 1, 8, 9],
-                borderColor: 'rgb(255, 99, 132)',
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                data: tikectsUnion,
+                borderColor: 'rgb(41,94,164)',
+                backgroundColor: 'rgb(41,94,164)',
                 borderRadius: 30,
-                borderSkipped: 30,
+                barPercentage: 0.5
+
+
             }, {
                 type: 'bar',
                 label: 'Ots registradas',
-                data: [2, 1, 3, 1, 2, 7],
+                data: tikects_ot_Union,
                 fill: false,
-                borderColor: 'rgb(54, 162, 235)',
+                borderColor: 'rgb(255,154,52)',
+                backgroundColor: 'rgb(255,154,52)',
                 borderRadius: 30,
-                borderSkipped: 30,
+                barPercentage: 0.5
+
             }]
         };
         const configBarUnion = {
