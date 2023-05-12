@@ -8,6 +8,7 @@ use App\Models\FichaTecnica as ModelFichaTecnica;
 use App\Models\Qr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
@@ -266,11 +267,11 @@ class FichaTecnica extends Component
                  * según la selección del usuario
                  */
                 if (isset($this->otroBtu)) {
-                    $fichaTecnica->btu   = Str::lower($this->otroBtu);
+                    $fichaTecnica->btu = preg_replace('/[^0-9]/', '', $this->otroBtu);
                 } else {
-                    $fichaTecnica->btu = Str::lower($this->btu);
+                    $fichaTecnica->btu = $this->btu;
                 }
-
+                $fichaTecnica->costo = $fichaTecnica->btu * 131.61;
                 $fichaTecnica->tipoCompresor    = $this->tipoCompresor;
                 $fichaTecnica->marcaCompresor   = $this->marcaCompresor;
                 $fichaTecnica->ampCompresor     = $this->ampCompresor;
@@ -279,8 +280,8 @@ class FichaTecnica extends Component
                 $fichaTecnica->imgEtiqVentilador    = $img_ventilador;
                 $fichaTecnica->oficina      = $this->oficina;
                 $fichaTecnica->piso         = $this->piso;
-                $fichaTecnica->agencia      = $estadoDes;
-                $fichaTecnica->estado       = $agenciaDes;
+                $fichaTecnica->agencia      = $agenciaDes;
+                $fichaTecnica->estado       = $estadoDes;
                 $fichaTecnica->save();
 
                 /**
@@ -334,10 +335,11 @@ class FichaTecnica extends Component
                  * según la selección del usuario
                  */
                 if (isset($this->otroBtu)) {
-                    $fichaTecnica->btu   = Str::lower($this->otroBtu);
+                    $fichaTecnica->btu = preg_replace('/[^0-9]/', '', $this->otroBtu);
                 } else {
-                    $fichaTecnica->btu = Str::lower($this->btu);
+                    $fichaTecnica->btu = $this->btu;    
                 }
+                $fichaTecnica->costo = $fichaTecnica->btu * 131.61;
                 $fichaTecnica->tipoCompresor = $this->tipoCompresor;
                 $fichaTecnica->marcaCompresor = $this->marcaCompresor;
                 $fichaTecnica->ampCompresor = $this->ampCompresor;
@@ -374,7 +376,7 @@ class FichaTecnica extends Component
                 $description = 'La ficha técnica fue registrada con éxito'
             );
         } catch (\Throwable $th) {
-            // dd($th);
+            Log::error($th->getMessage());
             $this->notification()->error(
                 $title = 'ERROR!',
                 $description = 'Function store() - livewire.ficha-tecnica'
@@ -389,6 +391,8 @@ class FichaTecnica extends Component
         return view('livewire.view.ficha-tecnica', [
             'data' => ModelFichaTecnica::where('uid', 'like', "%{$this->buscar}%")
                 ->orWhere('tipoConden', 'like', "%{$this->buscar}%")
+                ->orWhere('qrConden', 'like', "%{$this->buscar}%")
+                ->orWhere('qrEvaporador', 'like', "%{$this->buscar}%")
                 ->orWhere('phases', 'like', "%{$this->buscar}%")
                 ->orWhere('voltaje', 'like', "%{$this->buscar}%")
                 ->orWhere('tipoRefri', 'like', "%{$this->buscar}%")

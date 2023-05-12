@@ -69,19 +69,23 @@
                         <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">@lang('messages.label.BTU')</label>
                         <x-native-select wire:model="btu" wire:change="$emit('otro_btu', $event.target.value)" class="focus:ring-check-blue focus:border-check-blue">
                             <option></option>
-                            <option value="12.000">12.000</option>
-                            <option value="18.000">18.000</option>
-                            <option value="24.000">24.000</option>
-                            <option value="36.000">36.000</option>
-                            <option value="5TON">5TON</option>
-                            <option value="7,5TON">7,5TON</option>
-                            <option value="10TON">10TON</option>
+                            <option value="1">1</option>
+                            <option value="1.50">1.50</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="5">5</option>
+                            <option value="7.50">7.50</option>
+                            <option value="10">10</option>
+                            <option value="12">12</option>
+                            <option value="15">15</option>
+                            <option value="40">40</option>
+                            <option value="140">140</option>
                             <option value="otro">Otro</option>
                         </x-native-select>
                     </div>
                     <div class="p-2 {{ $atr_otro_btu }}">
                         <label class="opacity-60 mb-1 block text-sm font-medium text-italblue">Otro BTU</label>
-                        <x-input wire:model="otroBtu" class="focus:ring-check-blue focus:border-check-blue"/>
+                        <x-input wire:model="otroBtu" class="focus:ring-check-blue focus:border-check-blue valNumber"/>
                     </div>
                 </div>
             </div>
