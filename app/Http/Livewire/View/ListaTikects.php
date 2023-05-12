@@ -2,8 +2,10 @@
 
 namespace App\Http\Livewire\View;
 
+use App\Http\Controllers\UtilsController;
 use App\Models\Tikect;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use WireUi\Traits\Actions;
 
@@ -36,7 +38,11 @@ class ListaTikects extends Component
                     }
 
         } catch (\Throwable $th) {
-            dd($th);
+            Log::error($th->getMessage());
+            $this->notification()->error(
+                $title = 'ERROR!',
+                $description = 'Function updateStatusTikect().ListaTikects'
+            );
         }
     }
 
@@ -55,7 +61,6 @@ class ListaTikects extends Component
 
     ];
 
-
     public function actualiza_estatus()
     {
 
@@ -70,6 +75,19 @@ class ListaTikects extends Component
                     'fecha_fin' => date('d-m-Y'),
                     'observaciones_cierre' => $this->observaciones_cierre,
                 ]);
+            
+            $data = Tikect::where('tikect_uid', $this->nro_ticket)->get();
+            foreach($data as $item){
+                $estado = $item->estado;
+            }
+
+            /**
+             * @method total_ticket_abiertos
+             * @param $estado
+             * @param $estatus 0 -> Abierto , 1-> cerrado
+             * Logica para guardar el acumulado de ticket creados
+             */
+            UtilsController::total_ticket($estado, 1);
 
                 $this->reset();
 
@@ -79,7 +97,7 @@ class ListaTikects extends Component
                 );
 
         } catch (\Throwable $th) {
-            dd($th);
+            Log::error($th->getMessage());
             $this->notification()->error(
                 $title = 'ERROR!',
                 $description = 'Function actualiza_estatus() - livewire.ListaTikects'
@@ -90,7 +108,6 @@ class ListaTikects extends Component
     public function filtro($value)
     {
         $this->campo = $value;
-
     }
 
     public function CrearOt($id)
