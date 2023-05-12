@@ -49,6 +49,11 @@
     @stack('modals')
 
     @livewireScripts
+
+    @stack('scripts')
+
+    {{-- Utils.js --}}
+    <script  src="{{ asset('js/utils.js') }}" type="text/javascript"></script>
 </body>
 </html>
 
