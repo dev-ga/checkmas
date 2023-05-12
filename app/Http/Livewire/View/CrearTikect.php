@@ -2,13 +2,16 @@
 
 namespace App\Http\Livewire\View;
 
+use App\Http\Controllers\UtilsController;
 use App\Models\Agencia;
+use App\Models\Estadistica;
 use App\Models\Estado;
 use App\Models\Servicio;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use App\Models\Tikect as ModelTikect;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use WireUi\Traits\Actions;
@@ -148,6 +151,14 @@ class CrearTikect extends Component
             $creaTikect->des_status  = 'abierto';
             $creaTikect->save();
 
+            /**
+             * @method total_ticket_abiertos
+             * @param $estado
+             * @param $estatus 0 -> Abierto , 1-> cerrado
+             * Logica para guardar el acumulado de ticket creados
+             */
+            UtilsController::total_ticket($creaTikect->estado, 0);
+
             $this->reset();
 
             $this->notification()->success(
@@ -156,15 +167,15 @@ class CrearTikect extends Component
             );
 
             $this->emitTo('lista-tikects', 'refreshComponent');
+
         } catch (\Throwable $th) {
-            dd($th);
+            Log::error($th->getMessage());
             $this->notification()->error(
                 $title = 'ERROR!',
                 $description = 'Se ha producido un error al intentar guardar el Tikect.'
             );
         }
     }
-
 
     public function render()
     {
