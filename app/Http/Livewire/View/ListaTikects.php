@@ -105,6 +105,25 @@ class ListaTikects extends Component
         }
     }
 
+    public function eliminar($id)
+    {
+        try {
+                DB::table('tikects')
+                ->where('id', $id)
+                ->update([
+                    'status_tikect' => 3,
+                ]);
+                $this->notification()->success(
+                    $title = 'ÉXITO!',
+                    $description = 'El ticket Nro ***-***-.'.$id.' fue eliminado con existo'
+                );
+
+        } catch (\Throwable $th) {
+            dd($th);
+        }
+
+    }
+
     public function filtro($value)
     {
         $this->campo = $value;
@@ -129,17 +148,7 @@ class ListaTikects extends Component
     public function render()
     {
         return view('livewire.view.lista-tikects', [
-            'data' => Tikect::where('id', 'like', "%{$this->buscar}%")
-                ->orWhere('tikect_uid', 'like', "%{$this->buscar}%")
-                ->orWhere('tipoServicio', 'like', "%{$this->buscar}%")
-                ->orWhere('oficina', 'like', "%{$this->buscar}%")
-                ->orWhere('piso', 'like', "%{$this->buscar}%")
-                ->orWhere('estado', 'like', "%{$this->buscar}%")
-                ->orWhere('agencia', 'like', "%{$this->buscar}%")
-                ->orWhere('observaciones', 'like', "%{$this->buscar}%")
-                ->orWhere('owner', 'like', "%{$this->buscar}%")
-                ->orWhere('owner_email', 'like', "%{$this->buscar}%")
-                ->orWhere('created_at', 'like', "%{$this->buscar}%")
+            'data' => Tikect::whereIn('status_tikect', ['0','1'])
                 ->orderBy($this->campo, 'desc')
                 ->paginate(5)
         ]);
