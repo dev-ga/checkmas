@@ -42,7 +42,7 @@
                                 </div>
                             </th>   
 
-                            <th scope="col" class="w-20 px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                            <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                 @lang('messages.tablas.observacion')
                             </th>  
 
@@ -62,7 +62,7 @@
                     <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
                         @foreach ($data as $item)
                         <tr>
-                            <td class="w-1/4 px-4 py-4 text-sm font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap">
+                            <td class="px-4 py-4 text-sm font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap">
                                 <div class="flex items-center gap-x-2">
                                     <img class="object-cover w-7 h-7 rounded-full" src="{{ asset('images/orden-de-trabajo.png') }}" alt="">
                                     <div>
@@ -75,7 +75,7 @@
                                 </div>
                             </td>
 
-                            <td class="w-1/4 px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
+                            <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
                                 <div class="flex items-center gap-x-2">
                                     <div>
                                         <p class="text-xs font-bold text-gray-600 dark:text-gray-400">@lang('messages.tablas.agencia') {{ $item->agencia }}</p>
@@ -84,10 +84,10 @@
                                 </div>
                             </td>
         
-                            <td class="w-1/3 px-4 py-4 text-sm text-gray-500 text-justify dark:text-gray-300">{{ $item->observaciones }}</td>
+                            <td class="w-1/4 px-4 pr-12 py-4 text-sm text-gray-500 text-justify dark:text-gray-300">{{ $item->observaciones }}</td>
 
                             @if($item->status_tikect == '0')
-                            <td class="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
+                            <td class="w-1/6 px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
                                 <div class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-sky-500 bg-sky-100/60 dark:bg-gray-800">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5V6.75a4.5 4.5 0 119 0v3.75M3.75 21.75h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H3.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
@@ -98,7 +98,7 @@
                             @endif
 
                             @if($item->status_tikect == '1')
-                            <td class="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
+                            <td class="w-1/6 px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
                                 <div class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-red-500 bg-red-100/60 dark:bg-gray-800">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
