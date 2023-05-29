@@ -6,9 +6,16 @@ use App\Models\Agencia;
 use App\Models\Estadistica;
 use App\Models\Estado;
 use App\Models\FichaTecnica;
+use App\Models\Iaim_Articulo;
+use App\Models\Iaim_Movimiento_Inventario;
+use App\Models\Iaim_OrdenCompra;
+use App\Models\IaimMaterialOrdenTrabajo;
+use App\Models\IaimOrdenTrabajo;
 use App\Models\Ot;
 use App\Models\Tikect;
 use App\Models\User;
+use Barryvdh\Debugbar\Facades\Debugbar;
+use Barryvdh\Debugbar\Twig\Extension\Debug;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -121,18 +128,7 @@ class UtilsController extends Controller
         }
     }
 
-    public function reporte_users()
-    {
-        try {
-
-            $data = User::all();
-            $count = User::all()->count();
-            $pdf = Pdf::loadView('pdf.users', compact('data', 'count'));
-            return $pdf->stream('reporte_usuarios.pdf');
-        } catch (\Throwable $th) {
-            Log::error('- Class UtilsControllers - Se ha producido un error al ejecutar la funcion.'.$th->getMessage());
-        }
-    }
+    
 
     public function reporte_ots()
     {
@@ -376,15 +372,6 @@ class UtilsController extends Controller
                 $total_ot_mp_finalizada = $item->total_ot_mp_finalizada;
             }
 
-            if ($estatus == 1) {
-                $total_ot_mp_creada = $total_ot_mp_creada + 1;
-                DB::table('estadisticas')
-                    ->where('estado', $estado)
-                    ->update([
-                        'total_ot_mp_creada' => $total_ot_mp_creada
-                    ]);
-            }
-
             if ($estatus == 2) {
                 $total_ot_mp_aprobada = $total_ot_mp_aprobada + 1;
 
@@ -453,7 +440,162 @@ class UtilsController extends Controller
                     ]);
             }
         } catch (\Throwable $th) {
+            Debugbar::info($th);
+            dd($th);
+        }
+    }
+
+    public function reporte_articulos()
+    {
+        try {
+
+            $data = Iaim_Articulo::all();
+            $count = Iaim_Articulo::all()->count();
+            $pdf = Pdf::loadView('pdf.articulos', compact('data', 'count'));
+            return $pdf->stream('reporte_articulos.pdf');
+
+        } catch (\Throwable $th) {
             Log::error('- Class UtilsControllers - Se ha producido un error al ejecutar la funcion.'.$th->getMessage());
         }
     }
+
+    public function reporte_entradas()
+    {
+        try {
+
+            $data = Iaim_Movimiento_Inventario::where('tipo_mov', 1)->get();
+            $count = Iaim_Movimiento_Inventario::where('tipo_mov', 1)->count();
+            $pdf = Pdf::loadView('pdf.entradas', compact('data', 'count'));
+            return $pdf->stream('reporte_entradas.pdf');
+
+        } catch (\Throwable $th) {
+            Log::error('- Class UtilsControllers - Se ha producido un error al ejecutar la funcion.'.$th->getMessage());
+        }
+    }
+
+    public function reporte_salidas()
+    {
+        try {
+
+            $data = Iaim_Movimiento_Inventario::where('tipo_mov', 2)->get();
+            $count = Iaim_Movimiento_Inventario::where('tipo_mov', 2)->count();
+            $pdf = Pdf::loadView('pdf.salidas', compact('data', 'count'));
+            return $pdf->stream('reporte_salidas.pdf');
+
+        } catch (\Throwable $th) {
+            Log::error('- Class UtilsControllers - Se ha producido un error al ejecutar la funcion.'.$th->getMessage());
+        }
+    }
+
+    static function total_existe($codigo)
+    {
+        try {
+
+            $data_entradas = DB::table("iaim_movimiento_inventarios")
+                ->select(DB::raw("SUM(entrada) as entradas"))
+                ->where('codigo', $codigo)
+                ->orderBy("created_at")
+                // ->groupBy(DB::raw("year(created_at)"))
+                ->get();
+            Debugbar::infor($data_entradas);
+            foreach($data_entradas as $item)
+            {
+                $entradas = $item->entradas;
+            }
+
+            $data_salidas = DB::table("iaim_movimiento_inventarios")
+                ->select(DB::raw("SUM(salida) as salidas"))
+                ->where('codigo', $codigo)
+                ->orderBy("created_at")
+                // ->groupBy(DB::raw("year(created_at)"))
+                ->get();
+            foreach($data_salidas as $item)
+            {
+                $salidas = $item->salidas;
+            }
+
+
+            $total = $entradas - $salidas;
+            return $total;
+
+            // $total = $entradas - $salidas;
+            // return $total;
+
+        } catch (\Throwable $th) {
+            Debugbar::addThrowable($th);
+            Log::error('- Class UtilsControllers - Se ha producido un error al ejecutar la funcion.'.$th->getMessage());
+        }
+    }
+
+    static function crear_codigo_ot($aero, $area)
+    {
+
+        $prefijo = 'IAIM';
+
+        $res = DB::table('iaim_orden_trabajos')->latest('id')->first();
+        if($res == null){
+            $parte4 = str_pad(1, 5, "0", STR_PAD_LEFT);
+        }else{
+            $parte4 = $res->id + 1;
+            $parte4 = str_pad($parte4, 5, "0", STR_PAD_LEFT);
+        }
+        
+        if($aero == 'nacional' && $area == 'conviasa'){
+            $codigo_ot = $prefijo.'-N-CON-'.date('dmY').'-'.$parte4;
+            return $codigo_ot;
+        }
+
+        if($aero == 'nacional' && $area == 'aeropostal'){
+            $codigo_ot = $prefijo.'-N-AE-'.date('dmY').'-'.$parte4;
+            return $codigo_ot;
+        }
+
+        if($aero == 'internacional' && $area == 'copa'){
+            $codigo_ot = $prefijo.'-I-CO-'.date('dmY').'-'.$parte4;
+            return $codigo_ot;
+        }
+
+        if($aero == 'internacional' && $area == 'america'){
+            $codigo_ot = $prefijo.'-I-AM-'.date('dmY').'-'.$parte4;
+            return $codigo_ot;
+        }
+
+        if($aero == 'edif_sede' && $area == 'no_aplica'){
+            $codigo_ot = $prefijo.'-ES-'.date('dmY').'-'.$parte4;
+            return $codigo_ot;
+        }
+    }
+
+    public function orden_trabajo($id)
+    {
+        try {
+
+            $data = IaimOrdenTrabajo::where('id',$id)->get();
+            foreach($data as $item){
+                $codigo = $item->codigo_ot;
+            }
+            $dataProductos = IaimMaterialOrdenTrabajo::where('codigo_ot',$codigo)->get();
+            $pdf = Pdf::loadView('pdf.orden_trabajo', compact('data', 'dataProductos'));
+            return $pdf->stream('reporte_orden_compra.pdf');
+
+        } catch (\Throwable $th) {
+            Log::error('- Class UtilsControllers - Se ha producido un error al ejecutar la funcion.'.$th->getMessage());
+        }
+    }
+
+    static function actualiza_estatus_orden($codigo){
+
+        try {
+                DB::table('iaim_orden_trabajos')
+                ->where('codigo_ot', $codigo)
+                ->update([
+                    'status' => '3'
+                ]);
+
+        } catch (\Throwable $th) {
+            dd($th);
+        }
+        
+    }
+
 }
