@@ -80,9 +80,59 @@ class MantenimientosMc extends Component
             
         } catch (\Throwable $th) {
             dd($th);
-        }
+        }  
 
-        
+    }
+
+    public function eliminar($id){
+
+        try {
+
+            $data = Ot::find($id)->get();
+
+            foreach ($data as $item) {
+                    $estado = $item->estado;
+                    $costo_preCli = $item->costo_preCli;
+                    $statusOts = $item->statusOts;
+                    $statusOts_banco = $item->statusOts_banco;
+                }
+            
+            if($statusOts == '1' && $statusOts_banco == '1')
+            {
+                DB::table('ots')
+                ->where('id', $id)
+                ->update(['statusOts' => 6]);
+
+                UtilsController::actualiza_total_inversion_mc($costo_preCli, $estado);
+
+                $this->notification()->success(
+                    $title = 'NOTIFICACIÓN',
+                    $description = 'La Ots fue eliminada con exito'
+                );
+                
+            }
+            
+            if($statusOts_banco != '1')
+            {
+                $this->notification()->error(
+                    $title = 'NOTIFICACIÓN',
+                    $description = 'La Ots no puede ser eliminada ya que se encuentra aprobada por parte del banco'
+                );
+                
+            } 
+
+            if($statusOts != '1')
+            {
+                $this->notification()->error(
+                    $title = 'NOTIFICACIÓN',
+                    $description = 'La Ots no puede ser eliminada ya que se encuentra aprobada por parte en TRX'
+                );
+                
+            } 
+            
+        } catch (\Throwable $th) {
+            dd($th);
+        }
 
     }
 
@@ -113,6 +163,7 @@ class MantenimientosMc extends Component
         // return view('livewire.view.mantenimientos-mc');
         return view('livewire.view.mantenimientos-mc', [
             'data' => Ot::where('tipoMantenimiento', 'MC')
+                ->WhereIn('statusOts', ['1','2','3','4','5'])
                 ->Where('otUid', 'like', "%{$this->buscar}%")
                 ->orderBy('created_at', 'desc')
                 ->paginate(5)
