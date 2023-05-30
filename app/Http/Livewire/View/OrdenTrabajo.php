@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\View;
 
+use App\Http\Controllers\UtilsController;
 use App\Models\Agencia;
 use App\Models\Estado;
 use App\Models\FichaTecnica;
@@ -13,6 +14,7 @@ use App\Models\Ot;
 use App\Models\Tikect;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 use WireUi\Traits\Actions;
 use Illuminate\Support\Str;
 
@@ -224,6 +226,20 @@ class OrdenTrabajo extends Component
                 }
                 $ot->save();
 
+                /**
+                 * @method total_mp
+                 * @param $equipo_uid, $estado
+                 * Logica para guardar el acumulado de los MC
+                 */
+                UtilsController::total_inversion_mp($ot->equipoUid, $ot->estado);
+                
+                /**
+                 * @method total_mp
+                 * @param $estado, estatus
+                 * Logica para guardar el acumulado de los MC creados
+                 */
+                UtilsController::total_ot_mp_estatus($ot->estado, 1);
+                
                 $this->reset();
 
                 $this->notification()->success(
@@ -269,6 +285,13 @@ class OrdenTrabajo extends Component
 
                 $ot->save();
 
+                /**
+                 * @method total_mc
+                 * @param $estado
+                 * Logica para guardar el acumulado de los MP en estatus creada
+                 */
+                UtilsController::total_ot_mc_estatus($ot->estado, 1);
+
                 $this->reset();
 
                 $this->notification()->success(
@@ -277,7 +300,7 @@ class OrdenTrabajo extends Component
                 );
             }
         } catch (\Throwable $th) {
-            dd($th);
+            Log::error($th->getMessage());
             $this->notification()->error(
                 $title = 'ERROR!',
                 $description = 'Function store() - livewire.orden-trabajo'
