@@ -165,8 +165,9 @@ class Mantenimientos extends Component
 
         if($user->rol == '7'){
             return view('livewire.view.mantenimientos', [
-                'data' => Ot::orderBy($this->campo, $this->orden)
+                'data' => Ot::whereIn('statusOts', ['1','2','3','4','5'])
                     ->Where('otUid', 'like', "%{$this->buscar}%")
+                    ->orderBy($this->campo, $this->orden)
                     ->paginate(5)
             ]);
 
