@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\View;
 
+use App\Http\Controllers\UtilsController;
 use App\Models\Ot;
 use Livewire\Component;
 use Illuminate\Support\Str;
@@ -35,13 +36,20 @@ class MantenimientosMc extends Component
                 );
             } else {
     
-                $data = ot::find($id)->statusOts;
-    
-                if ($data == '1' && $btr == '2') {
+                $data = ot::where('id', $id)->get();
+                    foreach ($data as $item) {
+                        $statusOts = $item->statusOts;
+                        $estado = $item->estado;
+                        $pre_cli = $item->costo_preCli;
+                    }
+                
+                if ($statusOts == '1' && $btr == '2') {
                     DB::table('ots')
                         ->where('id', $id)
                         ->update(['statusOts' => 2]);
                 }
+                UtilsController::total_ot_mc_estatus($estado, 2);
+                UtilsController::total_inversion_mc($pre_cli, $estado);
             }
             //code...
         } catch (\Throwable $th) {

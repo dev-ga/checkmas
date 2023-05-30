@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\View;
 
+use App\Http\Controllers\UtilsController;
 use App\Models\Ot;
 use Livewire\Component;
 use Illuminate\Support\Str;
@@ -23,13 +24,19 @@ class MantenimientosMp extends Component
     }
 
     public function updateStatusAdmin($id, $btr){
-        $data = ot::find($id)->statusOts;
+        $data = ot::where('id', $id)->get();
+        foreach ($data as $item) {
+            $statusOts = $item->statusOts;
+            $estado = $item->estado;
+            $pre_cli = $item->costo_preCli;
+        }
 
-        if($data == '1' && $btr == '2'){
+        if($statusOts == '1' && $btr == '2'){
             DB::table('ots')
                 ->where('id', $id)
                 ->update(['statusOts' => 2]);
         }
+        UtilsController::total_ot_mp_estatus($estado, 2);
 
     }
 

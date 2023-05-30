@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\View;
 
+use App\Http\Controllers\UtilsController;
 use App\Models\Ot;
 use Livewire\Component;
 use Illuminate\Support\Str;
@@ -29,7 +30,6 @@ class Mantenimientos extends Component
     public function showFicha($id, $equipoUid)
     {
         $this->emit('showFichaModal', $equipoUid);
-        // dd($id, $equipoUid);
     }
 
     public function ePrint($id)
@@ -39,9 +39,14 @@ class Mantenimientos extends Component
     }
 
     public function updateStatusAdmin($id, $btr){
-        $data = ot::find($id)->statusOts;
+        $data = ot::where('id',$id)->get();
+        foreach ($data as $item) 
+        {
+            $statusOts = $item->statusOts;
+            $estado = $item->estado;
+        }
 
-        if($data == '1' && $btr == '2'){
+        if($statusOts == '1' && $btr == '2'){
             DB::table('ots')
                 ->where('id', $id)
                 ->update(['statusOts' => 2]);
@@ -49,21 +54,47 @@ class Mantenimientos extends Component
 
     }
 
-    public function updateStatusSupervisor($id, $btr){
-        $data = ot::find($id)->statusOts;
+    public function updateStatusSupervisor($id, $btr)
+    {
 
-        if($data == '2' && $btr == '3'){
+        $data = ot::where('id',$id)->get();
+        foreach ($data as $item) 
+        {
+            $statusOts = $item->statusOts;
+            $estado = $item->estado;
+            $ot_uid = $item->otUid;
+        }
+
+        if($statusOts == '2' && $btr == '3'){
             DB::table('ots')
                 ->where('id', $id)
                 ->update(['statusOts' => 3]);
             $this->atr = 'text-green-700';
+            if(Str::contains($ot_uid, 'MC')){
+                UtilsController::total_ot_mc_estatus($estado, 3);
+            }
+            if(Str::contains($ot_uid, 'MP')){
+                UtilsController::total_ot_mp_estatus($estado, 3);
+            }
         }
-        if($data == '3' && $btr == '4'){
+
+        if($statusOts == '3' && $btr == '4'){
             DB::table('ots')
                 ->where('id', $id)
                 ->update(['statusOts' => 4]);
+
+                    if(Str::contains($ot_uid, 'MC')){
+                        UtilsController::total_ot_mc_estatus($estado, 4);
+                    }
+                    if(Str::contains($ot_uid, 'MP')){
+                        UtilsController::total_ot_mp_estatus($estado, 4);
+                    }
+
+                    
+                
         }
-        if($data == '4' && $btr == '5'){
+
+        if($statusOts == '4' && $btr == '5'){
             $this->nro_ot = Ot::find($id)->otUid;
             $this->atr_form = '';
             $this->atr_table = 'hidden';
