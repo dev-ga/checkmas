@@ -265,17 +265,42 @@ class UtilsController extends Controller
         }
     }
 
+    static function actualiza_total_inversion_mc($costo_preCli, $estado)
+    {
+        try {
+
+            $data = Estadistica::where('estado', $estado)->get();
+                foreach ($data as $item) {
+                    $total_inversion_mc = $item->total_inversion_mc;
+                    $total_inversion_mp_mc = $item->total_inversion_mp_mc;
+                }
+
+            $total_inversion_mc = $total_inversion_mc - $costo_preCli;
+            $total_inversion_mp_mc = $total_inversion_mp_mc - $costo_preCli;
+
+            DB::table('estadisticas')
+                ->where('estado', $estado)
+                ->update([
+                    'total_inversion_mc' => $total_inversion_mc,
+                    'total_inversion_mp_mc' => $total_inversion_mp_mc,
+            ]);
+
+        } catch (\Throwable $th) {
+            Log::error('- Class UtilsControllers - Se ha producido un error al ejecutar la funcion.'.$th->getMessage());
+        }
+    }
+
     static function total_ot_mc_estatus($estado, $estatus)
     {
         try {
 
             $data = Estadistica::where('estado', $estado)->get();
             foreach ($data as $item) {
-                $total_ot_mc_creada = $item->total_ot_mc_creada;
-                $total_ot_mc_aprobada = $item->total_ot_mc_aprobada;
-                $total_ot_mc_ejecucion = $item->total_ot_mc_ejecucion;
+                $total_ot_mc_creada     = $item->total_ot_mc_creada;
+                $total_ot_mc_aprobada   = $item->total_ot_mc_aprobada;
+                $total_ot_mc_ejecucion  = $item->total_ot_mc_ejecucion;
                 $total_ot_mc_supervicion = $item->total_ot_mc_supervicion;
-                $total_ot_mc_finalizada = $item->total_ot_mc_finalizada;
+                $total_ot_mc_finalizada  = $item->total_ot_mc_finalizada;
             }
 
             if ($estatus == 1) {
@@ -596,7 +621,8 @@ class UtilsController extends Controller
         }
     }
 
-    static function actualiza_estatus_orden($codigo){
+    static function actualiza_estatus_orden($codigo)
+    {
 
         try {
                 DB::table('iaim_orden_trabajos')

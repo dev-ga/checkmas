@@ -113,11 +113,15 @@
                                 <x-dropdown>
 
                                     @if(Auth::user()->rol == 5 || Auth::user()->rol == 6)
-                                        <x-dropdown.item label="Asignar OT" wire:click="CrearOt({{ $item->id }})"/>
+                                        @if($item->status_tikect == 0)
+                                            <x-dropdown.item label="Asignar OT" wire:click="CrearOt({{ $item->id }})"/>
+                                        @endif
                                     @endif
 
                                     @if(Auth::user()->rol == 1 || Auth::user()->rol == 2 || Auth::user()->rol == 3)
-                                        <x-dropdown.item label="Cerrar" type="submit" wire:click="updateStatusTikect({{ $item->id }}, '1')"/>
+                                        @if($item->status_tikect == 0)
+                                            <x-dropdown.item label="Cerrar" type="submit" wire:click="updateStatusTikect({{ $item->id }}, '1')"/>
+                                        @endif
                                     @endif
 
                                     <x-dropdown.item label="Eliminar" wire:click="eliminar({{ $item->id }})"/>

@@ -234,6 +234,7 @@
                         </div>
                     </td>
                     @endif
+                    
                     @if($item->statusOts_banco == '2')
                     <td class="content-center px-4 py-4 text-sm font-medium text-gray-700 ">
                         <div class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-green-500 bg-green-100/60 dark:bg-gray-800">
@@ -249,7 +250,10 @@
                     @if(Auth::user()->rol == 5 || Auth::user()->rol == 6)
                     <td class="px-4 py-4 text-sm whitespace-nowrap">
                         <x-dropdown>
+                            @if($item->statusOts == '1')
                             <x-dropdown.item label="Aprobar OT" type="submit" wire:click="updateStatusAdmin({{ $item->id }}, '2')"/>
+                            @endif
+                            <x-dropdown.item label="Eliminar" type="submit" wire:click="eliminar({{ $item->id }})"/>
                         </x-dropdown>
                     </td>
                     @endif
