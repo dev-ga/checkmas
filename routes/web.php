@@ -2,9 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\View\Dashboard;
+use App\Models\Estado;
 use App\Models\Ot;
 use App\Models\Tikect;
 use App\Models\User;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -86,6 +88,18 @@ Route::middleware(['auth:sanctum','verified'])->group(function () {
         return view('tecnicos.bitacora');
     })->name('bitacora');
 
+    Route::get('mensajes/enviados', function () {
+        return view('dashboard.mensajes-enviados');
+    })->name('mensajes-enviados');
+
+    Route::get('mensajes/recibidos', function () {
+        return view('dashboard.mensajes-recibidos');
+    })->name('mensajes-recibidos');
+
+    Route::get('config/valor-tonelada', function () {
+        return view('dashboard.valor-tonelada');
+    })->name('valor-tonelada');
+
     Route::get('prueba', function () {
         return view('prueba');
     })->name('prueba');
@@ -116,6 +130,8 @@ Route::middleware(['auth:sanctum','verified'])->group(function () {
         ->name('reporte.ots');
     Route::get('/reporte/tickets', [\App\Http\Controllers\UtilsController::class, 'reporte_tickets'])
         ->name('reporte.tickets');
+    Route::get('/reporte/ficha-tecnica/{id}', [\App\Http\Controllers\UtilsController::class, 'reporte_ficha_tecnica'])
+        ->name('reporte.ficha-tecnica');
     
     /**
      * Ruta para imprimir la OTs
@@ -125,6 +141,66 @@ Route::middleware(['auth:sanctum','verified'])->group(function () {
         $keySecurity = Hash::make($id);
         return view('tecnicos.printOt', compact(['data', 'keySecurity']));
     })->name('print-ot');
+
+    /**
+     * Rutas IAIM
+     * ********************************************************************
+     */
+
+    /**
+     * Rutas modulo de inventario
+     */
+    Route::get('iaim/articulos', function () {
+        return view('iaim.articulos');
+    })->name('iaim-articulos');
+
+    Route::get('iaim/art-entrada', function () {
+        return view('iaim.art-entrada');
+    })->name('art-entrada');
+
+    Route::get('iaim/art-salida', function () {
+        return view('iaim.art-salida');
+    })->name('art-salida');
+
+    Route::get('iaim/flujo-inventario', function () {
+        return view('iaim.flujo-inventario');
+    })->name('flujo-inventario');
+
+    /**
+     * Ruta para reportes de Inventario
+     */
+    Route::get('/reporte/articulos', [\App\Http\Controllers\UtilsController::class, 'reporte_articulos'])
+        ->name('reporte.articulos');
+    Route::get('/reporte/entradas', [\App\Http\Controllers\UtilsController::class, 'reporte_entradas'])
+        ->name('reporte.entradas');
+    Route::get('/reporte/salidas', [\App\Http\Controllers\UtilsController::class, 'reporte_salidas'])
+        ->name('reporte.salidas');
+
+    /**
+     * Rutas modulo de Orden de trabajo
+     */
+    Route::get('iaim/crear/orden-trabajo', function () {
+        return view('iaim.crear-orden-trabajo');
+    })->name('crear-orden-trabajo');
+
+    Route::get('iaim/listar/orden-trabajo', function () {
+        return view('iaim.listar-orden-trabajo');
+    })->name('listar-orden-trabajo');
+
+    Route::get('iaim/certificar/orden-trabajo', function () {
+        return view('iaim.certificar-orden-trabajo');
+    })->name('certificar-orden-trabajo');
+
+    Route::get('/reporte/cert/ot/{id}', [\App\Http\Controllers\UtilsController::class, 'cert_orden_trabajo'])
+        ->name('reporte.cert.ot');
+        Route::get('/reporte/ot/{id}', [\App\Http\Controllers\UtilsController::class, 'orden_trabajo'])
+        ->name('reporte.ot');
+
+
+     /**
+     * Rutas modulo de Orden de Compra
+     */
+
 });
 
 /**
@@ -145,6 +221,10 @@ Route::get('registro-trx', function () {
 Route::get('registro-banco', function () {
     return view('auth.registro-banco');
 })->name('registro-banco');
+
+Route::get('registro-iaim', function () {
+    return view('auth.registro-iaim');
+})->name('registro-iaim');
 
 Route::get('/completar-registro-banco', function () {
     return view('auth.completar-registro-banco');
@@ -168,7 +248,10 @@ Route::get('uuid', function () {
 });
 
 Route::get('/pp', function () {
-    return view('modal');
+    $r = DB::table('users')->latest('id')->first();
+    dd($r);
+    $rr = 14;
+    dd(str_pad($rr, 5, "0", STR_PAD_LEFT));
 })->name('pp');
 
 

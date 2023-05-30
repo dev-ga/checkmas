@@ -487,6 +487,19 @@ class UtilsController extends Controller
         }
     }
 
+    public function reporte_ficha_tecnica($id)
+    {
+        try {
+
+            $data = FichaTecnica::where('id',$id)->get();
+            $pdf = Pdf::loadView('pdf.ficha_tecnica', compact('data'))->setPaper('a4', 'landscape');
+            return $pdf->stream('reporte_ficha_tecnica.pdf');
+
+        } catch (\Throwable $th) {
+            Log::error('- Class UtilsControllers - Se ha producido un error al ejecutar la funcion.'.$th->getMessage());
+        }
+    }
+
     static function total_existe($codigo)
     {
         try {
