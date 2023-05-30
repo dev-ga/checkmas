@@ -27,23 +27,22 @@
                                         </button>
                                     </div>
                                 </th>
-                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left text-gray-500 dark:text-gray-400">
                                     Fecha Incio
                                 </th>
-                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                    Tecnico Responsable
+                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-center text-gray-500 dark:text-gray-400">
+                                    Responsable
                                 </th>
-								<th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                    Ficha del Equipo
+								<th scope="col" class="px-4 py-3.5 text-sm font-normal text-left text-gray-500 dark:text-gray-400">
+                                    Ficha Equipo
                                 </th>
-								
-                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-center text-gray-500 dark:text-gray-400">
                                     Supervisor
                                 </th>
-                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-center text-gray-500 dark:text-gray-400">
                                     Estatus
                                 </th>
-                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-center text-gray-500 dark:text-gray-400">
                                     Accion
                                 </th>
 
@@ -77,11 +76,6 @@
                                         <button wire:click="showFicha({{ $item->id }}, '{{ $item->equipoUid }}')" class="flex text-blue-900 transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
                                             {{ $item->equipoUid }}
                                         </button>
-                                        <a class="flex text-orange-500  transition-colors duration-200 hover:text-indigo-500 focus:outline-none" href="{{ asset('/storage/'.$item->pdf_pre_oper) }}" target="_blank">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m.75 12l3 3m0 0l3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
-                                              </svg>                                              
-                                        </a>  
                                     </div>
                                 </td>
                                 
