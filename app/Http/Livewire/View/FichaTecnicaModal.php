@@ -33,33 +33,21 @@ class FichaTecnicaModal extends Component
 
         $data = FichaTecnica::where('uid', $equipoUid)->get();
 
-        foreach($data as $item){
-            $agencia = $item->agencia;
-            $estado = $item->estado;
-            $oficina = $item->oficina;
-            $piso = $item->piso;
-            $btu = $item->btu;
-            $tipoSistema = $item->tipoConden;
-            $qrConden = $item->qrConden;
-            $qrEvaporador = $item->qrEvaporador;
+        foreach($data as $item)
+        {
+            $agencia    = $item->agencia;
+            $estado     = $item->estado;
+            $oficina    = $item->oficina;
+            $piso       = $item->piso;
+            $btu        = $item->btu;
+            $tipoSistema    = $item->tipoConden;
+            $qrConden       = $item->qrConden;
+            $qrEvaporador   = $item->qrEvaporador;
 
         }
 
-        $edo = Estado::where('codigo', $estado)->get();
-
-        foreach($edo as $item){
-            $estadoDef = $item->descripcion;
-    
-        }
-
-        $age = Agencia::where('codigo', $agencia)->get();
-        foreach($age as $item){
-            $agenciaDef = $item->descripcion;
-    
-        }
-
-        $this->agencia = $agenciaDef;
-        $this->estado = $estadoDef;
+        $this->agencia = $agencia;
+        $this->estado = $estado;
         $this->oficina = $oficina;
         $this->piso = $piso;
         $this->btu = $btu;
@@ -67,12 +55,6 @@ class FichaTecnicaModal extends Component
         $this->qrConden = $qrConden;
         $this->qrEvaporador = $qrEvaporador;
 
-        
-
-
-
-        // $this->atr_showModal = '';
-        // dd(json_decode($data), $equipoUid);
 
     }
 
