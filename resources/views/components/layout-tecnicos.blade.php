@@ -27,9 +27,11 @@
 </head>
 <body class="font-sans antialiased">
     <x-notifications />
-    <x-dialog z-index="z-50" blur="md" align="center" />
+    {{-- <x-jet-banner /> --}}
 
     <div class="min-h-screen">
+        {{-- <div class="flex flex-row min-h-screen bg-gray-100"> --}}
+
         @livewire('navigation-menu')
 
         <!-- Page Content -->
@@ -52,35 +54,6 @@
 
     {{-- Utils.js --}}
     <script  src="{{ asset('js/utils.js') }}" type="text/javascript"></script>
-    <script>
-        var ratonParado = null;
-        var milisegundosLimite = 600000;
-        $(document).on('mousemove', function() {
-            clearTimeout(ratonParado);
-            ratonParado = setTimeout(function() {
-                $.ajax
-                ({
-                    url: "{{ route('logout') }}",
-                    method: 'GET',
-                    contentType: false,
-                    cache: false,
-                    processData: false,
-                    success:function(response)
-                    {
-                        window.$wireui.dialog({
-                        title: 'Sesión inactiva!',
-                        description: 'Su sesión fue cerrada por inactividad. Debe iniciar sesión nuevamente.',
-                        icon: 'error'
-                        })
-                        console.log('cerro la sesion')
-                    },
-                    error: function(response) {
-                        console.log(response)
-                    }
-                });
-            }, milisegundosLimite);
-        });
-    </script>
 </body>
 </html>
 

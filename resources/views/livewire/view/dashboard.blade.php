@@ -3,7 +3,6 @@
 use App\Models\Ot;
 use App\Models\Tikect;
 use App\Models\Estado;
-use App\Models\Estadistica;
 use Carbon\Carbon;
 
 $fecha = Carbon::now();
@@ -61,6 +60,24 @@ $tikectList = Tikect::select(DB::raw("count(*) as tikects"), DB::raw("estado as 
 $colorTi = $tikectList->pluck('colores');
 $estTi = $tikectList->pluck('estados');
 $tikects = $tikectList->pluck('tikects');
+
+$tikcet_g3 = Tikect::select(DB::raw("count(*) as tikects"), DB::raw("estado as estados"))
+            ->orderBy('estados', 'asc')
+            ->groupBy(DB::raw("estado"))
+            ->get();
+$total_ticket = $tikcet_g3->pluck('tikects');
+$estados_ticket = $tikcet_g3->pluck('estados');
+
+
+$tikcet_ot = DB::table('ots')
+            ->join('tikects', 'ots.estado_tikect', '=', 'tikects.estado')
+            ->select(DB::raw("count(ots.otUid) as Ots"), DB::raw("ots.estado_tikect as estados"))
+            ->orderBy('ots.estado_tikect', 'asc')
+            ->groupBy(DB::raw("estados"))
+            ->get();
+$total_ticket_ot = $tikcet_ot->pluck('Ots');
+$estados_ticket_ot = $tikcet_ot->pluck('estados');
+
 
 @endphp
 <x-app-layout>
@@ -255,6 +272,7 @@ $tikects = $tikectList->pluck('tikects');
                         @endforeach
                     </div>
                 </div>
+                
             </div>
         </div>
     </section>
@@ -276,6 +294,8 @@ $tikects = $tikectList->pluck('tikects');
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-piechart-outlabels"></script>
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js" integrity="sha512-ml/QKfG3+Yes6TwOzQb7aCNtJF4PUyha6R3w8pSTo/VJSywl7ZreYvvtUso7fKevpsI+pYVVwnu82YO0q3V6eg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
+
 <script type="text/javascript">
 
 
@@ -292,7 +312,7 @@ $tikects = $tikectList->pluck('tikects');
                 data: valores,
                 backgroundColor: colores,
                 hoverOffset: 4,
-                cutout: '90%',
+                cutout: '85%',
                 borderRadius: 20
             }]
         };
@@ -315,9 +335,9 @@ $tikects = $tikectList->pluck('tikects');
                         const halfwidth = width / 2;
                         const halfheight = height / 2;
 
-                        const xLine = x > halfwidth ? x + 15 : x - 15;
-                        const yLine = y > halfheight ? y + 15 : y - 15;
-                        const extraLine = x > halfwidth ? 140 : -140;
+                        const xLine = x >= halfwidth ? x + 15 : x - 15;
+                        const yLine = y >= halfheight ? y + 15 : y - 15;
+                        const extraLine = x >= halfwidth ? 140 : -140;
 
                         ctx.beginPath();
                         ctx.moveTo(x, y);
@@ -325,11 +345,11 @@ $tikects = $tikectList->pluck('tikects');
                         ctx.lineTo(width / 2 + 30 + extraLine, yLine);
                         ctx.strokeStyle = 'black';
                         ctx.stroke();
-
+                        
                         //text
                         const textWidth = ctx.measureText(chart.data.labels[index]).width;
                         // console.log(textWidth);
-                        ctx.font = '10px Arial';
+                        ctx.font = '11px Arial';
 
                         const textPosition = x >= halfwidth ? 'left' : 'right';
                         ctx.textAlign = textPosition;
@@ -337,14 +357,7 @@ $tikects = $tikectList->pluck('tikects');
                         // ctx.fillStyle = dataset.backgroundColor[index];
                         
                         const extraLine_text = x >= halfwidth ? 143 : -143;
-                        const porcen = chart.data.datasets[0].data[index] * 100 / suma;
-                        if(porcen < 30){
-                            ctx.textBaseline = 'bottom';
-                        }
-                        if(porcen >= 89){
-                            ctx.textBaseline = 'top';
-                        }
-                        ctx.fillText((porcen).toFixed(0) + "%", width / 2 + 30 + extraLine_text , yLine);
+                        ctx.fillText((chart.data.datasets[0].data[index] * 100 / suma).toFixed(0) + "%", width / 2 + 30 + extraLine_text , yLine);
                         // (chart.data.datasets[0].data[index] * 100) / sum)
                     })
                 })
@@ -388,7 +401,7 @@ $tikects = $tikectList->pluck('tikects');
                     data: tikects, 
                     backgroundColor: colorTi, 
                     hoverOffset: 4,
-                    cutout: '90%',
+                    cutout: '85%',
                     borderRadius: 20 
                 },
             ], 
@@ -487,28 +500,33 @@ $tikects = $tikectList->pluck('tikects');
 
         // **********GRAFICO BARRAS + LIENA*********************
         //******************************************************
-        var estadosUnion = @json($listaEstados);
-        var tikectsUnion = @json($tikects);
-        var colorTiUnion = @json($colorTi);
+        var estadosUnion = @json($estados_ticket);
+        var tikectsUnion = @json($total_ticket);
+        var tikects_ot_Union = @json($total_ticket_ot);
+        var color_union = @json($colorTi);
         const labelsEstados = estadosUnion;
         const dataUnion = {
-            labels: ['Amazonas', 'Bolivar', 'Distrito Capital', 'Merida', 'Monagas', 'Trujillo']
+            labels: estadosUnion
             , datasets: [{
                 type: 'bar',
                 label: 'Tickets registrados',
-                data: [5, 1, 2, 1, 8, 9],
-                borderColor: 'rgb(255, 99, 132)',
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                data: tikectsUnion,
+                borderColor: 'rgb(41,94,164)',
+                backgroundColor: 'rgb(41,94,164)',
                 borderRadius: 30,
-                borderSkipped: 30,
+                barPercentage: 0.5
+
+
             }, {
                 type: 'bar',
                 label: 'Ots registradas',
-                data: [2, 1, 3, 1, 2, 7],
+                data: tikects_ot_Union,
                 fill: false,
-                borderColor: 'rgb(54, 162, 235)',
+                borderColor: 'rgb(255,154,52)',
+                backgroundColor: 'rgb(255,154,52)',
                 borderRadius: 30,
-                borderSkipped: 30,
+                barPercentage: 0.5
+
             }]
         };
         const configBarUnion = {
@@ -548,7 +566,7 @@ $tikects = $tikectList->pluck('tikects');
                 data: ots,
                 backgroundColor: colorOts,
                 hoverOffset: 4,
-                cutout: '90%',
+                cutout: '85%',
                 borderRadius: 20
             }]
         };
