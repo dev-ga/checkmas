@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('mensaje_recibidos', function (Blueprint $table) {
             $table->id();
-            $table->string('receptor');
-            $table->string('emisor');
-            $table->string('fecha_recibido');
-            $table->string('fecha_respuesta');
-            $table->string('asunto');
-            $table->string('mensaje');
+            $table->string('receptor')->nullable();
+            $table->string('emisor')->nullable();
+            $table->string('fecha_recibido')->nullable();
+            $table->string('fecha_respuesta')->nullable();
+            $table->string('asunto')->nullable();
+            $table->string('mensaje')->nullable();
             $table->string('estatus')->default('1');
             $table->timestamps();
         });

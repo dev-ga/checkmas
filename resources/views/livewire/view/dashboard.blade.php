@@ -3,6 +3,7 @@
 use App\Models\Ot;
 use App\Models\Tikect;
 use App\Models\Estado;
+use App\Models\Estadistica;
 use Carbon\Carbon;
 
 $fecha = Carbon::now();
@@ -39,11 +40,15 @@ Logica para calcular el porcentaje de inversion por cada estado
 GRAFICO DE DONA
 GRAFICO Nro. 2
 */
-$porList = Ot::select(DB::raw("sum(costo_preCli) as totales"), DB::raw("estado as estados"), DB::raw("color as colores"))
-            ->where('tipoMantenimiento', 'MC')
-            ->where('statusOts', 5)
+// $porList = Ot::select(DB::raw("sum(costo_preCli) as totales"), DB::raw("estado as estados"), DB::raw("color as colores"))
+//             ->where('tipoMantenimiento', 'MC')
+//             ->where('statusOts', 5)
+//             ->orderBy('estados', 'asc')
+//             ->groupBy(DB::raw("estado, color"))
+//             ->get();
+$porList = Estadistica::select(DB::raw("total_inversion_mp_mc as totales"), DB::raw("estado as estados"), DB::raw("color as colores"))
+            ->where('total_inversion_mp_mc', '>', 0.00)
             ->orderBy('estados', 'asc')
-            ->groupBy(DB::raw("estado, color"))
             ->get();
 $colores = $porList->pluck('colores');
 $estados = $porList->pluck('estados');
@@ -256,7 +261,6 @@ $tikects = $tikectList->pluck('tikects');
                         @endforeach
                     </div>
                 </div>
-                
             </div>
         </div>
     </section>
@@ -278,8 +282,6 @@ $tikects = $tikectList->pluck('tikects');
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-piechart-outlabels"></script>
-{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js" integrity="sha512-ml/QKfG3+Yes6TwOzQb7aCNtJF4PUyha6R3w8pSTo/VJSywl7ZreYvvtUso7fKevpsI+pYVVwnu82YO0q3V6eg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
-
 <script type="text/javascript">
 
 
@@ -319,9 +321,9 @@ $tikects = $tikectList->pluck('tikects');
                         const halfwidth = width / 2;
                         const halfheight = height / 2;
 
-                        const xLine = x >= halfwidth ? x + 15 : x - 15;
-                        const yLine = y >= halfheight ? y + 15 : y - 15;
-                        const extraLine = x >= halfwidth ? 140 : -140;
+                        const xLine = x > halfwidth ? x + 15 : x - 15;
+                        const yLine = y > halfheight ? y + 15 : y - 15;
+                        const extraLine = x > halfwidth ? 140 : -140;
 
                         ctx.beginPath();
                         ctx.moveTo(x, y);
@@ -330,19 +332,19 @@ $tikects = $tikectList->pluck('tikects');
                         ctx.strokeStyle = 'black';
                         ctx.stroke();
 
-                        //lineas media
+                        // lineas media
                         // ctx.beginPath();
                         // ctx.moveTo(width / 2 + 30, 20);
                         // ctx.lineTo(width / 2 + 30, 242 + 30);
                         // ctx.stroke();
 
-                        //lineas izquierda
+                        // lineas izquierda
                         // ctx.beginPath();
                         // ctx.moveTo(50, 20);
                         // ctx.lineTo(50, 242 + 30);
                         // ctx.stroke();
 
-                        //lineas derecha
+                        // lineas derecha
                         // ctx.beginPath();
                         // ctx.moveTo(width, 20);
                         // ctx.lineTo(width, 242 + 30);
@@ -351,7 +353,7 @@ $tikects = $tikectList->pluck('tikects');
                         //text
                         const textWidth = ctx.measureText(chart.data.labels[index]).width;
                         // console.log(textWidth);
-                        ctx.font = '11px Arial';
+                        ctx.font = '10px Arial';
 
                         const textPosition = x >= halfwidth ? 'left' : 'right';
                         ctx.textAlign = textPosition;
@@ -359,7 +361,14 @@ $tikects = $tikectList->pluck('tikects');
                         // ctx.fillStyle = dataset.backgroundColor[index];
                         
                         const extraLine_text = x >= halfwidth ? 143 : -143;
-                        ctx.fillText((chart.data.datasets[0].data[index] * 100 / suma).toFixed(0) + "%", width / 2 + 30 + extraLine_text , yLine);
+                        const porcen = chart.data.datasets[0].data[index] * 100 / suma;
+                        if(porcen < 30){
+                            ctx.textBaseline = 'bottom';
+                        }
+                        if(porcen >= 89){
+                            ctx.textBaseline = 'top';
+                        }
+                        ctx.fillText((porcen).toFixed(0) + "%", width / 2 + 30 + extraLine_text , yLine);
                         // (chart.data.datasets[0].data[index] * 100) / sum)
                     })
                 })
