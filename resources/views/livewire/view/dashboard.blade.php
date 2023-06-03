@@ -40,12 +40,6 @@ Logica para calcular el porcentaje de inversion por cada estado
 GRAFICO DE DONA
 GRAFICO Nro. 2
 */
-// $porList = Ot::select(DB::raw("sum(costo_preCli) as totales"), DB::raw("estado as estados"), DB::raw("color as colores"))
-//             ->where('tipoMantenimiento', 'MC')
-//             ->where('statusOts', 5)
-//             ->orderBy('estados', 'asc')
-//             ->groupBy(DB::raw("estado, color"))
-//             ->get();
 $porList = Estadistica::select(DB::raw("total_inversion_mp_mc as totales"), DB::raw("estado as estados"), DB::raw("color as colores"))
             ->where('total_inversion_mp_mc', '>', 0.00)
             ->orderBy('estados', 'asc')
@@ -331,24 +325,6 @@ $tikects = $tikectList->pluck('tikects');
                         ctx.lineTo(width / 2 + 30 + extraLine, yLine);
                         ctx.strokeStyle = 'black';
                         ctx.stroke();
-
-                        // lineas media
-                        // ctx.beginPath();
-                        // ctx.moveTo(width / 2 + 30, 20);
-                        // ctx.lineTo(width / 2 + 30, 242 + 30);
-                        // ctx.stroke();
-
-                        // lineas izquierda
-                        // ctx.beginPath();
-                        // ctx.moveTo(50, 20);
-                        // ctx.lineTo(50, 242 + 30);
-                        // ctx.stroke();
-
-                        // lineas derecha
-                        // ctx.beginPath();
-                        // ctx.moveTo(width, 20);
-                        // ctx.lineTo(width, 242 + 30);
-                        // ctx.stroke();
 
                         //text
                         const textWidth = ctx.measureText(chart.data.labels[index]).width;
